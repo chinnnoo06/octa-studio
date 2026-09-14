@@ -1,0 +1,86 @@
+[
+  {
+    "name": "hero",
+    "cls": "section hero",
+    "y": 0,
+    "h": 972,
+    "w": 1440
+  },
+  {
+    "name": "about",
+    "cls": "section more",
+    "y": 1072,
+    "h": 1100,
+    "w": 1440
+  },
+  {
+    "name": "projects",
+    "cls": "section white more-top",
+    "y": 2172,
+    "h": 2393,
+    "w": 1440
+  },
+  {
+    "name": "process",
+    "cls": "section image process",
+    "y": 4565,
+    "h": 1207,
+    "w": 1440
+  },
+  {
+    "name": "services",
+    "cls": "section overflow",
+    "y": 5772,
+    "h": 1546,
+    "w": 1440
+  },
+  {
+    "name": "designcta",
+    "cls": "section design",
+    "y": 7638,
+    "h": 445,
+    "w": 724
+  },
+  {
+    "name": "offers",
+    "cls": "section no-padding",
+    "y": 8303,
+    "h": 91,
+    "w": 1440
+  },
+  {
+    "name": "advantages",
+    "cls": "section choice",
+    "y": 8494,
+    "h": 1324,
+    "w": 1440
+  },
+  {
+    "name": "products",
+    "cls": "section white products",
+    "y": 9818,
+    "h": 1316,
+    "w": 1440
+  },
+  {
+    "name": "testimonials",
+    "cls": "section testimonials",
+    "y": 11134,
+    "h": 931,
+    "w": 1440
+  },
+  {
+    "name": "blogs",
+    "cls": "section blogs",
+    "y": 12066,
+    "h": 1547,
+    "w": 1440
+  },
+  {
+    "name": "footer",
+    "cls": "section foter",
+    "y": 13713,
+    "h": 750,
+    "w": 1440
+  }
+]

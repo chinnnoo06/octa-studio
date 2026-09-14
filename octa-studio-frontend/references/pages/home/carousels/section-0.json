@@ -1,0 +1,18 @@
+{
+  "index": 0,
+  "selector": "hero-slider",
+  "tag": "div",
+  "slideCount": 0,
+  "hasArrows": false,
+  "hasDots": false,
+  "bbox": {
+    "x": 750,
+    "y": 550,
+    "w": 690,
+    "h": 422
+  },
+  "frames": [
+    "section-0-frame-0.png"
+  ],
+  "framesCaptured": 1
+}

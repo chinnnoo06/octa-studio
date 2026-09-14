@@ -1,0 +1,18 @@
+{
+  "index": 4,
+  "selector": "slider-box",
+  "tag": "div",
+  "slideCount": 1,
+  "hasArrows": false,
+  "hasDots": false,
+  "bbox": {
+    "x": -1097,
+    "y": 6986,
+    "w": 821,
+    "h": 110
+  },
+  "frames": [
+    "section-4-frame-0.png"
+  ],
+  "framesCaptured": 1
+}

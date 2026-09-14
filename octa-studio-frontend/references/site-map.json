@@ -1,0 +1,230 @@
+{
+  "domain": "livinor.webflow.io",
+  "target": "https://livinor.webflow.io/",
+  "current_page": "/",
+  "title": "Livinor - Webflow Ecommerce Website Template",
+  "lang": "en",
+  "meta_description": "Discover Livinor – a modern Webflow Ecommerce Website Template designed for stylish furniture and decor brands. Showcase elegant pieces, elevate everyday spaces, and offer a seamless shopping experience with creative layouts and responsive design. Perfect for turning inspiration into reality.",
+  "og_image": "https://cdn.prod.website-files.com/691077eba085c0a8252b3117/691079fa2179fc075075a260_Livinor%20Graph%20Image.png",
+  "framework_detected": {
+    "webflow": true,
+    "next": false,
+    "react": false,
+    "wordpress": false,
+    "gsap": true,
+    "swiper": false,
+    "splide": false,
+    "slick": false
+  },
+  "page_height_desktop": 14463,
+  "overlays": {
+    "dismissed": [],
+    "failed": [],
+    "hadOverlay": true
+  },
+  "available_pages": [
+    {
+      "url": "/",
+      "label": "Link",
+      "type": "homepage",
+      "navbar": true
+    },
+    {
+      "url": "/about-us",
+      "label": "About us",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/projects",
+      "label": "Projects",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/shop",
+      "label": "Shop",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/contact",
+      "label": "Contact Us",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/blogs",
+      "label": "Blogs",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/services",
+      "label": "Services",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/team-one",
+      "label": "Team",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/blogs/the-art-of-home-and-living",
+      "label": "Blogs Details",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/services/floor-styling",
+      "label": "Services Details",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/projects/luneth-maison",
+      "label": "Projects Details",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/product/leather-armchair",
+      "label": "Products Details",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/category/all",
+      "label": "Categories Details",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/utility-pages/style-guide",
+      "label": "Style Guide",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/utility-pages/changelog",
+      "label": "Changelog",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/utility-pages/licenses",
+      "label": "Licenses",
+      "type": "subpage",
+      "navbar": true
+    },
+    {
+      "url": "/401",
+      "label": "Password Protected",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/404",
+      "label": "404",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/checkout",
+      "label": "Checkout",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/paypal-checkout",
+      "label": "Checkout (Paypal)",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/order-confirmation",
+      "label": "Order Confirmation",
+      "type": "main",
+      "navbar": true
+    },
+    {
+      "url": "/projects/velora-haven",
+      "label": "Velora Haven2024 Current Link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/projects/serenith-home",
+      "label": "Serenith Home2023 Current Link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/projects/nuvell-retreat",
+      "label": "Nuvell Retreat2024 Current Link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/services/lighting-solutions",
+      "label": "Lighting SolutionsWe craft stylish, functional interiors that reflect your taste and enhance everyday living. Our designs combine creativity and practicality to transform every corner of your home.Current link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/services/space-planning",
+      "label": "Space PlanningOur team optimizes layouts to make every corner of your space purposeful and visually balanced. We ensure each arrangement enhances both comfort and aesthetic appeal.Current link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/services/furniture-styling",
+      "label": "Furniture StylingFrom statement pieces to subtle accents, we curate furniture that completes your home’s look. Every selection is chosen to harmonize style, function, and personality.Current link",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/product/wooden-chair",
+      "label": "Chair$ 599.00 USDwooden chairCart Chair",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/product/leather-bed",
+      "label": "Bed$ 299.00 USDleather bedCart Bed",
+      "type": "subpage",
+      "navbar": false
+    },
+    {
+      "url": "/blogs/elegant-spaces-journal-of-style",
+      "label": "Read More",
+      "type": "subpage",
+      "navbar": false
+    }
+  ],
+  "suggested_order": [
+    "/",
+    "/about-us",
+    "/projects",
+    "/shop",
+    "/contact",
+    "/blogs",
+    "/services",
+    "/team-one",
+    "/blogs/the-art-of-home-and-living",
+    "/services/floor-styling",
+    "/projects/luneth-maison",
+    "/product/leather-armchair",
+    "/category/all",
+    "/utility-pages/style-guide",
+    "/utility-pages/changelog",
+    "/utility-pages/licenses",
+    "/401",
+    "/404",
+    "/checkout",
+    "/paypal-checkout",
+    "/order-confirmation"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "index": 7,
+  "selector": "livinor-slider-icon w-embed",
+  "tag": "div",
+  "slideCount": 0,
+  "hasArrows": false,
+  "hasDots": false,
+  "bbox": {
+    "x": -245,
+    "y": 6986,
+    "w": 110,
+    "h": 110
+  },
+  "frames": [
+    "section-7-frame-0.png"
+  ],
+  "framesCaptured": 1
+}

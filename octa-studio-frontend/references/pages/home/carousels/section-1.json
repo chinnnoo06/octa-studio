@@ -1,0 +1,18 @@
+{
+  "index": 1,
+  "selector": "services-bottom-slider",
+  "tag": "div",
+  "slideCount": 65,
+  "hasArrows": false,
+  "hasDots": false,
+  "bbox": {
+    "x": 60,
+    "y": 6986,
+    "w": 1320,
+    "h": 232
+  },
+  "frames": [
+    "section-1-frame-0.png"
+  ],
+  "framesCaptured": 1
+}

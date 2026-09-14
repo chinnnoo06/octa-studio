@@ -1,0 +1,28 @@
+{
+  "target": "https://livinor.webflow.io/contact",
+  "pageName": "contact",
+  "capturedAt": "2026-09-14T07:03:07.111Z",
+  "screenshots": {
+    "desktop": "references\\pages\\contact\\screenshots\\desktop.png",
+    "tablet": "references\\pages\\contact\\screenshots\\tablet.png",
+    "mobile": "references\\pages\\contact\\screenshots\\mobile.png"
+  },
+  "overlays": {
+    "dismissed": [],
+    "failed": [],
+    "hadOverlay": true
+  },
+  "preDismissalShot": true,
+  "counts": {
+    "computedNodes": 207,
+    "images": 16,
+    "fonts": 2,
+    "videos": 1,
+    "inlineSvgs": 13,
+    "sliders": 0,
+    "animated": 61,
+    "carousels": 0,
+    "hoverStates": 1
+  },
+  "warnings": []
+}

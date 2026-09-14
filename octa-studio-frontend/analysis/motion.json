@@ -1,0 +1,765 @@
+{
+  "_meta": {
+    "analyst": "motion-analyst",
+    "page": "home",
+    "source": "https://livinor.webflow.io/",
+    "evidence": [
+      "IX2 completo extraido de webflow.a4a541eb.db1cca34483be52e.js -> Webflow.require('ix2').init({events:520, actionLists:86})",
+      "CSS original livinor.webflow.shared.b013c6ece.css (245 KB)",
+      "medicion en vivo con Playwright: scripts/tmp-motion-hover.ts -> scripts/tmp-motion-live.json",
+      "estado inicial IX2 por media-query: <style> inline #2 del dom.html (70 reglas html.w-mod-js:not(.w-mod-ix))"
+    ],
+    "easings": {
+      "outQuart": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "inQuad": "cubic-bezier(0.55, 0.085, 0.68, 0.53)",
+      "swingFromTo": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "webflowDefault": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+    },
+    "breakpoints": { "main": ">=992px", "medium": "768-991px", "small": "480-767px", "tiny": "<=479px" }
+  },
+
+  "marquees": [
+    {
+      "id": "hero-slider",
+      "section": "hero",
+      "component": "HeroSlider",
+      "content": "3 fotos de interiores unicas repetidas x3 = 9 items (.cover-image-wrap.hero > img.cover-image.hero). Orden: Decorated home / Well decorated home / modern office with chair and table",
+      "direction": "left",
+      "speedPxPerSec": 54.8,
+      "speedPxPerSecMeasured": 54.7,
+      "gap": "0px desktop, 6px @<=991, 4px @<=767 (medido 4px a 375)",
+      "pauseOnHover": false,
+      "itemCount": 9,
+      "uniqueItems": 3,
+      "duplicatedForLoop": true,
+      "container": { "w": 690, "h": 422, "border": "10px solid #fff", "radius": 10, "overflow": "hidden", "innerW": 670 },
+      "item": { "w": 360, "h": 402, "border": "6px solid #fff", "radius": 10, "minWidthByBp": { "main": 360, "medium": 250, "small": 150, "tiny": "120-180" } },
+      "originalIx2": {
+        "actionList": "a-28 'Hero Slider'",
+        "trigger": "SCROLL_INTO_VIEW loop:true",
+        "keyframes": "translateX 0% -> -609% (del ancho del propio item = -2192.4px) en 40000ms, luego reset instantaneo a 0%",
+        "note": "el reset NO es seamless en el original (quedan 1047px de contenido); se ve un salto cada 40s"
+      },
+      "recommendedImplementation": {
+        "technique": "CSS keyframes linear infinite sobre un track duplicado",
+        "trackSetWidthPx": 1080,
+        "durationSec": 19.7,
+        "css": "@keyframes marquee-left { from { transform: translate3d(0,0,0);} to { transform: translate3d(-1080px,0,0);} }",
+        "note": "renderizar 2 juegos de las 3 imagenes (6 items) y animar -1080px; a 375px el set es 3*(120+4)=372px -> 20.3s"
+      }
+    },
+    {
+      "id": "top-slider",
+      "section": "services",
+      "component": "ServicesMarquee (fila superior)",
+      "content": "5 sets de '<icono Livinor 110px> Renovation | <icono> Planning | <icono> Styling' (h1 96px Sora)",
+      "direction": "left",
+      "speedPxPerSec": 90.5,
+      "speedPxPerSecMeasured": 90.4,
+      "gap": "30px entre slider-box y entre sets",
+      "pauseOnHover": false,
+      "itemCount": 15,
+      "setCount": 5,
+      "setWidthPx": 2146,
+      "setPitchPx": 2176,
+      "itemWidths": { "Renovation": 821, "Planning": 692, "Styling": 572, "icon": 110 },
+      "container": { "cls": ".services-bottom-slider", "w": 1320, "h": 232, "flexColumn": true, "rowGap": 12 },
+      "originalIx2": {
+        "actionList": "a-80 'Slider Animation'",
+        "trigger": "SCROLL_INTO_VIEW loop:true",
+        "keyframes": "translateX -57% -> -674% (del ancho propio 1320px) = -752.4px -> -8896.8px en 90000ms, reset instantaneo a 0%"
+      },
+      "recommendedImplementation": { "durationSec": 24.05, "translatePx": -2176, "timing": "linear infinite" }
+    },
+    {
+      "id": "bottom-slider",
+      "section": "services",
+      "component": "ServicesMarquee (fila inferior)",
+      "content": "4 sets del mismo contenido que top-slider, alineados a la derecha (justify-content: flex-end)",
+      "direction": "right",
+      "speedPxPerSec": 72.9,
+      "speedPxPerSecMeasured": 72.8,
+      "gap": "30px",
+      "pauseOnHover": false,
+      "itemCount": 12,
+      "setCount": 4,
+      "setPitchPx": 2176,
+      "originalIx2": {
+        "actionList": "a-80 'Slider Animation'",
+        "keyframes": "translateX 0% -> +497% (de 1320px) = +6560.4px en 90000ms, reset instantaneo a 0%"
+      },
+      "recommendedImplementation": { "durationSec": 29.85, "translatePx": "+2176 (de -2176 a 0)", "timing": "linear infinite" }
+    },
+    {
+      "id": "design-slider",
+      "section": "designcta (section.section.no-padding, justo debajo del CTA)",
+      "component": "OffersMarquee",
+      "content": "'<icono +> 10% Off This Month <icono +>' | 'Free Space Planning' | '20% Off First Consultation' (h6 24px). Cada .design-slider contiene los 3 items x2 = 6 cajas",
+      "direction": "right",
+      "speedPxPerSec": 69.2,
+      "speedPxPerSecMeasured": 69.1,
+      "gap": "10px entre design-slider-box, 20px dentro de la caja (icono/texto/icono), 8px entre grupos .design-slider",
+      "pauseOnHover": false,
+      "itemCount": 24,
+      "setCount": 4,
+      "groupWidthPx": 2386,
+      "offerPitchPx": 1178,
+      "itemWidths": { "10% Off This Month": 343, "Free Space Planning": 364, "20% Off First Consultation": 461, "icon": 17 },
+      "container": { "cls": ".design-slider-layout", "w": 1320, "h": 31, "justify": "flex-end" },
+      "originalIx2": {
+        "actionList": "a-37 'Design Slider'",
+        "trigger": "SCROLL_INTO_VIEW loop:true",
+        "keyframes": "translateX 0% -> +290% (de 2386px) = +6919.4px en 100000ms, reset instantaneo a 0%"
+      },
+      "recommendedImplementation": { "durationSec": 17.03, "translatePx": "+1178", "timing": "linear infinite" }
+    }
+  ],
+
+  "carousels": [
+    {
+      "id": "testimonial-slider",
+      "section": "testimonials",
+      "component": "TestimonialCarousel",
+      "slides": 4,
+      "autoplay": false,
+      "delayMs": 4000,
+      "delayMsIsInert": true,
+      "loop": true,
+      "hasArrows": true,
+      "hasDots": false,
+      "dotsInDomButHidden": true,
+      "slidesVisible": 1,
+      "gap": 0,
+      "slideWidthPx": 1320,
+      "maskWidthPx": 1320,
+      "transitionMs": 500,
+      "transitionEasing": "ease",
+      "swipeEnabled": true,
+      "webflowAttrs": {
+        "data-animation": "slide",
+        "data-autoplay": "false",
+        "data-delay": "4000",
+        "data-duration": "500",
+        "data-easing": "ease",
+        "data-infinite": "true",
+        "data-disable-swipe": "false",
+        "data-hide-arrows": "false",
+        "data-nav-spacing": "3"
+      },
+      "arrows": {
+        "left": { "w": 60, "h": 60, "border": "3px solid #fff", "radius": 10, "bg": "transparent", "iconColor": "#fff", "pos": "absolute left:0, centrado vertical sobre la tarjeta" },
+        "right": { "w": 60, "h": 60, "border": "3px solid #fff", "radius": 12, "bg": "transparent", "iconColor": "#fff", "pos": "absolute right:0, centrado vertical" },
+        "icon": { "cls": ".slide-icon", "w": 25, "h": 30, "shape": "chevron < / >" },
+        "responsive": {
+          "<=991": "50x50",
+          "<=767": "40x40, top:20%",
+          "<=479": "30x30, radius 6px, top:100% (bajo la tarjeta)"
+        }
+      },
+      "slideContent": "rating 5 estrellas amarillas + parrafo blanco + avatar 260px (.cover-image-wrap.testimonial, img 190px alto) + nombre h6 blanco + rol .paragraph.yellow",
+      "emblaOptions": { "loop": true, "align": "start", "duration": 25, "containScroll": false, "slidesToScroll": 1 },
+      "emblaNote": "duration en embla son ~frames a 60fps; 25 ~= 420-500ms. NO poner autoplay: el original no lo tiene (verificado en vivo: tras 6s sin tocar el slide activo no cambia)."
+    }
+  ],
+
+  "textRotators": [
+    {
+      "id": "h2-title-counter",
+      "section": "projects | advantages | products | blogs",
+      "component": "SectionTitleRotator (compartido)",
+      "words": {
+        "projects": ["work", "work", "work (gris)"],
+        "advantages": ["us", "us", "us (gris)"],
+        "products": ["Collection", "Collection", "Collection (gris)"],
+        "blogs": ["Insights", "Insights", "Insights (gris)"]
+      },
+      "mechanics": "NO es un rotador de palabras distintas: es la MISMA palabra 3 veces; la 3a lleva la clase .color (#8e8e8e). El track sube 2 posiciones y se queda ahi -> el efecto visual es 'la palabra rueda como una slot machine y aterriza en gris'. Estado final = gris.",
+      "directionAndTiming": "translateY 0% -> -66% del track (== -2/3 == exactamente 2 items) | delay 1000ms | duration 1000ms | ease default | trigger SCROLL_INTO_VIEW offset 0% | loop:false (se ejecuta una sola vez)",
+      "geometry": {
+        "wrapCls": ".h2-counter-wrap",
+        "wrapHeightPx": { "main": 85, "medium": 36, "small": 30, "tiny": 28 },
+        "wrapOverflow": "hidden",
+        "trackCls": ".h2-title-counter",
+        "trackHeightPx": 246.2,
+        "itemHeightPx": 82.07,
+        "trackDisplay": "flex column, align-items center, overflow hidden",
+        "parentCls": ".h2-section-title (flex, gap 10px, la 1a palabra es un <h2> normal fuera del wrap)"
+      },
+      "originalIx2": "a-92 'H2 Counter 3' (4 eventos). Variantes en otras paginas: a-90/a-91 (-68%, delay 0), a-96 (-68%, delay 1000), a-112 (-66%, delay 1000)",
+      "implementation": "framer-motion: <div className='overflow-hidden h-[85px]'><motion.div initial={{y:0}} whileInView={{y:'-66.666%'}} viewport={{once:true, amount:0}} transition={{delay:1, duration:1, ease:[0.25,0.1,0.25,1]}} className='flex flex-col items-center'>{[0,1,2].map(...)}</motion.div></div> — el 3er hijo con text-[#8e8e8e]"
+    },
+    {
+      "id": "bold-text-rotator",
+      "section": "advantages",
+      "component": "BrandBadge (tarjeta superior-izquierda del bento)",
+      "words": ["Bold Designs", "Stark Designs", "Nexo Designs", "Prime Designs", "Aura Designs"],
+      "mechanics": "Slot machine vertical CONTINUO e infinito. Cada etiqueta es un h6 24px que envuelve a 2 lineas (lh 130% = 31.2px -> item de 62.4px). La ventana solo muestra ~60px, por eso en el screenshot se ven 2-3 medias lineas ('DESIGNS / STARK / DESIGNS'): es el rotador a mitad de camino, NO texto en circulo.",
+      "directionAndTiming": "translateY 0% -> -400% de la altura del propio item (= -249.6px = 4 items) en 10000ms, loop:true con reset instantaneo. Movimiento continuo (medido a -117.99% en la captura, entre item 2 y 3).",
+      "geometry": {
+        "wrapCls": ".bold-text-wrap",
+        "wrapWidthPx": 115,
+        "wrapHeightPx": { "main": 60, "medium": 54, "small": 50, "tiny": 49 },
+        "wrapPosition": "absolute, inset:auto, margin:auto (centrado dentro de .choice-left-top), overflow hidden",
+        "itemCls": ".bold-text",
+        "itemHeightPx": 62.4,
+        "trackHeightPx": 312
+      },
+      "originalIx2": "a-85 'Advantages Text Change Animation', SCROLL_INTO_VIEW loop:true",
+      "implementation": "CSS keyframes linear infinite (mas barato que framer-motion para un loop de 10s): duplicar la lista y animar translate3d(0,0,0) -> translate3d(0,-50%,0) sobre un track de 10 items en 12.5s, o replicar 1:1 con 5 items + reset a los 10s"
+    }
+  ],
+
+  "scrollReveals": [
+    {
+      "section": "hero",
+      "target": ".hero-text-wrap (h1 'Mood Begins at home')",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn"
+    },
+    {
+      "section": "hero",
+      "target": ".top-right-box (icono + lista '1. Interior Styling / 2. Space Planning / 3. Mood Lighting')",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 300,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn"
+    },
+    {
+      "section": "about",
+      "target": ".cover-image-wrap.about-us + .about-us-right",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "fadeIn"
+    },
+    {
+      "section": "about",
+      "target": ".about-us-text-wrap > .text-color-box > .line-color.one..eight (8 barras grises #8e8e8e de 50px sobre el h4)",
+      "type": "line-wipe-scroll-linked",
+      "from": { "x": "0%" },
+      "to": { "x": "100%" },
+      "stagger": "5% de progreso de scroll entre lineas",
+      "delay": 0,
+      "duration": "ligado al scroll (smoothing 90)",
+      "ease": "linear",
+      "trigger": "SCROLLING_IN_VIEW, keyframes 20%->60% del progreso",
+      "ix2": "a-38 'Text Color Change While Scrolling'",
+      "mediaQuery": "solo >=992px (.text-color-box tiene display:none @<=991px)",
+      "detail": "NO es reveal palabra-a-palabra ni cambio de color del texto. El h4 YA es negro; 8 divs grises con mix-blend-mode:lighten lo tapan y se deslizan a la derecha uno a uno. En about el contenedor mide 630x192 (4 lineas visibles); en services 896x144 (3 lineas). El resto de barras queda fuera del overflow:hidden."
+    },
+    {
+      "section": "about",
+      "target": ".counter-wrap x4 (2014 / 350+ / 200+ / ...)",
+      "type": "odometer",
+      "from": { "y": "-90%" },
+      "to": { "y": "0%" },
+      "stagger": 0,
+      "delay": 0,
+      "duration": 3000,
+      "ease": "ease",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "a-29 / a-30 'Counter Animation'",
+      "detail": "10 <h3.h3> apilados en orden DESCENDENTE (2014,2013,...,2006). Wrapper 66px overflow hidden. -90% == 9 items -> cuenta hacia arriba. El sufijo '+' vive en .counter-icon-wrap (5 copias) que va de 0% a -81%."
+    },
+    {
+      "section": "projects",
+      "target": ".home-projects-heading, .right-heading-wrap, .project-card x4",
+      "type": "slide-up + fade",
+      "from": { "opacity": 0, "y": 100 },
+      "to": { "opacity": 1, "y": 0 },
+      "stagger": "0 (todas comparten delay 200; para la replica usar stagger 80-120ms entre las 4 tarjetas)",
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "slideInBottom"
+    },
+    {
+      "section": "process",
+      "target": "section.section.image.process, .process-heading, .process-content-wrap, .process-top/center/bottom-wrap",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn (11 elementos)"
+    },
+    {
+      "section": "process",
+      "target": ".process-element.one..five (5 pasos)",
+      "type": "staggered pop-in (escala + desplazamiento)",
+      "from": {
+        "one": { "opacity": 0 },
+        "two": { "opacity": 0, "scale": 0.3, "x": "50%", "y": "-100%" },
+        "three": { "opacity": 0, "scale": 0.3, "x": "-50%", "y": "-100%" },
+        "four": { "opacity": 0, "scale": 0.3, "x": "0%", "y": "-100%" },
+        "five": { "opacity": 0, "scale": 0.3, "x": "0%", "y": "-100%" }
+      },
+      "to": { "opacity": 1, "scale": 1, "x": 0, "y": 0 },
+      "stagger": 700,
+      "delay": 500,
+      "duration": 200,
+      "ease": "ease",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "a-63 'Process Box Appear Animation'",
+      "mediaQuery": "solo main (>=992px)",
+      "detail": "Los grupos IX2 son secuenciales: paso1 aparece, luego cada paso siguiente espera 500ms y entra en 200ms. Efecto: los pasos 'caen' desde arriba encogidos hasta su sitio. Para la replica: stagger de ~0.5-0.7s con duration 0.25s."
+    },
+    {
+      "section": "services",
+      "target": ".services-left-heading",
+      "type": "grow + fade",
+      "from": { "opacity": 0, "scale": 0.75 },
+      "to": { "opacity": 1, "scale": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "growIn",
+      "mediaQuery": "solo <=767px (small+tiny)"
+    },
+    {
+      "section": "services",
+      "target": ".cover-image.services (imagen) + .service-collection-list.home (las 3 tarjetas)",
+      "type": "fade + slide-up secuencial",
+      "from": { "image": { "opacity": 0 }, "list": { "opacity": 0, "y": "50%" } },
+      "to": { "image": { "opacity": 1 }, "list": { "opacity": 1, "y": "0%" } },
+      "stagger": "secuencial: imagen 400ms, luego lista 500ms",
+      "delay": 0,
+      "duration": 500,
+      "ease": "swingFromTo",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "a-79 'Service Section Animation'"
+    },
+    {
+      "section": "services",
+      "target": ".services-content-wrap",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn"
+    },
+    {
+      "section": "services",
+      "target": ".about-us-text-wrap > .text-color-box (segundo bloque de 8 barras)",
+      "type": "line-wipe-scroll-linked",
+      "from": { "x": "0%" },
+      "to": { "x": "100%" },
+      "stagger": "5% de scroll",
+      "delay": 0,
+      "duration": "ligado al scroll",
+      "ease": "linear",
+      "trigger": "SCROLLING_IN_VIEW 20%->60%",
+      "ix2": "a-38",
+      "mediaQuery": "solo >=992px",
+      "detail": "h4: 'From interiors to lighting, we craft spaces that reflect your personality and purpose' — 3 lineas visibles (896x144)"
+    },
+    {
+      "section": "designcta",
+      "target": "section.section.design (imagen fullbleed 'LET'S DESIGN YOUR DREAM HOME')",
+      "type": "scale-on-scroll (zoom-in ligado al scroll)",
+      "from": { "scale": 0.5 },
+      "to": { "scale": 1 },
+      "stagger": 0,
+      "delay": 0,
+      "duration": "ligado al scroll (smoothing 85)",
+      "ease": "linear",
+      "trigger": "SCROLLING_IN_VIEW, keyframes 0% -> 45% del progreso",
+      "ix2": "a-84 'Design Scroll Animation'",
+      "mediaQuery": "solo main (>=992px)",
+      "detail": "La seccion entera arranca a scale 0.5 y crece a 1 mientras entra en viewport; a partir del 45% se queda en 1. El DOM capturado la muestra a scale3d(0.500335,...)."
+    },
+    {
+      "section": "advantages",
+      "target": ".choice-title, .choice-left-top, .choice-left-bottom, .center-logo-wrap, .center-bottom-wrap, .right-top-box, .right-bottom-wrap",
+      "type": "slide-up + fade",
+      "from": { "opacity": 0, "y": 100 },
+      "to": { "opacity": 1, "y": 0 },
+      "stagger": "0 en el original; recomendado 80ms entre celdas del bento",
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "slideInBottom (7 elementos)"
+    },
+    {
+      "section": "advantages",
+      "target": ".center-top-box > .cover-image-wrap.corner-one/two/three (3 fotos pequenas inclinadas)",
+      "type": "slide-in loop",
+      "from": { "corner-one": { "x": "250%" }, "corner-two": { "x": "150%" }, "corner-three": { "x": "140%" } },
+      "to": { "x": "0%" },
+      "stagger": "secuencial 800ms cada una: two -> one -> three",
+      "delay": 0,
+      "duration": 800,
+      "ease": "ease",
+      "trigger": "SCROLL_INTO_VIEW loop:true",
+      "ix2": "a-83 'Choice Box Animation'",
+      "mediaQuery": "main + medium",
+      "detail": "Tras las 3, espera 1500ms y resetea instantaneamente -> ciclo de ~3.9s. Las imagenes estan rotadas -30deg y viven en .corner-image-wrap (absolute, rotate(-20deg), inset auto 0% 5% 60%)."
+    },
+    {
+      "section": "advantages",
+      "target": ".counter-wrap (350+ 'Project Launched')",
+      "type": "odometer",
+      "from": { "y": "-90%" },
+      "to": { "y": "0%" },
+      "stagger": 0,
+      "delay": 0,
+      "duration": 3000,
+      "ease": "ease",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "a-29"
+    },
+    {
+      "section": "products",
+      "target": ".products-title-wrap + .products-wrap x3",
+      "type": "slide-up + fade",
+      "from": { "opacity": 0, "y": 100 },
+      "to": { "opacity": 1, "y": 0 },
+      "stagger": "0 original; recomendado 100ms entre tarjetas",
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "slideInBottom"
+    },
+    {
+      "section": "testimonials",
+      "target": "section.section.testimonials",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": 0,
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn"
+    },
+    {
+      "section": "blogs",
+      "target": ".blogs-title, .blogs-big-box x2, .blogs-mini-box x2",
+      "type": "slide-up + fade",
+      "from": { "opacity": 0, "y": 100 },
+      "to": { "opacity": 1, "y": 0 },
+      "stagger": "0 original; recomendado 100ms",
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 20%",
+      "ix2": "slideInBottom"
+    },
+    {
+      "section": "footer",
+      "target": ".footer-image, .footer-left-box, .footer-right-top, .footer-content-wrap, .footer-bottom",
+      "type": "fade",
+      "from": { "opacity": 0 },
+      "to": { "opacity": 1 },
+      "stagger": "0 original; recomendado 80ms",
+      "delay": 200,
+      "duration": 1000,
+      "ease": "outQuart",
+      "trigger": "SCROLL_INTO_VIEW offset 0%",
+      "ix2": "fadeIn (5 elementos)"
+    }
+  ],
+
+  "hoverStates": [
+    {
+      "selector": ".button-white (a > .button-box + .arrow-div)",
+      "component": "ButtonPrimary (compartido: hero x2, about, projects, services x2, designcta, products)",
+      "effect": "El pill cambia de amarillo a blanco y el circulo con flecha entra desde la izquierda",
+      "from": { ".button-box": { "backgroundColor": "#ffd900" }, ".arrow-div": { "x": "-105%", "scale": 0.75, "opacity": 0, "backgroundColor": "#ffffff" } },
+      "to": { ".button-box": { "backgroundColor": "#ffffff" }, ".arrow-div": { "x": "0%", "scale": 1, "opacity": 1, "backgroundColor": "#ffd900" } },
+      "duration": { "arrowMove": 300, "resto": 500 },
+      "ease": "ease",
+      "ix2": "a / a-2",
+      "mediaQuery": "solo main (>=992px). En <=991px NO hay hover: el estado en reposo es .button-box blanco + .arrow-div amarillo visible",
+      "geometry": { ".arrow-div": "52x52 circulo (48x48 @<=767), radius 100%", ".button-box": "pill radius 50px, border 1px #000, padding 14px 24px" }
+    },
+    {
+      "selector": ".button-black (a > .button-box.black + .arrow-div.white)",
+      "component": "ButtonSecondary (2 en blogs)",
+      "effect": "El pill negro se vuelve blanco, el texto blanco se vuelve negro y escala 1.09, el circulo negro con flecha blanca entra desde la izquierda",
+      "from": { ".button-box.black": { "backgroundColor": "#000000" }, ".button-text.white": { "color": "#ffffff", "scale": 1 }, ".arrow-div.white": { "x": "-105%", "scale": 0.75, "opacity": 0, "backgroundColor": "#000000" } },
+      "to": { ".button-box.black": { "backgroundColor": "#ffffff" }, ".button-text.white": { "color": "#000000", "scale": 1.09 }, ".arrow-div.white": { "x": "0%", "scale": 1, "opacity": 1, "backgroundColor": "#000000" }, ".button-icon": { "color": "#ffffff" } },
+      "duration": { "arrowMove": 300, "resto": 500 },
+      "ease": "ease",
+      "ix2": "a-3/a-4, a-46/a-47, a-48/a-49",
+      "verified": "medido en vivo",
+      "geometry": { ".arrow-div.white": "52x52, border 1px rgba(0,0,0,.6)" }
+    },
+    {
+      "selector": ".project-card",
+      "component": "ProjectCard (4 en projects)",
+      "effect": "Zoom de imagen + la barra lateral se vuelve negra con texto blanco + aparece un circulo amarillo que sigue el raton",
+      "from": { ".cover-image.project": { "scale": 1 }, ".projects-info-box": { "backgroundColor": "#fae9ce" }, ".h6.rotate": { "color": "#000000" }, ".project-mouse-move-element": { "scale": 0 } },
+      "to": { ".cover-image.project": { "scale": 1.1 }, ".projects-info-box": { "backgroundColor": "#000000" }, ".h6.rotate": { "color": "#ffffff" }, ".project-mouse-move-element": { "scale": 1 } },
+      "duration": { "imagen": 500, "colores": 300, "circulo": 500 },
+      "ease": "ease",
+      "ix2": "a-11/a-12 (Image Hover) + a-41/a-54 (Services Icon Hover) + a-42 (Services Icon Move)",
+      "verified": "medido en vivo",
+      "mouseFollow": {
+        "target": ".project-mouse-move-element",
+        "size": "95x95 circulo, border 2px #ffd900, color #ffd900, contiene una flecha en caja",
+        "rangeX": "-10vw .. +10vw",
+        "rangeY": "-20vh .. +20vh",
+        "smoothing": 80,
+        "restingState": 50,
+        "note": ".h6.rotate NO es un badge rotatorio: es el titulo del proyecto girado 90deg (texto vertical) en la barra lateral izquierda de la tarjeta"
+      },
+      "mediaQuery": "solo main (>=992px); .project-mouse-move-element tiene display:none @<=991px"
+    },
+    {
+      "selector": ".products-wrap",
+      "component": "ProductCard (3 en products)",
+      "effect": "El fondo de la imagen pasa de crema a beige, el chip 'Cart' pasa a negro con texto e icono blancos, y la imagen hace zoom",
+      "from": { ".cover-image-wrap.products": { "backgroundColor": "#fef8f0" }, ".cart-wrap": { "backgroundColor": "#fae9ce" }, ".paragraph.white": { "color": "#000000" }, ".cart-icon-home.black": { "opacity": 1 }, ".cart-icon-home.white": { "opacity": 0 }, ".cover-image.products": { "scale": 1 } },
+      "to": { ".cover-image-wrap.products": { "backgroundColor": "#fae9ce" }, ".cart-wrap": { "backgroundColor": "#000000" }, ".paragraph.white": { "color": "#ffffff" }, ".cart-icon-home.black": { "opacity": 0 }, ".cart-icon-home.white": { "opacity": 1 }, ".cover-image.products": { "scale": 1.1 } },
+      "duration": { "fondoImagen": 400, "iconos": 300, "resto": 500 },
+      "ease": "ease",
+      "ix2": "a-65/a-97 (Products Hover) + a-11/a-12 (Image Hover)",
+      "verified": "medido en vivo",
+      "detail": "El 'Cart' son DOS iconos superpuestos (.cart-icon-home.black z-index 1 y .cart-icon-home.white en position:absolute) que hacen cross-fade; el chip .cart-wrap es radius 6px, padding 10px 20px, gap 20px, 137x65. Oculto (display:none) en algun breakpoint <=991."
+    },
+    {
+      "selector": ".service-box",
+      "component": "ServiceCard (3 en services)",
+      "effect": "La tarjeta pasa de blanca a crema, la caja del icono de crema a blanca (inversion) y el icono escala 1.1",
+      "from": { "self": { "backgroundColor": "#ffffff" }, ".service-icon-box": { "backgroundColor": "#fae9ce" }, ".service-icon-image.service": { "scale": 1 } },
+      "to": { "self": { "backgroundColor": "#fae9ce" }, ".service-icon-box": { "backgroundColor": "#ffffff" }, ".service-icon-image.service": { "scale": 1.1 } },
+      "duration": 300,
+      "ease": "ease",
+      "ix2": "a-55/a-56",
+      "verified": "medido en vivo",
+      "geometry": { ".service-icon-box": "150x150 radius 14px (80/60/40 en breakpoints)" }
+    },
+    {
+      "selector": ".nav-wrap (links de navbar y del megamenu)",
+      "component": "NavLink",
+      "effect": "Subrayado blanco de 1.5px que entra deslizandose desde la izquierda y sale hacia la derecha",
+      "from": { ".nav-line": { "x": "-100%", "display": "none" } },
+      "to": { ".nav-line": { "x": "0%", "display": "block" } },
+      "out": { ".nav-line": { "x": "+100% (500ms) y luego salto a -100% + display none" } },
+      "duration": 500,
+      "ease": "ease",
+      "ix2": "a-81/a-82 (66 eventos) y a-115/a-116 (22 eventos)",
+      "verified": "medido en vivo (display none->block, transform none->matrix identity, width 0->45.5px)",
+      "geometry": { ".nav-line": "height 1.5px, background #fff (variante .black), position absolute inset auto 0% 0%", ".nav-text-box": "position relative, overflow hidden" }
+    },
+    {
+      "selector": ".blogs-big-box / .cover-image-wrap.blogs / .cover-image-wrap.about-us / .cover-image-wrap.services / .cover-image-wrap.inside",
+      "component": "ImageZoom (patron generico, 20 instancias en el sitio)",
+      "effect": "Zoom de la imagen dentro de su contenedor con overflow hidden",
+      "from": { ".cover-image": { "scale": 1 } },
+      "to": { ".cover-image": { "scale": 1.1 } },
+      "duration": 500,
+      "ease": "ease",
+      "ix2": "a-11/a-12 'Image Hover In/Out'",
+      "verified": "medido en vivo"
+    },
+    {
+      "selector": ".footer-social-box",
+      "component": "FooterSocial (4 iconos)",
+      "effect": "Circulo negro con borde blanco -> amarillo solido con icono negro",
+      "from": { "backgroundColor": "#000000", "borderColor": "#ffffff", ".social-icon": { "color": "#ffffff" } },
+      "to": { "backgroundColor": "#ffd900", "borderColor": "#ffd900", ".social-icon": { "color": "#000000" } },
+      "duration": 200,
+      "ease": "ease",
+      "ix2": "a-62/a-67",
+      "verified": "medido en vivo"
+    },
+    {
+      "selector": ".footer-content-wrap .link-text",
+      "component": "FooterLink (7 quick links)",
+      "effect": "El texto pasa de blanco a amarillo",
+      "from": { "color": "#ffffff" },
+      "to": { "color": "#ffd900" },
+      "duration": 300,
+      "ease": "ease",
+      "ix2": "a-68/a-69",
+      "verified": "medido en vivo"
+    },
+    {
+      "selector": ".cart-button (icono carrito de la navbar)",
+      "component": "CartButton",
+      "effect": "Sin cambios en el homepage: el target del IX2 (.cart-icon-wrap) no existe en desktop (display:none). El unico elemento propio es el badge amarillo del contador (estatico).",
+      "from": {},
+      "to": {},
+      "duration": 0,
+      "ix2": "a-23/a-24/a-25 (Cart Icon Hover/Move) — declarados pero sin target visible en el home",
+      "verified": "medido en vivo: 0 cambios"
+    }
+  ],
+
+  "specialAnimations": [
+    {
+      "name": "Dot Ring Rotation",
+      "section": "advantages",
+      "description": "Anillo de puntos (SVG 'Dot Image.svg', 205x205 desktop / 180 / 150) que gira 360deg en sentido horario de forma continua. Los puntos tienen opacidades escalonadas -> parece un spinner. Envuelve al rotador de texto .bold-text-wrap dentro de .choice-left-top (tarjeta blanca 250x300 con border 1px #dbdbdb, radius 10px).",
+      "params": { "from": "rotateZ(0deg)", "to": "rotateZ(360deg)", "duration": 10000, "loop": true, "ease": "linear", "measuredDegPerSec": 35.95 },
+      "ix2": "a-57 'Dot Rotation' SCROLL_INTO_VIEW loop:true",
+      "implementation": "CSS: animation: spin 10s linear infinite; @keyframes spin{to{transform:rotate(360deg)}}"
+    },
+    {
+      "name": "Star Rotation",
+      "section": "advantages",
+      "description": "Estrella de 4 puntas blanca (.right-corner-icon, 43x43) en la esquina superior izquierda de la tarjeta 'ATTENTION TO DETAILS'; gira 360deg continuamente",
+      "params": { "from": "rotateZ(0deg)", "to": "rotateZ(360deg)", "duration": 6000, "loop": true, "ease": "linear" },
+      "ix2": "a-86 'Star Rotation Animation' SCROLL_INTO_VIEW loop:true",
+      "implementation": "CSS: animation: spin 6s linear infinite"
+    },
+    {
+      "name": "Lottie icon (eyebrow de seccion)",
+      "section": "about, projects, services, advantages, products, blogs (6 instancias)",
+      "description": "Icono diamante 'Livnor Icon.lottie' animado, autoplay + loop, renderer SVG, ~0.833s por ciclo, delante del texto eyebrow ('About Us', 'Our Blogs', ...)",
+      "params": { "src": "692e9875b32d3ca619c825fb_Livnor Icon.lottie", "loop": true, "autoplay": true, "durationSec": 0.8333, "renderer": "svg" },
+      "implementation": "Opcion A (recomendada): usar el SVG estatico ya extraido en references/pages/home/assets/svgs/ y anadir un loop CSS sutil. Opcion B: @lottiefiles/dotlottie-react con el .lottie descargado. NO merece un bundle de lottie-web (>200KB) por un icono de 24px si Lighthouse es un objetivo."
+    },
+    {
+      "name": "Megamenu background video",
+      "section": "navbar / megamenu",
+      "description": "Video de fondo en loop dentro del panel del megamenu (.nav-bg-video > .navbar-background-video), autoplay + loop + muted + playsinline, mp4 + webm, con poster jpg de fallback",
+      "params": { "autoplay": true, "loop": true, "muted": true, "objectFit": "cover", "position": "absolute inset 0, overflow hidden" },
+      "assets": {
+        "mp4": "691077eba085c0a8252b3117_693a9287e3851420a97634a9_Navbar_BG_Video_mp4.mp4",
+        "webm": "691077eba085c0a8252b3117_693a9287e3851420a97634a9_Navbar_BG_Video_webm.webm",
+        "poster": "691077eba085c0a8252b3117_693a9287e3851420a97634a9_Navbar_BG_Video_poster.0000000.jpg"
+      },
+      "implementation": "<video autoPlay loop muted playsInline poster={poster} className='absolute inset-0 h-full w-full object-cover' /> + preload='none' para no penalizar Lighthouse; solo montarlo cuando el megamenu esta abierto"
+    },
+    {
+      "name": "Green Circle Animation (inerte)",
+      "section": "about",
+      "description": ".green-box-wrap tiene un STYLE_SIZE sin valores (widthValue/heightValue undefined) -> no hace nada en el original. NO replicar.",
+      "params": {},
+      "ix2": "a-52",
+      "implementation": "ignorar"
+    }
+  ],
+
+  "navbarBehavior": {
+    "sticky": false,
+    "fixed": false,
+    "verifiedLive": "Playwright a 1440px: 0 elementos position:fixed o sticky en toda la pagina a scrollY = 0, 1200, 5000 y volviendo hacia arriba. La navbar sale del viewport con el hero y no reaparece.",
+    "position": "relative dentro de .hero-navbar-wrap (que tiene background rgba(0,0,0,0.15)), z-index 1000",
+    "background": "transparente (--transperant); el contraste lo da el overlay del hero",
+    "changesOnScroll": "ninguno (ni fondo, ni tamano, ni opacidad, ni translate)",
+    "layout": {
+      "container": ".navbar-layout.home / .navbar-layout.hero, max-width 1700px, min-height 70px, justify space-between, gap 40px",
+      "left": ".navbar-left (logo 'Livinor Black.svg')",
+      "middle": ".navbar-middle > .navbar (w-nav) max-width 515px con .navbar-link-wrap.hero (gap 30px): Home / About us / Projects / Shop / Pages(dropdown)",
+      "right": "cart-button con badge amarillo de contador"
+    },
+    "collapseBreakpoint": "data-collapse='medium' -> hamburguesa a <=991px",
+    "linkHover": "ver hoverStates .nav-wrap (.nav-line 1.5px)",
+    "recommendation": "NO implementar sticky ni scroll-hide. Un header 'relative' dentro del hero. Si se quiere mejorar UX se puede anadir, pero se apartaria del original y el comparator lo penalizaria."
+  },
+
+  "mobileMenu": {
+    "trigger": ".menu-button.w-nav-button, 48x48, esquina superior derecha (x 317, y 11 a 375px), padding 12px",
+    "openClass": ".w--open (background pasa a --transperant, color negro)",
+    "type": "panel desplegable bajo la navbar (NO es overlay a pantalla completa, NO entra desde un lateral)",
+    "enterFrom": "arriba: el panel baja desde detras de la navbar, recortado por .w-nav-overlay (position absolute, top 100%, overflow hidden)",
+    "webflowAnimation": { "data-animation": "default", "data-duration": 600, "data-easing": "ease", "data-easing2": "ease" },
+    "panel": {
+      "selector": ".navbar-navigation.w-nav-menu",
+      "position": "absolute, top 100%",
+      "measuredOpen": { "x": 10, "y": 70, "w": 355, "h": 280, "viewport": 375 },
+      "background": "#fae9ce (--card-color)",
+      "borderRadius": 12,
+      "transition": "transform 0.6s"
+    },
+    "content": ["Home", "About us", "Projects", "Shop", "Pages (dropdown anidado)"],
+    "bodyScrollLock": false,
+    "verifiedLive": "Playwright a 375x812: click en .w-nav-button -> menu display none->block, 355x280, bg rgb(250,233,206); body overflow sigue 'visible'",
+    "implementation": "Estado React `open`; panel con AnimatePresence: initial={{y:'-100%'}} animate={{y:0}} exit={{y:'-100%'}} transition={{duration:0.6, ease:[0.25,0.1,0.25,1]}}, dentro de un wrapper absolute top-full overflow-hidden"
+  },
+
+  "megamenu": {
+    "selector": ".megamenu-dropdown (w-dropdown) en el item 'Pages' de la navbar",
+    "trigger": "click en .megamenu-dropdown-toggle (Webflow w-dropdown; en desktop tambien abre por hover del contenedor)",
+    "openAnimation": {
+      "target": ".dropdown-link-wrap",
+      "from": { "height": 0 },
+      "to": { "height": "auto" },
+      "duration": 1000,
+      "ease": "inQuad",
+      "overflow": "hidden"
+    },
+    "arrow": { "target": ".dropdown-arrow", "from": "rotateZ(0deg)", "to": "rotateZ(-90deg)", "duration": 500 },
+    "closeAnimation": { "target": ".dropdown-link-wrap", "to": { "height": 0 }, "duration": 1000, "ease": "inQuad" },
+    "ix2": "a-21/a-22 (variantes a-5/a-6, a-31/a-32, a-113/a-114, a-117/a-118)",
+    "panel": {
+      "selector": ".dropdown-content-wrap",
+      "measured": { "w": 850, "h": 400, "x": 204, "y": 77 },
+      "listMeasured": { "w": 850, "h": 430, "x": 304, "y": 47 },
+      "css": "border 1px solid #fff, min-width 850px, min-height 400px, padding 30px, display flex, justify-content space-between, gap 30px, background transparente",
+      "wrapCss": ".dropdown-link-wrap { margin-top: 30px; position: relative; right: 100px; overflow: hidden; }",
+      "backgroundVideo": "si — .nav-bg-video (ver specialAnimations)"
+    },
+    "columns": [
+      { "title": "PAGES", "links": [["Contact Us", "/contact"], ["Blogs", "/blogs"], ["Services", "/services"], ["Shop", "/shop"], ["Team", "/team-one"]] },
+      { "title": "CMS", "links": [["Blogs Details", "/blogs/the-art-of-home-and-living"], ["Services Details", "/services/floor-styling"], ["Projects Details", "/projects/luneth-maison"], ["Products Details", "/product/leather-armchair"], ["Categories Details", "/category/all"]] },
+      { "title": "UTILITY", "links": [["Style Guide", "/utility-pages/style-guide"], ["Changelog", "/utility-pages/changelog"], ["Licenses", "/utility-pages/licenses"], ["Password Protected", "/401"], ["404", "/404"]] },
+      { "title": "E-COMMERCE", "links": [["Checkout", "/checkout"], ["Checkout (Paypal)", "/paypal-checkout"], ["Order Confirmation", "/order-confirmation"]] }
+    ],
+    "verifiedLive": "click real con Playwright: linkWrap 0px -> 400px, arrow transform matrix(0,-1,1,0,0,0) = -90deg"
+  },
+
+  "prefersReducedMotion": {
+    "originalSupport": "ninguno (Webflow IX2 no lo respeta; la unica regla del original es el fallback img del background video)",
+    "desactivar": [
+      "los 4 marquees (hero-slider, top-slider, bottom-slider, design-slider): animation: none y dejar el track en su posicion inicial",
+      "las 2 rotaciones infinitas (dot ring 10s, star 6s): animation: none",
+      "el rotador .bold-text: mostrar solo el primer item ('Bold Designs')",
+      "el rotador .h2-title-counter: renderizar directamente el 3er item (gris) sin transicion",
+      "el odometer .counter-wrap: mostrar el numero final sin rodar",
+      "el zoom-on-scroll de la seccion designcta (a-84): dejar scale 1",
+      "el wipe de barras .line-color (a-38): dejar todas las barras en x:100% (texto negro completo)",
+      "el loop de .cover-image-wrap.corner-*: dejarlas en x:0",
+      "el video de fondo del megamenu: sustituir por el poster",
+      "los lottie: frame estatico"
+    ],
+    "mantener": [
+      "los reveals de entrada reducidos a un fade de 150ms sin desplazamiento",
+      "los hover states de color (son cambios de estado, no movimiento) pero sin scale ni translate",
+      "las transiciones del carrusel de testimonios reducidas a un cross-fade instantaneo (embla: duration 0)"
+    ],
+    "implementation": "Hook `useReducedMotion()` de framer-motion para los componentes JS + `@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }` en globals.css para los marquees CSS"
+  },
+
+  "dudas": [
+    "El original NO hace loop seamless en ninguno de los 4 marquees: el reset de Webflow (duration 0) produce un salto visible cada 40s/90s/100s. He especificado la version seamless (mismo px/s, translate = 1 set exacto). Si el comparator captura justo el frame del salto podria haber diferencia, pero es un frame entre miles.",
+    "El easing real de los movimientos IX2 con `easing:''` es el 'ease' por defecto de Webflow. Para los marquees el original usa ese ease sobre 40-100s, lo que en la practica es indistinguible de linear salvo en los extremos. He recomendado linear.",
+    "Los dots del carrusel de testimonios existen en el DOM (4x .w-slider-dot) pero .slide-nav tiene display:none en el CSS base -> NUNCA se ven, en ningun breakpoint. Verificado en vivo a 1440px. Si el brief pide dots, seria un anadido, no una replica.",
+    "a-42/a-19/a-25 son animaciones MOUSE_MOVE continuas (elemento que sigue el cursor con smoothing 80-90 y restingState 50). En framer-motion se replican con useMotionValue + useSpring; el 'smoothing 80' equivale a un spring bastante amortiguado (~stiffness 60, damping 20). Es una aproximacion, no un valor exacto.",
+    "El conteo de 238 `data-w-id` de interactivity.json cuenta ocurrencias del atributo en el HTML crudo; el DOM renderizado tiene 168 elementos unicos con data-w-id, de los cuales 120 tienen al menos un evento IX2 asociado."
+  ]
+}

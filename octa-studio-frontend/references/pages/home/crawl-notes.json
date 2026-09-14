@@ -1,0 +1,28 @@
+{
+  "target": "https://livinor.webflow.io/",
+  "pageName": "home",
+  "capturedAt": "2026-08-20T05:08:02.346Z",
+  "screenshots": {
+    "desktop": "references\\pages\\home\\screenshots\\desktop.png",
+    "tablet": "references\\pages\\home\\screenshots\\tablet.png",
+    "mobile": "references\\pages\\home\\screenshots\\mobile.png"
+  },
+  "overlays": {
+    "dismissed": [],
+    "failed": [],
+    "hadOverlay": true
+  },
+  "preDismissalShot": true,
+  "counts": {
+    "computedNodes": 1285,
+    "images": 125,
+    "fonts": 2,
+    "videos": 1,
+    "inlineSvgs": 70,
+    "sliders": 73,
+    "animated": 120,
+    "carousels": 8,
+    "hoverStates": 7
+  },
+  "warnings": []
+}

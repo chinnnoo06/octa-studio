@@ -1,0 +1,28 @@
+{
+  "target": "https://livinor.webflow.io/about-us",
+  "pageName": "about-us",
+  "capturedAt": "2026-09-14T02:39:37.402Z",
+  "screenshots": {
+    "desktop": "references\\pages\\about-us\\screenshots\\desktop.png",
+    "tablet": "references\\pages\\about-us\\screenshots\\tablet.png",
+    "mobile": "references\\pages\\about-us\\screenshots\\mobile.png"
+  },
+  "overlays": {
+    "dismissed": [],
+    "failed": [],
+    "hadOverlay": true
+  },
+  "preDismissalShot": true,
+  "counts": {
+    "computedNodes": 523,
+    "images": 59,
+    "fonts": 2,
+    "videos": 3,
+    "inlineSvgs": 31,
+    "sliders": 0,
+    "animated": 95,
+    "carousels": 0,
+    "hoverStates": 5
+  },
+  "warnings": []
+}

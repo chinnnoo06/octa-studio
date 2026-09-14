@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "lib": [
+            "esnext"
+        ],
+        "target": "ESNext",
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext",
+        "strict": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "isolatedModules": true,
+        "strictNullChecks": true,
+        "types": [
+            "node",
+            "express",
+            "multer",
+            "cookie-parser",
+            "cors",
+            "morgan",
+            "bcrypt",
+            "jsonwebtoken"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}

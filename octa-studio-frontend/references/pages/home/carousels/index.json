@@ -1,0 +1,146 @@
+[
+  {
+    "index": 0,
+    "selector": "hero-slider",
+    "tag": "div",
+    "slideCount": 0,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": 750,
+      "y": 550,
+      "w": 690,
+      "h": 422
+    },
+    "frames": [
+      "section-0-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 1,
+    "selector": "services-bottom-slider",
+    "tag": "div",
+    "slideCount": 65,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": 60,
+      "y": 6986,
+      "w": 1320,
+      "h": 232
+    },
+    "frames": [
+      "section-1-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 2,
+    "selector": "top-slider",
+    "tag": "div",
+    "slideCount": 35,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -1097,
+      "y": 6986,
+      "w": 1320,
+      "h": 110
+    },
+    "frames": [
+      "section-2-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 3,
+    "selector": "services-slider top",
+    "tag": "div",
+    "slideCount": 6,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -1097,
+      "y": 6986,
+      "w": 2146,
+      "h": 110
+    },
+    "frames": [
+      "section-3-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 4,
+    "selector": "slider-box",
+    "tag": "div",
+    "slideCount": 1,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -1097,
+      "y": 6986,
+      "w": 821,
+      "h": 110
+    },
+    "frames": [
+      "section-4-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 5,
+    "selector": "livinor-slider-icon w-embed",
+    "tag": "div",
+    "slideCount": 0,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -1097,
+      "y": 6986,
+      "w": 110,
+      "h": 110
+    },
+    "frames": [
+      "section-5-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 6,
+    "selector": "slider-box",
+    "tag": "div",
+    "slideCount": 1,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -245,
+      "y": 6986,
+      "w": 692,
+      "h": 110
+    },
+    "frames": [
+      "section-6-frame-0.png"
+    ],
+    "framesCaptured": 1
+  },
+  {
+    "index": 7,
+    "selector": "livinor-slider-icon w-embed",
+    "tag": "div",
+    "slideCount": 0,
+    "hasArrows": false,
+    "hasDots": false,
+    "bbox": {
+      "x": -245,
+      "y": 6986,
+      "w": 110,
+      "h": 110
+    },
+    "frames": [
+      "section-7-frame-0.png"
+    ],
+    "framesCaptured": 1
+  }
+]

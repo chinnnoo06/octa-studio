@@ -1,0 +1,11 @@
+# Material del pipeline de replicación: no forma parte del sitio desplegado.
+# Sin esto se subirían ~116 MB de screenshots y análisis.
+references/
+analysis/
+scripts/
+.captures/
+.devserver.log
+
+# Artefactos locales
+.next/
+node_modules/

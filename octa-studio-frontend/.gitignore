@@ -1,0 +1,39 @@
+# ── Dependencias ────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.*
+
+# ── Build ───────────────────────────────────────────────────────────────────
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Entorno y credenciales ──────────────────────────────────────────────────
+.env*
+!.env.example
+*.pem
+
+# ── Vercel ──────────────────────────────────────────────────────────────────
+.vercel
+
+# ── Logs ────────────────────────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+.pnpm-debug.log*
+.devserver.log
+
+# ── Artefactos del pipeline de replicación ──────────────────────────────────
+# Se ignora solo lo DERIVADO y regenerable. Lo irremplazable sí se versiona:
+# analysis/, references/original/ (CSS + config IX2 del sitio original),
+# el DOM, los computed styles y los screenshots de referencia.
+.captures/
+references/iterations/
+references/pages/*/crops/
+references/pages/*/svg-preview/
+
+# ── Sistema ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+/coverage

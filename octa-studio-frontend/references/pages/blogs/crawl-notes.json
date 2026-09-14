@@ -1,0 +1,28 @@
+{
+  "target": "https://livinor.webflow.io/blogs",
+  "pageName": "blogs",
+  "capturedAt": "2026-09-14T06:59:46.958Z",
+  "screenshots": {
+    "desktop": "references\\pages\\blogs\\screenshots\\desktop.png",
+    "tablet": "references\\pages\\blogs\\screenshots\\tablet.png",
+    "mobile": "references\\pages\\blogs\\screenshots\\mobile.png"
+  },
+  "overlays": {
+    "dismissed": [],
+    "failed": [],
+    "hadOverlay": true
+  },
+  "preDismissalShot": true,
+  "counts": {
+    "computedNodes": 183,
+    "images": 64,
+    "fonts": 2,
+    "videos": 1,
+    "inlineSvgs": 11,
+    "sliders": 0,
+    "animated": 49,
+    "carousels": 0,
+    "hoverStates": 1
+  },
+  "warnings": []
+}

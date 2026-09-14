@@ -1,0 +1,866 @@
+{
+  "page": "home",
+  "signatureCounts": {
+    "carousels": {
+      "\\bw-slider\\b": 13,
+      "\\bw-slide\\b": 4,
+      "\\bw-slider-nav\\b": 1,
+      "\\bw-slider-arrow-(left|right)\\b": 2,
+      "class=\"[^\"]*slider[^\"]*\"": 158
+    },
+    "animations": {
+      "data-w-id=\"[^\"]+\"": 238,
+      "data-animation=\"[^\"]+\"": 2,
+      "gsap|ScrollTrigger|SplitText": 2
+    },
+    "accordions": {
+      "aria-expanded=\"(true|false)\"": 2,
+      "w-dropdown": 7
+    },
+    "modals": {
+      "role=\"dialog\"": 1,
+      "class=\"[^\"]*(modal|lightbox|overlay)[^\"]*\"": 11
+    },
+    "sticky": {},
+    "forms": {
+      "<form": 2,
+      "w-form": 3,
+      "<input": 3
+    },
+    "video": {
+      "<video": 1,
+      "w-background-video": 3
+    },
+    "tabs": {}
+  },
+  "webflowIx2Elements": 238,
+  "gsapPresent": true,
+  "scrollTriggerPresent": false,
+  "interestingClasses": [
+    {
+      "cls": "slider-icon",
+      "n": 48
+    },
+    {
+      "cls": "slider-box",
+      "n": 27
+    },
+    {
+      "cls": "livinor-slider-icon",
+      "n": 27
+    },
+    {
+      "cls": "design-slider-box",
+      "n": 24
+    },
+    {
+      "cls": "tab-center",
+      "n": 16
+    },
+    {
+      "cls": "services-slider",
+      "n": 9
+    },
+    {
+      "cls": "rotate",
+      "n": 8
+    },
+    {
+      "cls": "design-slider",
+      "n": 4
+    },
+    {
+      "cls": "slide",
+      "n": 4
+    },
+    {
+      "cls": "w-slide",
+      "n": 4
+    },
+    {
+      "cls": "testimonial-slider",
+      "n": 4
+    },
+    {
+      "cls": "w-slider-dot",
+      "n": 4
+    },
+    {
+      "cls": "slide-icon",
+      "n": 2
+    },
+    {
+      "cls": "megamenu-dropdown",
+      "n": 1
+    },
+    {
+      "cls": "w-dropdown",
+      "n": 1
+    },
+    {
+      "cls": "megamenu-dropdown-toggle",
+      "n": 1
+    },
+    {
+      "cls": "w-dropdown-toggle",
+      "n": 1
+    },
+    {
+      "cls": "dropdown-arrow",
+      "n": 1
+    },
+    {
+      "cls": "dropdown-navigation",
+      "n": 1
+    },
+    {
+      "cls": "w-dropdown-list",
+      "n": 1
+    },
+    {
+      "cls": "dropdown-link-wrap",
+      "n": 1
+    },
+    {
+      "cls": "dropdown-content-wrap",
+      "n": 1
+    },
+    {
+      "cls": "w-commerce-commercecartcontainerwrapper--cartType-rightDropdown",
+      "n": 1
+    },
+    {
+      "cls": "hero-slider",
+      "n": 1
+    },
+    {
+      "cls": "services-bottom-slider",
+      "n": 1
+    },
+    {
+      "cls": "top-slider",
+      "n": 1
+    },
+    {
+      "cls": "bottom-slider",
+      "n": 1
+    },
+    {
+      "cls": "design-slider-layout",
+      "n": 1
+    },
+    {
+      "cls": "slider",
+      "n": 1
+    },
+    {
+      "cls": "w-slider",
+      "n": 1
+    },
+    {
+      "cls": "slider-mask",
+      "n": 1
+    },
+    {
+      "cls": "w-slider-mask",
+      "n": 1
+    },
+    {
+      "cls": "w-slider-aria-label",
+      "n": 1
+    },
+    {
+      "cls": "w-slider-arrow-left",
+      "n": 1
+    },
+    {
+      "cls": "w-slider-arrow-right",
+      "n": 1
+    },
+    {
+      "cls": "slide-nav",
+      "n": 1
+    },
+    {
+      "cls": "w-slider-nav",
+      "n": 1
+    }
+  ],
+  "slidersBySection": {
+    "hero": [
+      {
+        "cls": "hero-slider",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 690,
+        "h": 422,
+        "y": 550
+      }
+    ],
+    "services": [
+      {
+        "cls": "services-bottom-slider",
+        "slides": 65,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 232,
+        "y": 6986
+      },
+      {
+        "cls": "top-slider",
+        "slides": 35,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "services-slider top",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "services-slider top",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "services-slider top",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "services-slider top",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "services-slider top",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 6986
+      },
+      {
+        "cls": "bottom-slider",
+        "slides": 28,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "services-slider bottom",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "services-slider bottom",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "services-slider bottom",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "services-slider bottom",
+        "slides": 6,
+        "arrows": false,
+        "dots": false,
+        "w": 2146,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 821,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 692,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "slider-box",
+        "slides": 1,
+        "arrows": false,
+        "dots": false,
+        "w": 572,
+        "h": 110,
+        "y": 7108
+      },
+      {
+        "cls": "livinor-slider-icon w-embed",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 110,
+        "h": 110,
+        "y": 7108
+      }
+    ],
+    "testimonials": [
+      {
+        "cls": "slider w-slider",
+        "slides": 19,
+        "arrows": true,
+        "dots": true,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      },
+      {
+        "cls": "slider-mask w-slider-mask",
+        "slides": 9,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      },
+      {
+        "cls": "testimonial-slider",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      },
+      {
+        "cls": "testimonial-slider",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      },
+      {
+        "cls": "testimonial-slider",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      },
+      {
+        "cls": "testimonial-slider",
+        "slides": 0,
+        "arrows": false,
+        "dots": false,
+        "w": 1320,
+        "h": 487,
+        "y": 11478
+      }
+    ]
+  },
+  "animatedCountBySection": {
+    "hero": 32,
+    "about": 10,
+    "projects": 25,
+    "process": 11,
+    "services": 17,
+    "designcta": 3,
+    "advantages": 16,
+    "products": 6
+  },
+  "totalSlidersDetected": 73,
+  "totalAnimatedDetected": 120
+}
