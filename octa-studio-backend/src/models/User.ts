@@ -10,6 +10,8 @@ const UserSchema = new Schema<TUser>({
         type: String,
         require: true
     },
+}, {
+    timestamps: true
 })
 
 export const User = model<TUser>("User", UserSchema, "users");

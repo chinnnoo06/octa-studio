@@ -12,7 +12,7 @@ import { CtaSection } from '@/components/ui/CtaSection';
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />    
       <About />        
       <Services /> 
@@ -24,6 +24,6 @@ export default function HomePage() {
       <Faqs />       
       <Testimonials />
       <Blogs />   
-    </main>
+    </>
   );
 }

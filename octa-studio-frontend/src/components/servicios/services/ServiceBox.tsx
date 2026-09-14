@@ -6,7 +6,7 @@ import {
   HiOutlineUserGroup,
 } from 'react-icons/hi2';
 import type { IconType } from 'react-icons';
-import type { TService } from '@/types/content';
+import type { TService } from '@/types/content.types';
 
 const ICONS: Record<TService['icon'], IconType> = {
   stands: HiOutlineBuildingStorefront,

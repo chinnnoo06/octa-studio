@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
+    "@tanstack/react-query": "^5.102.8",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
@@ -22,10 +24,13 @@
     "pngjs": "^7.0.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-hook-form": "^7.88.0",
     "react-icons": "^5.7.0",
+    "react-toastify": "^11.1.0",
     "sharp": "^0.35.3",
     "ssim.js": "^3.5.0",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

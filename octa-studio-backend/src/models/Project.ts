@@ -24,6 +24,8 @@ const ProjectSchema = new Schema<TProject>({
             message: "At least one image is required"
         }
     },
+}, {
+    timestamps: true
 })
 
 ProjectSchema.plugin(mongoosePaginate);

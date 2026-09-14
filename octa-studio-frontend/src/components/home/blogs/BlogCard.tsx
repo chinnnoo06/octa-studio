@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegClock } from 'react-icons/fa6';
-import type { TBlogPost } from '@/types/content';
+import type { TBlogPost } from '@/types/content.types';
 
 export const BlogCard = ({ post }: { post: TBlogPost }) => {
   return (

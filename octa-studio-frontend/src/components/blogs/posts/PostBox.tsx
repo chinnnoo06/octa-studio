@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiCalendar } from 'react-icons/fi';
-import type { TBlogPost } from '@/types/content';
+import type { TBlogPost } from '@/types/content.types';
 import ImgAvatar from '@/assets/media/brand/ImgBlueLogo.webp';
 
 /** Tarjeta del listado: foto arriba, titular y, abajo, autoría y fecha. */

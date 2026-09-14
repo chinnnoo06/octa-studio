@@ -6,8 +6,6 @@ import './globals.css';
 import { Header } from '@/components/ui/header/Header';
 import { WhatsAppButton } from '@/components/ui/buttons/WhatsAppButton';
 
-/** La base de todo el sitio. `--font-sans` de `globals.css` apunta aquí, y de
- *  ahí sale la fuente del documento entero sin escribir ninguna clase. */
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -53,10 +51,7 @@ export default function RootLayout({
       className={`${inter.variable} ${gentleman.variable}`}
     >
       <body className="bg-primary text-fourth antialiased">
-        <Header />
         {children}
-        <Footer />
-        <WhatsAppButton />
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import type { TTestimonial } from '@/types/content';
+import type { TTestimonial } from '@/types/content.types';
 
 export const TESTIMONIALS: TTestimonial[] = [
   {

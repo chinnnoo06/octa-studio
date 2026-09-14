@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function ContactoPage() {
   return (
-    <main className="pt-18">
+    <>
       <Contact />
       <Faq />
-    </main>
+    </>
   );
 }

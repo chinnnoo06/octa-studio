@@ -1,4 +1,4 @@
-import type { TPillar } from '@/types/content';
+import type { TPillar } from '@/types/content.types';
 
 export const StoryCard = ({ pillar }: { pillar: TPillar }) => {
   return (

@@ -7,8 +7,10 @@ import { fadeBlur } from '@/utils/motion/reveal';
 import Img from "@/assets/media/stands/ImgStand1.webp"
 
 export const Hero = () => {
+  // El `-mt-18` cancela el `pt-18` del <main>: esta es la única sección que va
+  // a sangre por debajo del header, para que la foto llegue hasta arriba.
   return (
-    <section data-section="hero" className="relative w-full overflow-x-clip">
+    <section data-section="hero" className="relative -mt-18 w-full overflow-x-clip">
       <Image
         src={Img}
         alt=""

@@ -15,8 +15,8 @@ export default async function ServiciosPage({
   const { page } = await searchParams;
 
   return (
-    <main className="pt-18">
+    <>
       <Services page={Number(page) || 1} />
-    </main>
+    </>
   );
 }

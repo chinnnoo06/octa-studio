@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/utils/cn';
-import type { TProject } from '@/types/content';
+import type { TProject } from '@/types/content.types';
 
 /**
  * El tick central calca la interacción del original: escala de 0 a 1 al entrar

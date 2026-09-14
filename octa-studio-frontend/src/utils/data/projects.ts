@@ -1,4 +1,4 @@
-import type { TProject } from '@/types/content';
+import type { TProject } from '@/types/content.types';
 import ImgAgrokorita from '@/assets/media/stands/ImgStand9.webp';
 import ImgTemisa from '@/assets/media/stands/ImgStand10.webp';
 import ImgToyoKasei from '@/assets/media/stands/ImgStand4.webp';

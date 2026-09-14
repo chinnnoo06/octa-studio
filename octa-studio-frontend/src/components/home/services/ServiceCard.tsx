@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { HiArrowUpRight } from 'react-icons/hi2';
-import type { TService } from '@/types/content';
+import type { TService } from '@/types/content.types';
 
 export const ServiceCard = ({ service }: { service: TService }) => {
   return (

@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import { accordionPanel } from '@/utils/motion/accordion';
-import type { TFaq } from '@/types/content';
+import type { TFaq } from '@/types/content.types';
 
 type TFaqItemProps = {
   item: TFaq;

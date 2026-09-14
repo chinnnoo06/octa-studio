@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { TNavLink } from '@/types/content';
+import type { TNavLink } from '@/types/content.types';
 
 const ALIGN = {
   start: 'lg:mr-auto lg:ml-0',

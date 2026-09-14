@@ -15,8 +15,8 @@ export default async function BlogsPage({
   const { page } = await searchParams;
 
   return (
-    <main className="pt-18">
+    <>
       <Posts page={Number(page) || 1} />
-    </main>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import type { TStat } from '@/types/content';
+import type { TStat } from '@/types/content.types';
 
 export const STATS: TStat[] = [
   {

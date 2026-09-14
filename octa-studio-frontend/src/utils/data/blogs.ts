@@ -1,4 +1,4 @@
-import type { TBlogPost } from '@/types/content';
+import type { TBlogPost } from '@/types/content.types';
 import Img1 from '@/assets/media/renders/ImgRender1.webp';
 import Img2 from '@/assets/media/stands/ImgStand5.webp';
 import Img3 from '@/assets/media/stands/ImgStand6.webp';

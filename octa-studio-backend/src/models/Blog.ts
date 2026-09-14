@@ -101,7 +101,6 @@ const BlogSchema = new Schema<TBlog>(
     },
     {
         timestamps: true,
-        versionKey: false
     }
 )
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { cn } from '@/utils/cn';
-import type { TTeamArea } from '@/types/content';
+import type { TTeamArea } from '@/types/content.types';
 
 type TTeamCardProps = {
   area: TTeamArea;

@@ -21,7 +21,7 @@ export const PrimaryButtonLeft = ({ href, children }: TButtonProps) => {
         <HiArrowUpLeft className="size-4 lg:size-4.5 stroke-1" />
       </span>
 
-      <span className="border-secondary bg-secondary text-primary group-hover:text-secondary group-hover:bg-primary inline-flex items-center justify-center rounded-full border px-6 py-2.5 text-sm font-medium transition-colors duration-300 lg:text-base">
+      <span className="border-secondary bg-secondary text-primary group-hover:text-secondary group-hover:bg-primary inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-sm font-medium transition-colors duration-300 lg:text-base">
         {children}
       </span>
     </Link>

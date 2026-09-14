@@ -1,4 +1,4 @@
-import type { TNavLink } from '@/types/content';
+import type { TNavLink } from '@/types/content.types';
 
 export const NAV_LINKS: TNavLink[] = [
   { label: 'Inicio',    href: '/' },

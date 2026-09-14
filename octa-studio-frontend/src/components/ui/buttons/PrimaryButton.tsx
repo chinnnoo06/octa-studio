@@ -14,7 +14,7 @@ export const PrimaryButton = ({ href, children }: TButtonProps) => {
       rel={isExternal ? 'noopener noreferrer' : undefined}
       className="group inline-flex w-fit items-center gap-2.5"
     >
-      <span className="border border-secondary rounded-full font-medium text-sm lg:text-base bg-secondary text-primary group-hover:text-secondary group-hover:bg-primary inline-flex items-center justify-center px-6 py-2.5 transition-colors duration-300">
+      <span className="border border-secondary rounded-full font-medium text-sm lg:text-base bg-secondary text-primary group-hover:text-secondary group-hover:bg-primary inline-flex items-center justify-center px-5 py-2.5 transition-colors duration-300">
         {children}
       </span>
 

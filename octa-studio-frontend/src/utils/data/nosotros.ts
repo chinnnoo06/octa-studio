@@ -1,4 +1,4 @@
-import type { TPillar, TTeamArea, TCoverageItem } from '@/types/content';
+import type { TPillar, TTeamArea, TCoverageItem } from '@/types/content.types';
 import { CONTACT } from '@/utils/data/contact';
 import ImgMember1 from '@/assets/media/about/ImgMember1.webp';
 import ImgMember2 from '@/assets/media/about/ImgMember2.webp';

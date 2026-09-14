@@ -1,4 +1,4 @@
-import type { TProcessStep } from '@/types/content';
+import type { TProcessStep } from '@/types/content.types';
 import ImgStep1 from "@/assets/media/stock/ImgStock1.webp"
 import ImgStep2 from "@/assets/media/renders/ImgRender1.webp"
 import ImgStep3 from "@/assets/media/stands/ImgStand5.webp"

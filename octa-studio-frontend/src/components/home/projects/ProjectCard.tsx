@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import type { TProject } from '@/types/content';
+import type { TProject } from '@/types/content.types';
 
 export const ProjectCard = ({ project }: { project: TProject }) => {
   const ref = useRef<HTMLAnchorElement>(null);

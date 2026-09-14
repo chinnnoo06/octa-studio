@@ -1,6 +1,6 @@
 import { Odometer } from '@/components/ui/Odometer';
 import { cn } from '@/utils/cn';
-import type { TStat } from '@/types/content';
+import type { TStat } from '@/types/content.types';
 
 type TStatCardProps = {
   stat: TStat;

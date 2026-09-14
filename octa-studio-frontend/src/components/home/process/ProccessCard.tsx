@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Reveal } from '@/components/ui/Reveal';
 import { cn } from '@/utils/cn';
-import type { TProcessStep } from '@/types/content';
+import type { TProcessStep } from '@/types/content.types';
 import StepArrow from './StepArrow';
 
 type TProccessCardProps = {

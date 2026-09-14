@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 
 export default function NosotrosPage() {
   return (
-    <main className="pt-18">
+    <>
       <Hero />
       <Stats />
       <Story />
       <Team />
       <Coverage />
       <Faq />
-    </main>
+    </>
   );
 }

@@ -2,7 +2,7 @@
  * Contenido de la sección Services de la home.
  */
 
-import type { TService } from '@/types/content';
+import type { TService } from '@/types/content.types';
 
 export const SERVICES: TService[] = [
   {
