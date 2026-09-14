@@ -25,7 +25,7 @@ export class TestimonialController {
         try {
             return res.status(200).json({
                 status: "success",
-                Testimonial: req.Testimonial
+                testimonial: req.Testimonial
             });
 
         } catch (error) {

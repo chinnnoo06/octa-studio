@@ -78,7 +78,7 @@ export class BlogController {
         try {
             return res.status(200).json({
                 status: "success",
-                Blog: req.Blog
+                blog: req.Blog
             });
 
         } catch (error) {

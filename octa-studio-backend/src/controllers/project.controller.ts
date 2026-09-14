@@ -95,7 +95,7 @@ export class ProjectController {
         try {
             return res.status(200).send({
                 status: "success",
-                Project: req.Project
+                project: req.Project
             });
 
         } catch (error) {
