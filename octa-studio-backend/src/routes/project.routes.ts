@@ -2,7 +2,7 @@ import { Router } from "express";
 import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
 import { projectsUploads } from "../middlewares/uploads";
-import { handleInputErrors, validateImagesFormat } from "../middlewares/reqValidation";
+import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
 import { validateProjectExists, validateProjectInput } from "../middlewares/project";
 import { ProjectController } from "../controllers/project.controller";
 import { param, query } from "express-validator";
@@ -20,6 +20,7 @@ router.post("/",
     projectsUploads.fields([
         { name: "projectImages", maxCount: 5 }
     ]),
+    parseJsonFields(["seo"]),
     validateImagesFormat,
     validateProjectInput,
     handleInputErrors,

@@ -1,6 +1,17 @@
 import type { StaticImageData } from 'next/image';
+import type { IconType } from 'react-icons';
 
 export type TNavLink = { label: string; href: string };
+
+/** Enlace de la sidebar del panel. Extiende al de navegacion publica con lo
+ *  que solo necesita el admin: un icono y como comparar la ruta activa. */
+export type TAdminLink = TNavLink & {
+  icon: IconType;
+  /** `true` compara la ruta exacta. Lo necesitan los "Agregar", porque
+   *  `/admin/blogs` es prefijo de `/admin/blogs/crear` y si no, se
+   *  encenderian los dos a la vez. */
+  exact: boolean;
+};
 
 export type TStat = {
   odometer: string[];

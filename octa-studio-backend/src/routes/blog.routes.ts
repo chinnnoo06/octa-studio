@@ -4,8 +4,8 @@ import { BlogCategory } from "../types/blog/blog.types";
 import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
 import { blogsUploads } from "../middlewares/uploads";
-import { handleInputErrors, validateImagesFormat } from "../middlewares/reqValidation";
-import { parseBlogJsonFields, validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
+import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
+import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
 import { BlogController } from "../controllers/blog.controller";
 
 const router: Router = Router();
@@ -22,7 +22,7 @@ router.post("/",
     blogsUploads.fields([
         { name: "blogImages", maxCount: 5 }
     ]),
-    parseBlogJsonFields,
+    parseJsonFields(["content", "seo"]),
     validateImagesFormat,
     validateBlogInput,
     handleInputErrors,

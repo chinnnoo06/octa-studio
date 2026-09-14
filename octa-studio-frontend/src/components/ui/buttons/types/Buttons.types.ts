@@ -9,4 +9,6 @@ export type TSecondaryButtonProps = {
     disabled?: boolean;
     type?: 'submit' | 'button' | 'reset';
     className?: string;
+    /** Para usarlos fuera de un formulario, como en los modales. */
+    onClick?: () => void;
 }

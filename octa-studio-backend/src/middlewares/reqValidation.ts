@@ -60,3 +60,29 @@ export const validateImagesFormat = (req: Request, res: Response, next: NextFunc
 
     next();
 };
+
+// In multipart/form-data every field arrives as a string, so the structured
+// ones have to be parsed before they can be validated
+export const parseJsonFields = (fields: string[]) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        try {
+            fields.forEach(field => {
+                const value = req.body[field]
+
+                if (typeof value === "string") {
+                    req.body[field] = JSON.parse(value)
+                }
+            })
+
+            next()
+        } catch (error) {
+            deleteAllUploadedFiles(req.files as TMulterFiles | undefined);
+
+            return res.status(400).json({
+                errors: [
+                    { msg: `These fields must be valid JSON: ${fields.join(", ")}` }
+                ]
+            });
+        }
+    }
+}

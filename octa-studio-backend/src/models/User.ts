@@ -4,11 +4,11 @@ import { TUser } from "../types/user/user.types";
 const UserSchema = new Schema<TUser>({
     username: {
         type: String,
-        require: true
+        required: true
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
 }, {
     timestamps: true

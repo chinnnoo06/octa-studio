@@ -11,14 +11,12 @@ type TSectionTitleProps = {
   trail?: string;
   tone?: 'dark' | 'light';
   align?: 'left' | 'center';
-  /** `h1` solo cuando es el título principal de una página. Por defecto `h2`. */
   as?: 'h1' | 'h2';
-  /** `hero` usa la escala grande de portada; `section`, la de sección. */
   size?: 'section' | 'hero';
 };
 
 const SIZE = {
-  section: 'text-[2rem] small:text-[2.25rem] md:text-[3rem] lg:text-[3.75rem]',
+  section: 'text-[2rem] small:text-[2.25rem] md:text-[3rem] lg:text-[3.5rem]',
   hero: 'text-[2.5rem] small:text-[2.75rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem]',
 } as const;
 

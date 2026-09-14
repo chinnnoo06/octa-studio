@@ -18,7 +18,7 @@ router.post("/",
     TestimonialController.createTestimonial
 )
 
-router.patch("/:id",
+router.put("/:id",
     auth(),
     param('id').isMongoId().withMessage('Invalide Id'),
     validateTestimonialInput,
@@ -33,6 +33,13 @@ router.delete("/:id",
     handleInputErrors,
     validateTestimonialExists,
     TestimonialController.deleteTestimonial
+)
+
+router.get("/:id",
+    param('id').isMongoId().withMessage('Invalide Id'),
+    handleInputErrors,
+    validateTestimonialExists,
+    TestimonialController.getTestimonial
 )
 
 export default router;

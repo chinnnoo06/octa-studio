@@ -3,8 +3,6 @@ import { body } from "express-validator";
 import { TBlogContentBlock, TBlogDocument } from "../types/blog/blog.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
-import { TMulterFiles } from "../types/multer/multer.types";
-import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { blogRepository } from "../repositories/blog.repository";
 
 declare global {
@@ -12,30 +10,6 @@ declare global {
         interface Request {
             Blog?: TBlogDocument
         }
-    }
-}
-
-const JSON_FIELDS = ["content", "seo"] as const;
-
-export const parseBlogJsonFields = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        JSON_FIELDS.forEach(field => {
-            const value = req.body[field]
-
-            if (typeof value === "string") {
-                req.body[field] = JSON.parse(value)
-            }
-        })
-
-        next()
-    } catch (error) {
-        deleteAllUploadedFiles(req.files as TMulterFiles | undefined);
-
-        return res.status(400).json({
-            errors: [
-                { msg: "The fields content and seo must be valid JSON" }
-            ]
-        });
     }
 }
 

@@ -21,6 +21,19 @@ export class TestimonialController {
         }
     }
 
+    static getTestimonial = async (req: TRequestWithTestimonial<TMongoIdParams>, res: Response, next: NextFunction) => {
+        try {
+            return res.status(200).json({
+                status: "success",
+                Testimonial: req.Testimonial
+            });
+
+        } catch (error) {
+            console.error("Error retrieving the testimonial:", error);
+            next(error)
+        }
+    }
+
     static createTestimonial = async (req: Request<{}, {}, TTestimonialDto>, res: Response, next: NextFunction) => {
         const data = req.body;
 

@@ -1,6 +1,24 @@
 import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { TProject } from "../types/project/project.types";
+import { TProject, TProjectSEO } from "../types/project/project.types";
+
+const ProjectSEOSchema = new Schema<TProjectSEO>(
+    {
+        metaTitle: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 60
+        },
+        metaDescription: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 160
+        }
+    },
+    { _id: false }
+)
 
 const ProjectSchema = new Schema<TProject>({
     name: {
@@ -23,6 +41,11 @@ const ProjectSchema = new Schema<TProject>({
             validator: (arr: string[]) => arr.length > 0,
             message: "At least one image is required"
         }
+    },
+
+    seo: {
+        type: ProjectSEOSchema,
+        required: true
     },
 }, {
     timestamps: true

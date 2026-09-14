@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import { Footer } from '@/components/ui/footer/Footer';
 import './globals.css';
-import { Header } from '@/components/ui/header/Header';
-import { WhatsAppButton } from '@/components/ui/buttons/WhatsAppButton';
+import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
+import ToastNotification from '@/components/ui/ToastNotificaction';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,9 +49,12 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${gentleman.variable}`}
     >
+      <ReactQueryProvider>
       <body className="bg-primary text-fourth antialiased">
         {children}
+         <ToastNotification />
       </body>
+      </ReactQueryProvider>
     </html>
   );
 }

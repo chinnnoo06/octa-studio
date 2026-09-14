@@ -1,12 +1,19 @@
+import { SimpleHeader } from '@/components/ui/header/SimpleHeader';
 import { Sidebar } from '@/components/ui/sidebar/Sidebar';
+import { verifySession } from '@/services/auth/auth.dal';
 
+export default async function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  await verifySession();
 
-export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-5 lg:gap-10 px-5 lg:px-15 pt-18 lg:flex-row">
-      <Sidebar />
+    <>
+      <SimpleHeader showMenu />
 
-      <div className="min-w-0 flex-1 py-10">{children}</div>
-    </div>
+      <div className="mx-auto flex w-full gap-5 pt-18">
+        <Sidebar />
+
+        <main className="min-w-0 flex-1 px-5 py-10">{children}</main>
+      </div>
+    </>
   );
 }

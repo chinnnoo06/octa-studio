@@ -49,6 +49,7 @@ export const ProjectService = {
         project.name = data.name
         project.description = data.description
         project.sector = data.sector
+        project.seo = data.seo
 
         return await project.save()
     },

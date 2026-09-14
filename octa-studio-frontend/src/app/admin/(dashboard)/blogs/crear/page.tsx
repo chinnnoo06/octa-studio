@@ -1,7 +1,13 @@
+import { Eyebrow } from '@/components/ui/Eyebrow';
+import { SectionTitle } from '@/components/ui/SectionTitle';
+
 export default function CrearBlogPage() {
   return (
-    <section className="flex flex-col gap-10">
-      <h1 className="text-secondary text-2xl font-semibold uppercase lg:text-3xl">Agregar blog</h1>
+    <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">
+      <div className="text-secondary flex flex-col gap-2.5">
+        <Eyebrow>Agrega un nuevo blog</Eyebrow>
+        <SectionTitle lead="Crear" rotating="Blog" as='h1' />
+      </div>
 
       {/* TODO: formulario de creacion */}
     </section>

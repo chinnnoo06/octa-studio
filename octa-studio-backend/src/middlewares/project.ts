@@ -18,6 +18,9 @@ export const validateProjectInput = async (req: Request, res: Response, next: Ne
     await body("description").notEmpty().withMessage("Description is required").run(req)
     await body("sector").notEmpty().withMessage("Sector is required").run(req)
 
+    await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
+    await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)
+
     next()
 }
 
