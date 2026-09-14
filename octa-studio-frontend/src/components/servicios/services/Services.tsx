@@ -6,7 +6,6 @@ import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
 import { SERVICES } from '@/utils/data/services';
 import { ServiceBox } from './ServiceBox';
 
-/** Servicios por página, como en la referencia. */
 const PAGE_SIZE = 5;
 
 export const Services = ({ page = 1 }: { page?: number }) => {
