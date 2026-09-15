@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ADMIN_LINKS, ADMIN_LOGOUT } from '@/utils/data/navigation';
-import { isActiveHref } from '@/utils/isActiveHref';
 import { logout } from '@/actions/logout.action';
 
 const ITEM =
@@ -12,8 +11,7 @@ const ITEM =
 export const Sidebar = () => {
     const pathname = usePathname();
 
-    const isActive = (href: string, exact: boolean) =>
-        exact ? pathname === href : isActiveHref(pathname, href) && pathname !== `${href}/crear`;
+    const isActive = (href: string) => pathname === href;
 
     const LogoutIcon = ADMIN_LOGOUT.icon;
 
@@ -23,8 +21,8 @@ export const Sidebar = () => {
             <div className="border-secondary/30 flex flex-col  border lg:h-full">
                 <nav aria-label="Panel de administración">
                     <ul role="list" className="flex flex-col">
-                        {ADMIN_LINKS.map(({ href, label, icon: Icon, exact }, i) => {
-                            const active = isActive(href, exact);
+                        {ADMIN_LINKS.map(({ href, label, icon: Icon }) => {
+                            const active = isActive(href);
 
                             return (
                                 <li key={href} className="border-secondary/30 border-b">

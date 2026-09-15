@@ -9,12 +9,10 @@ export const Marquee = ({
   gap = 40,
 }: {
   children: React.ReactNode;
-  /** Segundos por vuelta completa. Más alto = más lento. */
   duration?: number;
   direction?: 'left' | 'right';
   pauseOnHover?: boolean;
   className?: string;
-  /** Separación entre items, en píxeles. */
   gap?: number;
 }) => {
   const half = (

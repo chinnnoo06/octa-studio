@@ -1,5 +1,6 @@
 import { ProjectResponseSchema, ProjectsResponseSchema } from "@/schemas/projects/projects.response.schemas";
 import { originHeader } from "../api.headers";
+import { getToken } from "../auth/auth.token";
 
 export const getProjectsService = async (page: number = 1) => {
   const url = `${process.env.API_URL}/projects?page=${page}`;
@@ -31,11 +32,14 @@ export const getProjectsService = async (page: number = 1) => {
 };
 
 export const getProjectByIdService = async (id: string) => {
+  const token = await getToken();
+
   const url = `${process.env.API_URL}/projects/id/${id}`;
 
   const req = await fetch(url, {
     method: "GET",
     headers: {
+      Authorization: `Bearer ${token}`,
       ...originHeader()
     },
     cache: "no-store",

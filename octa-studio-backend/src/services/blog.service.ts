@@ -12,7 +12,7 @@ import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
 
-const BLOGS_PER_PAGE = 6;
+const BLOGS_PER_PAGE = 10;
 
 const deleteImagesFromDisk = (images: string[]) => {
     images.forEach(image => {

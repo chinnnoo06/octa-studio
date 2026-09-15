@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ADMIN_LINKS, ADMIN_LOGOUT } from '@/utils/data/navigation';
-import { isActiveHref } from '@/utils/isActiveHref';
 import { logout } from '@/actions/logout.action';
 
 type TAdminMobileNavProps = {
@@ -16,8 +15,7 @@ const ITEM = 'flex items-center gap-2.5 px-5 py-4 text-base transition-colors du
 export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps) => {
     const pathname = usePathname();
 
-    const isActive = (href: string, exact: boolean) =>
-        exact ? pathname === href : isActiveHref(pathname, href) && pathname !== `${href}/crear`;
+    const isActive = (href: string) => pathname === href;
 
     const LogoutIcon = ADMIN_LOGOUT.icon;
 
@@ -44,8 +42,8 @@ export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps
             >
                 <nav aria-label="Panel de administración">
                     <ul role="list" className="flex flex-col">
-                        {ADMIN_LINKS.map(({ href, label, icon: Icon, exact }) => {
-                            const active = isActive(href, exact);
+                        {ADMIN_LINKS.map(({ href, label, icon: Icon }) => {
+                            const active = isActive(href);
 
                             return (
                                 <li key={href} className="border-secondary/30 border-b">

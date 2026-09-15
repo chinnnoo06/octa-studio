@@ -14,7 +14,6 @@ type TBlogContentFieldProps = {
     error?: string;
 };
 
-/** Un bloque vacio por tipo, con los mismos valores por defecto del modelo. */
 const EMPTY: Record<TBlockType, TBlogContentBlock> = {
     paragraph: { type: 'paragraph', text: '' },
     heading: { type: 'heading', text: '', level: 2 },
@@ -35,14 +34,7 @@ const ADD =
 const TRASH =
     'text-fourth/75 shrink-0 cursor-pointer rounded p-1.5 transition-colors duration-300 hover:bg-red-600/10 hover:text-red-600';
 
-/**
- * El contenido del blog es un array de bloques con cuatro formas distintas: la
- * misma union discriminada que declara el modelo.
- *
- * No pasa por `register` porque su estructura cambia segun el `type`. Se lleva
- * entero y se sustituye por inmutabilidad, que es lo que hace que React detecte
- * cada cambio.
- */
+
 export const BlogContentField = ({ content, onChange, error }: TBlogContentFieldProps) => {
     const add = (type: TBlockType) => onChange([...content, EMPTY[type]]);
 

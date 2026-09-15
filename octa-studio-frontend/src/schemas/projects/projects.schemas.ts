@@ -10,7 +10,6 @@ export const ProjectSchema = z.object({
   name: z.string(),
   description: z.string(),
   sector: z.string(),
-  /** Lo arma el backend a partir del titulo; en el cliente solo se lee. */
   slug: z.string(),
   images: z.array(z.string()),
   seo: ProjectSEOSchema,

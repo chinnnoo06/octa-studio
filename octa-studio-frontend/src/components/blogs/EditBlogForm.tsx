@@ -6,7 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { BLOG_CATEGORIES, CreateBlogFormSchema, TCreateBlogForm } from '@/schemas/blogs/blogs.form.schemas';
+import { BLOG_CATEGORIES, UpdateBlogFormSchema, TUpdateBlogForm } from '@/schemas/blogs/blogs.form.schemas';
+import { TBlog } from "@/schemas/blogs/blogs.schemas";
 import { useBlogs } from "@/hooks/blogs/useBlogs";
 import { Label } from "../ui/form/Label";
 import { Input } from "../ui/form/Input";
@@ -15,36 +16,39 @@ import { SpanError } from "../ui/form/SpanError";
 import { FormSection } from "../ui/form/FormSection";
 import { FormSectionTitle } from "../ui/form/FormSectionTitle";
 import { ActionButton } from "../ui/buttons/ActionButton";
-import { ImagesField } from "../projects/ImagesField";
 import { BlogContentField } from "./BlogContentField";
 
 const SELECT =
     'border-secondary/50 text-fourth/75 focus:border-secondary hover:border-secondary w-full cursor-pointer rounded-lg border bg-white px-5 py-2.5 text-xs outline-none transition-all duration-300 lg:text-sm';
 
-export const CreateBlogForm = () => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateBlogForm>({
-        resolver: zodResolver(CreateBlogFormSchema),
+export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
+    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TUpdateBlogForm>({
+        resolver: zodResolver(UpdateBlogFormSchema),
         defaultValues: {
-            title: '',
-            excerpt: '',
-            category: undefined,
-            content: [],
-            images: [],
-            seo: { metaTitle: '', metaDescription: '' }
+            title: blog.title,
+            excerpt: blog.excerpt,
+            // En `TBlog` la categoria es `string` porque viene del backend; aqui
+            // el formulario la acota al enum. Si el backend devolviera una que ya
+            // no existe, el propio resolver lo marca al enviar.
+            category: blog.category as TUpdateBlogForm['category'],
+            content: blog.content,
+            seo: {
+                metaTitle: blog.seo.metaTitle,
+                metaDescription: blog.seo.metaDescription
+            }
         }
     })
 
-    const { createBlog } = useBlogs();
+    const { updateBlog } = useBlogs();
 
     useEffect(() => {
-        if (createBlog.error) toast.error(createBlog.error);
-        if (createBlog.success) toast.success(createBlog.success);
-    }, [createBlog.error, createBlog.success]);
+        if (updateBlog.error) toast.error(updateBlog.error);
+        if (updateBlog.success) toast.success(updateBlog.success);
+    }, [updateBlog.error, updateBlog.success]);
 
     const content = watch('content');
-    const images = watch('images');
 
-    const onSubmit = (data: TCreateBlogForm) => createBlog.handleCreateBlog(data)
+    const onSubmit = (data: TUpdateBlogForm) => updateBlog.handleUpdateBlog(blog._id, data)
 
     return (
         <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -60,7 +64,7 @@ export const CreateBlogForm = () => {
 
                 <div className="form-group">
                     <Label htmlFor="category">Categoría</Label>
-                    <select id="category" defaultValue="" className={SELECT} {...register("category")}>
+                    <select id="category" className={SELECT} {...register("category")}>
                         <option value="" disabled>Elige una categoría</option>
                         {BLOG_CATEGORIES.map((category) => (
                             <option key={category} value={category}>{category}</option>
@@ -102,19 +106,9 @@ export const CreateBlogForm = () => {
                 </div>
             </FormSection>
 
-            <FormSection>
-                <FormSectionTitle>Imágenes</FormSectionTitle>
-
-                <ImagesField
-                    images={images}
-                    onChange={(next) => setValue('images', next, { shouldValidate: true })}
-                    error={errors.images?.message}
-                />
-            </FormSection>
-
-            <ActionButton loading={createBlog.loading} className="w-full">
+            <ActionButton loading={updateBlog.loading} className="w-full">
                 <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
-                {createBlog.loading ? 'Guardando...' : 'Crear blog'}
+                {updateBlog.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>
     )
