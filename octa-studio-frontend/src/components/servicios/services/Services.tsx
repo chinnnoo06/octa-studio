@@ -1,8 +1,8 @@
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
-import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { SERVICES } from '@/utils/data/services';
 import { ServiceBox } from './ServiceBox';
 
@@ -43,15 +43,15 @@ export const Services = ({ page = 1 }: { page?: number }) => {
             className="flex flex-wrap items-center justify-center gap-5"
           >
             {current > 1 && (
-              <PrimaryButtonLeft href={`/servicios?page=${current - 1}`}>
+              <LinkButtonLeft href={`/servicios?page=${current - 1}`}>
                 Página anterior
-              </PrimaryButtonLeft>
+              </LinkButtonLeft>
             )}
 
             {current < totalPages && (
-              <PrimaryButton href={`/servicios?page=${current + 1}`}>
+              <LinkButton href={`/servicios?page=${current + 1}`}>
                 Página siguiente
-              </PrimaryButton>
+              </LinkButton>
             )}
           </nav>
         )}

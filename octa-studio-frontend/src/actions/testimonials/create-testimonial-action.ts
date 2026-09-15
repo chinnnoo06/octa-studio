@@ -7,7 +7,7 @@ import { TestimonialFormSchema, TTestimonialForm } from "@/schemas/testimonials/
 import { TActionState } from "@/types/common.types"
 import { getToken } from "@/services/auth/auth.token"
 
-export const createTestimonial = async (data: TTestimonialForm): Promise<TActionState | undefined> => {
+export const createTestimonial = async (data: TTestimonialForm): Promise<TActionState> => {
 
     const parsed = TestimonialFormSchema.safeParse(data)
 
@@ -19,12 +19,6 @@ export const createTestimonial = async (data: TTestimonialForm): Promise<TAction
     }
 
     const token = await getToken()
-
-    if (!token) {
-        return {
-            error: "Tu sesión expiró, vuelve a iniciar sesión"
-        }
-    }
 
     const url = `${process.env.API_URL}/testimonials`
 

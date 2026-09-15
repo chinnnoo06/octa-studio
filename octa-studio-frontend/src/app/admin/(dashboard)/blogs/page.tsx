@@ -1,4 +1,5 @@
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -11,7 +12,13 @@ export default function AdminBlogsPage() {
           <SectionTitle lead="Nuestros" rotating="Blogs" as='h1' />
         </div>
 
-        <PrimaryButton href="/admin/blogs/crear">Agregar blog</PrimaryButton>
+        <div className="hidden xl:flex">
+          <LinkButtonLeft href={`/admin/blogs/crear`}>Crear blog</LinkButtonLeft>
+        </div>
+
+        <div className="flex xl:hidden">
+          <LinkButton href={`/admin/blogs/crear`}>Crear blog</LinkButton>
+        </div>
       </div>
 
       {/* TODO: listado de blogs */}

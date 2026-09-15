@@ -47,7 +47,6 @@ const ContentBlockSchema = new Schema(
 
 const BlogSchema = new Schema<TBlog>(
     {
-        
         slug: {
             type: String,
             required: true,

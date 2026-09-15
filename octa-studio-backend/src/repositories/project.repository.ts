@@ -6,6 +6,10 @@ export const projectRepository = {
         return Project.findById(id);
     },
 
+    async findBySlug(slug: string) {
+        return Project.findOne({ slug });
+    },
+
     async findPaginated(page: number, limit: number) {
         return Project.paginate({}, {
             page,

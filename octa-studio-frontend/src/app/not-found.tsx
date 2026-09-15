@@ -1,4 +1,4 @@
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 
 export default function NotFound() {
   return (
@@ -14,7 +14,7 @@ export default function NotFound() {
         llegas a todo lo demás.
       </p>
 
-      <PrimaryButton href="/">Volver al inicio</PrimaryButton>
+      <LinkButton href="/">Volver al inicio</LinkButton>
     </main>
   );
 }

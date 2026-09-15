@@ -9,19 +9,24 @@ import { Label } from "../ui/form/Label";
 import { Input } from "../ui/form/Input";
 import { Textarea } from "../ui/form/Textarea";
 import { SpanError } from "../ui/form/SpanError";
-import { SecondaryButton } from "../ui/buttons/SecondaryButton";
+import { FormSection } from "../ui/form/FormSection";
+import { FormSectionTitle } from "../ui/form/FormSectionTitle";
+import { ActionButton } from "../ui/buttons/ActionButton";
 
 type TTestimonialFormProps = {
     register: UseFormRegister<TTestimonialForm>
     errors: FieldErrors<TTestimonialForm>
     onSubmit: FormEventHandler<HTMLFormElement>
     loading: boolean
-    submitLabel?: string
+    submitLabel: string
 }
 
-export const TestimonialForm = ({ register, errors, onSubmit, loading, submitLabel = 'Guardar testimonio' }: TTestimonialFormProps) => {
+export const TestimonialForm = ({ register, errors, onSubmit, loading, submitLabel }: TTestimonialFormProps) => {
     return (
         <form className='space-y-8' onSubmit={onSubmit} noValidate>
+            <FormSection>
+                <FormSectionTitle>Datos del testimonio</FormSectionTitle>
+
             <div className="form-group">
                 <Label htmlFor="name">Nombre</Label>
                 <Input
@@ -56,11 +61,13 @@ export const TestimonialForm = ({ register, errors, onSubmit, loading, submitLab
                 />
                 <SpanError message={errors.rating?.message} />
             </div>
+            </FormSection>
 
-            <SecondaryButton loading={loading} className="w-full">
+
+            <ActionButton loading={loading} className="w-full">
                 <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
                 {loading ? 'Guardando...' : submitLabel}
-            </SecondaryButton>
+            </ActionButton>
         </form>
     )
 }

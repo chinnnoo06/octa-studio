@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FiMapPin } from 'react-icons/fi';
 import { CONTACT } from '@/utils/data/contact';
-import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Logo } from '../Logo';
 
 export const FooterBrand = () => {
@@ -29,7 +29,7 @@ export const FooterBrand = () => {
           </span>
         </p>
 
-        <PrimaryButtonLeft href={CONTACT.whatsapp.url}>Cotiza tu proyecto</PrimaryButtonLeft>
+        <LinkButtonLeft href={CONTACT.whatsapp.url}>Cotiza tu proyecto</LinkButtonLeft>
       </div>
     </div>
   );

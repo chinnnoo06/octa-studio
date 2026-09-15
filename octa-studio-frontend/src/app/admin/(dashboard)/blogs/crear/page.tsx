@@ -1,3 +1,4 @@
+import { CreateBlogForm } from '@/components/blogs/CreateBlogForm';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -9,7 +10,7 @@ export default function CrearBlogPage() {
         <SectionTitle lead="Crear" rotating="Blog" as='h1' />
       </div>
 
-      {/* TODO: formulario de creacion */}
+      <CreateBlogForm />
     </section>
   );
 }

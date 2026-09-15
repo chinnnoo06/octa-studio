@@ -1,4 +1,5 @@
-import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -13,7 +14,13 @@ export default async function DetalleBlogPage({ params }: { params: Promise<{ id
           <SectionTitle lead="Detalle del" rotating="Blog" as='h1' />
         </div>
 
-        <PrimaryButtonLeft href={`/admin/blogs/${id}/editar`}>Editar blog</PrimaryButtonLeft>
+        <div className="hidden xl:flex">
+          <LinkButtonLeft href={`/admin/blogs/${id}/editar`}>Editar blog</LinkButtonLeft>
+        </div>
+
+        <div className="flex xl:hidden">
+          <LinkButton href={`/admin/blogs/${id}/editar`}>Editar blog</LinkButton>
+        </div>
       </div>
 
       {/* TODO: detalle del blog */}

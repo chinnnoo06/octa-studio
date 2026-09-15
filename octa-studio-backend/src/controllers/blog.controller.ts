@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
+import { TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithBlog } from "../types/express/blog";
 import { TBlogDto, TGetBlogsQuery } from "../types/blog/blog.dtos";
 import { BlogService } from "../services/blog.service";
@@ -74,7 +74,7 @@ export class BlogController {
         }
     }
 
-    static getBlog = async (req: TRequestWithBlog<TSlugParams>, res: Response, next: NextFunction) => {
+    static getBlog = async (req: TRequestWithBlog, res: Response, next: NextFunction) => {
         try {
             return res.status(200).json({
                 status: "success",

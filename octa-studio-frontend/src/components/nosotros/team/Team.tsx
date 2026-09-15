@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { TEAM_AREAS } from '@/utils/data/nosotros';
 import { TeamCard } from './TeamCard';
 import Bg from '@/assets/media/about/ImgTeamBg.webp';
@@ -27,7 +27,7 @@ export const Team = () => {
                 <SectionTitle tone="light" lead="La gente que lo" rotating="monta" />
               </div>
 
-              <PrimaryButton href="/contacto">Trabaja con nosotros</PrimaryButton>
+              <LinkButton href="/contacto">Trabaja con nosotros</LinkButton>
             </div>
 
             <Reveal className="h-62.5 sm:h-100">

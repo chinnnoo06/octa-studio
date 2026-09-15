@@ -12,7 +12,9 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "img-src 'self' data: blob:",
+      // El backend sirve las imágenes de proyectos y blogs desde otro origen:
+      // sin declararlo aquí el navegador las bloquea, aunque Next las optimice.
+      "img-src 'self' data: blob: http://localhost:4000 https://octa-studio-deploy.onrender.com",
       "media-src 'self'",
       "font-src 'self' data:",
       // Tailwind y next/font inyectan estilos inline; next/image usa blob:
@@ -37,6 +39,10 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost', port: '4000', pathname: '/files/**' },
+      { protocol: 'https', hostname: 'octa-studio-deploy.onrender.com', pathname: '/files/**' },
+    ],
   },
 };
 

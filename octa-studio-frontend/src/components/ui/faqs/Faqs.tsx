@@ -8,7 +8,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { staggerParent } from '@/utils/motion/reveal';
 import { FAQS } from '@/utils/data/faqs';
 import { FaqItem } from './FaqItem';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 
 export const Faqs = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -33,7 +33,7 @@ export const Faqs = () => {
             <p className="text-secondary font-gentleman text-4xl lg:text-7xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
               ¿Tienes otra pregunta?
             </p>
-            <PrimaryButton href="/contacto">Escríbenos</PrimaryButton>
+            <LinkButton href="/contacto">Escríbenos</LinkButton>
           </div>
         </div>
 

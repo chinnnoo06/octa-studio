@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { WipeHeading } from '@/components/ui/WipeHeading';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { Reveal } from '@/components/ui/Reveal';
 import { ServiceCard } from './ServiceCard';
 import { SERVICES } from '@/utils/data/services';
@@ -37,7 +37,7 @@ export const Services = () => {
               evento, también tenemos otros servicios.
             </p>
 
-            <PrimaryButton href="/servicios">Ver todo lo que hacemos</PrimaryButton>
+            <LinkButton href="/servicios">Ver todo lo que hacemos</LinkButton>
           </div>
         </div>
 

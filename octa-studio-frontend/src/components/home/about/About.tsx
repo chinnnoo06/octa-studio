@@ -3,7 +3,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { STATS } from '@/utils/data/about';
 import { Odometer } from '@/components/ui/Odometer';
 import { WipeHeading } from '../../ui/WipeHeading';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { Reveal } from '@/components/ui/Reveal';
 import { fadeUpScale } from '@/utils/motion/reveal';
 import Img from "@/assets/media/stands/ImgStand8.webp"
@@ -29,7 +29,7 @@ export const About = () => {
                   a nivel nacional e internacional. Acompañamos cada proyecto desde la primera idea hasta el desmontaje.
                 </p>
                 
-                <PrimaryButton href='/nosotros'>Conoce Octa Studio</PrimaryButton>
+                <LinkButton href='/nosotros'>Conoce Octa Studio</LinkButton>
             </div>
 
             <Reveal variants={fadeUpScale} className="rounded-xl overflow-hidden bg-white w-full">

@@ -7,7 +7,7 @@ export type TNavLink = { label: string; href: string };
  *  que solo necesita el admin: un icono y como comparar la ruta activa. */
 export type TAdminLink = TNavLink & {
   icon: IconType;
-  /** `true` compara la ruta exacta. Lo necesitan los "Agregar", porque
+  /** `true` compara la ruta exacta. Lo necesitan los "Crear", porque
    *  `/admin/blogs` es prefijo de `/admin/blogs/crear` y si no, se
    *  encenderian los dos a la vez. */
   exact: boolean;

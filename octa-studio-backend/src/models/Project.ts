@@ -21,6 +21,14 @@ const ProjectSEOSchema = new Schema<TProjectSEO>(
 )
 
 const ProjectSchema = new Schema<TProject>({
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true
+    },
+
     name: {
         type: String,
         required: true
@@ -42,7 +50,6 @@ const ProjectSchema = new Schema<TProject>({
             message: "At least one image is required"
         }
     },
-
     seo: {
         type: ProjectSEOSchema,
         required: true

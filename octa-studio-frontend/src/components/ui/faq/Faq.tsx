@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { FAQS } from '@/utils/data/faqs';
 import { FaqCard } from './FaqCard';
 
@@ -38,7 +38,7 @@ export const Faq = () => {
               Escríbenos y te resolvemos la duda antes de cotizar nada. Sin compromiso.
             </p>
 
-            <PrimaryButton href="/contacto">Hablemos ahora</PrimaryButton>
+            <LinkButton href="/contacto">Hablemos ahora</LinkButton>
           </Reveal>
         </div>
 

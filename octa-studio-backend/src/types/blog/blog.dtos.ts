@@ -11,7 +11,6 @@ export type TGetBlogsParams = {
 }
 
 export type TBlogDto = {
-    slug: string,
     title: string,
     excerpt: string,
     category: BlogCategory,

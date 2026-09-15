@@ -6,15 +6,9 @@ import { revalidatePath } from "next/cache"
 import { TActionState } from "@/types/common.types"
 import { getToken } from "@/services/auth/auth.token"
 
-export const deleteTestimonial = async (id: string): Promise<TActionState | undefined> => {
+export const deleteTestimonial = async (id: string): Promise<TActionState> => {
 
     const token = await getToken()
-
-    if (!token) {
-        return {
-            error: "Tu sesión expiró, vuelve a iniciar sesión"
-        }
-    }
 
     const url = `${process.env.API_URL}/testimonials/${id}`
 

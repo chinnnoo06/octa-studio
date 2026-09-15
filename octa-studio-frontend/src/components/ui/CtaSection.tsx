@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { TickLine } from '@/components/ui/TickLine';
 import { zoomOnScroll } from '@/utils/motion/scroll';
 import Img from '@/assets/media/backgrounds/ImgBackground4.webp';
@@ -49,7 +49,7 @@ export const CtaSection = () => {
               Escríbenos y te acompañamos en todo el proceso.
             </p>
 
-            <PrimaryButton href="/contacto">Hablemos ahora</PrimaryButton>
+            <LinkButton href="/contacto">Hablemos ahora</LinkButton>
           </div>
         </div>
       </div>

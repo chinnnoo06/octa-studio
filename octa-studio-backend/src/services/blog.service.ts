@@ -7,6 +7,7 @@ import { TBlogDto, TGetBlogsParams } from "../types/blog/blog.dtos";
 import { TBlogDocument } from "../types/blog/blog.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
+import { buildSlug } from "../utils/slug";
 import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
@@ -48,12 +49,12 @@ export const BlogService = {
 
     async createBlog(data: TBlogDto, files?: TMulterFiles) {
         try {
-            const slug = data.slug.trim().toLowerCase()
+            const slug = buildSlug(data.title)
 
             const slugTaken = await blogRepository.findBySlug(slug)
 
             if (slugTaken) {
-                throw new HttpError(409, "This slug is already in use");
+                throw new HttpError(409, "A blog with that title already exists");
             }
 
             const images = files?.blogImages?.map(file => file.filename) ?? []
@@ -75,13 +76,13 @@ export const BlogService = {
     },
 
     async updateBlog(blog: TBlogDocument, data: TBlogDto) {
-        const slug = data.slug.trim().toLowerCase()
+        const slug = buildSlug(data.title)
 
         if (slug !== blog.slug) {
             const slugTaken = await blogRepository.findBySlug(slug)
 
             if (slugTaken) {
-                throw new HttpError(409, "This slug is already in use");
+                throw new HttpError(409, "A blog with that title already exists");
             }
         }
 

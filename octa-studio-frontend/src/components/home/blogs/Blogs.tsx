@@ -3,7 +3,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { BlogCard } from './BlogCard';
 import { BLOG_POSTS } from '@/utils/data/blogs';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 
 export const Blogs = () => {
   return (
@@ -28,7 +28,7 @@ export const Blogs = () => {
           ))}
         </div>
 
-        <PrimaryButton href="/blogs">Ver más blogs</PrimaryButton>
+        <LinkButton href="/blogs">Ver más blogs</LinkButton>
       </div>
     </section>
   );

@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from "react-toastify";
 
-import { updateTestimonial } from '@/actions/testimonials/update-testimonial-action';
 import { TestimonialFormSchema, TTestimonialForm } from '@/schemas/testimonials/testimonials.form.schemas';
-import { useActionStatus } from "@/hooks/ui/useActionStatus";
 import { TestimonialForm } from './TestimonialForm';
 import { TTestiomonial } from "@/schemas/testimonials/testimonials.schemas";
+import { useTestimonials } from "@/hooks/testimonials/useTestimonials";
+import { useEffect } from "react";
 
-export const EditTestimonial = ({ testimonial }: {testimonial: TTestiomonial}) => {
+export const EditTestimonial = ({ testimonial }: { testimonial: TTestiomonial }) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TTestimonialForm>({
         resolver: zodResolver(TestimonialFormSchema),
         defaultValues: {
@@ -20,23 +20,21 @@ export const EditTestimonial = ({ testimonial }: {testimonial: TTestiomonial}) =
         }
     })
 
-    const { loading, startLoading, stopLoading } = useActionStatus()
+    const { updateTestimonial } = useTestimonials();
 
-    const submit = async (data: TTestimonialForm) => {
-        startLoading()
-        const res = await updateTestimonial(testimonial._id, data)
-        stopLoading()
+    useEffect(() => {
+        if (updateTestimonial.error) toast.error(updateTestimonial.error);
+        if (updateTestimonial.success) toast.success(updateTestimonial.success);
+    }, [updateTestimonial.error, updateTestimonial.success]);
 
-        if (res?.error) toast.error(res.error)
-        else if (res?.success) toast.success(res.success)
-    }
+    const onSubmit = (data: TTestimonialForm) => updateTestimonial.handleUpdateTestimonial(testimonial._id, data)
 
     return (
         <TestimonialForm
             register={register}
             errors={errors}
-            onSubmit={handleSubmit(submit)}
-            loading={loading}
+            onSubmit={handleSubmit(onSubmit)}
+            loading={updateTestimonial.loading}
             submitLabel="Guardar cambios"
         />
     )

@@ -4,8 +4,7 @@ import { useLockBodyScroll } from "@/hooks/ui/useLockBodyScroll";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FaArrowLeft, FaCheck } from "react-icons/fa6";
-import { SecondaryButton } from "./buttons/SecondaryButton";
-import { ThirdButton } from "./buttons/ThirdButton";
+import { ActionButton } from "./buttons/ActionButton";
 
 export type TConfirmationModalProps = {
   isOpen: boolean;
@@ -56,7 +55,8 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, 
           <p className="text-[#1A1615]/75 text-sm lg:text-base mb-4">{context}</p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <ThirdButton
+            <ActionButton
+              variant="outline"
               type="button"
               onClick={onClose}
               disabled={loading}
@@ -64,9 +64,9 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, 
             >
               <FaArrowLeft className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
               Cancelar
-            </ThirdButton>
+            </ActionButton>
 
-            <SecondaryButton
+            <ActionButton
               type="button"
               onClick={onConfirm}
               loading={loading}
@@ -74,7 +74,7 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, 
             >
               <FaCheck className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
               {loading ? "Eliminando..." : "Confirmar"}
-            </SecondaryButton>
+            </ActionButton>
           </div>
         </div>
       </div>

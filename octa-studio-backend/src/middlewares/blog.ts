@@ -52,7 +52,6 @@ const validateContentBlocks = (blocks: TBlogContentBlock[]) => {
 }
 
 export const validateBlogInput = async (req: Request, res: Response, next: NextFunction) => {
-    await body("slug").notEmpty().withMessage("Slug is required").run(req)
     await body("title").notEmpty().withMessage("Title is required").run(req)
     await body("excerpt").notEmpty().withMessage("Excerpt is required").run(req)
     await body("category").notEmpty().withMessage("Category is required").run(req)

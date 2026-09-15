@@ -91,7 +91,7 @@ export class ProjectController {
         }
     }
 
-    static getProject = async (req: TRequestWithProject<TMongoIdParams>, res: Response, next: NextFunction) => {
+    static getProject = async (req: TRequestWithProject, res: Response, next: NextFunction) => {
         try {
             return res.status(200).send({
                 status: "success",

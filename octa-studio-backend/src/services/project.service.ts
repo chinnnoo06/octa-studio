@@ -7,6 +7,7 @@ import { TProjectDto } from "../types/project/project.dtos";
 import { TProjectDocument } from "../types/project/project.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
+import { buildSlug } from "../utils/slug";
 import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "projects");
@@ -30,6 +31,14 @@ export const ProjectService = {
 
     async createProject(data: TProjectDto, files?: TMulterFiles) {
         try {
+            const slug = buildSlug(data.name)
+
+            const slugTaken = await projectRepository.findBySlug(slug)
+
+            if (slugTaken) {
+                throw new HttpError(409, "A project with that name already exists");
+            }
+
             // converToWebP already renamed each file, so `filename` is the name stored on disk
             const images = files?.projectImages?.map(file => file.filename) ?? []
 
@@ -37,7 +46,7 @@ export const ProjectService = {
                 throw new HttpError(400, "At least one image is required for the project");
             }
 
-            return await projectRepository.createProject({ ...data, images })
+            return await projectRepository.createProject({ ...data, slug, images })
 
         } catch (error) {
             deleteAllUploadedFiles(files);
@@ -46,6 +55,17 @@ export const ProjectService = {
     },
 
     async updateProject(project: TProjectDocument, data: TProjectDto) {
+        const slug = buildSlug(data.name)
+
+        if (slug !== project.slug) {
+            const slugTaken = await projectRepository.findBySlug(slug)
+
+            if (slugTaken) {
+                throw new HttpError(409, "A project with that name already exists");
+            }
+        }
+
+        project.slug = slug
         project.name = data.name
         project.description = data.description
         project.sector = data.sector

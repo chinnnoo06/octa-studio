@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { HeroSlider } from './HeroSlider';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { TickLine } from '@/components/ui/TickLine';
 import { RevealOnLoad } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
@@ -75,7 +75,7 @@ export const Hero = () => {
                     nacional e internacional
                   </span>
                 </p>
-                <PrimaryButton href="/contacto">Agenda tu proyecto</PrimaryButton>
+                <LinkButton href="/contacto">Agenda tu proyecto</LinkButton>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ export const Hero = () => {
                   </span>
                 </p>
 
-                <PrimaryButton href="/contacto">Agenda tu proyecto</PrimaryButton>
+                <LinkButton href="/contacto">Agenda tu proyecto</LinkButton>
               </div>
             </div>
 

@@ -19,11 +19,11 @@ export const LEGAL_LINKS: TNavLink[] = [
 
 export const ADMIN_LINKS: TAdminLink[] = [
   { label: 'Blogs',              href: '/admin/blogs',              icon: FiFileText,      exact: false },
-  { label: 'Agregar blog',       href: '/admin/blogs/crear',        icon: FiPlus,          exact: true },
+  { label: 'Crear blog',         href: '/admin/blogs/crear',        icon: FiPlus,          exact: true },
   { label: 'Proyectos',          href: '/admin/proyectos',          icon: FiFolder,        exact: false },
-  { label: 'Agregar proyecto',   href: '/admin/proyectos/crear',    icon: FiPlus,          exact: true },
+  { label: 'Crear proyecto',     href: '/admin/proyectos/crear',    icon: FiPlus,          exact: true },
   { label: 'Testimonios',        href: '/admin/testimonios',        icon: FiMessageSquare, exact: false },
-  { label: 'Agregar testimonio', href: '/admin/testimonios/crear',  icon: FiPlus,          exact: true },
+  { label: 'Crear testimonio',   href: '/admin/testimonios/crear',  icon: FiPlus,          exact: true },
 ];
 
 export const ADMIN_LOGOUT = { label: 'Cerrar sesión', icon: FiLogOut } as const;

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { body } from "express-validator";
 import { TProjectDocument } from "../types/project/project.types";
 import { HttpError } from "../utils/error";
-import { TMongoIdParams } from "../types/common/common.dtos";
+import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
 import { projectRepository } from "../repositories/project.repository";
 
 declare global {
@@ -22,6 +22,24 @@ export const validateProjectInput = async (req: Request, res: Response, next: Ne
     await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)
 
     next()
+}
+
+export const validateProjectExistsBySlug = async (req: Request<TSlugParams>, res: Response, next: NextFunction) => {
+    const { slug } = req.params
+
+    try {
+        const Project = await projectRepository.findBySlug(slug.trim().toLowerCase())
+
+        if (!Project) {
+            throw new HttpError(404, "Project not found")
+        }
+
+        req.Project = Project
+
+        next()
+    } catch (error) {
+        next(error)
+    }
 }
 
 export const validateProjectExists = async (req: Request<TMongoIdParams>, res: Response, next: NextFunction) => {

@@ -60,6 +60,14 @@ router.delete("/:id",
     BlogController.deleteBlog
 )
 
+router.get("/id/:id",
+    auth(),
+    param('id').isMongoId().withMessage('Invalide Id'),
+    handleInputErrors,
+    validateBlogExists,
+    BlogController.getBlog
+)
+
 router.get("/:slug",
     param('slug').notEmpty().withMessage('Slug is required'),
     handleInputErrors,

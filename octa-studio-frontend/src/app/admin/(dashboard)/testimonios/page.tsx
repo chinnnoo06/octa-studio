@@ -1,4 +1,5 @@
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { TestimonialsTable } from '@/components/testimonials/TestimonialsTable';
@@ -15,7 +16,13 @@ export default async function AdminTestimoniosPage() {
           <SectionTitle lead="Nuestros" rotating="Testimonios" as='h1' />
         </div>
 
-        <PrimaryButton href="/admin/testimonios/crear">Agregar testimonio</PrimaryButton>
+        <div className="hidden xl:flex">
+          <LinkButtonLeft href={`/admin/testimonios/crear`}>Crear testimonio</LinkButtonLeft>
+        </div>
+
+        <div className="flex xl:hidden">
+          <LinkButton href={`/admin/testimonios/crear`}>Crear testimonio</LinkButton>
+        </div>
       </div>
 
       <TestimonialsTable testimonials={testimonials} />

@@ -1,4 +1,4 @@
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { PROJECTS } from '@/utils/data/projects';
@@ -33,7 +33,7 @@ export const Projects = () => {
                   Más de 20 años montando stands para marcas nacionales e internacionales.
                   Cada proyecto nace desde cero, adaptado al espacio, los productos y el presupuesto de cada cliente.
                 </p>
-                <PrimaryButton href="/proyectos">Ver todos los proyectos</PrimaryButton>
+                <LinkButton href="/proyectos">Ver todos los proyectos</LinkButton>
               </Reveal>
               <div className="flex flex-col gap-10">
                 {right.map((p, i) => (
@@ -50,7 +50,7 @@ export const Projects = () => {
               Más de 20 años montando stands para marcas nacionales e internacionales.
               Cada proyecto nace desde cero, adaptado al espacio, los productos y el presupuesto de cada cliente.
             </p>
-            <PrimaryButton href="/proyectos">Ver todos los proyectos</PrimaryButton>
+            <LinkButton href="/proyectos">Ver todos los proyectos</LinkButton>
           </Reveal>
         </div>
       </div>

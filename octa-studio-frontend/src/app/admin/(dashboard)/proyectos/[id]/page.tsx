@@ -1,4 +1,5 @@
-import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -13,7 +14,13 @@ export default async function DetalleProyectoPage({ params }: { params: Promise<
           <SectionTitle lead="Detalle del" rotating="Proyecto" as='h1' />
         </div>
 
-        <PrimaryButtonLeft href={`/admin/proyectos/${id}/editar`}>Editar proyecto</PrimaryButtonLeft>
+        <div className="hidden xl:flex">
+          <LinkButtonLeft href={`/admin/proyectos/${id}/editar`}>Editar proyecto</LinkButtonLeft>
+        </div>
+
+        <div className="flex xl:hidden">
+          <LinkButton href={`/admin/proyectos/${id}/editar`}>Editar proyecto</LinkButton>
+        </div>
       </div>
 
       {/* TODO: detalle del proyecto */}

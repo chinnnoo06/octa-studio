@@ -6,10 +6,12 @@ import { FaEye, FaEyeSlash, FaRightToBracket } from 'react-icons/fa6';
 
 import { LoginFormSchema, TLoginForm } from '@/schemas/auth/login.form.schemas';
 import { toast } from "react-toastify";
-import { SecondaryButton } from "../ui/buttons/SecondaryButton";
+import { ActionButton } from "../ui/buttons/ActionButton";
 import { Label } from "../ui/form/Label";
 import { Input } from "../ui/form/Input";
 import { SpanError } from "../ui/form/SpanError";
+import { FormSection } from "../ui/form/FormSection";
+import { FormSectionTitle } from "../ui/form/FormSectionTitle";
 import { useActionStatus } from "@/hooks/ui/useActionStatus";
 import { usePasswordVisibility } from "@/hooks/ui/usePasswordVisibility";
 import { login } from "@/actions/login.action";
@@ -32,6 +34,9 @@ export const LoginForm = () => {
 
     return (
         <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+            <FormSection>
+                <FormSectionTitle>Credenciales</FormSectionTitle>
+
             <div className="form-group">
                 <Label htmlFor="username">Usuario</Label>
 
@@ -75,11 +80,13 @@ export const LoginForm = () => {
 
                 <SpanError message={errors.password?.message} />
             </div>
+            </FormSection>
 
-            <SecondaryButton loading={loading} className="w-full">
+
+            <ActionButton loading={loading} className="w-full">
                 <FaRightToBracket aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
                 {loading ? 'Entrando...' : 'Entrar'}
-            </SecondaryButton>
+            </ActionButton>
         </form>
     )
 }

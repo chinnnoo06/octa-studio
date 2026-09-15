@@ -3,7 +3,7 @@ import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
 import { projectsUploads } from "../middlewares/uploads";
 import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
-import { validateProjectExists, validateProjectInput } from "../middlewares/project";
+import { validateProjectExists, validateProjectExistsBySlug, validateProjectInput } from "../middlewares/project";
 import { ProjectController } from "../controllers/project.controller";
 import { param, query } from "express-validator";
 
@@ -58,10 +58,18 @@ router.delete("/:id",
     ProjectController.deleteProject
 )
 
-router.get("/:id",
+router.get("/id/:id",
+    auth(),
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateProjectExists,
+    ProjectController.getProject
+)
+
+router.get("/:slug",
+    param('slug').notEmpty().withMessage('Slug is required'),
+    handleInputErrors,
+    validateProjectExistsBySlug,
     ProjectController.getProject
 )
 

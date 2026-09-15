@@ -1,8 +1,8 @@
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
-import { PrimaryButton } from '@/components/ui/buttons/PrimaryButton';
-import { PrimaryButtonLeft } from '@/components/ui/buttons/PrimaryButtonLeft';
+import { LinkButton } from '@/components/ui/buttons/LinkButton';
+import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { BLOG_POSTS } from '@/utils/data/blogs';
 import { PostBox } from './PostBox';
 
@@ -44,15 +44,15 @@ export const Posts = ({ page = 1 }: { page?: number }) => {
             className="flex flex-wrap items-center justify-center gap-5"
           >
             {current > 1 && (
-              <PrimaryButtonLeft href={`/blogs?page=${current - 1}`}>
+              <LinkButtonLeft href={`/blogs?page=${current - 1}`}>
                 Página anterior
-              </PrimaryButtonLeft>
+              </LinkButtonLeft>
             )}
 
             {current < totalPages && (
-              <PrimaryButton href={`/blogs?page=${current + 1}`}>
+              <LinkButton href={`/blogs?page=${current + 1}`}>
                 Página siguiente
-              </PrimaryButton>
+              </LinkButton>
             )}
           </nav>
         )}

@@ -6,6 +6,7 @@ export type TProjectSEO = {
 }
 
 export type TProject = {
+    slug: string,
     name: string,
     description: string,
     sector: string,
