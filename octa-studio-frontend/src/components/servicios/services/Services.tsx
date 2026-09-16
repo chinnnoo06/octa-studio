@@ -31,7 +31,7 @@ export const Services = ({ page = 1 }: { page?: number }) => {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:gap-7.5">
           {visible.map((service, i) => (
-            <Reveal key={service.href} delay={i * 0.1} className="h-full">
+            <Reveal key={service.href} className="h-full">
               <ServiceBox service={service} />
             </Reveal>
           ))}

@@ -11,7 +11,7 @@ export const Testimonials = () => {
     <section data-section="testimonials" className="bg-thrird">
       <Reveal
         variants={fadeBlur}
-        className="bg-fourth relative flex min-h-[60vh] items-center justify-center overflow-hidden py-20 lg:min-h-screen lg:py-25"
+        className="bg-fourth relative flex min-h-[60vh] items-center justify-center overflow-hidden py-15 lg:py-20 lg:min-h-screen"
       >
         <Image
           src={Img}

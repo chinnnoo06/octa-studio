@@ -1,6 +1,6 @@
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditTestimonial } from '@/components/testimonials/EditTestimonial';
+import { EditTestimonial } from '@/components/testimonials/form/EditTestimonial';
 import { getTestimonialService } from '@/services/server/testimonials.service';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';

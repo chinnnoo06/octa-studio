@@ -9,25 +9,25 @@ export const Projects = () => {
   const [left, right] = [PROJECTS.slice(0, 2), PROJECTS.slice(2)];
 
   return (
-    <section data-section="projects" className="py-20 lg:py-25 bg-primary">
+    <section data-section="projects" className="py-15 lg:py-20 bg-primary">
       <div className="mx-auto max-w-[1700px] px-5 lg:px-15 flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col gap-10 overflow-hidden">
 
-          <div className="text-secondary flex flex-col items-start gap-5 max-w-3xl">
+          <div className="text-secondary flex flex-col items-start gap-2.5 max-w-3xl">
             <Eyebrow>Nuestros Proyectos</Eyebrow>
             <SectionTitle lead="Proyectos que hablan por" rotating="nosotros" />
           </div>
 
-          <div className="flex flex-col md:grid grid-cols-2 gap-10">
-            <div className="flex flex-col gap-10">
+          <div className="flex flex-col md:grid grid-cols-2 gap-5">
+            <div className="flex flex-col gap-5">
               {left.map((p, i) => (
-                <Reveal key={p.name} delay={i * 0.1}>
+                <Reveal key={p.name}>
                   <ProjectCard project={p} />
                 </Reveal>
               ))}
             </div>
 
-            <div className="flex flex-col gap-10 ">
+            <div className="flex flex-col gap-10">
               <Reveal className="hidden md:flex max-w-2xl flex-col justify-center gap-5">
                 <p className="text-fourth/75 text-lg">
                   Más de 20 años montando stands para marcas nacionales e internacionales.
@@ -35,9 +35,9 @@ export const Projects = () => {
                 </p>
                 <LinkButton href="/proyectos">Ver todos los proyectos</LinkButton>
               </Reveal>
-              <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-5">
                 {right.map((p, i) => (
-                  <Reveal key={p.name} delay={i * 0.1}>
+                  <Reveal key={p.name}>
                     <ProjectCard project={p} />
                   </Reveal>
                 ))}

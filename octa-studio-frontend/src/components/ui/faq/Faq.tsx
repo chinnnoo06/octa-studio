@@ -1,10 +1,5 @@
 'use client';
 
-/**
- * FAQ de paginas interiores: columna de titulo + tarjetas acordeon. La de la
- * home, con el titulo pegajoso y las filas separadas, vive en `ui/faqs`.
- */
-
 import { useState } from 'react';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
@@ -20,11 +15,11 @@ export const Faq = () => {
     setOpenItems((prev) => (prev.includes(i) ? prev.filter((n) => n !== i) : [...prev, i]));
 
   return (
-    <section data-section="faq" className="bg-primary py-20 lg:py-25">
+    <section data-section="faq" className="bg-primary py-15 lg:py-20">
       <div className="mx-auto grid max-w-[1700px] gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-15 lg:px-15">
 
         <div className="flex flex-col gap-10 lg:gap-15">
-          <div className="text-secondary flex flex-col gap-5">
+          <div className="text-secondary flex flex-col gap-2.5">
             <Eyebrow>Preguntas frecuentes</Eyebrow>
             <SectionTitle lead="Lo que más nos" rotating="preguntan" />
           </div>
@@ -44,7 +39,7 @@ export const Faq = () => {
 
         <div className="flex flex-col gap-5">
           {FAQS.map((item, i) => (
-            <Reveal key={item.question} delay={i * 0.05}>
+            <Reveal key={item.question}>
               <FaqCard
                 id={`nosotros-faq-${i}`}
                 item={item}

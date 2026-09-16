@@ -7,11 +7,7 @@ import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } fro
 import { cn } from '@/utils/cn';
 import type { TProject } from '@/types/content.types';
 
-/**
- * El tick central calca la interacción del original: escala de 0 a 1 al entrar
- * (500 ms, easing de rebote) y deriva ±22 px en X y ±10 px en Y siguiendo al
- * ratón. Sale en 300 ms. Por debajo de `lg` el original lo oculta.
- */
+
 const SWING = [0.68, -0.55, 0.265, 1.55] as const;
 const DRIFT_X = [-22, 22];
 const DRIFT_Y = [-10, 10];

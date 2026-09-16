@@ -4,7 +4,8 @@ import { Stats } from '@/components/nosotros/stats/Stats';
 import { Story } from '@/components/nosotros/story/Story';
 import { Team } from '@/components/nosotros/team/Team';
 import { Coverage } from '@/components/nosotros/coverage/Coverage';
-import { Faq } from '@/components/ui/faq/Faq';
+import { Faqs } from '@/components/ui/faqs/Faqs';
+import { CtaSection } from '@/components/ui/CtaSection';
 
 export const metadata: Metadata = {
   title: 'Nosotros',
@@ -18,9 +19,10 @@ export default function NosotrosPage() {
       <Hero />
       <Stats />
       <Story />
-      <Team />
+      <CtaSection />
+      <Faqs />
       <Coverage />
-      <Faq />
+
     </>
   );
 }

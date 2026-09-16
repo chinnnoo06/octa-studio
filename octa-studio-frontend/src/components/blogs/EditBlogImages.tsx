@@ -11,7 +11,7 @@ import { useBlogs } from "@/hooks/blogs/useBlogs";
 import { ActionButton } from "../ui/buttons/ActionButton";
 import { FormSection } from "../ui/form/FormSection";
 import { FormSectionTitle } from "../ui/form/FormSectionTitle";
-import { ImagesField } from "../projects/ImagesField";
+import { ImagesField } from "../ui/form/ImagesField";
 import { CurrentBlogImages } from "./CurrentBlogImages";
 
 export const EditBlogImages = ({ blog }: { blog: TBlog }) => {

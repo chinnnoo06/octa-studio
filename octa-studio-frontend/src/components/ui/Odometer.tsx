@@ -6,7 +6,6 @@ import { motion, useInView } from 'framer-motion';
 type TOdometerProps = {
   values: readonly string[];
   suffix?: string;
-  /** `light` para fondos oscuros. Por defecto, azul sobre fondo claro. */
   tone?: 'dark' | 'light';
 }
 

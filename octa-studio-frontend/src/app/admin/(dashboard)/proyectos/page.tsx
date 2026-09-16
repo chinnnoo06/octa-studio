@@ -5,7 +5,7 @@ import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Pagination } from '@/components/ui/Pagination';
-import { ProjectsTable } from '@/components/projects/ProjectsTable';
+import { ProjectsTable } from '@/components/projects/table/ProjectsTable';
 import { getProjectsService } from '@/services/server/projects.service';
 
 const BASE_PATH = '/admin/proyectos';

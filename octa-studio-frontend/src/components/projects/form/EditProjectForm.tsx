@@ -6,39 +6,40 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { CreateProjectFormSchema, TCreateProjectForm } from '@/schemas/projects/projects.form.schemas';
+import { UpdateProjectFormSchema, TUpdateProjectForm } from '@/schemas/projects/projects.form.schemas';
+import { TProject } from "@/schemas/projects/projects.schemas";
 import { useProjects } from "@/hooks/projects/useProjects";
-import { Label } from "../ui/form/Label";
-import { Input } from "../ui/form/Input";
-import { Textarea } from "../ui/form/Textarea";
-import { SpanError } from "../ui/form/SpanError";
-import { FormSection } from "../ui/form/FormSection";
-import { FormSectionTitle } from "../ui/form/FormSectionTitle";
-import { ActionButton } from "../ui/buttons/ActionButton";
-import { ImagesField } from "./ImagesField";
+import { Label } from "../../ui/form/Label";
+import { Input } from "../../ui/form/Input";
+import { Textarea } from "../../ui/form/Textarea";
+import { SpanError } from "../../ui/form/SpanError";
+import { FormSection } from "../../ui/form/FormSection";
+import { FormSectionTitle } from "../../ui/form/FormSectionTitle";
+import { ActionButton } from "../../ui/buttons/ActionButton";
 
-export const CreateProjectForm = () => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateProjectForm>({
-        resolver: zodResolver(CreateProjectFormSchema),
+
+export const EditProjectForm = ({ project }: { project: TProject }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<TUpdateProjectForm>({
+        resolver: zodResolver(UpdateProjectFormSchema),
         defaultValues: {
-            name: '',
-            description: '',
-            sector: '',
-            images: [],
-            seo: { metaTitle: '', metaDescription: '' }
+            name: project.name,
+            description: project.description,
+            sector: project.sector,
+            seo: {
+                metaTitle: project.seo.metaTitle,
+                metaDescription: project.seo.metaDescription
+            }
         }
     })
 
-    const { createProject } = useProjects();
+    const { updateProject } = useProjects();
 
     useEffect(() => {
-        if (createProject.error) toast.error(createProject.error);
-        if (createProject.success) toast.success(createProject.success);
-    }, [createProject.error, createProject.success]);
+        if (updateProject.error) toast.error(updateProject.error);
+        if (updateProject.success) toast.success(updateProject.success);
+    }, [updateProject.error, updateProject.success]);
 
-    const images = watch('images');
-
-    const onSubmit = (data: TCreateProjectForm) => createProject.handleCreateProject(data)
+    const onSubmit = (data: TUpdateProjectForm) => updateProject.handleUpdateProject(project._id, data)
 
     return (
         <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -81,19 +82,9 @@ export const CreateProjectForm = () => {
                 </div>
             </FormSection>
 
-            <FormSection>
-                <FormSectionTitle>Imágenes</FormSectionTitle>
-
-                <ImagesField
-                    images={images}
-                    onChange={(next) => setValue('images', next, { shouldValidate: true })}
-                    error={errors.images?.message}
-                />
-            </FormSection>
-
-            <ActionButton loading={createProject.loading} className="w-full">
+            <ActionButton loading={updateProject.loading} className="w-full">
                 <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
-                {createProject.loading ? 'Guardando...' : 'Crear proyecto'}
+                {updateProject.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>
     )

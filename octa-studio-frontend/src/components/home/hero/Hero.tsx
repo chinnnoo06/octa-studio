@@ -7,10 +7,8 @@ import { fadeBlur } from '@/utils/motion/reveal';
 import Img from "@/assets/media/stands/ImgStand1.webp"
 
 export const Hero = () => {
-  // El `-mt-18` cancela el `pt-18` del <main>: esta es la única sección que va
-  // a sangre por debajo del header, para que la foto llegue hasta arriba.
   return (
-    <section data-section="hero" className="relative -mt-18 w-full overflow-x-clip">
+    <section data-section="hero" className="relative w-full overflow-x-clip">
       <Image
         src={Img}
         alt=""
@@ -24,9 +22,8 @@ export const Hero = () => {
       <div aria-hidden="true" className="bg-fourth/25 absolute inset-0" />
 
       <div className="relative z-10 w-full">
-        <div className="h-20" aria-hidden="true" />
 
-        <div className="mt-20 flex flex-col justify-between gap-20 md:min-h-135 lg:min-h-200">
+        <div className="flex flex-col justify-between gap-20 md:min-h-135 lg:min-h-200 pt-15 lg:pt-20">
 
           {/* ── Bloque superior ───────────────────────────────────────────── */}
           <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-10 lg:gap-20 px-5 lg:px-15 md:flex-row">
@@ -34,7 +31,7 @@ export const Hero = () => {
             <RevealOnLoad variants={fadeBlur}>
               <h1 className="text-primary/75 font-bold uppercase
                text-center md:text-end
-               text-[2.5rem] small:text-[2.75rem] md:text-[3rem] lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem]
+               text-[2.5rem] small:text-[2.75rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem]
                leading-[1.2] tracking-[-0.02em]">
               Diseñamos grandes {''}<br className="hidden md:block" />
                 <span className="text-primary">experiencias</span>
@@ -44,7 +41,6 @@ export const Hero = () => {
             <div className="flex w-full flex-col items-center gap-5 md:justify-end md:flex-1 md:flex-row lg:flex-none lg:w-auto ">
               <RevealOnLoad
                 variants={fadeBlur}
-                delay={0.15}
                 className="hidden items-center gap-5 md:flex"
               >
                 <TickLine className="hidden lg:flex text-primary min-h-55" />
@@ -66,11 +62,11 @@ export const Hero = () => {
               <div className="flex flex-col items-center gap-10 md:hidden ">
 
                 <p className="flex items-center gap-2.5">
-                  <span className="text-primary text-5xl font-medium">
+                  <span className="text-primary text-6xl font-medium">
                     20
                   </span>
                   <span className="text-primary font-gentleman text-center text-5xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
-                    años de montajes
+                    Años de montajes
                     <br />
                     nacional e internacional
                   </span>
@@ -90,7 +86,7 @@ export const Hero = () => {
                     20
                   </span>
                   <span className="text-primary font-gentleman text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
-                    años de montajes
+                    Años de montajes
                     <br />
                     nacional e internacional
                   </span>

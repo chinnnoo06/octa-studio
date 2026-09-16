@@ -14,7 +14,6 @@ type TProccessCardProps = {
 export const ProccessCard = ({ step, index, hasArrow = false, className }: TProccessCardProps) => {
   return (
     <Reveal
-      delay={index * 0.08}
       className={cn(
         'border-primary/30 mx-auto flex h-full max-w-150 items-center justify-end gap-2.5 rounded-xl border p-2.5',
         'xl:rounded-none xl:border-0 xl:p-0',

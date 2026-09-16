@@ -9,7 +9,7 @@ type TStatCardProps = {
 };
 
 const VARIANT: Record<TStatCardProps['variant'], string> = {
-  dark: 'bg-fourth',
+  dark: 'bg-secondary',
   tint: 'bg-secondary/15',
   white: 'bg-primary border border-fourth/30',
   overlay: 'bg-fourth/50 absolute inset-0',
@@ -30,7 +30,7 @@ export const StatCard = ({ stat, variant }: TStatCardProps) => {
       <div className="flex flex-col gap-2.5">
         <h3
           className={cn(
-            'text-lg font-semibold uppercase lg:text-xl',
+            'font-gentleman text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case',
             light ? 'text-primary' : 'text-secondary',
           )}
         >

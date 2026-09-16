@@ -1,4 +1,4 @@
-import { CreateProjectForm } from '@/components/projects/CreateProjectForm';
+import { CreateProjectForm } from '@/components/projects/form/CreateProjectForm';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';

@@ -4,13 +4,10 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { Logo } from '@/components/ui/Logo';
-import Img from '@/assets/media/about/ImgBanner.webp';
+import { Reveal } from '@/components/ui/Reveal';
+import { fadeBlur } from '@/utils/motion/reveal';
+import Img from '@/assets/media/backgrounds/ImgBackground1.webp';
 
-/**
- * El logo sigue al ratón dentro del banner. Calca la interacción «Banner Logo
- * Move Animation» del original: recorre -60%/+60% en X y -80%/+80% en Y sobre
- * su propio tamaño, con mucho suavizado y volviendo al centro al salir.
- */
 const RANGE_X = ['-60%', '60%'];
 const RANGE_Y = ['-80%', '80%'];
 
@@ -39,27 +36,29 @@ export const BannerLogo = () => {
   };
 
   return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="relative overflow-hidden rounded-xl lg:rounded-none"
-    >
-      <Image
-        src={Img}
-        alt=""
-        priority
-        quality={90}
-        sizes="100vw"
-        placeholder="blur"
-        className="h-62.5 w-full object-cover sm:h-85 lg:h-178.5"
-      />
+    <Reveal variants={fadeBlur}>
+      <div
+        ref={ref}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        className="relative overflow-hidden rounded-xl lg:rounded-none"
+      >
+        <Image
+          src={Img}
+          alt=""
+          priority
+          quality={90}
+          sizes="100vw"
+          placeholder="blur"
+          className="h-62.5 w-full object-cover sm:h-85 lg:h-178.5"
+        />
 
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <motion.div style={{ x, y }} className="w-50 lg:w-100">
-          <Logo sizes="(min-width: 1024px) 400px, 200px" />
-        </motion.div>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <motion.div style={{ x, y }} className="w-50 lg:w-100">
+            <Logo sizes="(min-width: 1024px) 400px, 200px" />
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </Reveal>
   );
 };

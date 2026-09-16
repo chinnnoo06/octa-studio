@@ -15,7 +15,7 @@ import { SpanError } from "../ui/form/SpanError";
 import { FormSection } from "../ui/form/FormSection";
 import { FormSectionTitle } from "../ui/form/FormSectionTitle";
 import { ActionButton } from "../ui/buttons/ActionButton";
-import { ImagesField } from "../projects/ImagesField";
+import { ImagesField } from "../ui/form/ImagesField";
 import { BlogContentField } from "./BlogContentField";
 
 const SELECT =

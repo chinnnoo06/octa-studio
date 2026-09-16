@@ -1,4 +1,5 @@
-import type { TStat } from '@/types/content.types';
+import type { TCoverageItem, TPillar, TStat } from '@/types/content.types';
+import { CONTACT } from '@/utils/data/contact';
 
 export const STATS: TStat[] = [
   {
@@ -29,4 +30,34 @@ export const STATS: TStat[] = [
     description: 'México, Estados Unidos y clientes de Asia y Sudamérica, etc...',
     variant: 'four',
   },
+];
+
+export const COVERAGE: TCoverageItem[] = [
+  {
+    title: "Guadalajara",
+    description:
+      'Zona metropolitana y occidente del país. Montaje y desmontaje incluidos, con el taller a media hora del recinto.',
+  },
+  {
+    title: "Monterrey",
+    description:
+      'Noreste del país. Trasladamos material y cuadrilla propia para no depender de proveedores locales.',
+  },
+  {
+    title: "Ciudad de México",
+    description:
+      'Centro del país y los recintos de mayor aforo, donde los tiempos de montaje son más ajustados.',
+  },
+  {
+    title: "Cobertura en todo México y en todo Estados Unidos",
+    description:
+      'Nos movemos a donde esté el evento, dentro y fuera de México, con el mismo equipo de principio a fin.',
+  },
+];
+
+export const PILLARS: TPillar[] = [
+  { number: '01', title: 'Diseño' },
+  { number: '02', title: 'Fabricación' },
+  { number: '03', title: 'Montaje' },
+  { number: '04', title: 'Desmontaje' },
 ];

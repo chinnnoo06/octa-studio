@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo } from 'react';
 import { FiImage, FiX } from 'react-icons/fi';
-import { SpanError } from '../ui/form/SpanError';
-import { Label } from '../ui/form/Label';
+import { SpanError } from './SpanError';
+import { Label } from './Label';
 
 type TImagesFieldProps = {
     images: File[];

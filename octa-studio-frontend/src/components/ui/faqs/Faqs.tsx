@@ -17,11 +17,11 @@ export const Faqs = () => {
     setOpenItems((prev) => (prev.includes(i) ? prev.filter((n) => n !== i) : [...prev, i]));
 
   return (
-    <section data-section="faqs" className="bg-thrird py-20 lg:py-25">
+    <section data-section="faqs" className="bg-thrird py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15 lg:flex-row lg:items-start ">
 
         <div className="flex flex-col gap-10 lg:sticky lg:top-25 lg:w-2/5 lg:shrink-0">
-          <div className="text-secondary flex flex-col gap-5">
+          <div className="text-secondary flex flex-col gap-2.5">
             <Eyebrow>Preguntas Frecuentes</Eyebrow>
             <SectionTitle lead="Lo que más nos" rotating="preguntan" />
             <p className="text-fourth/75 max-w-xl text-base lg:text-lg">
@@ -46,7 +46,6 @@ export const Faqs = () => {
           {FAQS.map((item, i) => (
             <Reveal
               key={item.question}
-              delay={i * 0.05}
               className="border-fourth/30 border-b last:border-b-0"
             >
               <FaqItem

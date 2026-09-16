@@ -10,7 +10,7 @@ export const Process = () => {
 
   return (
     <section data-section="process"
-      className="bg-fourth relative overflow-hidden py-10 sm:py-15 md:py-20 lg:py-35"
+      className="bg-fourth relative overflow-hidden py-15 lg:py-20"
     >
       <Image
         src={Bg}
@@ -26,7 +26,7 @@ export const Process = () => {
       <div className="relative z-10 mx-auto max-w-[1700px] px-5 lg:px-15">
         <div className="flex flex-col items-center gap-5 sm:gap-10 md:gap-15 xl:grid xl:grid-cols-[300px_1fr] xl:items-start xl:gap-0">
 
-          <div className="text-primary flex max-w-120 flex-col items-center gap-5 text-center xl:items-start xl:text-start">
+          <div className="text-primary flex max-w-120 flex-col items-center gap-2.5 text-center xl:items-start xl:text-start">
             <Eyebrow>Nuestro Proceso</Eyebrow>
             <SectionTitle tone="light" lead="Así es como" rotating="trabajamos" />
           </div>

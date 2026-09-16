@@ -1,4 +1,4 @@
-import { CreateTestimonial } from '@/components/testimonials/CreateTestimonial';
+import { CreateTestimonial } from '@/components/testimonials/form/CreateTestimonial';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';

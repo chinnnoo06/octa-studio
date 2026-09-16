@@ -32,7 +32,7 @@ export const Posts = ({ page = 1 }: { page?: number }) => {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7.5">
           {visible.map((post, i) => (
-            <Reveal key={post.href} delay={i * 0.1} className="h-full">
+            <Reveal key={post.href} className="h-full">
               <PostBox post={post} />
             </Reveal>
           ))}

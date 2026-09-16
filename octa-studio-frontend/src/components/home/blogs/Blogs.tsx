@@ -7,7 +7,7 @@ import { LinkButton } from '@/components/ui/buttons/LinkButton';
 
 export const Blogs = () => {
   return (
-    <section data-section="blogs" className="bg-primary py-20 lg:py-25">
+    <section data-section="blogs" className="bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col gap-5">
@@ -20,7 +20,6 @@ export const Blogs = () => {
           {BLOG_POSTS.map((post, i) => (
             <Reveal
               key={post.href}
-              delay={i * 0.1}
               className="w-75 shrink-0 snap-start sm:w-auto sm:shrink"
             >
               <BlogCard post={post} />

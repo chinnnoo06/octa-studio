@@ -40,14 +40,13 @@ export const Team = () => {
             {rest.map((area, i) => (
               <Reveal
                 key={area.area}
-                delay={i * 0.1}
                 className="h-62.5 w-62.5 shrink-0 snap-start sm:h-100 sm:w-auto sm:shrink"
               >
                 <TeamCard area={area} />
               </Reveal>
             ))}
 
-            <Reveal delay={0.3} className="h-62.5 w-62.5 shrink-0 snap-start sm:h-100 sm:w-auto sm:shrink">
+            <Reveal className="h-62.5 w-62.5 shrink-0 snap-start sm:h-100 sm:w-auto sm:shrink">
               <div className="bg-primary flex h-full flex-col items-center justify-center gap-2.5 rounded-xl p-2.5">
                 <div className="relative flex size-40 items-center justify-center lg:size-50">
                   <Image

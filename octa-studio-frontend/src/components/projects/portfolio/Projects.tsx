@@ -6,10 +6,7 @@ import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { PROJECTS } from '@/utils/data/projects';
 import { ProjectRow } from './ProjectRow';
 
-/**
- * Proyectos por página. El original usa 5; aquí va a 3 para que la paginación
- * sea real con el catálogo actual de 4. Súbelo a 5 cuando entren más.
- */
+
 const PAGE_SIZE = 3;
 
 export const Projects = ({ page = 1 }: { page?: number }) => {
@@ -35,7 +32,7 @@ export const Projects = ({ page = 1 }: { page?: number }) => {
 
         <div className="flex flex-col gap-5 lg:gap-7.5">
           {visible.map((project, i) => (
-            <Reveal key={project.name} delay={i * 0.1}>
+            <Reveal key={project.name}>
               <ProjectRow project={project} priority={current === 1 && i === 0} />
             </Reveal>
           ))}

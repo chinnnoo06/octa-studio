@@ -58,7 +58,6 @@ export const Contact = () => {
 
               <Reveal
                 variants={fadeUpScale}
-                delay={0.1}
                 className="group overflow-hidden rounded-xl"
               >
                 <Image
@@ -98,7 +97,6 @@ export const Contact = () => {
               return (
                 <Reveal
                   key={item.title}
-                  delay={i * 0.1}
                   className="border-fourth/30 bg-primary w-full rounded-md border sm:max-w-70.25"
                 >
                   {item.href ? (

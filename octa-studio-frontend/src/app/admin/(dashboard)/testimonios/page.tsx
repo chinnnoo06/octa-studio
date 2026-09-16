@@ -2,7 +2,7 @@ import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { TestimonialsTable } from '@/components/testimonials/TestimonialsTable';
+import { TestimonialsTable } from '@/components/testimonials/table/TestimonialsTable';
 import { getTestimonialsService } from '@/services/server/testimonials.service';
 
 export default async function AdminTestimoniosPage() {
