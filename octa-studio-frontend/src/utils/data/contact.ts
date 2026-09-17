@@ -1,3 +1,5 @@
+import type { TChannel } from '@/types/content.types';
+
 const PHONE_DISPLAY = '33 4493 4790';
 
 const PHONE_E164 = '+523344934790';
@@ -34,9 +36,34 @@ export const CONTACT = {
     mail('Dirección', 'ceocompany@octabuilding-studio.com'),
   ],
 
-  /** Dónde opera, según el brief: todo México y parte de Estados Unidos. */
+  /** Dónde opera: todo México y todo Estados Unidos. */
   coverage: {
-    summary: 'Todo México y parte de Estados Unidos',
+    summary: 'Todo México y Estados Unidos',
     cities: ['Guadalajara', 'Monterrey', 'Ciudad de México'],
   },
 } as const;
+
+
+export const CHANNELS: TChannel[] = [
+  {
+    id: 'whatsapp',
+    name: 'WhatsApp',
+    description: 'La forma más rápida. Abre el chat con un mensaje ya escrito y cuéntanos tu proyecto.',
+    action: 'Abrir chat',
+    links: [{ label: 'Chat directo', value: CONTACT.whatsapp.display, href: CONTACT.whatsapp.url }],
+  },
+  {
+    id: 'telefono',
+    name: 'Teléfono',
+    description: 'Para cotizar de viva voz o resolver dudas al momento.',
+    action: 'Llamar',
+    links: [{ label: 'Oficina', value: CONTACT.phone.display, href: CONTACT.phone.href }],
+  },
+  {
+    id: 'correo',
+    name: 'Correo',
+    description: 'Para enviarnos planos, referencias o bases de licitación.',
+    action: 'Escribir',
+    links: CONTACT.emails.map((m) => ({ label: m.label, value: m.address, href: m.href })),
+  },
+];

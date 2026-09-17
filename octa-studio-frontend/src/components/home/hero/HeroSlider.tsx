@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Marquee } from '@/components/ui/Marquee';
 import Img1 from "@/assets/media/stands/ImgStand2.webp"
 import Img2 from "@/assets/media/stands/ImgStand3.webp"
-import Img3 from "@/assets/media/stands/ImgStand4.webp"
+import Img3 from "@/assets/media/stands/ImgStand20.webp"
 import Img4 from "@/assets/media/stands/ImgStand17.webp"
 import Img5 from "@/assets/media/stands/ImgStand18.webp"
 import Img6 from "@/assets/media/stands/ImgStand19.webp"

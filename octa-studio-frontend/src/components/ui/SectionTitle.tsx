@@ -3,7 +3,6 @@
 import { useRef } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { rotatorY, rotatorTransition } from '@/utils/motion/rotator';
-import { cn } from '@/utils/cn';
 
 type TSectionTitleProps = {
   lead: string;
@@ -40,11 +39,7 @@ export const SectionTitle = ({
   const copia = (tenue: boolean, aria: boolean) => (
     <span
       aria-hidden={aria}
-      className={cn(
-        'flex items-center',
-        LINE,
-        tenue && (light ? 'text-primary/75' : 'text-secondary/75'),
-      )}
+      className={`flex items-center ${LINE} ${tenue ? (light ? 'text-primary/75' : 'text-secondary/75') : ''}`}
     >
       {rotating}
     </span>
@@ -53,15 +48,10 @@ export const SectionTitle = ({
   return (
     <Heading
       ref={ref}
-      className={cn(
-        SIZE[size],
-        'font-bold uppercase leading-[1.2] tracking-[-0.02em] ',
-        light ? 'text-primary' : 'text-secondary',
-        align === 'center' && 'text-center',
-      )}
+      className={`${SIZE[size]} font-bold uppercase leading-[1.2] tracking-[-0.02em] ${light ? 'text-primary' : 'text-secondary'} ${align === 'center' ? 'text-center' : ''}`}
     >
       {lead}{' '}
-      <span className={cn('inline-block max-w-full overflow-hidden align-bottom', LINE)}>
+      <span className={`inline-block max-w-full overflow-hidden align-bottom ${LINE}`}>
         <motion.span
           className="flex flex-col"
           animate={{ y: inView && !reduced ? rotatorY : '0%' }}

@@ -5,13 +5,13 @@ import { FieldErrors, UseFormRegister } from "react-hook-form"
 import { FaFloppyDisk } from 'react-icons/fa6';
 
 import { TTestimonialForm } from '@/schemas/testimonials/testimonials.form.schemas';
-import { Label } from "../../ui/form/Label";
-import { Input } from "../../ui/form/Input";
-import { Textarea } from "../../ui/form/Textarea";
-import { SpanError } from "../../ui/form/SpanError";
-import { FormSection } from "../../ui/form/FormSection";
-import { FormSectionTitle } from "../../ui/form/FormSectionTitle";
-import { ActionButton } from "../../ui/buttons/ActionButton";
+import { Label } from "@/components/ui/form/Label";
+import { Input } from "@/components/ui/form/Input";
+import { Textarea } from "@/components/ui/form/Textarea";
+import { SpanError } from "@/components/ui/form/SpanError";
+import { FormSection } from "@/components/ui/form/FormSection";
+import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
+import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
 type TTestimonialFormProps = {
     register: UseFormRegister<TTestimonialForm>

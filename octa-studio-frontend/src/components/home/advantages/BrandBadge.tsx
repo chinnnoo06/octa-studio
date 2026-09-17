@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DotRing } from '../../ui/DotRing';
+import { DotRing } from '@/components/ui/DotRing';
 import { ADVANTAGES_BADGE_TEXTS } from '@/utils/data/advantages';
 
 const DURACION_POR_ETIQUETA = 2.32;

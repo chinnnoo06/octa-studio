@@ -90,6 +90,7 @@ export const BlogService = {
         blog.title = data.title
         blog.excerpt = data.excerpt
         blog.category = data.category
+        blog.readingTime = data.readingTime
         blog.content = data.content
         blog.seo = data.seo
 

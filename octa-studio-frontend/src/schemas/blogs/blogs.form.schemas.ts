@@ -1,15 +1,5 @@
 import { z } from "zod"
-
-export const BLOG_CATEGORIES = [
-    'Diseño de Stands',
-    'Montaje y Logística',
-    'Materiales y Sustentabilidad',
-    'Casos de Éxito / Proyectos',
-    'Guías para Expositores',
-    'Ferias y Eventos',
-    'Tendencias en Exhibición Comercial',
-    'Noticias Octa',
-] as const
+import { BlogCategorySchema } from "@/schemas/enums.schemas"
 
 /* -------------------------------------------------------------------------- */
 /*                            BLOQUES DE CONTENIDO                            */
@@ -57,7 +47,9 @@ export const BlogSEOFormSchema = z.object({
 export const CreateBlogFormSchema = z.object({
     title: z.string().trim().min(1, { message: "Campo obligatorio" }),
     excerpt: z.string().trim().min(1, { message: "Campo obligatorio" }).max(300, { message: "Maximo 300 caracteres" }),
-    category: z.enum(BLOG_CATEGORIES, { error: "Elige una categoría" }),
+    category: BlogCategorySchema,
+    // El input registra con valueAsNumber: vacio llega como NaN y cae en el error de tipo.
+    readingTime: z.number({ error: "Campo obligatorio" }).int({ message: "Solo minutos enteros" }).min(1, { message: "Mínimo 1 minuto" }),
     content: z.array(BlogContentBlockSchema).min(1, { message: "Añade al menos un bloque de contenido" }),
     images: z
         .array(z.instanceof(File, { message: "Campo obligatorio" }))

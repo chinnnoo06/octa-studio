@@ -55,6 +55,7 @@ export const validateBlogInput = async (req: Request, res: Response, next: NextF
     await body("title").notEmpty().withMessage("Title is required").run(req)
     await body("excerpt").notEmpty().withMessage("Excerpt is required").run(req)
     await body("category").notEmpty().withMessage("Category is required").run(req)
+    await body("readingTime").isInt({ min: 1 }).withMessage("Reading time must be a whole number of minutes, 1 or more").toInt().run(req)
 
     await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
     await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)

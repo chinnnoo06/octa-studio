@@ -1,4 +1,20 @@
 import type { TBlogPost } from '@/types/content.types';
+
+/**
+ * Las categorias del blog, en el mismo orden y con los mismos textos que el
+ * enum `BlogCategory` del backend. De aqui salen el <select> del panel y la
+ * validacion de los schemas: un blog con otra categoria no pasa.
+ */
+export const BLOG_CATEGORIES = [
+  'Diseño de Stands',
+  'Montaje y Logística',
+  'Materiales y Sustentabilidad',
+  'Casos de Éxito / Proyectos',
+  'Guías para Expositores',
+  'Ferias y Eventos',
+  'Tendencias en Exhibición Comercial',
+  'Noticias Octa',
+] as const;
 import Img1 from '@/assets/media/renders/ImgRender1.webp';
 import Img2 from '@/assets/media/stands/ImgStand5.webp';
 import Img3 from '@/assets/media/stands/ImgStand6.webp';
@@ -7,7 +23,7 @@ export const BLOG_POSTS: TBlogPost[] = [
   {
     title: 'Cómo elegir el tamaño de tu stand según el presupuesto',
     date: '12 de agosto de 2026',
-    category: 'Ferias',
+    category: 'Ferias y Eventos',
     readingTime: '5 min',
     excerpt:
       'Metros cuadrados, altura permitida y qué recortar primero cuando el número no da. Lo que preguntamos en la primera reunión.',
@@ -18,7 +34,7 @@ export const BLOG_POSTS: TBlogPost[] = [
   {
     title: 'Qué revisar en el render antes de aprobar la fabricación',
     date: '28 de julio de 2026',
-    category: 'Diseño',
+    category: 'Diseño de Stands',
     readingTime: '4 min',
     excerpt:
       'El render es el último punto barato para cambiar de opinión. Estos seis detalles son los que más caro salen si se pasan por alto.',
@@ -29,7 +45,7 @@ export const BLOG_POSTS: TBlogPost[] = [
   {
     title: 'Montaje y desmontaje: los plazos reales de un recinto',
     date: '9 de julio de 2026',
-    category: 'Montaje',
+    category: 'Montaje y Logística',
     readingTime: '6 min',
     excerpt:
       'Cuántos días da el recinto, a qué hora entra la maquinaria y por qué el desmontaje siempre es más corto de lo que parece.',
@@ -45,3 +61,4 @@ export const BLOG_NEWSLETTER = {
   description:
     'Escribimos sobre ferias, montaje y producción cada pocas semanas. Sin spam y te puedes dar de baja cuando quieras.',
 } as const;
+

@@ -14,6 +14,7 @@ export type TBlogDto = {
     title: string,
     excerpt: string,
     category: BlogCategory,
+    readingTime: number,
     content: TBlogContentBlock[],
     seo: TBlogSEO
 }

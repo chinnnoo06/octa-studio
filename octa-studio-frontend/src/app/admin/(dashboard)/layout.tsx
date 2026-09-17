@@ -1,5 +1,5 @@
-import { SimpleHeader } from '@/components/ui/header/SimpleHeader';
-import { Sidebar } from '@/components/ui/sidebar/Sidebar';
+import { SimpleHeader } from '@/components/layout/header/SimpleHeader';
+import { Sidebar } from '@/components/layout/Sidebar';
 import { verifySession } from '@/services/auth/auth.dal';
 
 export default async function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {

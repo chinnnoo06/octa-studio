@@ -1,4 +1,4 @@
-import { TActionButtonProps } from './types/Buttons.types';
+import { TActionButtonProps } from '@/types/buttons.types';
 
 const VARIANT = {
   solid: 'bg-secondary text-primary hover:text-secondary hover:bg-primary',

@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
-import { cn } from '@/utils/cn';
 
 const START = 0.2;
 const END = 0.5;
@@ -46,11 +45,11 @@ export const WipeHeading = ({ text }: { text: string }) => {
 
   return (
     <div ref={ref} className="relative">
-      <h2 className={cn(HEADING, 'text-muted')}>{text}</h2>
+      <h2 className={`${HEADING} text-muted`}>{text}</h2>
 
       <span
         aria-hidden="true"
-        className={cn(HEADING, 'text-secondary pointer-events-none absolute inset-0')}
+        className={`${HEADING} text-secondary pointer-events-none absolute inset-0`}
       >
         {words.map((word, i) => (
           <Word

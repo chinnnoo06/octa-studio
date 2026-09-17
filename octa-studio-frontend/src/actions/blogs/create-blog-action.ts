@@ -28,6 +28,7 @@ export const createBlog = async (data: TCreateBlogForm): Promise<TActionState> =
     formData.append("title", parsed.data.title)
     formData.append("excerpt", parsed.data.excerpt)
     formData.append("category", parsed.data.category)
+    formData.append("readingTime", String(parsed.data.readingTime))
 
     // `content` y `seo` viajan como cadena JSON: un FormData solo transporta
     // texto y archivos, no objetos ni arrays anidados. El backend los reconstruye

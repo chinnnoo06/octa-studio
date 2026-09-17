@@ -8,11 +8,11 @@ import { toast } from "react-toastify";
 import { ProjectImagesFormSchema } from '@/schemas/projects/projects.form.schemas';
 import { TProject } from "@/schemas/projects/projects.schemas";
 import { useProjects } from "@/hooks/projects/useProjects";
-import { ActionButton } from "../../ui/buttons/ActionButton";
-import { FormSection } from "../../ui/form/FormSection";
-import { FormSectionTitle } from "../../ui/form/FormSectionTitle";
+import { ActionButton } from "@/components/ui/buttons/ActionButton";
+import { FormSection } from "@/components/ui/form/FormSection";
+import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { CurrentImages } from "./CurrentImages";
-import { ImagesField } from "../../ui/form/ImagesField";
+import { ImagesField } from "@/components/ui/form/ImagesField";
 
 export const EditProjectImages = ({ project }: { project: TProject }) => {
     const [images, setImages] = useState<File[]>([]);

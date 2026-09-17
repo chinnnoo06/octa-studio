@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
-import ToastNotification from '@/components/ui/ToastNotificaction';
+import ToastNotification from '@/components/ui/ToastNotification';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,23 +21,29 @@ const gentleman = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN ?? 'http://localhost:3000'),
   robots: { index: false, follow: false, nocache: true },
-  title: 'Octa Studio | Diseño y montaje de stands para expos y eventos',
+  // La home usa el titulo completo; el resto de paginas solo pone el suyo y
+  // la plantilla le pega el nombre del sitio.
+  title: {
+    default: 'Octa Building Studio | Diseño y montaje de stands para expos y eventos',
+    template: '%s | Octa Building Studio',
+  },
   description:
-    'Diseñamos, fabricamos, montamos y desmontamos stands para ferias, congresos y eventos masivos. 20 años de experiencia en Guadalajara, Monterrey, CDMX y todo México.',
+    'Diseñamos, fabricamos, montamos y desmontamos stands para ferias, congresos y eventos masivos. 20 años de experiencia en Guadalajara, Monterrey, CDMX, todo México y Estados Unidos.',
   openGraph: {
-    title: 'Octa Studio | Diseño y montaje de stands para expos y eventos',
+    title: 'Octa Building Studio | Diseño y montaje de stands para expos y eventos',
     description:
       'Construyendo ideas, creando experiencias. Diseño, fabricación, montaje y desmontaje de stands a nivel nacional e internacional.',
     type: 'website',
     locale: 'es_MX',
-    siteName: 'Octa Studio',
+    siteName: 'Octa Building Studio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Octa Studio | Diseño y montaje de stands para expos y eventos',
+    title: 'Octa Building Studio | Diseño y montaje de stands para expos y eventos',
     description:
-      'Construyendo ideas, creando experiencias. 20 años diseñando y montando stands en todo México.',
+      'Construyendo ideas, creando experiencias. 20 años diseñando y montando stands en México y Estados Unidos.',
   },
 };
 

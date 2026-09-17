@@ -1,18 +1,23 @@
-import type { Metadata } from 'next';
-import { Contact } from '@/components/contacto/contact/Contact';
-import { Faq } from '@/components/ui/faq/Faq';
+import { pageMetadata } from '@/utils/metadata';
+import { Hero } from '@/components/contact/Hero';
+import { Channels } from '@/components/contact/channels/Channels';
+import { Faqs } from '@/components/sections/faqs/Faqs';
+import { Statement } from '@/components/sections/Statement';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Contacto',
   description:
-    'Cotiza tu stand, evento o congreso con Octa Studio. Guadalajara, Monterrey, Ciudad de México y todo el país.',
-};
+    'Llámanos, escríbenos por WhatsApp o mándanos un correo para cotizar tu stand, evento o congreso. Guadalajara, Monterrey, Ciudad de México, todo el país y Estados Unidos.',
+  path: '/contacto',
+});
 
 export default function ContactoPage() {
   return (
     <>
-      <Contact />
-      <Faq />
+      <Hero />
+      <Channels />
+      <Faqs />
+      <Statement lead="En Octa, el valor agregado es" highlight="nuestro equipo." />
     </>
   );
 }

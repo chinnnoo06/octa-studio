@@ -50,6 +50,8 @@ export type TBlog = {
     title: string,
     excerpt: string,
     category: BlogCategory,
+    /** Minutos de lectura estimados. */
+    readingTime: number,
     images: string[],
     content: TBlogContentBlock[],
     seo: TBlogSEO

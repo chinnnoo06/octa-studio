@@ -1,4 +1,4 @@
-import type { TCoverageItem, TPillar, TStat } from '@/types/content.types';
+import type { TCoverageItem, TPillar, TPurpose, TStat } from '@/types/content.types';
 import { CONTACT } from '@/utils/data/contact';
 
 export const STATS: TStat[] = [
@@ -6,7 +6,7 @@ export const STATS: TStat[] = [
     odometer: ['20', '19', '18', '17', '16', '15', '14', '13', '12', '11'],
     suffix: '+',
     label: 'Años de experiencia',
-    description: 'Dos décadas diseñando y montando en todo México',
+    description: 'Dos décadas diseñando y montando en México y Estados Unidos',
     variant: 'one',
   },
   {
@@ -20,14 +20,14 @@ export const STATS: TStat[] = [
     odometer: ['300', '290', '280', '270', '260', '250', '240', '230', '220', '210'],
     suffix: '+',
     label: 'Marcas atendidas',
-    description: 'Empresas expositoras nacionales como internacionales',
+    description: 'Empresas expositoras, tanto nacionales como internacionales',
     variant: 'three',
   },
   {
     odometer: ['7', '4', '5', '6', '7', '8', '9', '1', '2', '7'],
     suffix: '+',
     label: 'Países de operación',
-    description: 'México, Estados Unidos y clientes de Asia y Sudamérica, etc...',
+    description: 'México, Estados Unidos y clientes de Asia y Sudamérica',
     variant: 'four',
   },
 ];
@@ -61,3 +61,27 @@ export const PILLARS: TPillar[] = [
   { number: '03', title: 'Montaje' },
   { number: '04', title: 'Desmontaje' },
 ];
+
+export const PURPOSE: TPurpose[] = [
+  {
+    name: 'Misión',
+    statement: 'Espacios que conectan con las personas y cumplen objetivos comerciales reales.',
+    points: [
+      'Ideas convertidas en experiencias memorables',
+      'Creatividad, negocio y ejecución alineados',
+      'Relaciones duraderas entre marca y audiencia',
+    ],
+  },
+  {
+    name: 'Visión',
+    statement: 'Ser el referente nacional en convertir marcas en experiencias que se recuerdan.',
+    points: [
+      'Presencia en proyectos nacionales e internacionales',
+      'Innovación en formatos, tecnologías y narrativas',
+      'El socio estratégico de las marcas que crecen',
+    ],
+  },
+];
+
+/** Va sobre el video, en dos mitades que se equilibran. */
+export const PURPOSE_CLOSING = ['La creatividad como motor.', 'La experiencia como vínculo.'];

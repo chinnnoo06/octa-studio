@@ -2,7 +2,7 @@ import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditBlogImages } from '@/components/blogs/EditBlogImages';
+import { EditBlogImages } from '@/components/blogs/images/EditBlogImages';
 import { getBlogByIdService } from '@/services/server/blogs.service';
 
 export default async function ImagenesBlogPage({ params }: { params: Promise<{ id: string }> }) {

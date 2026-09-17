@@ -23,7 +23,7 @@ export const Hero = () => {
 
       <div className="relative z-10 w-full">
 
-        <div className="flex flex-col justify-between gap-20 md:min-h-135 lg:min-h-200 pt-15 lg:pt-20">
+        <div className="flex flex-col justify-between gap-20 md:min-h-155 lg:min-h-225 pt-15 lg:pt-20">
 
           {/* ── Bloque superior ───────────────────────────────────────────── */}
           <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-10 lg:gap-20 px-5 lg:px-15 md:flex-row">
@@ -48,7 +48,7 @@ export const Hero = () => {
                 <ul role="list" className="flex flex-col gap-5">
                   {['Stands y ferias', 'Eventos masivos', 'Congresos', 'Activaciones'].map((item, i) => (
                     <li key={item} className="flex items-baseline gap-2.5">
-                      <span className="text-primary text-base lg:text-lg">
+                      <span className="text-primary text-base lg:text-lg font-medium">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="text-primary font-gentleman text-4xl lg:text-5xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
@@ -62,7 +62,7 @@ export const Hero = () => {
               <div className="flex flex-col items-center gap-10 md:hidden ">
 
                 <p className="flex items-center gap-2.5">
-                  <span className="text-primary text-6xl font-medium">
+                  <span className="text-primary text-6xl font-semibold">
                     20
                   </span>
                   <span className="text-primary font-gentleman text-center text-5xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
@@ -82,7 +82,7 @@ export const Hero = () => {
               <TickLine className="hidden lg:flex text-primary mb-10" />
               <div className="flex flex-col justify-between gap-10 mb-10 lg:min-h-60">
                 <p className="flex items-center gap-5">
-                  <span className="text-primary text-6xl lg:text-7xl font-medium">
+                  <span className="text-primary text-6xl lg:text-7xl font-semibold">
                     20
                   </span>
                   <span className="text-primary font-gentleman text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case">

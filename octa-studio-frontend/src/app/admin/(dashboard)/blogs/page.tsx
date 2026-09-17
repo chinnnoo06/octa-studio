@@ -5,7 +5,7 @@ import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Pagination } from '@/components/ui/Pagination';
-import { BlogsTable } from '@/components/blogs/BlogsTable';
+import { BlogsTable } from '@/components/blogs/table/BlogsTable';
 import { getBlogsService } from '@/services/server/blogs.service';
 
 const BASE_PATH = '/admin/blogs';

@@ -4,7 +4,7 @@ import { useLockBodyScroll } from "@/hooks/ui/useLockBodyScroll";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FaArrowLeft, FaCheck } from "react-icons/fa6";
-import { ActionButton } from "./buttons/ActionButton";
+import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
 export type TConfirmationModalProps = {
   isOpen: boolean;

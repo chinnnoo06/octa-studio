@@ -5,7 +5,7 @@ export const Logo = ({ sizes }: { sizes: string }) => {
     return (
         <Image
             src={Img}
-            alt="Logo Octa Studio"
+            alt="Logo Octa Building Studio"
             sizes={sizes}
             priority
             className="w-full h-auto"

@@ -2,10 +2,6 @@ import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 import { BlogCategory, TBlog, TBlogSEO } from "../types/blog/blog.types";
 
-/* -------------------------------------------------------------------------- */
-/*                                   SEO                                      */
-/* -------------------------------------------------------------------------- */
-
 const BlogSEOSchema = new Schema<TBlogSEO>(
     {
         metaTitle: {
@@ -24,12 +20,6 @@ const BlogSEOSchema = new Schema<TBlogSEO>(
     { _id: false }
 )
 
-/* -------------------------------------------------------------------------- */
-/*                             CONTENT BLOCKS                                 */
-/* -------------------------------------------------------------------------- */
-
-// Base schema: only the discriminator key, so an unknown block type is rejected.
-// Each block type declares its own fields through a discriminator below.
 const ContentBlockSchema = new Schema(
     {
         type: {
@@ -40,10 +30,6 @@ const ContentBlockSchema = new Schema(
     },
     { discriminatorKey: "type" }
 )
-
-/* -------------------------------------------------------------------------- */
-/*                                    BLOG                                    */
-/* -------------------------------------------------------------------------- */
 
 const BlogSchema = new Schema<TBlog>(
     {
@@ -73,6 +59,16 @@ const BlogSchema = new Schema<TBlog>(
             required: true,
             trim: true,
             enum: Object.values(BlogCategory)
+        },
+
+        readingTime: {
+            type: Number,
+            required: true,
+            min: 1,
+            validate: {
+                validator: Number.isInteger,
+                message: "Reading time must be a whole number of minutes"
+            }
         },
 
         images: {

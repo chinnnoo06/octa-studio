@@ -1,22 +1,25 @@
-import type { Metadata } from 'next';
-import { Posts } from '@/components/blogs/posts/Posts';
+import { pageMetadata } from '@/utils/metadata';
+import { Hero } from '@/components/blogs/Hero';
+import { Posts } from '@/components/blogs/Posts';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Blog',
   description:
     'Lo que aprendimos montando stands: presupuestos, renders, tiempos de recinto y logística de feria.',
-};
+  path: '/blogs',
+});
 
 export default async function BlogsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; categoria?: string }>;
 }) {
-  const { page } = await searchParams;
+  const { page, categoria } = await searchParams;
 
   return (
     <>
-      <Posts page={Number(page) || 1} />
+      <Hero />
+      <Posts page={Number(page) || 1} category={categoria} />
     </>
   );
 }

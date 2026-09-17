@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { ProccessCard } from './ProccessCard';
+import { ProcessCard } from './ProcessCard';
 import { PROCESS_STEPS } from '@/utils/data/process';
 import Bg from '@/assets/media/backgrounds/ImgBackground2.webp';
 
@@ -35,31 +35,31 @@ export const Process = () => {
 
             <div className="contents md:mx-auto md:block md:w-[calc(50%-0.625rem)] xl:w-full">
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s1} index={0} hasArrow />
+                <ProcessCard step={s1} index={0} hasArrow />
               </div>
             </div>
 
             <div className="contents md:grid md:w-full md:grid-cols-2 md:gap-5 xl:gap-5 xl:overflow-hidden">
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s2} index={1} hasArrow />
+                <ProcessCard step={s2} index={1} hasArrow />
               </div>
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s3} index={2} hasArrow />
+                <ProcessCard step={s3} index={2} hasArrow />
               </div>
             </div>
 
             <div className="contents md:grid md:w-full md:grid-cols-2 md:gap-5 xl:gap-0 xl:overflow-hidden">
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s4} index={3} hasArrow className="xl:justify-start" />
+                <ProcessCard step={s4} index={3} hasArrow className="xl:justify-start" />
               </div>
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s5} index={4} hasArrow className="xl:justify-start" />
+                <ProcessCard step={s5} index={4} hasArrow className="xl:justify-start" />
               </div>
             </div>
 
             <div className="contents md:mx-auto md:block md:w-[calc(50%-0.625rem)] xl:w-full">
               <div className="w-75 shrink-0 sm:w-100 md:w-auto md:shrink">
-                <ProccessCard step={s6} index={5} className="xl:justify-start" />
+                <ProcessCard step={s6} index={5} className="xl:justify-start" />
               </div>
             </div>
 

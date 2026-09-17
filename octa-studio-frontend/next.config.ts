@@ -36,9 +36,14 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },
+  // Terminos se fusiono con privacidad; el enlace viejo sigue resolviendo.
+  async redirects() {
+    return [{ source: '/terminos', destination: '/privacidad', permanent: true }];
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],
+    dangerouslyAllowLocalIP: isDev,
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost', port: '4000', pathname: '/files/**' },
       { protocol: 'https', hostname: 'octa-studio-deploy.onrender.com', pathname: '/files/**' },

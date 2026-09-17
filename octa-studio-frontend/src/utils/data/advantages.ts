@@ -7,7 +7,6 @@ export const ADVANTAGES_BADGE_TEXTS = [
   'Expos',
   'Congresos',
   'Eventos',
-  'Showrooms',
 ] as const;
 
 export const ADVANTAGES_CORNER_IMAGES = [

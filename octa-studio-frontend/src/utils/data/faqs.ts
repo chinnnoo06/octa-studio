@@ -14,7 +14,7 @@ export const FAQS: TFaq[] = [
   {
     question: '¿En qué ciudades trabajan?',
     answer:
-      'En todo México, con más presencia en Guadalajara, Monterrey y Ciudad de México. También montamos en parte de Estados Unidos, y hemos trabajado para marcas de Brasil, Colombia y China.',
+      'En todo México, con más presencia en Guadalajara, Monterrey y Ciudad de México. También montamos en todo Estados Unidos, y hemos trabajado para marcas de Brasil, Colombia y China.',
   },
   {
     question: '¿Se encargan también del desmontaje?',

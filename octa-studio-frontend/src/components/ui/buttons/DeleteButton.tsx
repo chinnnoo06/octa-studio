@@ -1,5 +1,5 @@
 import { FiTrash2 } from 'react-icons/fi';
-import { TDeleteButtonProps } from './types/Buttons.types';
+import { TDeleteButtonProps } from '@/types/buttons.types';
 
 
 export const DeleteButton = ({ onClick, label, disabled = false, className }: TDeleteButtonProps) => {

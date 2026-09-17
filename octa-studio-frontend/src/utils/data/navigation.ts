@@ -11,8 +11,7 @@ export const NAV_LINKS: TNavLink[] = [
 ];
 
 export const LEGAL_LINKS: TNavLink[] = [
-  { label: 'Terminos y condiciones', href: '/terminos' },
-  { label: 'Politica de privacidad', href: '/privacidad' },
+  { label: 'Privacidad y aviso legal', href: '/privacidad' },
   { label: 'Licencia y Creditos', href: '/creditos' },
 ];
 

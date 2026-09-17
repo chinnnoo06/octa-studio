@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FiImage } from 'react-icons/fi';
-import { TImagesButtonProps } from './types/Buttons.types';
+import { TImagesButtonProps } from '@/types/buttons.types';
 
 /** Lleva a la pantalla de actualizar imagenes. Va aparte de `EditButton` porque
  *  el backend las trata como recurso distinto: `PATCH /:id/images`, con su

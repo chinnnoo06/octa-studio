@@ -9,13 +9,13 @@ import { toast } from "react-toastify";
 import { UpdateProjectFormSchema, TUpdateProjectForm } from '@/schemas/projects/projects.form.schemas';
 import { TProject } from "@/schemas/projects/projects.schemas";
 import { useProjects } from "@/hooks/projects/useProjects";
-import { Label } from "../../ui/form/Label";
-import { Input } from "../../ui/form/Input";
-import { Textarea } from "../../ui/form/Textarea";
-import { SpanError } from "../../ui/form/SpanError";
-import { FormSection } from "../../ui/form/FormSection";
-import { FormSectionTitle } from "../../ui/form/FormSectionTitle";
-import { ActionButton } from "../../ui/buttons/ActionButton";
+import { Label } from "@/components/ui/form/Label";
+import { Input } from "@/components/ui/form/Input";
+import { Textarea } from "@/components/ui/form/Textarea";
+import { SpanError } from "@/components/ui/form/SpanError";
+import { FormSection } from "@/components/ui/form/FormSection";
+import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
+import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
 
 export const EditProjectForm = ({ project }: { project: TProject }) => {
