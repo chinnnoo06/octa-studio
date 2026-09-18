@@ -6,7 +6,7 @@ export const FooterBottomBar = () => {
     return (
         <div className="border-primary/30 flex flex-col items-center gap-2.5 border-t pt-10 sm:flex-row sm:justify-between">
             <p className="text-primary/75 text-xs lg:text-sm">
-                © {new Date().getFullYear()} Octa Building Studio · Desarrollado por{' '}
+                © {new Date().getFullYear()} Octa Building Studio · Powered by {' '}
                 {DEVELOPER.url ? (
                     <a
                         href={DEVELOPER.url}
