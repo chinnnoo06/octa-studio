@@ -21,7 +21,7 @@ export const ProjectHero = ({ project }: { project: TProject }) => {
           variants={fadeBlur}
           className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between"
         >
-          <div className="text-secondary flex max-w-3xl flex-col items-start gap-5">
+          <div className="text-secondary flex max-w-3xl flex-col items-start gap-2.5">
             <Eyebrow>{project.sector}</Eyebrow>
 
             <h1 className="text-[2rem] small:text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem] font-bold uppercase leading-[1.2] tracking-[-0.02em]">

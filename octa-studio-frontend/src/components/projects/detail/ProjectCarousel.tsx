@@ -74,7 +74,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
                     height={1080}
                     priority={i === 0}
                     sizes="(min-width: 1272px) 1152px, (min-width: 1024px) calc(100vw - 120px), calc(100vw - 40px)"
-                    className="aspect-video w-full object-cover"
+                    className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-160"
                   />
                 </div>
               ))}

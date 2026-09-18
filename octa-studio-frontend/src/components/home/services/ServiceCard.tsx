@@ -23,7 +23,7 @@ export const ServiceCard = ({ service }: { service: TService }) => {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <h3 className="text-secondary group-hover:text-primary font-gentleman text-5xl lg:text-6xl p-1.5 leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 min-h-25">
+        <h3 className="text-secondary group-hover:text-primary font-gentleman text-5xl lg:text-6xl p-1.5 leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 2xl:min-h-25">
           {service.title}
         </h3>
 

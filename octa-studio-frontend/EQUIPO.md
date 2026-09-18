@@ -9,12 +9,14 @@ pisemos. Léela una vez y ya.
 
 ```bash
 git clone https://github.com/alexmenchaca7/octa-studio.git
-cd octa-studio
+cd octa-studio/octa-studio-frontend
 pnpm install
 pnpm dev            # http://localhost:3000
 ```
 
-Necesitas **Node 20.9+** y **pnpm**. Nada más.
+Necesitas **Node 20.9+**, **pnpm** y el backend corriendo en el puerto 4000
+(`pnpm dev` en `octa-studio-backend`). Copia las variables de `.env` que están
+en el README.
 
 ---
 
@@ -32,35 +34,33 @@ detendrá y te preguntará antes de publicar nada.
 
 ## El reparto: quién toca qué
 
-Cada sección de la home tiene **dos archivos propios**. Si tú tocas una sección
-y el otro toca otra distinta, git nunca genera conflictos.
+Cada página tiene su carpeta de componentes y, si aún es estática, su archivo
+de contenido. Si cada uno toca páginas distintas, git no genera conflictos.
 
-| Sección | Su código | Su contenido |
+| Página | Su código | Su contenido |
 |---|---|---|
-| Hero | `src/components/home/hero/` | `src/lib/data/hero.ts` |
-| About | `src/components/home/about/` | `src/lib/data/about.ts` |
-| Projects | `src/components/home/projects/` | `src/lib/data/projects.ts` |
-| Process | `src/components/home/process/` | `src/lib/data/process.ts` |
-| Services | `src/components/home/services/` | `src/lib/data/services.ts` |
-| Design CTA | `src/components/home/designcta/` | `src/lib/data/designcta.ts` |
-| Advantages | `src/components/home/advantages/` | `src/lib/data/advantages.ts` |
-| Products | `src/components/home/products/` | `src/lib/data/products.ts` |
-| Testimonials | `src/components/home/testimonials/` | `src/lib/data/testimonials.ts` |
-| Blogs | `src/components/home/blogs/` | `src/lib/data/blogs.ts` |
+| Home | `src/components/home/` | `src/utils/data/{about,advantages,process,services,faqs}.ts` |
+| Nosotros | `src/components/aboutUs/` | `src/utils/data/about.ts` |
+| Servicios | `src/components/services/` | `src/utils/data/services.ts` |
+| Contacto | `src/components/contact/` | `src/utils/data/contact.ts` |
+| Legales | `src/components/legal/` | `src/utils/data/credits.ts` |
+| Proyectos | `src/components/projects/` | backend |
+| Blog | `src/components/blogs/` | backend (`BLOG_CATEGORIES` en `utils/data/blogs.ts`) |
+| Testimonios | `src/components/testimonials/` | backend |
 
 ### Zona compartida: avisa antes de tocar
 
-Estos archivos afectan a **toda** la web. No es que git falle: es que un cambio
-ahí se propaga a todas las secciones.
+Estos archivos afectan a **toda** la web.
 
 | Archivo | Qué controla |
 |---|---|
-| `src/app/globals.css` | Los design tokens: colores, tipografía, spacing |
-| `src/components/shared/Navbar.tsx` | La navbar de todas las páginas |
-| `src/components/shared/Footer.tsx` | El footer de todas las páginas |
-| `src/components/ui/` | Button, Marquee, SectionTitle, Reveal… |
-| `src/lib/data/navigation.ts` | Menús y enlaces del footer |
-| `src/app/(public)/page.tsx` | El orden de las secciones |
+| `src/app/globals.css` | Colores, fuentes y easing de la marca |
+| `src/components/layout/` | Header, footer y sidebar del panel |
+| `src/components/ui/` | Botones, Reveal, SectionTitle, Eyebrow, Pagination… |
+| `src/components/sections/` | BannerLogo, CtaSection, Statement, Faqs, BrandMarquee |
+| `src/utils/data/navigation.ts` | Menús y enlaces del footer |
+| `src/services/` y `src/actions/` | Fetch al backend, caché y Server Actions |
+| `src/schemas/` | Validación de formularios y respuestas |
 
 ---
 
@@ -81,9 +81,6 @@ git push -u origin hero-textos    # ← avisa antes
 
 Vercel genera una **URL de preview de esa rama**. La abres, la revisas, y si
 está bien la fusionas a `main` desde GitHub. Ahí sí va a producción.
-
-Nombra las ramas por lo que tocas: `hero-textos`, `colores-marca`,
-`services-animacion`.
 
 ---
 
@@ -108,64 +105,43 @@ Pide usuario y contraseña — están en el chat del equipo, no en el repo.
 
 ## Cosas que hay que saber sí o sí
 
-### Los design tokens están congelados
+### Los colores y fuentes viven en `globals.css`
 
-Los colores, tamaños de letra y espaciados viven en el bloque `@theme` de
-`src/app/globals.css`. Se extrajeron midiendo el sitio original, no a ojo.
+Están en el bloque `@theme`: `primary` (blanco), `secondary` (azul de marca),
+`thrird` (gris claro), `fourth` (negro) y las dos fuentes. No inventes colores
+en las secciones; usa esos con sus opacidades (`text-fourth/75`,
+`bg-secondary/15`).
 
-**No los cambies para arreglar una sección concreta.** Si un color no cuadra en
-un sitio, casi siempre el error está en esa sección, no en el token. Cambiar un
-token mueve toda la web a la vez.
+### Recetas que se repiten
 
-Cambiarlos sí es lo correcto cuando quieres **rediseñar la marca entera** — por
-ejemplo pasar el amarillo a otro color. Eso es un cambio deliberado y global, y
-se avisa antes.
-
-### No escribas tamaños a mano
-
-`text-h2` ya vale 72px en escritorio y 32/28/26px en pantallas menores.
-`py-section` ya escala 100→80→60→40. Todo eso se ajusta solo redefiniendo
-variables CSS por breakpoint.
-
-Escribir `md:text-[32px]` rompe ese sistema. Usa las utilidades.
-
-### Los breakpoints no son los de Tailwind
-
-Son los del diseño original, y son **max-width**:
-
-```
-tab:  ≤991px       land:  ≤767px       mob:  ≤479px
-```
-
-Los de Tailwind (`sm:`, `md:`, `lg:`) existen pero son min-width y **no
-coinciden**. Usa `tab:`, `land:` y `mob:`.
+- Marco de sección: `py-15 lg:py-20`, contenedor `max-w-[1700px] px-5 lg:px-15`.
+- Título de sección: `Eyebrow` en Gentleman + `SectionTitle`.
+- Texto de lectura: `text-fourth/75 text-base lg:text-lg`; texto de tarjeta:
+  `text-sm lg:text-base`.
+- Tarjeta blanca con borde `border-fourth/30`; tarjeta azul claro
+  `bg-secondary/15` sin borde.
+- Fondos: nunca gris ni oscuro justo antes del footer.
 
 ### framer-motion 13: `whileInView` no existe
 
-Las props `whileInView` y `viewport` se eliminaron en la versión 13.
-**Compilan sin error y no animan nada** — falla en silencio y te vuelves loco
-buscando el bug.
-
-Usa el envoltorio que ya está hecho:
+Compila sin error y no anima nada. Usa el envoltorio que ya está hecho:
 
 ```tsx
-import Reveal from '@/components/ui/Reveal';
-import { fadeUp } from '@/lib/motion';
-
-<Reveal variants={fadeUp}>…</Reveal>
+import { Reveal } from '@/components/ui/Reveal';
+<Reveal>…</Reveal>
 ```
 
-### Cada sección lleva `data-section`
+Y no envuelvas con `Reveal` bloques más altos que la pantalla.
 
-El elemento raíz de cada sección tiene `data-section="hero"`, `"about"`, etc.
-Sirve para el comparador visual automático. **No lo quites.**
+### El contenido del blog
+
+Se escribe en TinyMCE desde el panel. El backend guarda HTML saneado (sin
+estilos) y `BlogContent` le pone el aspecto de la web. Las imágenes del
+contenido se suben al insertarlas; las que sobran se limpian solas.
 
 ---
 
 ## Si hay conflicto
-
-Pasa cuando los dos tocamos el mismo archivo. Con el reparto de arriba debería
-ser raro.
 
 ```bash
 git checkout main && git pull
@@ -175,15 +151,3 @@ git merge main            # resuelves aquí, en tu rama
 
 Si el conflicto es en la zona compartida, **para y hablamos** antes de resolver
 a ciegas.
-
----
-
-## Contexto del proyecto
-
-Es la réplica visual de un template comercial de Webflow, hecha con un pipeline
-propio. En `analysis/` está el estudio del original: geometría, colores,
-tipografía y animaciones, todo medido. Si dudas de por qué algo está como está,
-la respuesta suele estar ahí.
-
-Por ser réplica de un template de terceros, el sitio va con contraseña y
-`noindex`. **No lo publiques abierto ni lo uses como producto.**

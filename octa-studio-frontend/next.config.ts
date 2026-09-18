@@ -2,6 +2,25 @@ import type { NextConfig } from 'next';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+const backendOrigins = [
+  ...new Set(
+    [process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL, process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL]
+      .filter((url): url is string => Boolean(url))
+      .map((url) => new URL(url).origin),
+  ),
+];
+
+const remotePatterns = backendOrigins.map((origin) => {
+  const { protocol, hostname, port } = new URL(origin);
+
+  return {
+    protocol: protocol.replace(':', '') as 'http' | 'https',
+    hostname,
+    port,
+    pathname: '/files/**',
+  };
+});
+
 const securityHeaders = [
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -12,15 +31,10 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // El backend sirve las imágenes de proyectos y blogs desde otro origen:
-      // sin declararlo aquí el navegador las bloquea, aunque Next las optimice.
-      "img-src 'self' data: blob: http://localhost:4000 https://octa-studio-deploy.onrender.com",
+      `img-src 'self' data: blob: ${backendOrigins.join(' ')}`.trim(),
       "media-src 'self'",
       "font-src 'self' data:",
-      // Tailwind y next/font inyectan estilos inline; next/image usa blob:
       "style-src 'self' 'unsafe-inline'",
-      // 'unsafe-eval' SOLO en dev: Turbopack lo necesita para HMR.
-      // En producción el script-src queda sin eval.
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
       `connect-src 'self'${isDev ? ' ws: wss:' : ''}`,
       "frame-ancestors 'self'",
@@ -36,7 +50,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },
-  // Terminos se fusiono con privacidad; el enlace viejo sigue resolviendo.
   async redirects() {
     return [{ source: '/terminos', destination: '/privacidad', permanent: true }];
   },
@@ -44,10 +57,7 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],
     dangerouslyAllowLocalIP: isDev,
-    remotePatterns: [
-      { protocol: 'http', hostname: 'localhost', port: '4000', pathname: '/files/**' },
-      { protocol: 'https', hostname: 'octa-studio-deploy.onrender.com', pathname: '/files/**' },
-    ],
+    remotePatterns,
   },
 };
 

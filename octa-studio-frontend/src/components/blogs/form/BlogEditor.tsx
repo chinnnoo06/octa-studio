@@ -60,7 +60,7 @@ const CONTENT_STYLE = `
   li { margin-bottom: 8px; }
   blockquote { border-left: 4px solid #18608C; padding-left: 20px; color: #18608C; font-weight: 500; }
   blockquote p { margin-top: 8px; }
-  img { width: 100%; max-width: 1152px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
+  img { width: 100%; max-width: 1152px; aspect-ratio: 4 / 3; max-height: 440px; object-fit: cover; border-radius: 12px; }
   hr { border: 0; border-top: 1px solid #0000004d; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th { text-align: left; color: #18608C; font-weight: 600; }

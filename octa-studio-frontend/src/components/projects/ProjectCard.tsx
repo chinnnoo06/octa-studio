@@ -34,7 +34,7 @@ export const ProjectCard = ({ project }: { project: TProject }) => {
           height={1200}
           alt={`Proyecto ${project.name}, ${project.sector}`}
           sizes="(min-width: 1820px) 840px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 40px)"
-          className="ease-brand aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="ease-brand aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-110 lg:aspect-auto lg:h-110"
         />
         <span aria-hidden="true" className="absolute inset-0 bg-black/30" />
       </div>

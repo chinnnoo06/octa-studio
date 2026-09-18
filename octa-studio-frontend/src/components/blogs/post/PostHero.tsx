@@ -12,7 +12,7 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
   return (
     <section data-section="blog-hero" className="bg-primary pt-15 lg:pt-20">
       <div className="flex flex-col gap-10">
-        <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
+        <div className="mx-auto w-full max-w-7xl px-5 lg:px-15">
           <RevealOnLoad variants={fadeBlur} className="flex flex-col gap-10">
             <div className="text-secondary flex flex-col items-start gap-2.5">
               <Link
@@ -51,7 +51,7 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
               height={1080}
               priority
               sizes="(min-width: 1272px) 1152px, (min-width: 1024px) calc(100vw - 120px), calc(100vw - 40px)"
-              className="aspect-video w-full object-cover"
+              className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-160"
             />
           </Reveal>
         </div>

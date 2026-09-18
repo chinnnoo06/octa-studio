@@ -26,7 +26,7 @@ const ContactRow = ({ icon: Icon, label, value, href }: TContactRowProps) => {
 
 export const FooterContact = () => {
   return (
-    <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-5 text-center col-span-2 lg:col-span-1 lg:mr-0 lg:ml-auto">
+    <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-2.5 text-center col-span-2 lg:col-span-1 lg:mr-0 lg:ml-auto">
       <p className="text-primary font-gentleman text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case">Contacto</p>
 
       <ul className="flex max-w-full flex-col items-center gap-2.5">

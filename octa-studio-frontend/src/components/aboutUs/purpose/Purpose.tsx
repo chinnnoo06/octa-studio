@@ -33,7 +33,7 @@ export const Purpose = () => {
               playsInline
               poster={ImgPoster.src}
               aria-label="Recorrido por un stand terminado"
-              className="h-100 lg:h-110 w-full object-cover"
+              className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
             >
               <source src="/media/videos/Video3.mp4" type="video/mp4" />
             </video>
@@ -52,7 +52,7 @@ export const Purpose = () => {
               alt=""
               quality={90}
               sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
-              className="h-100 lg:h-110 w-full object-cover"
+              className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
             />
 
             <div aria-hidden="true" className="bg-fourth/50 absolute inset-0" />

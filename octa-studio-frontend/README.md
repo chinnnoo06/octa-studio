@@ -1,18 +1,15 @@
-# livinor-replica
+# Octa Building Studio · sitio web
 
-Clon visual de la homepage de [livinor.webflow.io](https://livinor.webflow.io/) —
-un template comercial de ecommerce de Webflow para marcas de interiorismo—
-reconstruido sobre Next.js con el pipeline **VisionLoop**.
-
-> **Repositorio privado a propósito.** Esto replica un template de pago de
-> terceros (Theme Sleek). El sitio se despliega con `noindex` y sin promover a
-> producción. No lo publiques ni lo uses como producto.
+Sitio público y panel de administración de **Octa Building Studio**, empresa de
+diseño, fabricación y montaje de stands para ferias, congresos y eventos. Este
+repositorio es el frontend; el backend (API REST, subida de imágenes) vive en
+`../octa-studio-backend`.
 
 ## Stack
 
-Next.js 16 (App Router) · React 19 · TypeScript strict · Tailwind CSS v4
-(config CSS-first, **no hay `tailwind.config.ts`**) · framer-motion ·
-embla-carousel
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript strict · Tailwind
+CSS v4 (config CSS-first, **no hay `tailwind.config.ts`**) · framer-motion ·
+embla-carousel · react-hook-form + Zod · TinyMCE (editor del blog)
 
 ## Arranque
 
@@ -20,81 +17,62 @@ embla-carousel
 pnpm install
 pnpm dev          # http://localhost:3000
 pnpm build        # build de producción
+pnpm exec tsc --noEmit
 ```
+
+Variables de entorno en `.env` (no se versiona):
+
+```
+API_URL=http://localhost:4000/api
+NEXT_PUBLIC_PROJECTS_IMAGE_URL=http://localhost:4000/files/projects
+NEXT_PUBLIC_BLOGS_IMAGE_URL=http://localhost:4000/files/blogs
+NEXT_PUBLIC_DOMAIN=http://localhost:3000
+```
+
+`.env.render` guarda los valores apuntando al backend desplegado en Render.
 
 ## Estructura
 
 ```
 src/
   app/
-    layout.tsx            Navbar + Footer + fuentes + metadata
-    globals.css           @theme: TODOS los design tokens (congelados)
-    (public)/page.tsx     la homepage
+    layout.tsx             fuentes, metadata global, providers
+    globals.css            @theme: colores, fuentes y easing de la marca
+    (public)/              home, nosotros, servicios, proyectos, blogs, contacto, legales
+    admin/                 panel: login y dashboard (blogs, proyectos, testimonios)
+    api/admin/             route handler que sube imágenes del editor al backend
   components/
-    ui/                   primitivos: Button, Marquee, SectionTitle, Reveal…
-    shared/               Navbar y Footer (se reutilizan entre páginas)
-    home/                 una carpeta por sección de la home
-  lib/
-    home-data.ts          todo el copy y los datos, tipados
-    motion.ts             variantes de animación
-    page-registry.ts      manifiesto de páginas replicadas
-
-analysis/                 análisis del original (layout, diseño, tipografía,
-                          componentes, motion) — la fuente de verdad
-references/               material crawleado: screenshots, DOM, computed
-  original/               styles, y el CSS + config IX2 REALES del sitio
-scripts/                  crawler, captura por tiles y comparador visual
+    ui/                    primitivos: botones, Reveal, SectionTitle, Eyebrow, Pagination…
+    layout/                header, footer y sidebar del panel
+    sections/              secciones compartidas: BannerLogo, CtaSection, Statement, Faqs…
+    home/ aboutUs/ services/ contact/ legal/   secciones propias de cada página
+    blogs/ projects/ testimonials/             tarjetas, fichas, formularios y tablas
+  services/server/         fetch al backend con Data Cache por tag (blogs, projects, testimonials)
+  actions/                 Server Actions del panel; invalidan con updateTag
+  schemas/                 Zod: respuestas del backend y formularios
+  utils/data/              copy estático de las secciones que aún no vienen del backend
 ```
 
-## Cómo funcionan los tokens
+## Datos y caché
 
-La escala tipográfica y los gaps **no** usan clases por breakpoint: se
-redefinen las variables CSS dentro de cada media query, igual que hace Webflow.
-Así `text-h2` vale 72px en desktop y 32/28/26px en los cortes inferiores sin
-tocar el marcado.
+Blogs, proyectos y testimonios se leen del backend con `fetch` cacheado por
+tag (`next: { revalidate: 3600, tags: [...] }`). Toda escritura pasa por una
+Server Action del panel que llama a `updateTag`, así que la web pública se
+refresca al instante. Los fetch con token (fichas por id del panel) no se
+cachean.
 
-Los breakpoints son los del original (**max-width** 991/767/479), declarados
-como variantes propias `tab:`, `land:` y `mob:`. **No coinciden** con los de
-Tailwind (`sm:`, `md:`…), que son min-width.
+Las tarjetas y fichas públicas usan los tipos derivados de los schemas
+(`TBlog`, `TProject`, `TTestiomonial`); los tipos de `utils/data` quedan solo
+para las secciones todavía estáticas.
 
-## Pipeline de verificación
+## Cosas que hay que saber
 
-```bash
-# Recapturar el original en los 3 breakpoints
-pnpm exec tsx scripts/recapture-ref.ts https://livinor.webflow.io/ home
-
-# Medir bboxes de sección en el original
-pnpm exec tsx scripts/ref-sections.ts https://livinor.webflow.io/ home
-
-# Comparar réplica contra referencia (requiere `pnpm dev` corriendo)
-ITER=1 pnpm exec tsx scripts/compare.ts
-```
-
-El comparador recorta por sección usando los `data-section` del DOM y aplica
-pixelmatch sobre cada recorte. Reporta dos números: el crudo y otro que excluye
-las bandas de marquee —comparar píxeles sobre un bucle infinito mide en qué
-fase estaba cada captura, no si el diseño coincide.
-
-## Fidelidad actual
-
-Media por sección, excluyendo bandas de marquee:
-
-| Breakpoint | Score | Objetivo |
-|---|---|---|
-| Desktop | 90.4% | 99% |
-| Tablet | 80.1% | 97% |
-| Móvil | 75.9% | 97% |
-
-Lo más flojo es el responsive móvil y el footer. `designcta` puntúa bajo porque
-la captura de referencia la pilló a mitad de su animación de escala ligada al
-scroll: la réplica está en el estado correcto (`scale: 1`) y la referencia no.
-
-## Dos trampas encontradas
-
-1. **framer-motion 13 eliminó `whileInView` y `viewport`.** Compilan sin error
-   y no animan nada: fallo silencioso. Usa el hook `useInView`, o el envoltorio
-   `components/ui/Reveal.tsx`.
-2. **`page.screenshot({ fullPage: true })` no sirve con este sitio.** Redimensiona
-   el viewport al alto total, así que las animaciones scroll-triggered de GSAP
-   y Webflow IX2 nunca se disparan y las secciones salen en blanco. La captura
-   hace scroll real por tiles y los cose (`scripts/capture-stitch.ts`).
+- **framer-motion 13 eliminó `whileInView` y `viewport`.** Compilan y no animan
+  nada. Usa `useInView` o el envoltorio `components/ui/Reveal.tsx`.
+- **`Reveal` muestra el bloque cuando el 30 % entra en pantalla.** No envuelvas
+  con él contenido más alto que la ventana (un artículo entero): nunca se
+  mostraría.
+- **Los fondos de las secciones alternan** blanco / `secondary/15` / foto
+  oscura, y la última sección antes del footer siempre es blanca.
+- **Despliegue:** cada push a `main` despliega en Vercel. El sitio está tras
+  contraseña y con `noindex` hasta que se publique.

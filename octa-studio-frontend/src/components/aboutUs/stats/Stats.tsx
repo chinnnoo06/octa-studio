@@ -31,7 +31,7 @@ export const Stats = () => {
                 playsInline
                 poster={ImgPoster.src}
                 aria-label="Montaje de un stand en vídeo"
-                className="w-full rounded-xl object-cover h-100 lg:h-110"
+                className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
               >
                 <source src="/media/videos/Video2.mp4" type="video/mp4" />
               </video>
@@ -43,7 +43,7 @@ export const Stats = () => {
                 alt="Stand de Octa Building Studio terminado"
                 quality={90}
                 sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
-                className="w-full rounded-xl object-cover h-100 lg:h-110"
+                className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
               />
 
               <StatCard stat={first} variant="overlay" />

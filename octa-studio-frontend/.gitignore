@@ -24,15 +24,6 @@ yarn-debug.log*
 .pnpm-debug.log*
 .devserver.log
 
-# ── Artefactos del pipeline de replicación ──────────────────────────────────
-# Se ignora solo lo DERIVADO y regenerable. Lo irremplazable sí se versiona:
-# analysis/, references/original/ (CSS + config IX2 del sitio original),
-# el DOM, los computed styles y los screenshots de referencia.
-.captures/
-references/iterations/
-references/pages/*/crops/
-references/pages/*/svg-preview/
-
 # ── Sistema ─────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

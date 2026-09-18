@@ -58,7 +58,7 @@ export const Advantages = () => {
             src={ImgMontaje}
             alt="Stand de PCP montado por Octa en feria"
             title="Montaje y desmontaje con equipo propio"
-            className="min-h-100 sm:col-span-2"
+            className="aspect-4/3 sm:col-span-2 lg:aspect-auto lg:h-110"
             sizes="(min-width: 1024px) 50vw, 100vw"
             quality={90}
           />
@@ -67,14 +67,14 @@ export const Advantages = () => {
             src={ImgRender}
             alt="Render tridimensional de un stand antes de fabricarse"
             title="Cada stand, diseñado desde cero"
-            className="min-h-100"
+            className="aspect-4/3 lg:aspect-auto lg:h-110"
           />
 
           <PhotoTile
             src={ImgTrato}
             alt="Atención a visitantes en el mostrador de un stand"
             title="Trato directo, sin intermediarios"
-            className="min-h-100"
+            className="aspect-4/3 lg:aspect-auto lg:h-110"
           >
             <DetailStar
               className="text-primary spin-slow size-15"

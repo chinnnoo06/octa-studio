@@ -40,7 +40,7 @@ export const ServiceDetail = ({ service, flip = false }: TServiceDetailProps) =>
           alt={service.alt}
           quality={90}
           sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
-          className="h-100 w-full rounded-xl object-cover lg:h-110"
+          className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
         />
       </Reveal>
 

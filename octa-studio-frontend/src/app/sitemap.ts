@@ -5,9 +5,8 @@ import { NAV_LINKS, LEGAL_LINKS } from '@/utils/data/navigation';
 const BASE = 'https://example.com';
 
 /**
- * Se construye desde el menú, que es la fuente de verdad de las rutas del sitio.
- * Antes salía de un registro aparte con las páginas «ya replicadas»: eso era de
- * cuando esto clonaba una plantilla, y el archivo ya no existe.
+ * Se construye desde el menu, que es la fuente de verdad de las rutas del sitio.
+ * Pendiente: anadir las fichas de blogs y proyectos leyendo del backend.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [...NAV_LINKS, ...LEGAL_LINKS].map(({ href }) => ({

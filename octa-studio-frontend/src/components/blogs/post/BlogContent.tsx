@@ -10,7 +10,7 @@ const PROSE = [
   '[&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-6 [&_ol]:pl-6 [&_li]:mb-2',
   '[&_blockquote]:border-secondary [&_blockquote]:border-l-4 [&_blockquote]:pl-5 [&_blockquote]:text-secondary [&_blockquote]:font-medium',
   // Mismo tope de ancho que la imagen principal de la entrada.
-  '[&_img]:rounded-xl [&_img]:w-full [&_img]:max-w-6xl [&_img]:aspect-video [&_img]:object-cover',
+  '[&_img]:rounded-xl [&_img]:w-full [&_img]:max-w-6xl [&_img]:aspect-4/3 [&_img]:object-cover [&_img]:lg:aspect-auto [&_img]:lg:h-110',
   '[&_hr]:border-fourth/30',
   '[&_table]:w-full [&_table]:text-sm [&_th]:text-left [&_th]:text-secondary [&_th]:font-semibold [&_th]:border-b [&_th]:border-fourth/30 [&_th]:p-2.5 [&_td]:border-b [&_td]:border-fourth/30 [&_td]:p-2.5',
 ].join(' ');

@@ -13,7 +13,7 @@ const TILE = 'bg-primary text-secondary flex size-10 shrink-0 items-center justi
 export const PostBody = ({ blog }: { blog: TBlog }) => {
   return (
     <section data-section="blog-body" className="bg-primary py-15 lg:py-20">
-      <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:flex-row lg:px-15">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 lg:flex-row lg:px-15">
 
         <aside className="flex lg:sticky lg:top-24 lg:w-80 lg:shrink-0 lg:self-start">
           <div className="bg-secondary/15 flex flex-col gap-5 rounded-xl p-5 lg:p-10">

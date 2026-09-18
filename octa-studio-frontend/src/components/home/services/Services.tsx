@@ -23,7 +23,7 @@ export const Services = () => {
                 alt="Montaje de un stand en feria"
                 sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
                 quality={90}
-                className="h-100 lg:h-110 w-full object-cover"
+                className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
               />
             </Reveal>
           </div>

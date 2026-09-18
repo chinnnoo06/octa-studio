@@ -1,14 +1,14 @@
 @AGENTS.md
 
-# Réplica de Livinor
+# Octa Building Studio · frontend
 
-Clon visual de la homepage de **https://livinor.webflow.io/** (template comercial
-de Webflow) sobre Next.js 16 + React 19 + Tailwind v4.
+Sitio público y panel de administración de Octa Building Studio (diseño,
+fabricación y montaje de stands). Next.js 16 + React 19 + Tailwind v4, con un
+backend Express en `../octa-studio-backend` (puerto 4000 en local).
 
-**Esto es un proyecto de edición, no de generación.** La web ya está construida.
-Tu trabajo aquí es iterar sobre lo que existe: ajustar una sección, cambiar
-textos, afinar animaciones. **No la regeneres desde cero ni vuelvas a crawlear
-el sitio original** salvo que te lo pidan explícitamente.
+**Esto es un proyecto en marcha, no un generador.** Itera sobre lo que existe:
+ajusta una sección, cambia textos, conecta datos. No regeneres páginas desde
+cero salvo que te lo pidan.
 
 ## ⛔ Regla de equipo: nunca hagas git push por tu cuenta
 
@@ -32,115 +32,78 @@ ajustes de Vercel y tocar variables de entorno.
 
 ---
 
-## Antes de tocar nada
-
-`analysis/` es la fuente de verdad de por qué cada cosa está como está. Todo se
-midió sobre el sitio original, no se estimó a ojo:
-
-| Archivo | Qué contiene |
-|---|---|
-| `analysis/layout.md` | Geometría exacta de cada sección: grids, gaps, offsets, colapsos responsive |
-| `analysis/design.md` | Colores, radios, bordes, variantes de botón e iconos |
-| `analysis/typography.md` | Qué nivel tipográfico usa cada texto y cómo escala |
-| `analysis/components.md` | El copy literal y la estructura interna de cada sección |
-| `analysis/motion.md` + `.json` | Cada animación con sus valores exactos (duración, delay, easing) |
-| `references/original/livinor.css` | La hoja de estilos real del sitio original, 245 KB |
-
-Si dudas de un valor, **grepea `references/original/livinor.css`** antes de
-inventarlo.
-
 ## Dónde está cada cosa
 
 ```
 src/
   app/
-    layout.tsx           Navbar + Footer + fuentes + metadata
-    globals.css          @theme: TODOS los design tokens (CONGELADOS)
-    (public)/page.tsx    la homepage: importa las secciones en orden
-    proxy.ts             puerta de contraseña del despliegue
+    layout.tsx             fuentes, metadata global, providers
+    globals.css            @theme: colores, fuentes y easing (no hay tailwind.config)
+    (public)/              páginas públicas; la page hace el fetch y pasa props
+    admin/                 panel: login y dashboard (blogs, proyectos, testimonios)
+    api/admin/             route handler: sube imágenes del editor al backend
   components/
-    ui/                  primitivos compartidos: Button, Marquee, SectionTitle, Reveal…
-    shared/              Navbar y Footer — afectan a TODAS las páginas
-    home/<seccion>/      una carpeta por sección de la home
-  lib/
-    data/<seccion>.ts    el copy y los datos, un archivo por sección
-    home-data.ts         barril que reexporta lib/data (no edites aquí)
-    motion.ts            variantes de animación
+    ui/ layout/ sections/  primitivos, header/footer/sidebar, secciones compartidas
+    home/ aboutUs/ services/ contact/ legal/   secciones de cada página
+    blogs/ projects/ testimonials/             tarjetas, fichas, forms y tablas
+  services/server/         fetch al backend (Data Cache por tag)
+  actions/                 Server Actions del panel (updateTag)
+  schemas/                 Zod: respuestas y formularios
+  utils/data/              copy de las secciones todavía estáticas
 ```
 
 ## Reglas de oro
 
-**Los design tokens están congelados.** Viven en el bloque `@theme` de
-`src/app/globals.css` y se extrajeron de las variables CSS reales del original.
-No los cambies para arreglar una sección concreta: si un color no cuadra, casi
-siempre el error está en la sección, no en el token. Cambiar un token afecta a
-toda la web.
+**Datos del backend con tipos de schema.** Todo componente que pinta blogs,
+proyectos o testimonios recibe `TBlog`, `TProject` o `TTestiomonial`
+(`src/schemas`). Nada de adaptadores hacia los tipos de `utils/data`; esos
+quedan solo para secciones aún estáticas.
 
-**No hay `tailwind.config.ts`.** Tailwind v4 es CSS-first: la configuración está
-en `globals.css`.
+**Caché por tag, no React Query.** Los fetch públicos llevan
+`next: { revalidate: 3600, tags: ['blogs' | 'projects' | 'testimonials'] }`.
+Los fetch con `Authorization` van en `no-store`. Cada action del panel llama a
+`updateTag` de su entidad. No mezcles `cache: 'no-store'` con `next.revalidate`.
 
-**No escribas tamaños ni espaciados a mano.** `text-h2` ya vale 72px en desktop
-y 32/28/26px en los cortes inferiores; `py-section` ya escala 100→80→60→40. La
-escala se reajusta redefiniendo variables CSS por media query, igual que hacía
-Webflow. Escribir `md:text-[32px]` rompe ese sistema.
+**Las Server Actions no validan el token.** Se llaman desde páginas donde la
+sesión ya se verificó. La excepción es el route handler público de
+`app/api/admin`, que sí comprueba la cookie porque es una URL abierta.
 
-**Los breakpoints son los de Webflow, no los de Tailwind.** Son **max-width**:
+**Colores y fuentes solo del `@theme`.** `primary` blanco, `secondary` azul,
+`thrird` gris claro, `fourth` negro; con opacidades (`text-fourth/75`,
+`bg-secondary/15`). Recetas: sección `py-15 lg:py-20`, contenedor
+`max-w-[1700px] px-5 lg:px-15`, título `Eyebrow` + `SectionTitle`, lectura
+`text-base lg:text-lg`, tarjeta blanca con borde `border-fourth/30`, tarjeta
+azul claro sin borde. La última sección antes del footer siempre es blanca.
 
-```
-tab:   ≤991px      land:  ≤767px      mob:  ≤479px
-```
+**Sin `cn()` salvo necesidad.** Las clases condicionales van con plantillas
+`${}`.
 
-Los de Tailwind (`sm:`, `md:`, `lg:`) existen pero son min-width y **no
-coinciden** con los cortes del diseño. Usa `tab:`, `land:` y `mob:`.
+**Cada carpeta de `components/` agrupa por dominio** y no hay carpetas con un
+solo componente.
 
-**Cada sección lleva `data-section="<nombre>"` en su raíz.** El comparador visual
-mide por ese atributo. Si lo quitas, esa sección deja de puntuarse.
+## Trampas conocidas
 
-## Trampa conocida: framer-motion 13
-
-**Las props `whileInView` y `viewport` ya no existen.** Compilan sin error y
-**no animan nada** — falla en silencio. Verificado en `dist/index.d.ts`.
-
-Usa el hook `useInView`, o mejor el envoltorio ya hecho:
-
-```tsx
-import Reveal from '@/components/ui/Reveal';
-import { fadeUp } from '@/lib/motion';
-
-<Reveal variants={fadeUp}>…</Reveal>
-```
-
-`useScroll` y `useTransform` sí funcionan con normalidad.
+- **framer-motion 13:** `whileInView` y `viewport` no existen; compilan y no
+  animan. Usa `useInView` o `components/ui/Reveal.tsx`.
+- **`Reveal` exige el 30 % en pantalla.** No envuelvas con él bloques más altos
+  que la ventana (un artículo): nunca se mostrarían.
+- **`.next/types/validator.ts` se queda obsoleto** al renombrar rutas y hace
+  fallar `tsc`. Se regenera con `pnpm build`.
+- **Windows y `sharp`:** en el backend se lee el archivo a buffer antes de
+  convertir, o el archivo queda bloqueado.
+- **La plantilla de título de un layout** no alcanza a la `page` de su mismo
+  segmento: ahí el título va `absolute`.
 
 ## Comprobar que no rompiste nada
 
 ```bash
-pnpm dev                    # http://localhost:3000
-pnpm exec tsc --noEmit      # tipos
-pnpm build                  # build de producción
+pnpm dev                    # http://localhost:3000 (backend en :4000)
+pnpm exec tsc --noEmit
+pnpm build
 ```
-
-Y para medir fidelidad contra el original (requiere `pnpm dev` corriendo):
-
-```bash
-ITER=1 pnpm exec tsx scripts/compare.ts
-```
-
-Recorta por sección usando los `data-section` y compara con pixelmatch. Da dos
-números: el crudo y otro que excluye las bandas de marquee — comparar píxeles
-sobre un bucle infinito mide en qué fase estaba la captura, no el diseño.
-
-## Estado actual
-
-Fidelidad media por sección (sin contar bandas de marquee): **90.4% desktop ·
-80.1% tablet · 75.9% móvil**. Lo más flojo es el responsive móvil y el footer.
-
-`designcta` puntúa bajo por un motivo conocido: la captura de referencia pilló
-esa sección a mitad de su animación de escala ligada al scroll. La réplica está
-en el estado correcto (`scale: 1`); es la referencia la que está contaminada.
 
 ## Despliegue
 
-Cada push a `main` despliega solo a Vercel. El sitio está tras contraseña y con
-`noindex` por ser réplica de un template comercial de terceros: no lo publiques
-abierto ni lo uses como producto.
+Cada push a `main` despliega en Vercel. El sitio está tras contraseña y con
+`noindex` hasta la publicación. En Render, el backend necesita `PUBLIC_URL`
+con su propio origen para normalizar las rutas de las imágenes del blog.
