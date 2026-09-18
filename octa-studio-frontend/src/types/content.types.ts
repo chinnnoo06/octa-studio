@@ -88,23 +88,10 @@ export type TChannel = {
 };
 
 
-/** Una imagen de terceros acreditada en /creditos. Cada fuente pide una
- *  atribucion distinta, de ahi la union: Freepik quiere autor y enlace al
- *  recurso; Magnific, una mencion a la herramienta. */
-export type TImageCredit =
-  | {
-      source: 'freepik';
-      /** Que imagen es, para quien lee la lista. */
-      title: string;
-      /** Donde se usa en el sitio. */
-      usedIn: string;
-      /** Autor tal como aparece en Freepik. */
-      author: string;
-      /** Enlace al recurso original. */
-      url: string;
-    }
-  | {
-      source: 'magnific';
-      title: string;
-      usedIn: string;
-    };
+/** Un fondo generado con Magnific, acreditado en /creditos. */
+export type TImageCredit = {
+  /** Que imagen es, para quien lee la lista. */
+  title: string;
+  /** Donde se usa en el sitio. */
+  usedIn: string;
+};
