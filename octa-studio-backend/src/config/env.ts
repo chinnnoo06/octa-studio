@@ -8,3 +8,5 @@ export const PORT = process.env.PORT!
 export const IS_DEV = process.env.NODE_ENV === "development"
 export const IS_PROD = process.env.NODE_ENV === "production"
 export const UPLOADS_PATH = process.env.UPLOADS_PATH || 'uploads'
+/** URL publica del propio backend, para construir enlaces absolutos a /files. */
+export const PUBLIC_URL = process.env.PUBLIC_URL || `http://localhost:${process.env.PORT || 4000}`

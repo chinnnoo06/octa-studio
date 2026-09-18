@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
@@ -16,22 +16,22 @@ import { SpanError } from "@/components/ui/form/SpanError";
 import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
-import { ImagesField } from "@/components/ui/form/ImagesField";
-import { BlogContentField } from "./BlogContentField";
+import { ImageField } from "@/components/ui/form/ImageField";
+import { BlogEditorField } from "./BlogEditorField";
 
 const SELECT =
     'border-secondary/50 text-fourth/75 focus:border-secondary hover:border-secondary w-full cursor-pointer rounded-lg border bg-white px-5 py-2.5 text-xs outline-none transition-all duration-300 lg:text-sm';
 
 export const CreateBlogForm = () => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateBlogForm>({
+    const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateBlogForm>({
         resolver: zodResolver(CreateBlogFormSchema),
         defaultValues: {
             title: '',
             excerpt: '',
             category: undefined,
             readingTime: undefined,
-            content: [],
-            images: [],
+            content: '',
+            image: undefined,
             seo: { metaTitle: '', metaDescription: '' }
         }
     })
@@ -43,8 +43,7 @@ export const CreateBlogForm = () => {
         if (createBlog.success) toast.success(createBlog.success);
     }, [createBlog.error, createBlog.success]);
 
-    const content = watch('content');
-    const images = watch('images');
+    const image = watch('image');
 
     const onSubmit = (data: TCreateBlogForm) => createBlog.handleCreateBlog(data)
 
@@ -76,6 +75,7 @@ export const CreateBlogForm = () => {
                     <Textarea id="excerpt" rows={3} placeholder="Resumen breve, máximo 300 caracteres" {...register("excerpt")} />
                     <SpanError message={errors.excerpt?.message} />
                 </div>
+
                 <div className="form-group">
                     <Label htmlFor="readingTime">Tiempo de lectura (minutos)</Label>
                     <Input type="number" id="readingTime" min={1} step={1} placeholder="Ej. 5" {...register("readingTime", { valueAsNumber: true })} />
@@ -84,12 +84,15 @@ export const CreateBlogForm = () => {
             </FormSection>
 
             <FormSection>
-                <FormSectionTitle>Contenido</FormSectionTitle>
+                <FormSectionTitle>Contenido del blog</FormSectionTitle>
 
-                <BlogContentField
-                    content={content}
-                    onChange={(next) => setValue('content', next, { shouldValidate: true })}
-                    error={errors.content?.message}
+                {/* El editor no es un input nativo: entra por Controller con valor y onChange. */}
+                <Controller
+                    control={control}
+                    name="content"
+                    render={({ field }) => (
+                        <BlogEditorField value={field.value} onChange={field.onChange} error={errors.content?.message} />
+                    )}
                 />
             </FormSection>
 
@@ -110,12 +113,12 @@ export const CreateBlogForm = () => {
             </FormSection>
 
             <FormSection>
-                <FormSectionTitle>Imágenes</FormSectionTitle>
+                <FormSectionTitle>Imagen destacada</FormSectionTitle>
 
-                <ImagesField
-                    images={images}
-                    onChange={(next) => setValue('images', next, { shouldValidate: true })}
-                    error={errors.images?.message}
+                <ImageField
+                    image={image ?? null}
+                    onChange={(file) => setValue('image', file as File, { shouldValidate: true })}
+                    error={errors.image?.message}
                 />
             </FormSection>
 

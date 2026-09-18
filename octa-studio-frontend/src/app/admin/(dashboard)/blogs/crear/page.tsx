@@ -1,6 +1,9 @@
+import type { Metadata } from 'next';
 import { CreateBlogForm } from '@/components/blogs/form/CreateBlogForm';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
+
+export const metadata: Metadata = { title: 'Crear blog' };
 
 export default function CrearBlogPage() {
   return (

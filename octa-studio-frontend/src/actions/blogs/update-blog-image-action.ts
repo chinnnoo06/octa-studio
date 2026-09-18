@@ -1,16 +1,16 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath, updateTag } from "next/cache"
 
 import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
-import { BlogImagesFormSchema, TBlogImagesForm } from "@/schemas/blogs/blogs.form.schemas"
+import { BlogImageFormSchema, TBlogImageForm } from "@/schemas/blogs/blogs.form.schemas"
 import { TActionState } from "@/types/common.types"
 import { originHeader } from "@/services/api.headers"
 import { getToken } from "@/services/auth/auth.token"
 
-export const updateBlogImages = async (id: string, data: TBlogImagesForm): Promise<TActionState> => {
+export const updateBlogImage = async (id: string, data: TBlogImageForm): Promise<TActionState> => {
 
-    const parsed = BlogImagesFormSchema.safeParse(data)
+    const parsed = BlogImageFormSchema.safeParse(data)
 
     if (!parsed.success) {
         return {
@@ -21,13 +21,12 @@ export const updateBlogImages = async (id: string, data: TBlogImagesForm): Promi
 
     const token = await getToken()
 
-    const url = `${process.env.API_URL}/blogs/${id}/images`
+    const url = `${process.env.API_URL}/blogs/${id}/image`
 
     const formData = new FormData()
 
-    parsed.data.images.forEach((image) => {
-        formData.append("blogImages", image)
-    })
+    // El nombre del campo es el que espera multer en `blogImage`.
+    formData.append("blogImage", parsed.data.image)
 
     const req = await fetch(url, {
         method: 'PATCH',
@@ -52,6 +51,10 @@ export const updateBlogImages = async (id: string, data: TBlogImagesForm): Promi
     const success = SuccessResponseSchema.parse(json)
 
     revalidatePath('/admin/blogs')
+
+    // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
+
+    updateTag('blogs')
 
     return {
         error: "",

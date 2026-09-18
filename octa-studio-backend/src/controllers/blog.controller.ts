@@ -42,19 +42,38 @@ export class BlogController {
         }
     }
 
-    static updateBlogImages = async (req: TRequestWithBlog<TMongoIdParams>, res: Response, next: NextFunction) => {
+    static updateBlogImage = async (req: TRequestWithBlog<TMongoIdParams>, res: Response, next: NextFunction) => {
         const files = req.files as TMulterFiles
 
         try {
-            await BlogService.updateBlogImages(req.Blog, files)
+            await BlogService.updateBlogImage(req.Blog, files)
 
             return res.status(200).json({
                 status: "success",
-                message: "Blog images updated successfully"
+                message: "Blog image updated successfully"
             });
 
         } catch (error) {
-            console.error("Error updating the blog images:", error);
+            console.error("Error updating the blog image:", error);
+            next(error)
+        }
+    }
+
+    static uploadContentImage = async (req: Request, res: Response, next: NextFunction) => {
+        const files = req.files as TMulterFiles
+
+        try {
+            const { url, path } = BlogService.uploadContentImage(files)
+
+            // TinyMCE espera `location`; `path` es la ruta relativa que queda guardada.
+            return res.status(201).json({
+                status: "success",
+                location: url,
+                path
+            });
+
+        } catch (error) {
+            console.error("Error uploading the content image:", error);
             next(error)
         }
     }

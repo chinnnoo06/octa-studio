@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
 import { CreateProjectForm } from '@/components/projects/form/CreateProjectForm';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
+
+export const metadata: Metadata = { title: 'Crear proyecto' };
 
 export default function CrearProyectoPage() {
   return (

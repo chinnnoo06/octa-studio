@@ -7,6 +7,7 @@ import { Coverage } from '@/components/aboutUs/Coverage';
 import { Faqs } from '@/components/sections/faqs/Faqs';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { BrandMarquee } from '@/components/sections/BrandMarquee';
+import { getTestimonialsService } from '@/services/server/testimonials.service';
 
 export const metadata = pageMetadata({
   title: 'Nosotros',
@@ -15,12 +16,14 @@ export const metadata = pageMetadata({
   path: '/nosotros',
 });
 
-export default function NosotrosPage() {
+export default async function NosotrosPage() {
+  const testimonials = await getTestimonialsService();
+
   return (
     <>
       <Hero />
       <Purpose />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
       <Stats />
       <BrandMarquee />
       <CtaSection line="Ya sabes quiénes somos. Ahora cuéntanos de ti." />

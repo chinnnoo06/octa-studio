@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useActionStatus } from '../ui/useActionStatus'
-import { TCreateBlogForm, TBlogImagesForm, TUpdateBlogForm } from '@/schemas/blogs/blogs.form.schemas'
+import { TCreateBlogForm, TBlogImageForm, TUpdateBlogForm } from '@/schemas/blogs/blogs.form.schemas'
 import { createBlog } from '@/actions/blogs/create-blog-action'
 import { updateBlog } from '@/actions/blogs/update-blog-action'
 import { deleteBlog } from '@/actions/blogs/delete-blog-action'
-import { updateBlogImages } from '@/actions/blogs/update-blog-images-action'
+import { updateBlogImage } from '@/actions/blogs/update-blog-image-action'
 
 export const useBlogs = () => {
     const createStatus = useActionStatus()
@@ -59,7 +59,7 @@ export const useBlogs = () => {
         if (res.success) setSuccessUpdate(res.success)
     }
 
-    const handleUpdateBlogImages = async (id: string, data: TBlogImagesForm) => {
+    const handleUpdateBlogImage = async (id: string, data: TBlogImageForm) => {
         if (imagesStatus.loading) return
 
         setErrorImages(null)
@@ -67,7 +67,7 @@ export const useBlogs = () => {
 
         imagesStatus.startLoading()
 
-        const res = await updateBlogImages(id, data)
+        const res = await updateBlogImage(id, data)
 
         imagesStatus.stopLoading()
 
@@ -108,8 +108,8 @@ export const useBlogs = () => {
             success: successUpdate
         },
 
-        updateBlogImages: {
-            handleUpdateBlogImages,
+        updateBlogImage: {
+            handleUpdateBlogImage,
             loading: imagesStatus.loading,
             error: errorImages,
             success: successImages

@@ -1,7 +1,10 @@
+import type { Metadata } from 'next';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
+
+export const metadata: Metadata = { title: 'Detalle del proyecto' };
 
 export default async function DetalleProyectoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

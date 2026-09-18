@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
@@ -9,6 +10,8 @@ import { BlogsTable } from '@/components/blogs/table/BlogsTable';
 import { getBlogsService } from '@/services/server/blogs.service';
 
 const BASE_PATH = '/admin/blogs';
+
+export const metadata: Metadata = { title: 'Blogs' };
 
 export default async function AdminBlogsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const { page } = await searchParams;

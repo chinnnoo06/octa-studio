@@ -9,10 +9,6 @@ dist/
 .env.*
 !.env.example
 
-# Uploaded files (user data, keep the folder but not its content)
-uploads/*
-!uploads/.gitkeep
-
 # Logs
 *.log
 npm-debug.log*

@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditTestimonial } from '@/components/testimonials/form/EditTestimonial';
 import { getTestimonialService } from '@/services/server/testimonials.service';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
+
+export const metadata: Metadata = { title: 'Editar testimonio' };
 
 export default async function EditarTestimonioPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

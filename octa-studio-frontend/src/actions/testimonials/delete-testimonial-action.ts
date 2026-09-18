@@ -2,7 +2,7 @@
 
 import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
 import { originHeader } from "@/services/api.headers"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, updateTag } from "next/cache"
 import { TActionState } from "@/types/common.types"
 import { getToken } from "@/services/auth/auth.token"
 
@@ -35,6 +35,10 @@ export const deleteTestimonial = async (id: string): Promise<TActionState> => {
     const success = SuccessResponseSchema.parse(json)
 
     revalidatePath('/admin/testimonios')
+
+    // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
+
+    updateTag('testimonials')
 
     return {
         error: "",

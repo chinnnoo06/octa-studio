@@ -2,15 +2,18 @@ import { BlogResponseSchema, BlogsResponseSchema } from "@/schemas/blogs/blogs.r
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
 
-export const getBlogsService = async (page: number = 1) => {
-  const url = `${process.env.API_URL}/blogs?page=${page}`;
+export const getBlogsService = async (page: number = 1, category?: string) => {
+  const params = new URLSearchParams({ page: String(page) });
+  if (category) params.set("category", category);
+
+  const url = `${process.env.API_URL}/blogs?${params}`;
 
   const req = await fetch(url, {
     method: "GET",
     headers: {
       ...originHeader()
     },
-    cache: "no-store",
+    next: { revalidate: 3600, tags: ["blogs"] },
   });
 
   if (!req.ok) {
@@ -60,6 +63,7 @@ export const getBlogByIdService = async (id: string) => {
   return result.data.blog;
 };
 
+/** `null` cuando el slug no existe, para que la pagina responda 404. */
 export const getBlogBySlugService = async (slug: string) => {
   const url = `${process.env.API_URL}/blogs/${slug}`;
 
@@ -68,8 +72,12 @@ export const getBlogBySlugService = async (slug: string) => {
     headers: {
       ...originHeader()
     },
-    cache: "no-store",
+    next: { revalidate: 3600, tags: ["blogs"] },
   });
+
+  if (req.status === 404) {
+    return null;
+  }
 
   if (!req.ok) {
     throw new Error("Request Failed");

@@ -5,8 +5,11 @@ import { TestimonialCarousel } from './TestimonialCarousel';
 import { Reveal } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import Img from '@/assets/media/backgrounds/ImgBackground3.webp';
+import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
 
-export const Testimonials = () => {
+export const Testimonials = ({ testimonials }: { testimonials: TTestiomonial[] }) => {
+  if (testimonials.length === 0) return null;
+
   return (
     <section data-section="testimonials" className="bg-thrird">
       <Reveal
@@ -31,7 +34,7 @@ export const Testimonials = () => {
             <SectionTitle tone="light" align="center" lead="Lo que nuestros clientes dicen de" rotating="nosotros"/>
           </div>
 
-          <TestimonialCarousel />
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </Reveal>
     </section>

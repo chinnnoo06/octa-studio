@@ -4,9 +4,9 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import type { TProject } from '@/types/content.types';
+import type { TProject } from '@/schemas/projects/projects.schemas';
 
-export const ProjectCard = ({ project, priority = false }: { project: TProject; priority?: boolean }) => {
+export const ProjectCard = ({ project }: { project: TProject }) => {
   const ref = useRef<HTMLAnchorElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -23,30 +23,29 @@ export const ProjectCard = ({ project, priority = false }: { project: TProject; 
   return (
     <Link
       ref={ref}
-      href={project.href}
+      href={`/proyectos/${project.slug}`}
       onMouseMove={onMove}
-      className="group relative flex overflow-hidden rounded-xl"
+      className="group relative flex flex-col overflow-hidden rounded-xl"
     >
-
-      <div className="bg-secondary/15 group-hover:bg-secondary flex w-14 lg:w-16 shrink-0 flex-col items-center justify-between gap-5 py-5 transition-colors duration-300">
-        <h3 className="font-gentleman text-secondary rotate-180 text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 group-hover:text-white [writing-mode:vertical-rl]">
-          {project.name}
-        </h3>
-        <p className="font-gentleman text-secondary rotate-180 text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 group-hover:text-white [writing-mode:vertical-rl]">
-          {project.sector}
-        </p>
-      </div>
-
-      <div className="relative flex-1 overflow-hidden">
+      <div className="relative overflow-hidden">
         <Image
-          src={project.image}
-
-          priority={priority}
+          src={`${process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL}/${project.images[0]}`}
+          width={1600}
+          height={1200}
           alt={`Proyecto ${project.name}, ${project.sector}`}
-          sizes="(min-width: 1820px) 706px, (min-width: 1024px) calc(50vw - 144px), (min-width: 768px) calc(50vw - 88px), calc(100vw - 88px)"
-          className="ease-brand h-100 sm:h-130 lg:h-170 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(min-width: 1820px) 840px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 40px)"
+          className="ease-brand aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <span aria-hidden="true" className="absolute inset-0 bg-black/30" />
+      </div>
+
+      <div className="bg-secondary/15 group-hover:bg-secondary flex items-center justify-between gap-5 px-5 py-4 transition-colors duration-300 lg:px-6 lg:py-5">
+        <h3 className="font-gentleman text-secondary text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 group-hover:text-white">
+          {project.name}
+        </h3>
+        <p className="font-gentleman text-secondary text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 group-hover:text-white">
+          {project.sector}
+        </p>
       </div>
 
       <motion.span

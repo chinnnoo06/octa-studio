@@ -2,6 +2,10 @@ import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 import { BlogCategory, TBlog, TBlogSEO } from "../types/blog/blog.types";
 
+/* -------------------------------------------------------------------------- */
+/*                                   SEO                                      */
+/* -------------------------------------------------------------------------- */
+
 const BlogSEOSchema = new Schema<TBlogSEO>(
     {
         metaTitle: {
@@ -20,16 +24,9 @@ const BlogSEOSchema = new Schema<TBlogSEO>(
     { _id: false }
 )
 
-const ContentBlockSchema = new Schema(
-    {
-        type: {
-            type: String,
-            required: true,
-            enum: ["paragraph", "heading", "list", "quote"]
-        }
-    },
-    { discriminatorKey: "type" }
-)
+/* -------------------------------------------------------------------------- */
+/*                                    BLOG                                    */
+/* -------------------------------------------------------------------------- */
 
 const BlogSchema = new Schema<TBlog>(
     {
@@ -71,22 +68,18 @@ const BlogSchema = new Schema<TBlog>(
             }
         },
 
-        images: {
-            type: [String],
+        // Una sola imagen destacada. Las del cuerpo viven dentro de `content`.
+        image: {
+            type: String,
             required: true,
-            validate: {
-                validator: (arr: string[]) => arr.length > 0,
-                message: "At least one image is required"
-            }
+            trim: true
         },
 
+        // HTML ya saneado por validateBlogInput; el modelo solo exige que exista.
         content: {
-            type: [ContentBlockSchema],
+            type: String,
             required: true,
-            validate: {
-                validator: (blocks: unknown[]) => blocks.length > 0,
-                message: "The blog must have at least one content block"
-            }
+            trim: true
         },
 
         seo: {
@@ -98,57 +91,6 @@ const BlogSchema = new Schema<TBlog>(
         timestamps: true,
     }
 )
-
-const contentBlocks = BlogSchema.path<Schema.Types.DocumentArray>("content")
-
-contentBlocks.discriminator("paragraph", new Schema({
-    text: {
-        type: String,
-        required: true,
-        trim: true
-    }
-}))
-
-contentBlocks.discriminator("heading", new Schema({
-    text: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    level: {
-        type: Number,
-        required: true,
-        enum: [2, 3]
-    }
-}))
-
-contentBlocks.discriminator("list", new Schema({
-    ordered: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    items: {
-        type: [String],
-        required: true,
-        validate: {
-            validator: (items: string[]) => items.length > 0,
-            message: "A list block must have at least one item"
-        }
-    }
-}))
-
-contentBlocks.discriminator("quote", new Schema({
-    text: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    cite: {
-        type: String,
-        trim: true
-    }
-}))
 
 BlogSchema.plugin(mongoosePaginate);
 

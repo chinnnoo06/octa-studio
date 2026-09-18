@@ -20,6 +20,11 @@ export const blogRepository = {
         return Blog.findOne({ slug });
     },
 
+    /** Solo el HTML de cada blog: lo usa el job que limpia imagenes huerfanas. */
+    async findAllContent() {
+        return Blog.find({}, { content: 1 }).lean<{ content: string }[]>();
+    },
+
     async createBlog(data: TBlog) {
         return Blog.create(data)
     }

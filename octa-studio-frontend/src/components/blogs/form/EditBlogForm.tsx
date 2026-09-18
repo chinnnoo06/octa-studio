@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
 import { UpdateBlogFormSchema, TUpdateBlogForm } from '@/schemas/blogs/blogs.form.schemas';
 import { BLOG_CATEGORIES } from '@/utils/data/blogs';
+import { withAbsoluteContentImages } from '@/utils/blogContentImages';
 import { TBlog } from "@/schemas/blogs/blogs.schemas";
 import { useBlogs } from "@/hooks/blogs/useBlogs";
 import { Label } from "@/components/ui/form/Label";
@@ -17,23 +18,20 @@ import { SpanError } from "@/components/ui/form/SpanError";
 import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
-import { BlogContentField } from "./BlogContentField";
+import { BlogEditorField } from "./BlogEditorField";
 
 const SELECT =
     'border-secondary/50 text-fourth/75 focus:border-secondary hover:border-secondary w-full cursor-pointer rounded-lg border bg-white px-5 py-2.5 text-xs outline-none transition-all duration-300 lg:text-sm';
 
 export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TUpdateBlogForm>({
+    const { register, control, handleSubmit, formState: { errors } } = useForm<TUpdateBlogForm>({
         resolver: zodResolver(UpdateBlogFormSchema),
         defaultValues: {
             title: blog.title,
             excerpt: blog.excerpt,
-            // En `TBlog` la categoria es `string` porque viene del backend; aqui
-            // el formulario la acota al enum. Si el backend devolviera una que ya
-            // no existe, el propio resolver lo marca al enviar.
-            category: blog.category as TUpdateBlogForm['category'],
+            category: blog.category,
             readingTime: blog.readingTime,
-            content: blog.content,
+            content: withAbsoluteContentImages(blog.content),
             seo: {
                 metaTitle: blog.seo.metaTitle,
                 metaDescription: blog.seo.metaDescription
@@ -47,8 +45,6 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
         if (updateBlog.error) toast.error(updateBlog.error);
         if (updateBlog.success) toast.success(updateBlog.success);
     }, [updateBlog.error, updateBlog.success]);
-
-    const content = watch('content');
 
     const onSubmit = (data: TUpdateBlogForm) => updateBlog.handleUpdateBlog(blog._id, data)
 
@@ -80,6 +76,7 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
                     <Textarea id="excerpt" rows={3} placeholder="Resumen breve, máximo 300 caracteres" {...register("excerpt")} />
                     <SpanError message={errors.excerpt?.message} />
                 </div>
+
                 <div className="form-group">
                     <Label htmlFor="readingTime">Tiempo de lectura (minutos)</Label>
                     <Input type="number" id="readingTime" min={1} step={1} placeholder="Ej. 5" {...register("readingTime", { valueAsNumber: true })} />
@@ -90,10 +87,12 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
             <FormSection>
                 <FormSectionTitle>Contenido</FormSectionTitle>
 
-                <BlogContentField
-                    content={content}
-                    onChange={(next) => setValue('content', next, { shouldValidate: true })}
-                    error={errors.content?.message}
+                <Controller
+                    control={control}
+                    name="content"
+                    render={({ field }) => (
+                        <BlogEditorField value={field.value} onChange={field.onChange} error={errors.content?.message} />
+                    )}
                 />
             </FormSection>
 

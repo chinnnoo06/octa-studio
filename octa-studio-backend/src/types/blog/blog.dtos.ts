@@ -1,4 +1,4 @@
-import { BlogCategory, TBlogContentBlock, TBlogSEO } from "./blog.types";
+import { BlogCategory, TBlogSEO } from "./blog.types";
 
 export type TGetBlogsQuery = {
     page?: string,
@@ -15,6 +15,7 @@ export type TBlogDto = {
     excerpt: string,
     category: BlogCategory,
     readingTime: number,
-    content: TBlogContentBlock[],
+    /** HTML del editor. Llega crudo y validateBlogInput lo deja saneado. */
+    content: string,
     seo: TBlogSEO
 }

@@ -2,25 +2,23 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { Pagination } from '@/components/ui/Pagination';
-import { BLOG_CATEGORIES, BLOG_POSTS } from '@/utils/data/blogs';
-import { paginate } from '@/utils/paginate';
 import { slugify } from '@/utils/slugify';
 import { BlogCard } from '@/components/blogs/BlogCard';
 import { CategoryFilter } from '@/components/blogs/CategoryFilter';
-
-const PAGE_SIZE = 6;
+import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import type { TPagination } from '@/schemas/common/common.response.schemas';
+import type { TBlogCategory } from '@/types/content.types';
 
 type TPostsProps = {
-  page?: number;
-  category?: string;
+  blogs: TBlog[];
+  pagination: TPagination;
+  /** Categoria activa; sin ella se listan todas. */
+  category?: TBlogCategory;
 };
 
-export const Posts = ({ page = 1, category }: TPostsProps) => {
-  const selected = BLOG_CATEGORIES.find((c) => slugify(c) === category);
-  const items = selected ? BLOG_POSTS.filter((post) => post.category === selected) : BLOG_POSTS;
-  const { visible, pagination } = paginate(items, page, PAGE_SIZE);
-
-  const basePath = selected ? `/blogs?categoria=${slugify(selected)}` : '/blogs';
+export const Posts = ({ blogs, pagination, category }: TPostsProps) => {
+  const active = category ? slugify(category) : undefined;
+  const basePath = active ? `/blogs?categoria=${active}` : '/blogs';
 
   return (
     <section id="entradas" data-section="blogs" className="bg-primary scroll-mt-18 py-15 lg:py-20">
@@ -31,13 +29,13 @@ export const Posts = ({ page = 1, category }: TPostsProps) => {
           <SectionTitle lead="Últimas" rotating="entradas" />
         </div>
 
-        <CategoryFilter active={selected ? slugify(selected) : undefined} />
+        <CategoryFilter active={active} />
 
-        {visible.length > 0 ? (
+        {blogs.length > 0 ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {visible.map((post) => (
-              <Reveal key={post.href} className="h-full">
-                <BlogCard post={post} />
+            {blogs.map((blog) => (
+              <Reveal key={blog._id} className="h-full">
+                <BlogCard blog={blog} />
               </Reveal>
             ))}
           </div>

@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditProjectImages } from '@/components/projects/images/EditProjectImages';
 import { getProjectByIdService } from '@/services/server/projects.service';
+
+export const metadata: Metadata = { title: 'Imágenes del proyecto' };
 
 export default async function ImagenesProyectoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

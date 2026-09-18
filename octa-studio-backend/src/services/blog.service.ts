@@ -8,24 +8,29 @@ import { TBlogDocument } from "../types/blog/blog.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
-import { UPLOADS_PATH } from "../config/env";
+import { CONTENT_IMAGES_PATH, extractContentImages } from "../utils/blogContent";
+import { PUBLIC_URL, UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
+const contentImagesDir = path.resolve(UPLOADS_PATH, "blogs", "content");
 
-const BLOGS_PER_PAGE = 10;
+const BLOGS_PER_PAGE = 6;
 
-const deleteImagesFromDisk = (images: string[]) => {
-    images.forEach(image => {
-        const filePath = path.join(imagesDir, image)
+const deleteFromDisk = (dir: string, names: string[]) => {
+    names.forEach(name => {
+        const filePath = path.join(dir, name)
 
         try {
             fs.unlinkSync(filePath)
-            console.log(`Image deleted: ${image}`);
+            console.log(`Image deleted: ${name}`);
         } catch (err) {
-            console.error(`Error deleting ${image}`)
+            console.error(`Error deleting ${name}`)
         }
     })
 }
+
+const deleteFeaturedImage = (name: string) => deleteFromDisk(imagesDir, [name])
+const deleteContentImages = (names: string[]) => deleteFromDisk(contentImagesDir, names)
 
 export const BlogService = {
 
@@ -57,16 +62,16 @@ export const BlogService = {
                 throw new HttpError(409, "A blog with that title already exists");
             }
 
-            const images = files?.blogImages?.map(file => file.filename) ?? []
+            const image = files?.blogImage?.[0]?.filename
 
-            if (images.length === 0) {
-                throw new HttpError(400, "At least one image is required for the blog");
+            if (!image) {
+                throw new HttpError(400, "A featured image is required for the blog");
             }
 
             return await blogRepository.createBlog({
                 ...data,
                 slug,
-                images
+                image
             })
 
         } catch (error) {
@@ -86,6 +91,12 @@ export const BlogService = {
             }
         }
 
+        // Las imagenes del cuerpo que ya no aparecen en el HTML nuevo se borran
+        // del disco despues de guardar, para no dejar huerfanos.
+        const before = extractContentImages(blog.content)
+        const after = new Set(extractContentImages(data.content))
+        const removed = before.filter(name => !after.has(name))
+
         blog.slug = slug
         blog.title = data.title
         blog.excerpt = data.excerpt
@@ -94,23 +105,27 @@ export const BlogService = {
         blog.content = data.content
         blog.seo = data.seo
 
-        return await blog.save()
+        const saved = await blog.save()
+
+        deleteContentImages(removed)
+
+        return saved
     },
 
-    async updateBlogImages(blog: TBlogDocument, files?: TMulterFiles) {
+    async updateBlogImage(blog: TBlogDocument, files?: TMulterFiles) {
         try {
-            const images = files?.blogImages?.map(file => file.filename) ?? []
+            const image = files?.blogImage?.[0]?.filename
 
-            if (images.length === 0) {
-                throw new HttpError(400, "At least one image is required for the blog");
+            if (!image) {
+                throw new HttpError(400, "A featured image is required for the blog");
             }
 
-            const oldImages = [...blog.images]
+            const oldImage = blog.image
 
-            blog.images = images
+            blog.image = image
             await blog.save()
 
-            deleteImagesFromDisk(oldImages)
+            deleteFeaturedImage(oldImage)
 
             return blog
         } catch (error) {
@@ -119,9 +134,25 @@ export const BlogService = {
         }
     },
 
+    uploadContentImage(files?: TMulterFiles) {
+        const file = files?.image?.[0]
+
+        if (!file) {
+            throw new HttpError(400, "An image is required");
+        }
+
+        const relativePath = `${CONTENT_IMAGES_PATH}/${file.filename}`
+
+        return {
+            path: relativePath,
+            url: `${PUBLIC_URL}${relativePath}`
+        }
+    },
+
     async deleteBlog(blog: TBlogDocument) {
         await blog.deleteOne()
 
-        deleteImagesFromDisk(blog.images)
+        deleteFeaturedImage(blog.image)
+        deleteContentImages(extractContentImages(blog.content))
     }
 }

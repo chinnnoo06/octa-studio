@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { EditButton } from '@/components/ui/buttons/EditButton';
 import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
 import { Table } from '@/components/ui/table/Table';
@@ -5,11 +6,10 @@ import { TableHead } from '@/components/ui/table/TableHead';
 import { TableRow } from '@/components/ui/table/TableRow';
 import { TableEmpty } from '@/components/ui/table/TableEmpty';
 import type { TBlog } from '@/schemas/blogs/blogs.schemas';
-import { BlogImages } from './BlogImages';
 import { DeleteBlogButton } from './DeleteBlogButton';
 import { ExcerptCell } from './ExcerptCell';
 
-const COLUMNS = ['Imágenes', 'Título', 'Extracto', 'Categoría', 'Lectura', 'Acciones'] as const;
+const COLUMNS = ['Imagen', 'Título', 'Extracto', 'Categoría', 'Lectura', 'Acciones'] as const;
 
 export const BlogsTable = ({ blogs }: { blogs: TBlog[] }) => {
     if (blogs.length === 0) {
@@ -24,7 +24,15 @@ export const BlogsTable = ({ blogs }: { blogs: TBlog[] }) => {
                 {blogs.map((blog) => (
                     <TableRow key={blog._id}>
                         <td className="px-5 py-4 text-sm lg:text-base align-top">
-                            <BlogImages images={blog.images} name={blog.title} />
+                            <div className="border-secondary/30 bg-primary w-fit rounded border p-0.5">
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL}/${blog.image}`}
+                                    alt={`Imagen destacada de ${blog.title}`}
+                                    width={56}
+                                    height={40}
+                                    className="h-10 w-14 object-contain"
+                                />
+                            </div>
                         </td>
 
                         <td className="px-5 py-4 text-sm lg:text-base align-top text-secondary font-medium">{blog.title}</td>
@@ -40,8 +48,8 @@ export const BlogsTable = ({ blogs }: { blogs: TBlog[] }) => {
                         <td className="px-5 py-4 text-sm lg:text-base align-top text-right whitespace-nowrap">
                             <span className="inline-flex items-center gap-2.5">
                                 <ImagesButton
-                                    href={`/admin/blogs/${blog._id}/imagenes`}
-                                    label={`Actualizar las imágenes de ${blog.title}`}
+                                    href={`/admin/blogs/${blog._id}/imagen`}
+                                    label={`Actualizar la imagen destacada de ${blog.title}`}
                                 />
 
                                 <EditButton

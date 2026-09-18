@@ -23,8 +23,6 @@ const gentleman = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN ?? 'http://localhost:3000'),
   robots: { index: false, follow: false, nocache: true },
-  // La home usa el titulo completo; el resto de paginas solo pone el suyo y
-  // la plantilla le pega el nombre del sitio.
   title: {
     default: 'Octa Building Studio | Diseño y montaje de stands para expos y eventos',
     template: '%s | Octa Building Studio',

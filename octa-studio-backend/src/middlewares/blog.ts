@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { body } from "express-validator";
-import { TBlogContentBlock, TBlogDocument } from "../types/blog/blog.types";
+import { TBlogDocument } from "../types/blog/blog.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
 import { blogRepository } from "../repositories/blog.repository";
+import { contentToText, extractContentImages, sanitizeBlogContent } from "../utils/blogContent";
 
 declare global {
     namespace Express {
@@ -11,44 +12,6 @@ declare global {
             Blog?: TBlogDocument
         }
     }
-}
-
-const validateContentBlocks = (blocks: TBlogContentBlock[]) => {
-    blocks.forEach((block, index) => {
-        const position = `content[${index}]`
-
-        switch (block?.type) {
-            case "paragraph":
-            case "quote":
-                if (!block.text?.trim()) {
-                    throw new Error(`${position}: text is required`)
-                }
-                break
-
-            case "heading":
-                if (!block.text?.trim()) {
-                    throw new Error(`${position}: text is required`)
-                }
-                if (block.level !== 2 && block.level !== 3) {
-                    throw new Error(`${position}: level must be 2 or 3`)
-                }
-                break
-
-            case "list":
-                if (typeof block.ordered !== "boolean") {
-                    throw new Error(`${position}: ordered must be a boolean`)
-                }
-                if (!Array.isArray(block.items) || block.items.length === 0) {
-                    throw new Error(`${position}: items must have at least one entry`)
-                }
-                break
-
-            default:
-                throw new Error(`${position}: invalid block type`)
-        }
-    })
-
-    return true
 }
 
 export const validateBlogInput = async (req: Request, res: Response, next: NextFunction) => {
@@ -60,9 +23,18 @@ export const validateBlogInput = async (req: Request, res: Response, next: NextF
     await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
     await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)
 
-    await body("content").isArray({ min: 1 }).withMessage("Content must have at least one block")
+    // El HTML del editor se sanea aqui y se sigue con la version limpia: lo
+    // que llega al service y al modelo ya no lleva nada fuera de la lista.
+    await body("content")
+        .isString().withMessage("Content must be an HTML string")
         .bail()
-        .custom(validateContentBlocks)
+        .customSanitizer((html: string) => sanitizeBlogContent(html))
+        .custom((html: string) => {
+            if (contentToText(html).length === 0 && extractContentImages(html).length === 0) {
+                throw new Error("Content cannot be empty")
+            }
+            return true
+        })
         .run(req)
 
     next()

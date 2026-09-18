@@ -18,14 +18,6 @@ export type TStat = {
   variant: 'one' | 'two' | 'three' | 'four';
 };
 
-export type TProject = {
-  name: string;
-  sector: string;
-  href: string;
-  image: StaticImageData;
-  alt: string;
-};
-
 export type TProcessStep = {
   step: string;
   title: string;
@@ -47,25 +39,8 @@ export type TService = {
   alt: string;
 };
 
-export type TTestimonial = {
-  quote: string;
-  name: string;
-  rating: number;
-};
-
 /** Una de las categorias de `BLOG_CATEGORIES`; el tipo sale de la lista. */
 export type TBlogCategory = (typeof BLOG_CATEGORIES)[number];
-
-export type TBlogPost = {
-  title: string;
-  date: string;
-  category: TBlogCategory;
-  readingTime: string;
-  excerpt: string;
-  href: string;
-  image: StaticImageData;
-  alt: string;
-};
 
 export type TFaq = {
   question: string;

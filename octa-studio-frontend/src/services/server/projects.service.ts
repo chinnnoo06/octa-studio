@@ -10,7 +10,7 @@ export const getProjectsService = async (page: number = 1) => {
     headers: {
       ...originHeader()
     },
-    cache: "no-store",
+    next: { revalidate: 3600, tags: ["projects"] },
   });
 
   if (!req.ok) {
@@ -60,6 +60,7 @@ export const getProjectByIdService = async (id: string) => {
   return result.data.project;
 };
 
+/** `null` cuando el slug no existe, para que la pagina responda 404. */
 export const getProjectBySlugService = async (slug: string) => {
   const url = `${process.env.API_URL}/projects/${slug}`;
 
@@ -68,8 +69,12 @@ export const getProjectBySlugService = async (slug: string) => {
     headers: {
       ...originHeader()
     },
-    cache: "no-store",
+    next: { revalidate: 3600, tags: ["projects"] },
   });
+
+  if (req.status === 404) {
+    return null;
+  }
 
   if (!req.ok) {
     throw new Error("Request Failed");

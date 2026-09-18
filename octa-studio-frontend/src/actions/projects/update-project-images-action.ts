@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath, updateTag } from "next/cache"
 
 import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
 import { ProjectImagesFormSchema, TProjectImagesForm } from "@/schemas/projects/projects.form.schemas"
@@ -55,6 +55,10 @@ export const updateProjectImages = async (id: string, data: TProjectImagesForm):
     const success = SuccessResponseSchema.parse(json)
 
     revalidatePath('/admin/proyectos')
+
+    // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
+
+    updateTag('projects')
 
     return {
         error: "",

@@ -17,6 +17,8 @@ import projectRouter from './routes/project.routes'
 import blogRouter from './routes/blog.routes'
 import testimonialRouter from './routes/testimonial.routes'
 
+import { scheduleOrphanContentImagesCleanup } from './jobs/cleanOrphanContentImages.job'
+
 connection();
 
 const server: Express = express();
@@ -45,5 +47,7 @@ server.use("/api/blogs", blogRouter);
 server.use("/api/testimonials", testimonialRouter);
 
 server.use(errorHandler);
+
+scheduleOrphanContentImagesCleanup();
 
 export default server

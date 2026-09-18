@@ -9,15 +9,7 @@ const PILL =
 const ON = `${PILL} border-secondary bg-secondary text-primary`;
 const OFF = `${PILL} border-secondary text-secondary hover:bg-secondary/15`;
 
-type TCategoryFilterProps = {
-  /** Slug de la categoria activa; sin el, "Todas". */
-  active?: string;
-};
-
-/** Filtro por categoria del indice del blog. Es navegacion, no estado: cada
- *  pildora es un enlace con la categoria en la URL, y el ancla devuelve a la
- *  lista. En movil se desplaza en horizontal, como los carruseles del sitio. */
-export const CategoryFilter = ({ active }: TCategoryFilterProps) => {
+export const CategoryFilter = ({ active }: {active?: string;}) => {
   return (
     <nav aria-label="Categorías del blog">
       <ul

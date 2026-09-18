@@ -5,7 +5,9 @@ import path from "path"
 
 import { UPLOADS_PATH } from "../config/env"
 
-const createUploader = (folder: string) => multer({
+const MB = 1024 * 1024
+
+const createUploader = (folder: string, maxFileSize?: number) => multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
             const dir = path.resolve(UPLOADS_PATH, folder);
@@ -24,9 +26,14 @@ const createUploader = (folder: string) => multer({
 
             cb(null, `${timestamp}-${random}${ext}`);
         }
-    })
+    }),
+    limits: maxFileSize ? { fileSize: maxFileSize } : undefined
 });
 
 export const projectsUploads = createUploader("projects")
 
+/** Imagen destacada del blog. */
 export const blogsUploads = createUploader("blogs")
+
+/** Imagenes del cuerpo del blog, subidas desde el editor una a una. */
+export const blogContentUploads = createUploader("blogs/content", 5 * MB)

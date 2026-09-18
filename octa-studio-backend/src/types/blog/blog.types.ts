@@ -1,34 +1,5 @@
 import { HydratedDocument, Types } from "mongoose";
 
-export type TParagraphBlock = {
-    type: "paragraph",
-    text: string
-}
-
-export type THeadingBlock = {
-    type: "heading",
-    level: 2 | 3,
-    text: string
-}
-
-export type TListBlock = {
-    type: "list",
-    ordered: boolean,
-    items: string[]
-}
-
-export type TQuoteBlock = {
-    type: "quote",
-    text: string,
-    cite?: string
-}
-
-export type TBlogContentBlock =
-    | TParagraphBlock
-    | THeadingBlock
-    | TListBlock
-    | TQuoteBlock
-
 export enum BlogCategory {
     STAND_DESIGN = 'Diseño de Stands',
     ASSEMBLY_AND_LOGISTICS = 'Montaje y Logística',
@@ -52,8 +23,14 @@ export type TBlog = {
     category: BlogCategory,
     /** Minutos de lectura estimados. */
     readingTime: number,
-    images: string[],
-    content: TBlogContentBlock[],
+    /** Nombre de archivo de la imagen destacada, en uploads/blogs. */
+    image: string,
+    /**
+     * Cuerpo del articulo en HTML, tal como lo genera el editor (TinyMCE) y
+     * ya saneado por el backend. Las imagenes que lleve dentro apuntan a
+     * rutas relativas /files/blogs/content/<archivo>.
+     */
+    content: string,
     seo: TBlogSEO
 }
 

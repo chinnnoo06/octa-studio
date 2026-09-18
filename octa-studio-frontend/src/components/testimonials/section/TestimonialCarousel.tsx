@@ -3,12 +3,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar } from 'react-icons/fa6';
-import { TESTIMONIALS } from '@/utils/data/testimonials';
+import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
 
 const ARROW =
   'cursor-pointer border-primary text-primary hover:bg-primary hover:text-secondary flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-xl border-2 transition-colors duration-300 ';
 
-export const TestimonialCarousel = () => {
+export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomonial[] }) => {
   const [emblaRef, embla] = useEmblaCarousel({
     loop: true,
     align: 'start',
@@ -53,13 +53,13 @@ export const TestimonialCarousel = () => {
     >
       <div ref={emblaRef} className="w-full overflow-hidden">
         <div className="flex">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <div
-              key={t.name}
+              key={t._id}
               className="min-w-0 shrink-0 grow-0 basis-full"
               role="group"
               aria-roledescription="slide"
-              aria-label={`${i + 1} de ${TESTIMONIALS.length}`}
+              aria-label={`${i + 1} de ${testimonials.length}`}
               aria-hidden={selected !== i}
             >
        
@@ -91,8 +91,8 @@ export const TestimonialCarousel = () => {
         </button>
 
         <ul className="flex items-center gap-2.5">
-          {TESTIMONIALS.map((t, i) => (
-            <li key={t.name}>
+          {testimonials.map((t, i) => (
+            <li key={t._id}>
               <button
                 type="button"
                 onClick={() => embla?.scrollTo(i)}

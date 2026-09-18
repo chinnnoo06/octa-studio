@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
 import { CreateTestimonial } from '@/components/testimonials/form/CreateTestimonial';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
+
+export const metadata: Metadata = { title: 'Crear testimonio' };
 
 export default function CrearTestimonioPage() {
   return (

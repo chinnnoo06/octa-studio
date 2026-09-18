@@ -2,8 +2,8 @@ import { Router } from "express";
 import { param, query } from "express-validator";
 import { BlogCategory } from "../types/blog/blog.types";
 import { auth } from "../middlewares/auth";
-import { converToWebP } from "../middlewares/convertToWebp";
-import { blogsUploads } from "../middlewares/uploads";
+import { converToWebP, convertContentImageToWebP } from "../middlewares/convertToWebp";
+import { blogContentUploads, blogsUploads } from "../middlewares/uploads";
 import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
 import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
 import { BlogController } from "../controllers/blog.controller";
@@ -20,14 +20,24 @@ router.get("/",
 router.post("/",
     auth(),
     blogsUploads.fields([
-        { name: "blogImages", maxCount: 5 }
+        { name: "blogImage", maxCount: 1 }
     ]),
-    parseJsonFields(["content", "seo"]),
+    parseJsonFields(["seo"]),
     validateImagesFormat,
     validateBlogInput,
     handleInputErrors,
     converToWebP,
     BlogController.createBlog
+)
+
+router.post("/content-images",
+    auth(),
+    blogContentUploads.fields([
+        { name: "image", maxCount: 1 }
+    ]),
+    validateImagesFormat,
+    convertContentImageToWebP,
+    BlogController.uploadContentImage
 )
 
 router.patch("/:id",
@@ -39,17 +49,17 @@ router.patch("/:id",
     BlogController.updateBlog
 )
 
-router.patch("/:id/images",
+router.patch("/:id/image",
     auth(),
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateBlogExists,
     blogsUploads.fields([
-        { name: "blogImages", maxCount: 5 }
+        { name: "blogImage", maxCount: 1 }
     ]),
     validateImagesFormat,
     converToWebP,
-    BlogController.updateBlogImages
+    BlogController.updateBlogImage
 )
 
 router.delete("/:id",

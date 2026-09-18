@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath, updateTag } from "next/cache"
 
 import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
 import { UpdateBlogFormSchema, TUpdateBlogForm } from "@/schemas/blogs/blogs.form.schemas"
@@ -50,6 +50,10 @@ export const updateBlog = async (id: string, data: TUpdateBlogForm): Promise<TAc
     const success = SuccessResponseSchema.parse(json)
 
     revalidatePath('/admin/blogs')
+
+    // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
+
+    updateTag('blogs')
 
     return {
         error: "",

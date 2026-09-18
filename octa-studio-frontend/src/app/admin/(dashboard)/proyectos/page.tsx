@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
@@ -9,6 +10,8 @@ import { ProjectsTable } from '@/components/projects/table/ProjectsTable';
 import { getProjectsService } from '@/services/server/projects.service';
 
 const BASE_PATH = '/admin/proyectos';
+
+export const metadata: Metadata = { title: 'Proyectos' };
 
 export default async function AdminProyectosPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const { page } = await searchParams;

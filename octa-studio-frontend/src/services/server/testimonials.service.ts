@@ -10,6 +10,7 @@ export const getTestimonialsService = async (): Promise<TTestiomonial[]> => {
     headers: {
       ...originHeader()
     },
+    next: { revalidate: 3600, tags: ["testimonials"] },
   });
 
   if (!req.ok) {

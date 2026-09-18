@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditBlogForm } from '@/components/blogs/form/EditBlogForm';
 import { getBlogByIdService } from '@/services/server/blogs.service';
+
+export const metadata: Metadata = { title: 'Editar blog' };
 
 export default async function EditarBlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

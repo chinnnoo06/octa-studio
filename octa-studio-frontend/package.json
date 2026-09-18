@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-query": "^5.102.8",
+    "@tinymce/tinymce-react": "^6.3.0",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
@@ -30,6 +31,7 @@
     "sharp": "^0.35.3",
     "ssim.js": "^3.5.0",
     "tailwind-merge": "^3.6.0",
+    "tinymce": "^8.9.1",
     "zod": "^4.6.5"
   },
   "devDependencies": {

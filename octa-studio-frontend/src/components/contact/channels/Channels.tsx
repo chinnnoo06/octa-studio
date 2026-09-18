@@ -4,8 +4,6 @@ import { Reveal } from '@/components/ui/Reveal';
 import { CHANNELS } from '@/utils/data/contact';
 import { ChannelCard } from './ChannelCard';
 
-/** WhatsApp en sólido porque es el canal que se quiere empujar; el resto baja
- *  de peso por orden: tinte para el teléfono, blanco con borde para el correo. */
 const VARIANT = ['dark', 'tint', 'white'] as const;
 
 export const Channels = () => {

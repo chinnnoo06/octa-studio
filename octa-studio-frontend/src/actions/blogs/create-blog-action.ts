@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath, updateTag } from "next/cache"
 
 import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
 import { CreateBlogFormSchema, TCreateBlogForm } from "@/schemas/blogs/blogs.form.schemas"
@@ -30,16 +30,13 @@ export const createBlog = async (data: TCreateBlogForm): Promise<TActionState> =
     formData.append("category", parsed.data.category)
     formData.append("readingTime", String(parsed.data.readingTime))
 
-    // `content` y `seo` viajan como cadena JSON: un FormData solo transporta
-    // texto y archivos, no objetos ni arrays anidados. El backend los reconstruye
-    // con su middleware `parseJsonFields(["content", "seo"])`.
-    formData.append("content", JSON.stringify(parsed.data.content))
+    // `content` ya es texto (HTML del editor) y viaja tal cual; solo `seo` es
+    // un objeto y va serializado, que el backend reconstruye con `parseJsonFields(["seo"])`.
+    formData.append("content", parsed.data.content)
     formData.append("seo", JSON.stringify(parsed.data.seo))
 
-    // El nombre del campo es el que espera multer en `blogImages`.
-    parsed.data.images.forEach((image) => {
-        formData.append("blogImages", image)
-    })
+    // El nombre del campo es el que espera multer en `blogImage`: una sola destacada.
+    formData.append("blogImage", parsed.data.image)
 
     const req = await fetch(url, {
         method: 'POST',
@@ -66,6 +63,10 @@ export const createBlog = async (data: TCreateBlogForm): Promise<TActionState> =
     const success = SuccessResponseSchema.parse(json)
 
     revalidatePath('/admin/blogs')
+
+    // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
+
+    updateTag('blogs')
 
     return {
         error: "",
