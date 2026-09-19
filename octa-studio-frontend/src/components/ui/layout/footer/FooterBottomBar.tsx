@@ -4,8 +4,8 @@ import { DEVELOPER } from '@/utils/data/credits'
 
 export const FooterBottomBar = () => {
     return (
-        <div className="border-primary/30 flex flex-col items-center gap-2.5 border-t pt-10 sm:flex-row sm:justify-between">
-            <p className="text-primary/75 text-xs lg:text-sm">
+        <div className="border-primary/30 flex flex-col items-center gap-5 border-t pt-10 sm:flex-row sm:justify-between">
+            <p className="text-primary/75 text-xs lg:text-sm text-center">
                 © {new Date().getFullYear()} Octa Building Studio · Powered by {' '}
                 {DEVELOPER.url ? (
                     <a
@@ -21,12 +21,12 @@ export const FooterBottomBar = () => {
                 )}
             </p>
 
-            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5">
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 text-xs lg:text-sm">
                 {LEGAL_LINKS.map((l) => (
                     <li key={l.href}>
                         <Link
                             href={l.href}
-                            className="text-primary/75 hover:text-primary text-xs lg:text-sm transition-colors duration-300"
+                            className="text-primary/75 hover:text-primary transition-colors duration-300"
                         >
                             {l.label}
                         </Link>

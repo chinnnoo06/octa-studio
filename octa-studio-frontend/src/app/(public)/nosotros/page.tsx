@@ -2,6 +2,7 @@ import { pageMetadata } from '@/utils/metadata';
 import { Hero } from '@/components/aboutUs/hero/Hero';
 import { Stats } from '@/components/aboutUs/stats/Stats';
 import { Testimonials } from '@/components/testimonials/section/Testimonials';
+import { ClientsMarquee } from '@/components/testimonials/section/ClientsMarquee';
 import { Purpose } from '@/components/aboutUs/purpose/Purpose';
 import { Coverage } from '@/components/aboutUs/Coverage';
 import { Faqs } from '@/components/sections/faqs/Faqs';
@@ -25,8 +26,9 @@ export default async function NosotrosPage() {
       <Purpose />
       <Testimonials testimonials={testimonials} />
       <Stats />
-      <BrandMarquee />
+      <BrandMarquee spacing="bottom" />
       <CtaSection line="Ya sabes quiénes somos. Ahora cuéntanos de ti." />
+      <ClientsMarquee testimonials={testimonials} spacing="top" />
       <Coverage />
     </>
   );

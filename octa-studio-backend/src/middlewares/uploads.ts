@@ -37,3 +37,6 @@ export const blogsUploads = createUploader("blogs")
 
 /** Imagenes del cuerpo del blog, subidas desde el editor una a una. */
 export const blogContentUploads = createUploader("blogs/content", 5 * MB)
+
+/** Logo o foto de la empresa del testimonio. */
+export const testimonialsUploads = createUploader("testimonials")

@@ -7,6 +7,7 @@ import { Projects } from '@/components/home/Projects';
 import { BrandMarquee } from '@/components/sections/BrandMarquee';
 import { Advantages } from '@/components/home/advantages/Advantages';
 import { Testimonials } from '@/components/testimonials/section/Testimonials';
+import { ClientsMarquee } from '@/components/testimonials/section/ClientsMarquee';
 import { Faqs } from '@/components/sections/faqs/Faqs';
 import { Blogs } from '@/components/home/Blogs';
 import { CtaSection } from '@/components/sections/CtaSection';
@@ -31,10 +32,11 @@ export default async function HomePage() {
       <Services /> 
       <Process />     
       <Projects projects={projects} />     
-      <BrandMarquee />
+      <BrandMarquee spacing="none" />
       <Advantages />  
+      <ClientsMarquee testimonials={testimonials} spacing="bottom" />
       <CtaSection /> 
-      <Faqs />       
+      <Faqs />
       <Testimonials testimonials={testimonials} />
       <Blogs blogs={blogs} />   
     </>

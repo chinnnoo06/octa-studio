@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar } from 'react-icons/fa6';
 import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
@@ -64,7 +65,18 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomon
             >
        
               <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 text-center">
-                <FaQuoteLeft aria-hidden="true" className="text-primary/75 size-8 lg:size-10" />
+                <div className="bg-primary flex size-36 shrink-0 items-center justify-center overflow-hidden rounded-xl p-5 lg:size-40">
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_TESTIMONIALS_IMAGE_URL}/${t.image}`}
+                    alt={`Empresa de ${t.name}`}
+                    width={160}
+                    height={160}
+                    sizes="(min-width: 1024px) 96px, 80px"
+                    className="size-full object-contain"
+                  />
+                </div>
+
+                <FaQuoteLeft aria-hidden="true" className="text-primary/75 size-6 lg:size-8" />
 
                 <p className="text-primary text-base text-balance lg:text-lg">
                   {t.quote}

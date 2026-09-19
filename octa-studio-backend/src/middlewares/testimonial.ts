@@ -16,7 +16,7 @@ declare global {
 export const validateTestimonialInput = async (req: Request, res: Response, next: NextFunction) => {
     await body("quote").notEmpty().withMessage("Quote is required").run(req)
     await body("name").notEmpty().withMessage("Name is required").run(req)
-    await body("rating").isInt({ min: 0, max: 5 }).withMessage("Rating must be an integer between 0 and 5").run(req)
+    await body("rating").isInt({ min: 0, max: 5 }).withMessage("Rating must be an integer between 0 and 5").toInt().run(req)
 
     next()
 }

@@ -1,15 +1,16 @@
 "use server"
 
-import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
-import { originHeader } from "@/services/api.headers"
 import { revalidatePath, updateTag } from "next/cache"
-import { TestimonialFormSchema, TTestimonialForm } from "@/schemas/testimonials/testimonials.form.schemas"
+
+import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
+import { UpdateTestimonialFormSchema, TUpdateTestimonialForm } from "@/schemas/testimonials/testimonials.form.schemas"
 import { TActionState } from "@/types/common.types"
+import { originHeader } from "@/services/api.headers"
 import { getToken } from "@/services/auth/auth.token"
 
-export const updateTestimonial = async (id: string, data: TTestimonialForm): Promise<TActionState> => {
+export const updateTestimonial = async (id: string, data: TUpdateTestimonialForm): Promise<TActionState> => {
 
-    const parsed = TestimonialFormSchema.safeParse(data)
+    const parsed = UpdateTestimonialFormSchema.safeParse(data)
 
     if (!parsed.success) {
         return {

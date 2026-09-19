@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { BlogCategorySchema } from "@/schemas/enums.schemas"
 
-const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/webp"]
+const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
 
 /** El editor devuelve HTML; esta vacio si no queda texto ni imagenes. */
 const htmlHasContent = (html: string) =>
@@ -14,7 +14,7 @@ export const BlogSEOFormSchema = z.object({
 
 export const BlogImageFieldSchema = z
     .instanceof(File, { message: "Campo obligatorio" })
-    .refine((file) => IMAGE_TYPES.includes(file.type), { message: "Solo JPG o WebP" })
+    .refine((file) => IMAGE_TYPES.includes(file.type), { message: "Solo JPG, PNG o WebP" })
 
 export const CreateBlogFormSchema = z.object({
     title: z.string().trim().min(1, { message: "Campo obligatorio" }),

@@ -1,8 +1,16 @@
 import { Marquee } from '@/components/ui/Marquee';
+import type { TSectionSpacing } from '@/types/content.types';
 
 const BRAND = 'Octa Building Studio';
 
 const REPEATS = 6;
+
+const SPACING: Record<TSectionSpacing, string> = {
+  both: 'py-20 lg:py-30',
+  top: 'pt-20 lg:pt-30',
+  bottom: 'pb-20 lg:pb-30',
+  none: '',
+};
 
 const Row = ({ direction, duration }: { direction: 'left' | 'right'; duration: number }) => {
   return (
@@ -19,9 +27,9 @@ const Row = ({ direction, duration }: { direction: 'left' | 'right'; duration: n
   );
 }
 
-export const BrandMarquee = () => {
+export const BrandMarquee = ({ spacing = 'both' }: { spacing?: TSectionSpacing }) => {
   return (
-    <div className="bg-thrird w-full overflow-hidden py-20 lg:py-25">
+    <div className={`bg-primary w-full overflow-hidden ${SPACING[spacing]}`}>
       <Row direction="left" duration={24.1} />
       <Row direction="right" duration={29.9} />
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CreateTestimonial } from '@/components/testimonials/form/CreateTestimonial';
+import { CreateTestimonialForm } from '@/components/testimonials/form/CreateTestimonialForm';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';
@@ -25,7 +25,7 @@ export default function CrearTestimonioPage() {
         </div>
       </div>
 
-      <CreateTestimonial />
+      <CreateTestimonialForm />
     </section>
   );
 }

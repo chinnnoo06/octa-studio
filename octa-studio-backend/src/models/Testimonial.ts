@@ -20,6 +20,11 @@ const TestimonialSchema = new Schema<TTestimonial>(
             required: true,
             min: 0,
             max: 5
+        },
+
+        image: {
+            type: String,
+            required: true
         }
     },
     {

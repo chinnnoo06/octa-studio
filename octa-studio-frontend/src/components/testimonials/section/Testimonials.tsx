@@ -14,7 +14,7 @@ export const Testimonials = ({ testimonials }: { testimonials: TTestiomonial[] }
     <section data-section="testimonials" className="bg-thrird">
       <Reveal
         variants={fadeBlur}
-        className="bg-fourth relative flex min-h-[60svh] items-center justify-center overflow-hidden py-15 lg:py-20 lg:min-h-screen"
+        className="bg-fourth relative flex min-h-[60svh] items-center justify-center overflow-hidden py-20 lg:py-30 lg:min-h-screen"
       >
         <Image
           src={Img}

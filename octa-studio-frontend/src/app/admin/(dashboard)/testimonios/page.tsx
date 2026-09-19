@@ -13,7 +13,7 @@ export default async function AdminTestimoniosPage() {
 
   return (
     <section className="flex flex-col gap-10">
-      <div className="flex flex-col justify-between gap-5">
+      <div className="flex flex-col xl:flex-row justify-between gap-5">
         <div className="text-secondary flex flex-col gap-2.5">
           <Eyebrow>Administra los testimonios</Eyebrow>
           <SectionTitle lead="Nuestros" rotating="Testimonios" as='h1' />

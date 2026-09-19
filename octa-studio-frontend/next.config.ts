@@ -4,7 +4,11 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const backendOrigins = [
   ...new Set(
-    [process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL, process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL]
+    [
+      process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL,
+      process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL,
+      process.env.NEXT_PUBLIC_TESTIMONIALS_IMAGE_URL,
+    ]
       .filter((url): url is string => Boolean(url))
       .map((url) => new URL(url).origin),
   ),

@@ -21,13 +21,6 @@ export const FooterBrand = () => {
       </div>
 
       <div className="flex flex-col items-center gap-5 lg:items-end">
-        <p className="text-primary/75 flex items-start gap-2.5 text-center text-sm lg:text-right">
-          <FiMapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 lg:order-2" />
-          <span>
-            {CONTACT.coverage.summary}
-            <span className="text-primary hidden lg:block">{CONTACT.coverage.cities.join(' · ')}</span>
-          </span>
-        </p>
 
         <LinkButtonLeft href={CONTACT.whatsapp.url}>Cotiza tu proyecto</LinkButtonLeft>
       </div>

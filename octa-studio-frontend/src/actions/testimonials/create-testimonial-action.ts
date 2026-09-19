@@ -1,15 +1,16 @@
 "use server"
 
-import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
-import { originHeader } from "@/services/api.headers"
 import { revalidatePath, updateTag } from "next/cache"
-import { TestimonialFormSchema, TTestimonialForm } from "@/schemas/testimonials/testimonials.form.schemas"
+
+import { ErrorResponseSchema, SuccessResponseSchema } from "@/schemas/common/common.response.schemas"
+import { CreateTestimonialFormSchema, TCreateTestimonialForm } from "@/schemas/testimonials/testimonials.form.schemas"
 import { TActionState } from "@/types/common.types"
+import { originHeader } from "@/services/api.headers"
 import { getToken } from "@/services/auth/auth.token"
 
-export const createTestimonial = async (data: TTestimonialForm): Promise<TActionState> => {
+export const createTestimonial = async (data: TCreateTestimonialForm): Promise<TActionState> => {
 
-    const parsed = TestimonialFormSchema.safeParse(data)
+    const parsed = CreateTestimonialFormSchema.safeParse(data)
 
     if (!parsed.success) {
         return {
@@ -22,18 +23,24 @@ export const createTestimonial = async (data: TTestimonialForm): Promise<TAction
 
     const url = `${process.env.API_URL}/testimonials`
 
+    const formData = new FormData()
+
+    formData.append("quote", parsed.data.quote)
+    formData.append("name", parsed.data.name)
+    formData.append("rating", String(parsed.data.rating))
+
+    // El nombre del campo es el que espera multer en `testimonialImage`: una sola.
+    formData.append("testimonialImage", parsed.data.image)
+
     const req = await fetch(url, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            // Sin `Content-Type`: con un FormData lo pone fetch, que es el unico
+            // que conoce el `boundary` del multipart.
             "Authorization": `Bearer ${token}`,
             ...originHeader()
         },
-        body: JSON.stringify({
-            quote: parsed.data.quote,
-            name: parsed.data.name,
-            rating: parsed.data.rating
-        })
+        body: formData
     })
 
     const json = await req.json()

@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { FaStar } from 'react-icons/fa6';
+import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
 import { EditButton } from '@/components/ui/buttons/EditButton';
 import { Table } from '@/components/ui/table/Table';
 import { TableHead } from '@/components/ui/table/TableHead';
@@ -8,7 +10,7 @@ import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas'
 import { DeleteTestimonialButton } from './DeleteTestimonialButton';
 import { QuoteCell } from './QuoteCell';
 
-const COLUMNS = ['Nombre', 'Testimonio', 'Valoración', 'Acciones'] as const;
+const COLUMNS = ['Imagen', 'Nombre', 'Testimonio', 'Valoración', 'Acciones'] as const;
 
 export const TestimonialsTable = ({ testimonials }: { testimonials: TTestiomonial[] }) => {
     if (testimonials.length === 0) {
@@ -22,7 +24,19 @@ export const TestimonialsTable = ({ testimonials }: { testimonials: TTestiomonia
             <tbody className="text-fourth/75">
                 {testimonials.map((t) => (
                     <TableRow key={t._id}>
-                        <td className={`px-5 py-4 text-sm lg:text-base align-top text-secondary font-medium`}>{t.name}</td>
+                        <td className="px-5 py-4 text-sm lg:text-base align-top">
+                            <div className="border-secondary/30 bg-primary w-fit rounded border p-0.5">
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_TESTIMONIALS_IMAGE_URL}/${t.image}`}
+                                    alt={`Imagen de la empresa de ${t.name}`}
+                                    width={56}
+                                    height={40}
+                                    className="h-10 w-14 object-contain"
+                                />
+                            </div>
+                        </td>
+
+                        <td className="px-5 py-4 text-sm lg:text-base align-top text-secondary font-medium">{t.name}</td>
 
                         <td className="px-5 py-4 text-sm lg:text-base align-top">
                             <QuoteCell quote={t.quote} />
@@ -42,6 +56,11 @@ export const TestimonialsTable = ({ testimonials }: { testimonials: TTestiomonia
 
                         <td className={`px-5 py-4 text-sm lg:text-base align-top text-right whitespace-nowrap`}>
                             <span className="inline-flex items-center gap-2.5">
+                                <ImagesButton
+                                    href={`/admin/testimonios/${t._id}/imagen`}
+                                    label={`Actualizar la imagen del testimonio de ${t.name}`}
+                                />
+
                                 <EditButton
                                     href={`/admin/testimonios/${t._id}/editar`}
                                     label={`Editar el testimonio de ${t.name}`}

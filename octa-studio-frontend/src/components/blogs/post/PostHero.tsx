@@ -10,7 +10,7 @@ import type { TBlog } from '@/schemas/blogs/blogs.schemas';
 
 export const PostHero = ({ blog }: { blog: TBlog }) => {
   return (
-    <section data-section="blog-hero" className="bg-primary pt-15 lg:pt-20">
+    <section data-section="blog-hero" className="bg-primary pt-20 lg:pt-30">
       <div className="flex flex-col gap-10">
         <div className="mx-auto w-full max-w-7xl px-5 lg:px-15">
           <RevealOnLoad variants={fadeBlur} className="flex flex-col gap-10">

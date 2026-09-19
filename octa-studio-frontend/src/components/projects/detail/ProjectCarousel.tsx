@@ -43,7 +43,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
   const many = project.images.length > 1;
 
   return (
-    <section data-section="project-gallery" className="bg-primary py-15 lg:py-20">
+    <section data-section="project-gallery" className="bg-primary py-20 lg:py-30">
       <Reveal
         variants={fadeUpScale}
         className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-10 px-5 lg:px-15"

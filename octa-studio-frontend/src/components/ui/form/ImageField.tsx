@@ -41,7 +41,7 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
                     {image ? 'Haz clic para cambiar la imagen' : 'Haz clic para elegir una imagen'}
                 </label>
 
-                <input id={id} type="file" accept="image/jpeg,image/webp" onChange={onSelect} className="sr-only" />
+                <input id={id} type="file" accept="image/jpeg,image/png,image/webp" onChange={onSelect} className="sr-only" />
 
                 {preview && image && (
                     <div className="relative w-fit">

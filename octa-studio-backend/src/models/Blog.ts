@@ -2,10 +2,6 @@ import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 import { BlogCategory, TBlog, TBlogSEO } from "../types/blog/blog.types";
 
-/* -------------------------------------------------------------------------- */
-/*                                   SEO                                      */
-/* -------------------------------------------------------------------------- */
-
 const BlogSEOSchema = new Schema<TBlogSEO>(
     {
         metaTitle: {
@@ -23,10 +19,6 @@ const BlogSEOSchema = new Schema<TBlogSEO>(
     },
     { _id: false }
 )
-
-/* -------------------------------------------------------------------------- */
-/*                                    BLOG                                    */
-/* -------------------------------------------------------------------------- */
 
 const BlogSchema = new Schema<TBlog>(
     {
@@ -68,14 +60,12 @@ const BlogSchema = new Schema<TBlog>(
             }
         },
 
-        // Una sola imagen destacada. Las del cuerpo viven dentro de `content`.
         image: {
             type: String,
             required: true,
             trim: true
         },
 
-        // HTML ya saneado por validateBlogInput; el modelo solo exige que exista.
         content: {
             type: String,
             required: true,

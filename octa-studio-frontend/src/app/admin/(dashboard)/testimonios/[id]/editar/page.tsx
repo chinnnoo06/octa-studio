@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditTestimonial } from '@/components/testimonials/form/EditTestimonial';
+import { EditTestimonialForm } from '@/components/testimonials/form/EditTestimonialForm';
 import { getTestimonialService } from '@/services/server/testimonials.service';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
@@ -30,7 +30,7 @@ export default async function EditarTestimonioPage({ params }: { params: Promise
         </div>
       </div>
 
-      <EditTestimonial testimonial={testimonial}/>
+      <EditTestimonialForm testimonial={testimonial} />
     </section>
   );
 }

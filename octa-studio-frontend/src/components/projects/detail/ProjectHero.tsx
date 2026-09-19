@@ -15,7 +15,7 @@ export const ProjectHero = ({ project }: { project: TProject }) => {
   ];
 
   return (
-    <section data-section="project-hero" className="bg-primary pt-15 lg:pt-20">
+    <section data-section="project-hero" className="bg-primary pt-20 lg:pt-30">
       <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
         <RevealOnLoad
           variants={fadeBlur}

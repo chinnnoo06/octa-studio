@@ -18,7 +18,7 @@ export default function ServiciosPage() {
       <Hero />
       <ServiceDetails />
       <CtaSection line="Elige el servicio. Del resto nos encargamos." />
-      <BrandMarquee />
+      <BrandMarquee spacing="top" />
       <Pillars />
     </>
   );

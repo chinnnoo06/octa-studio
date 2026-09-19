@@ -1,6 +1,7 @@
 import z from "zod";
 import { TestimonialSchema, TTestiomonial } from "@/schemas/testimonials/testimonials.schemas";
 import { originHeader } from "../api.headers";
+import { getToken } from "../auth/auth.token";
 
 export const getTestimonialsService = async (): Promise<TTestiomonial[]> => {
   const url = `${process.env.API_URL}/testimonials`;
@@ -29,13 +30,17 @@ export const getTestimonialsService = async (): Promise<TTestiomonial[]> => {
 };
 
 export const getTestimonialService = async (id: string): Promise<TTestiomonial> => {
+  const token = await getToken();
+
   const url = `${process.env.API_URL}/testimonials/${id}`;
 
   const req = await fetch(url, {
     method: "GET",
     headers: {
+      Authorization: `Bearer ${token}`,
       ...originHeader()
     },
+    cache: "no-store",
   });
 
   if (!req.ok) {

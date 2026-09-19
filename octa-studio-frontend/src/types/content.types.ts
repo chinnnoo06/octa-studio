@@ -4,6 +4,11 @@ import type { BLOG_CATEGORIES } from '@/utils/data/blogs';
 
 export type TNavLink = { label: string; href: string };
 
+/** Que lados de una banda llevan padding. Se decide en la pagina: contra una
+ *  seccion blanca se quita ese lado para no sumar dos paddings; contra un fondo
+ *  oscuro se mantiene. */
+export type TSectionSpacing = 'both' | 'top' | 'bottom' | 'none';
+
 /** Enlace de la sidebar del panel. Extiende al de navegacion publica con lo
  *  que solo necesita el admin: un icono. */
 export type TAdminLink = TNavLink & {

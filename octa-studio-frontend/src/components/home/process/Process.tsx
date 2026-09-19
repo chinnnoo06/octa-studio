@@ -10,7 +10,7 @@ export const Process = () => {
 
   return (
     <section data-section="process"
-      className="bg-fourth relative overflow-hidden py-15 lg:py-20"
+      className="bg-fourth relative overflow-hidden py-20 lg:py-30"
     >
       <Image
         src={Bg}

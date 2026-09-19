@@ -41,6 +41,7 @@ export const validateImagesFormat = (req: Request, res: Response, next: NextFunc
     const allowedFormats = [
         "image/jpeg",
         "image/jpg",
+        "image/png",
         "image/webp"
     ];
 
@@ -53,7 +54,7 @@ export const validateImagesFormat = (req: Request, res: Response, next: NextFunc
 
         return res.status(400).json({
             errors: [
-                { msg: "One or more files have an invalid format, it must be (jpeg, jpg, webp)." }
+                { msg: "One or more files have an invalid format, it must be (jpeg, jpg, png, webp)." }
             ]
         });
     }

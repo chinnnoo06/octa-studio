@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import { TMulterFiles } from "../types/multer/multer.types";
 import { TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithTestimonial } from "../types/express/testimonial";
 import { TTestimonialDto } from "../types/testimonial/testimonial.dtos";
@@ -36,9 +37,10 @@ export class TestimonialController {
 
     static createTestimonial = async (req: Request<{}, {}, TTestimonialDto>, res: Response, next: NextFunction) => {
         const data = req.body;
+        const files = req.files as TMulterFiles;
 
         try {
-            await TestimonialService.createTestimonial(data)
+            await TestimonialService.createTestimonial(data, files)
 
             return res.status(201).json({
                 status: "success",
@@ -64,6 +66,23 @@ export class TestimonialController {
 
         } catch (error) {
             console.error("Error updating the testimonial:", error);
+            next(error)
+        }
+    }
+
+    static updateTestimonialImage = async (req: TRequestWithTestimonial<TMongoIdParams>, res: Response, next: NextFunction) => {
+        const files = req.files as TMulterFiles
+
+        try {
+            await TestimonialService.updateTestimonialImage(req.Testimonial, files)
+
+            return res.status(200).json({
+                status: "success",
+                message: "Testimonial image updated successfully"
+            });
+
+        } catch (error) {
+            console.error("Error updating the testimonial image:", error);
             next(error)
         }
     }
