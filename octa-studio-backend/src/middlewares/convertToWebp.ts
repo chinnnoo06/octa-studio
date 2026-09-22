@@ -6,14 +6,9 @@ import { TMulterFiles } from "../types/multer/multer.types";
 import { deleteSingleUploadedFile } from "../utils/deleteFiles";
 
 type TConverterOptions = {
-    /** Si se indica, las imagenes mas anchas se reducen a este ancho. */
     maxWidth?: number
 }
 
-/**
- * Convierte a WebP todo lo que subio multer, en el sitio. Con `maxWidth`
- * ademas reescala las que se pasen, sin agrandar las pequenas.
- */
 export const createWebPConverter = ({ maxWidth }: TConverterOptions = {}) =>
     async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -21,8 +16,10 @@ export const createWebPConverter = ({ maxWidth }: TConverterOptions = {}) =>
 
             if (!filesObj) return next();
 
+            // Solo imagenes: los videos se guardan tal cual.
             const filesToProcess: Express.Multer.File[] = Object.values(filesObj)
-                .flatMap(field => field ?? []);
+                .flatMap(field => field ?? [])
+                .filter(file => file.mimetype.startsWith("image/"));
 
             if (filesToProcess.length === 0) return next();
 
@@ -99,8 +96,6 @@ export const createWebPConverter = ({ maxWidth }: TConverterOptions = {}) =>
         }
     };
 
-/** El de siempre: proyectos y la imagen destacada del blog, a tamano original. */
 export const converToWebP = createWebPConverter();
 
-/** Imagenes del cuerpo del blog: ademas se limitan a 1600 px de ancho. */
 export const convertContentImageToWebP = createWebPConverter({ maxWidth: 1600 });

@@ -45,6 +45,10 @@ export const getProjectByIdService = async (id: string) => {
     cache: "no-store",
   });
 
+  if (req.status === 404 || req.status === 400) {
+    return null;
+  }
+
   if (!req.ok) {
     throw new Error("Request Failed");
   }
@@ -60,7 +64,6 @@ export const getProjectByIdService = async (id: string) => {
   return result.data.project;
 };
 
-/** `null` cuando el slug no existe, para que la pagina responda 404. */
 export const getProjectBySlugService = async (slug: string) => {
   const url = `${process.env.API_URL}/projects/${slug}`;
 
@@ -72,7 +75,8 @@ export const getProjectBySlugService = async (slug: string) => {
     next: { revalidate: 3600, tags: ["projects"] },
   });
 
-  if (req.status === 404) {
+  // Slug inexistente (404) o rechazado por el backend (400): la pagina responde 404.
+  if (req.status === 404 || req.status === 400) {
     return null;
   }
 

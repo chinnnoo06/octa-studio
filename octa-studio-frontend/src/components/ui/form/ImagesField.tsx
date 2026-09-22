@@ -46,13 +46,13 @@ export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldPr
                     <FiImage aria-hidden="true" className="size-6" />
                     {full
                         ? `Máximo ${max} imágenes`
-                        : `Haz clic para elegir imágenes (${images.length} de ${max})`}
+                        : `Haz clic para elegir imágenes (${images.length} de ${max}) · JPG, PNG o WebP`}
                 </label>
 
                 <input
                     id="images"
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg,image/png,image/webp"
                     multiple
                     disabled={full}
                     onChange={onSelect}
@@ -63,6 +63,7 @@ export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldPr
                     <ul role="list" className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                         {previews.map((preview, i) => (
                             <li key={preview} className="group relative">
+                                {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
                                 <img
                                     src={preview}
                                     alt={`Vista previa ${i + 1}: ${images[i].name}`}

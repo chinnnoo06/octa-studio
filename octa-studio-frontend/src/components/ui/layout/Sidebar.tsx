@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ADMIN_LINKS, ADMIN_LOGOUT } from '@/utils/data/navigation';
-import { logout } from '@/actions/logout.action';
+import { ADMIN_LINKS } from '@/utils/data/navigation';
+import { LogoutButton } from '@/components/auth/LogoutButton';
 
 const ITEM =
     'flex items-center gap-2.5 px-5 py-3.5 text-sm lg:text-base transition-colors duration-300';
@@ -12,8 +12,6 @@ export const Sidebar = () => {
     const pathname = usePathname();
 
     const isActive = (href: string) => pathname === href;
-
-    const LogoutIcon = ADMIN_LOGOUT.icon;
 
     return (
 
@@ -43,15 +41,7 @@ export const Sidebar = () => {
                     </ul>
                 </nav>
 
-                <form action={logout} className="mt-auto">
-                    <button
-                        type="submit"
-                        className={`${ITEM} w-full cursor-pointer  text-red-600 hover:bg-red-600/10`}
-                    >
-                        <LogoutIcon aria-hidden="true" className="size-4.5 shrink-0" />
-                        {ADMIN_LOGOUT.label}
-                    </button>
-                </form>
+                <LogoutButton className={`${ITEM} mt-auto hover:bg-red-600/10`}  />
             </div>
         </aside>
     );

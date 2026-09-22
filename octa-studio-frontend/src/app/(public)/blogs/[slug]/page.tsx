@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { pageMetadata } from '@/utils/metadata';
-import { PostHero } from '@/components/blogs/post/PostHero';
-import { PostBody } from '@/components/blogs/post/PostBody';
 import { RelatedPosts } from '@/components/blogs/post/RelatedPosts';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { getBlogBySlugService, getBlogsService } from '@/services/server/blogs.service';
 import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import { Post } from '@/components/blogs/post/Post';
 
 const RELATED = 3;
 
-export async function generateMetadata({ params }:{ params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlogBySlugService(slug);
 
@@ -56,8 +55,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <PostHero blog={blog} />
-      <PostBody blog={blog} />
+      <Post blog={blog} />
       <CtaSection line="Ya sabes cómo lo hacemos. Cuéntanos tu próxima feria." />
       <RelatedPosts blogs={related} />
     </>

@@ -29,7 +29,7 @@ export const getTestimonialsService = async (): Promise<TTestiomonial[]> => {
   return result.data;
 };
 
-export const getTestimonialService = async (id: string): Promise<TTestiomonial> => {
+export const getTestimonialService = async (id: string): Promise<TTestiomonial | null> => {
   const token = await getToken();
 
   const url = `${process.env.API_URL}/testimonials/${id}`;
@@ -42,6 +42,11 @@ export const getTestimonialService = async (id: string): Promise<TTestiomonial> 
     },
     cache: "no-store",
   });
+
+  // Id inexistente (404) o mal formado (400): la pagina responde 404.
+  if (req.status === 404 || req.status === 400) {
+    return null;
+  }
 
   if (!req.ok) {
     throw new Error("Request Failed");

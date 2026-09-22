@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form"
+import { Controller, useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
@@ -23,7 +23,7 @@ const SELECT =
     'border-secondary/50 text-fourth/75 focus:border-secondary hover:border-secondary w-full cursor-pointer rounded-lg border bg-white px-5 py-2.5 text-xs outline-none transition-all duration-300 lg:text-sm';
 
 export const CreateBlogForm = () => {
-    const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateBlogForm>({
+    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateBlogForm>({
         resolver: zodResolver(CreateBlogFormSchema),
         defaultValues: {
             title: '',
@@ -43,7 +43,7 @@ export const CreateBlogForm = () => {
         if (createBlog.success) toast.success(createBlog.success);
     }, [createBlog.error, createBlog.success]);
 
-    const image = watch('image');
+    const image = useWatch({ control, name: 'image' });
 
     const onSubmit = (data: TCreateBlogForm) => createBlog.handleCreateBlog(data)
 
@@ -119,6 +119,7 @@ export const CreateBlogForm = () => {
                     image={image ?? null}
                     onChange={(file) => setValue('image', file as File, { shouldValidate: true })}
                     error={errors.image?.message}
+                    hint="Se recomienda una foto horizontal: se recorta para llenar el encabezado de la entrada y las tarjetas."
                 />
             </FormSection>
 

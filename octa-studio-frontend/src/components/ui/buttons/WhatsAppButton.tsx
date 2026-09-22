@@ -12,7 +12,7 @@ export const WhatsAppButton = () => {
       className="group border border-secondary bg-secondary text-primary hover:bg-primary hover:text-secondary fixed right-5 bottom-5 z-90 inline-flex items-center rounded-full p-3.5 shadow-lg shadow-black/20 transition duration-300 hover:scale-105 "
     >
       <FaWhatsapp className="size-6 lg:size-7 stroke-1 shrink-0" />
-      <span className="hidden max-w-0 overflow-hidden text-sm leading-none whitespace-nowrap opacity-0 transition-all duration-300 group-hover:ml-3 group-hover:max-w-50 group-hover:opacity-100 lg:inline-block">
+      <span className="hidden max-w-0 overflow-hidden text-sm lg:text-base leading-none whitespace-nowrap opacity-0 transition-all duration-300 group-hover:ml-3 group-hover:max-w-50 group-hover:opacity-100 lg:inline-block">
         Escríbenos
       </span>
     </Link>

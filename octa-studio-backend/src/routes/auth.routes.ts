@@ -21,6 +21,6 @@ router.post("/login",
     AuthController.login
 )
 
-router.get("/session", auth(), AuthController.checkAuth);
+router.get("/session", auth, AuthController.checkAuth);
 
 export default router;

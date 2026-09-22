@@ -11,21 +11,25 @@ import { buildSlug } from "../utils/slug";
 import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "projects");
+const videosDir = path.resolve(UPLOADS_PATH, "projects/videos");
 
 const PROJECTS_PER_PAGE = 6;
 
-const deleteImagesFromDisk = (images: string[]) => {
-    images.forEach(image => {
-        const filePath = path.join(imagesDir, image)
+const deleteFilesFromDisk = (dir: string, names: string[]) => {
+    names.forEach(name => {
+        const filePath = path.join(dir, name)
 
         try {
             fs.unlinkSync(filePath)
-            console.log(`Image deleted: ${image}`);
+            console.log(`File deleted: ${name}`);
         } catch (err) {
-            console.error(`Error deleting ${image}`)
+            console.error(`Error deleting ${name}`)
         }
     })
 }
+
+const deleteImagesFromDisk = (images: string[]) => deleteFilesFromDisk(imagesDir, images)
+const deleteVideosFromDisk = (videos: string[]) => deleteFilesFromDisk(videosDir, videos)
 
 export const ProjectService = {
 
@@ -46,7 +50,10 @@ export const ProjectService = {
                 throw new HttpError(400, "At least one image is required for the project");
             }
 
-            return await projectRepository.createProject({ ...data, slug, images })
+            // Los videos son opcionales: sin campo, lista vacia.
+            const videos = files?.projectVideos?.map(file => file.filename) ?? []
+
+            return await projectRepository.createProject({ ...data, slug, images, videos })
 
         } catch (error) {
             deleteAllUploadedFiles(files);
@@ -97,10 +104,30 @@ export const ProjectService = {
         }
     },
 
+    /** Reemplaza todos los videos; sin archivos, los quita. Los viejos se borran del disco tras guardar. */
+    async updateProjectVideos(project: TProjectDocument, files?: TMulterFiles) {
+        try {
+            const videos = files?.projectVideos?.map(file => file.filename) ?? []
+
+            const oldVideos = [...project.videos]
+
+            project.videos = videos
+            await project.save()
+
+            deleteVideosFromDisk(oldVideos)
+
+            return project
+        } catch (error) {
+            deleteAllUploadedFiles(files);
+            throw error
+        }
+    },
+
     async deleteProject(project: TProjectDocument) {
         await project.deleteOne()
 
         deleteImagesFromDisk(project.images)
+        deleteVideosFromDisk(project.videos)
     },
 
     async getProjects(page: number) {

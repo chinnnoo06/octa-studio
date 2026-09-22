@@ -11,9 +11,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.9.1
         version: 5.9.1(react-hook-form@7.88.0(react@19.2.8))(zod@4.6.5)
-      '@tanstack/react-query':
-        specifier: ^5.102.8
-        version: 5.102.8(react@19.2.8)
       '@tinymce/tinymce-react':
         specifier: ^6.3.0
         version: 6.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(tinymce@8.9.1)
@@ -668,14 +665,6 @@ packages:
 
   '@tailwindcss/postcss@4.3.3':
     resolution: {integrity: sha512-JTSZZGQi1AyKirbLN3azmjVzef92tcX7h+iSqPdaeStyFpGpDlKvvpxeOE8njhbUanbRwr3z8DyzhICWnMtQeg==}
-
-  '@tanstack/query-core@5.102.8':
-    resolution: {integrity: sha512-ZNjkJ33CqvPNec/6lZBnHqLc3EVGPZ9ySLhYahU9TcuRFdmwXewuj0c4hwSWcGHqEUwcSrKeZ+oGcvPBqXcQcg==}
-
-  '@tanstack/react-query@5.102.8':
-    resolution: {integrity: sha512-TYBea4OuXWD7MhaSHq069TWbFe7rcwWN6kzT7JF0OKi1K6c1gTv2IzD6A6ExJsCMozdkqBWeuIUZmu4KQg0O5A==}
-    peerDependencies:
-      react: ^18 || ^19
 
   '@tinymce/tinymce-react@6.3.0':
     resolution: {integrity: sha512-E++xnn0XzDzpKr40jno2Kj7umfAE6XfINZULEBBeNjTMvbACWzA6CjiR6V8eTDc9yVmdVhIPqVzV4PqD5TZ/4g==}
@@ -2657,13 +2646,6 @@ snapshots:
       '@tailwindcss/oxide': 4.3.3
       postcss: 8.5.26
       tailwindcss: 4.3.3
-
-  '@tanstack/query-core@5.102.8': {}
-
-  '@tanstack/react-query@5.102.8(react@19.2.8)':
-    dependencies:
-      '@tanstack/query-core': 5.102.8
-      react: 19.2.8
 
   '@tinymce/tinymce-react@6.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(tinymce@8.9.1)':
     dependencies:

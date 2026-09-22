@@ -36,6 +36,10 @@ export const createProject = async (data: TCreateProjectForm): Promise<TActionSt
         formData.append("projectImages", image)
     })
 
+    parsed.data.videos.forEach((video) => {
+        formData.append("projectVideos", video)
+    })
+
     const req = await fetch(url, {
         method: 'POST',
         headers: {

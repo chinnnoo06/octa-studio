@@ -21,7 +21,7 @@ export const Posts = ({ blogs, pagination, category }: TPostsProps) => {
   const basePath = active ? `/blogs?categoria=${active}` : '/blogs';
 
   return (
-    <section id="entradas" data-section="blogs" className="bg-primary scroll-mt-18 py-20 lg:py-30">
+    <section id="entradas" data-section="blogs" className="bg-primary scroll-mt-18 py-20 lg:py-25">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col gap-2.5">

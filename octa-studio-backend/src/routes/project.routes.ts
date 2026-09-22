@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
-import { projectsUploads } from "../middlewares/uploads";
-import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
+import { projectMediaUploads, projectsUploads, projectVideosUploads } from "../middlewares/uploads";
+import { handleInputErrors, parseJsonFields, validateImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
 import { validateProjectExists, validateProjectExistsBySlug, validateProjectInput } from "../middlewares/project";
 import { ProjectController } from "../controllers/project.controller";
 import { param, query } from "express-validator";
@@ -16,12 +16,14 @@ router.get("/",
 )
 
 router.post("/",
-    auth(),
-    projectsUploads.fields([
-        { name: "projectImages", maxCount: 5 }
+    auth,
+    projectMediaUploads.fields([
+        { name: "projectImages", maxCount: 5 },
+        { name: "projectVideos", maxCount: 5 }
     ]),
     parseJsonFields(["seo"]),
     validateImagesFormat,
+    validateVideosFormat,
     validateProjectInput,
     handleInputErrors,
     converToWebP,
@@ -29,7 +31,7 @@ router.post("/",
 )
 
 router.patch("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     validateProjectInput,
     handleInputErrors,
@@ -38,7 +40,7 @@ router.patch("/:id",
 )
 
 router.patch("/:id/images",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateProjectExists,
@@ -50,8 +52,20 @@ router.patch("/:id/images",
     ProjectController.updateProjectImages
 )
 
+router.patch("/:id/videos",
+    auth,
+    param('id').isMongoId().withMessage('Invalide Id'),
+    handleInputErrors,
+    validateProjectExists,
+    projectVideosUploads.fields([
+        { name: "projectVideos", maxCount: 5 }
+    ]),
+    validateVideosFormat,
+    ProjectController.updateProjectVideos
+)
+
 router.delete("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateProjectExists,
@@ -59,7 +73,7 @@ router.delete("/:id",
 )
 
 router.get("/id/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateProjectExists,

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FiEdit2 } from 'react-icons/fi';
-import { TEditButtonProps } from '@/types/buttons.types';
+import { TEditButtonProps } from './types';
 
 export const EditButton = ({ href, label, className }: TEditButtonProps) => {
   return (

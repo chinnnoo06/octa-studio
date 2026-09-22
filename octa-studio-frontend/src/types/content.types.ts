@@ -58,14 +58,6 @@ export type TPillar = {
   title: string;
 };
 
-/** Areas del equipo en /nosotros. Son areas, no personas. */
-export type TTeamArea = {
-  area: string;
-  description: string;
-  image: StaticImageData;
-  alt: string;
-};
-
 /** Filas de cobertura geografica de /nosotros. */
 export type TCoverageItem = {
   title: string;

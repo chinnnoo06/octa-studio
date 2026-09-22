@@ -5,7 +5,6 @@ import { Testimonials } from '@/components/testimonials/section/Testimonials';
 import { ClientsMarquee } from '@/components/testimonials/section/ClientsMarquee';
 import { Purpose } from '@/components/aboutUs/purpose/Purpose';
 import { Coverage } from '@/components/aboutUs/Coverage';
-import { Faqs } from '@/components/sections/faqs/Faqs';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { BrandMarquee } from '@/components/sections/BrandMarquee';
 import { getTestimonialsService } from '@/services/server/testimonials.service';

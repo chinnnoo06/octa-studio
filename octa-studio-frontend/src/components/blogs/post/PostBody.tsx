@@ -12,61 +12,57 @@ const TILE = 'bg-primary text-secondary flex size-10 shrink-0 items-center justi
 
 export const PostBody = ({ blog }: { blog: TBlog }) => {
   return (
-    <section data-section="blog-body" className="bg-primary py-20 lg:py-30">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 lg:flex-row lg:px-15">
+    <div className="flex flex-col gap-10 lg:flex-row">
+      <aside className="flex lg:sticky lg:top-24 lg:w-80 lg:shrink-0 lg:self-start">
+        <div className="bg-secondary/15 flex flex-col gap-5 rounded-xl p-5 lg:p-10">
+          <p className="font-gentleman text-secondary text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
+            Sobre esta entrada
+          </p>
 
-        <aside className="flex lg:sticky lg:top-24 lg:w-80 lg:shrink-0 lg:self-start">
-          <div className="bg-secondary/15 flex flex-col gap-5 rounded-xl p-5 lg:p-10">
-            <p className="font-gentleman text-secondary text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case">
-              Sobre esta entrada
-            </p>
+          <ul className="flex flex-col gap-5">
+            <li className="flex items-center gap-5">
+              <span className={TILE}>
+                <FaRegCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
+              </span>
+              <div className="flex flex-col gap-0.5">
+                <span className={LABEL}>Publicado</span>
+                <span className={VALUE}>{formatDate(blog.createdAt)}</span>
+              </div>
+            </li>
 
-            <ul className="flex flex-col gap-5">
-              <li className="flex items-center gap-5">
-                <span className={TILE}>
-                  <FaRegCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
-                </span>
-                <div className="flex flex-col gap-0.5">
-                  <span className={LABEL}>Publicado</span>
-                  <span className={VALUE}>{formatDate(blog.createdAt)}</span>
-                </div>
-              </li>
+            <li className="flex items-center gap-5">
+              <span className={TILE}>
+                <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
+              </span>
+              <div className="flex flex-col gap-0.5">
+                <span className={LABEL}>Lectura</span>
+                <span className={VALUE}>{blog.readingTime} min</span>
+              </div>
+            </li>
 
-              <li className="flex items-center gap-5">
-                <span className={TILE}>
-                  <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
-                </span>
-                <div className="flex flex-col gap-0.5">
-                  <span className={LABEL}>Lectura</span>
-                  <span className={VALUE}>{blog.readingTime} min</span>
-                </div>
-              </li>
+            <li className="flex items-center gap-5">
+              <span className={TILE}>
+                <FaTag aria-hidden="true" className="size-4 lg:size-4.5" />
+              </span>
+              <div className="flex flex-col gap-0.5">
+                <span className={LABEL}>Categoría</span>
+                <span className={VALUE}>{blog.category}</span>
+              </div>
+            </li>
+          </ul>
 
-              <li className="flex items-center gap-5">
-                <span className={TILE}>
-                  <FaTag aria-hidden="true" className="size-4 lg:size-4.5" />
-                </span>
-                <div className="flex flex-col gap-0.5">
-                  <span className={LABEL}>Categoría</span>
-                  <span className={VALUE}>{blog.category}</span>
-                </div>
-              </li>
-            </ul>
-
-
-            <div className="border-secondary/30 flex flex-col items-start gap-5 border-t pt-5 lg:pt-10">
-              <LinkButton href={`/blogs?categoria=${slugify(blog.category)}#entradas`}>
-                Ver la categoría
-              </LinkButton>
-              <LinkButton href="/blogs#entradas">Volver al blog</LinkButton>
-            </div>
+          <div className="border-secondary/30 flex flex-col items-start gap-5 border-t pt-5 lg:pt-10">
+            <LinkButton href={`/blogs?categoria=${slugify(blog.category)}#entradas`}>
+              Ver la categoría
+            </LinkButton>
+            <LinkButton href="/blogs#entradas">Volver al blog</LinkButton>
           </div>
-        </aside>
+        </div>
+      </aside>
 
-        <article className="min-w-0 flex-1">
-          <BlogContent html={blog.content} />
-        </article>
-      </div>
-    </section>
+      <article className="min-w-0 flex-1">
+        <BlogContent html={blog.content} />
+      </article>
+    </div>
   );
 };

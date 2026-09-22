@@ -1,15 +1,13 @@
-import { HiArrowDown } from 'react-icons/hi2';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { RevealOnLoad } from '@/components/ui/Reveal';
 import { BannerLogo } from '@/components/sections/BannerLogo';
 import { fadeBlur } from '@/utils/motion/reveal';
-import { CHANNELS } from '@/utils/data/contact';
 import ImgBanner from '@/assets/media/backgrounds/ImgBackground7.webp';
 
 export const Hero = () => {
   return (
-    <section data-section="contact-hero" className="bg-primary pt-20 lg:pt-30">
-      <div className="flex flex-col gap-20 lg:gap-30">
+    <section data-section="contact-hero" className="bg-primary pt-20 lg:pt-25">
+      <div className="flex flex-col gap-20 lg:gap-25">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
             <RevealOnLoad variants={fadeBlur} className="flex flex-1 flex-col gap-10">
               <SectionTitle as="h1" size="hero" lead="Contacta con" rotating="nosotros" />

@@ -11,6 +11,13 @@ import type { TProject } from '@/schemas/projects/projects.schemas';
 const ARROW =
   'cursor-pointer border-secondary text-secondary hover:bg-secondary hover:text-primary flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-xl border-2 transition-colors duration-300';
 
+/** El marco siempre mide lo mismo; el medio se ajusta dentro sin recortarse. */
+const FRAME = 'relative aspect-4/3 w-full overflow-hidden bg-fourth lg:aspect-auto lg:h-160';
+
+/** Fondo: el mismo medio desenfocado, para que un vertical no deje bandas planas. */
+const BACKDROP = 'absolute inset-0 size-full scale-110 object-cover opacity-60 blur-2xl';
+
+type TSlide = { kind: 'image' | 'video'; file: string };
 
 export const ProjectCarousel = ({ project }: { project: TProject }) => {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start', duration: 25 });
@@ -40,10 +47,16 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
     }
   };
 
-  const many = project.images.length > 1;
+  // Primero las fotos y despues los videos, todos del mismo tamano.
+  const slides: TSlide[] = [
+    ...project.images.map((file) => ({ kind: 'image' as const, file })),
+    ...project.videos.map((file) => ({ kind: 'video' as const, file })),
+  ];
+
+  const many = slides.length > 1;
 
   return (
-    <section data-section="project-gallery" className="bg-primary py-20 lg:py-30">
+    <section data-section="project-gallery" className="bg-primary py-20 lg:py-25">
       <Reveal
         variants={fadeUpScale}
         className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-10 px-5 lg:px-15"
@@ -52,30 +65,51 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
           className="w-full max-w-6xl"
           role="region"
           aria-roledescription="carousel"
-          aria-label={`Fotos del proyecto ${project.name}`}
+          aria-label={`Galería del proyecto ${project.name}`}
           tabIndex={many ? 0 : undefined}
           onKeyDown={many ? onKeyDown : undefined}
         >
           <div ref={emblaRef} className="overflow-hidden rounded-xl">
             <div className="flex">
-              {project.images.map((image, i) => (
+              {slides.map((slide, i) => (
                 <div
-                  key={image}
+                  key={slide.file}
                   className="min-w-0 shrink-0 grow-0 basis-full"
                   role="group"
                   aria-roledescription="slide"
-                  aria-label={`${i + 1} de ${project.images.length}`}
+                  aria-label={`${i + 1} de ${slides.length}`}
                   aria-hidden={selected !== i}
                 >
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL}/${image}`}
-                    alt={`Proyecto ${project.name}, foto ${i + 1}`}
-                    width={1920}
-                    height={1080}
-                    priority={i === 0}
-                    sizes="(min-width: 1272px) 1152px, (min-width: 1024px) calc(100vw - 120px), calc(100vw - 40px)"
-                    className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-160"
-                  />
+                  <div className={FRAME}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL}/${slide.kind === 'image' ? slide.file : project.images[0]}`}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      sizes="(min-width: 1272px) 1152px, (min-width: 1024px) calc(100vw - 120px), calc(100vw - 40px)"
+                      className={BACKDROP}
+                    />
+
+                    {slide.kind === 'image' ? (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL}/${slide.file}`}
+                        alt={`Proyecto ${project.name}, foto ${i + 1}`}
+                        fill
+                        priority={i === 0}
+                        sizes="(min-width: 1272px) 1152px, (min-width: 1024px) calc(100vw - 120px), calc(100vw - 40px)"
+                        className="object-contain"
+                      />
+                    ) : (
+                      <video
+                        src={`${process.env.NEXT_PUBLIC_PROJECTS_VIDEO_URL}/${slide.file}`}
+                        controls
+                        playsInline
+                        preload="metadata"
+                        aria-label={`Proyecto ${project.name}, video`}
+                        className="relative size-full object-contain"
+                      />
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -84,17 +118,17 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
 
         {many && (
           <div className="flex items-center gap-5">
-            <button type="button" onClick={prev} aria-label="Foto anterior" className={ARROW}>
+            <button type="button" onClick={prev} aria-label="Anterior" className={ARROW}>
               <FaChevronLeft aria-hidden="true" className="size-4 lg:size-5" />
             </button>
 
             <ul className="flex items-center gap-2.5">
-              {project.images.map((image, i) => (
-                <li key={image}>
+              {slides.map((slide, i) => (
+                <li key={slide.file}>
                   <button
                     type="button"
                     onClick={() => embla?.scrollTo(i)}
-                    aria-label={`Ir a la foto ${i + 1}`}
+                    aria-label={`Ir a ${slide.kind === 'video' ? 'el video' : 'la foto'} ${i + 1}`}
                     aria-current={selected === i}
                     className={`size-2.5 rounded-full transition-colors duration-300 ${
                       selected === i ? 'bg-secondary' : 'bg-secondary/30 hover:bg-secondary/75'
@@ -104,7 +138,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
               ))}
             </ul>
 
-            <button type="button" onClick={next} aria-label="Foto siguiente" className={ARROW}>
+            <button type="button" onClick={next} aria-label="Siguiente" className={ARROW}>
               <FaChevronRight aria-hidden="true" className="size-4 lg:size-5" />
             </button>
           </div>

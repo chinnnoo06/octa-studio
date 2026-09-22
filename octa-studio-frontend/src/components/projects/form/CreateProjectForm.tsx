@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
@@ -16,15 +16,17 @@ import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
 import { ImagesField } from "@/components/ui/form/ImagesField";
+import { VideosField } from "@/components/ui/form/VideosField";
 
 export const CreateProjectForm = () => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateProjectForm>({
+    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateProjectForm>({
         resolver: zodResolver(CreateProjectFormSchema),
         defaultValues: {
             name: '',
             description: '',
             sector: '',
             images: [],
+            videos: [],
             seo: { metaTitle: '', metaDescription: '' }
         }
     })
@@ -36,7 +38,8 @@ export const CreateProjectForm = () => {
         if (createProject.success) toast.success(createProject.success);
     }, [createProject.error, createProject.success]);
 
-    const images = watch('images');
+    const images = useWatch({ control, name: 'images' });
+    const videos = useWatch({ control, name: 'videos' });
 
     const onSubmit = (data: TCreateProjectForm) => createProject.handleCreateProject(data)
 
@@ -88,6 +91,16 @@ export const CreateProjectForm = () => {
                     images={images}
                     onChange={(next) => setValue('images', next, { shouldValidate: true })}
                     error={errors.images?.message}
+                />
+            </FormSection>
+
+            <FormSection>
+                <FormSectionTitle>Videos</FormSectionTitle>
+
+                <VideosField
+                    videos={videos}
+                    onChange={(next) => setValue('videos', next, { shouldValidate: true })}
+                    error={errors.videos?.message}
                 />
             </FormSection>
 

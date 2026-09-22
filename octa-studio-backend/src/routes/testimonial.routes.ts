@@ -14,7 +14,7 @@ router.get("/",
 )
 
 router.post("/",
-    auth(),
+    auth,
     testimonialsUploads.fields([
         { name: "testimonialImage", maxCount: 1 }
     ]),
@@ -26,7 +26,7 @@ router.post("/",
 )
 
 router.put("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     validateTestimonialInput,
     handleInputErrors,
@@ -35,7 +35,7 @@ router.put("/:id",
 )
 
 router.patch("/:id/image",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateTestimonialExists,
@@ -48,7 +48,7 @@ router.patch("/:id/image",
 )
 
 router.delete("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateTestimonialExists,
@@ -56,7 +56,7 @@ router.delete("/:id",
 )
 
 router.get("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateTestimonialExists,

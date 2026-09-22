@@ -14,7 +14,7 @@ export const fanKeyframes = {
   scale: [0.85, 0.85, 1, 1, 0.85, 0.85],
 };
 
-export const fanTimes = (i: number, total: number) => {
+const fanTimes = (i: number, total: number) => {
   const step = MOVE + GAP;
   const allIn = PRE + total * step - GAP;
   const allOut = allIn + HOLD + (total - 1) * step + MOVE;

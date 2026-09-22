@@ -1,5 +1,6 @@
 import { EditButton } from '@/components/ui/buttons/EditButton';
 import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
+import { VideosButton } from '@/components/ui/buttons/VideosButton';
 import { Table } from '@/components/ui/table/Table';
 import { TableHead } from '@/components/ui/table/TableHead';
 import { TableRow } from '@/components/ui/table/TableRow';
@@ -40,6 +41,11 @@ export const ProjectsTable = ({ projects }: { projects: TProject[] }) => {
                                 <ImagesButton
                                     href={`/admin/proyectos/${project._id}/imagenes`}
                                     label={`Actualizar las imágenes de ${project.name}`}
+                                />
+
+                                <VideosButton
+                                    href={`/admin/proyectos/${project._id}/videos`}
+                                    label={`Actualizar los videos de ${project.name}`}
                                 />
 
                                 <EditButton

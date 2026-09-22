@@ -3,6 +3,9 @@ import { BlogCategorySchema } from "@/schemas/enums.schemas"
 
 const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
 
+/** Mismo tope que el backend por imagen. */
+const IMAGE_MAX_SIZE = 10 * 1024 * 1024
+
 /** El editor devuelve HTML; esta vacio si no queda texto ni imagenes. */
 const htmlHasContent = (html: string) =>
     /<img\b/i.test(html) || html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim().length > 0
@@ -15,6 +18,7 @@ export const BlogSEOFormSchema = z.object({
 export const BlogImageFieldSchema = z
     .instanceof(File, { message: "Campo obligatorio" })
     .refine((file) => IMAGE_TYPES.includes(file.type), { message: "Solo JPG, PNG o WebP" })
+    .refine((file) => file.size <= IMAGE_MAX_SIZE, { message: "Cada imagen debe pesar 10 MB o menos" })
 
 export const CreateBlogFormSchema = z.object({
     title: z.string().trim().min(1, { message: "Campo obligatorio" }),

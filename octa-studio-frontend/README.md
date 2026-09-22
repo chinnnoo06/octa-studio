@@ -25,6 +25,7 @@ Variables de entorno en `.env` (no se versiona):
 ```
 API_URL=http://localhost:4000/api
 NEXT_PUBLIC_PROJECTS_IMAGE_URL=http://localhost:4000/files/projects
+NEXT_PUBLIC_PROJECTS_VIDEO_URL=http://localhost:4000/files/projects/videos
 NEXT_PUBLIC_BLOGS_IMAGE_URL=http://localhost:4000/files/blogs
 NEXT_PUBLIC_TESTIMONIALS_IMAGE_URL=http://localhost:4000/files/testimonials
 NEXT_PUBLIC_DOMAIN=http://localhost:3000

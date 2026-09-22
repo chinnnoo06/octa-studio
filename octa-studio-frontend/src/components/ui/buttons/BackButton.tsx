@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { HiArrowUpRight } from 'react-icons/hi2';
-import { TBackButtonProps } from '@/types/buttons.types';
+import { TBackButtonProps } from './types';
 
 export const BackButton = ({ label = 'Volver', className }: TBackButtonProps) => {
   const router = useRouter();

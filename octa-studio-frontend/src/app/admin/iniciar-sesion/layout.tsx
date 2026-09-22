@@ -11,7 +11,7 @@ export default function LoginLayout({ children }: Readonly<{ children: React.Rea
     <>
       <SimpleHeader />
 
-      <main>{children}</main>
+      <main className='pt-18'>{children}</main>
     </>
   );
 }

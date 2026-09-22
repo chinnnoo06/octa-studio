@@ -8,6 +8,7 @@ const backendOrigins = [
       process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL,
       process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL,
       process.env.NEXT_PUBLIC_TESTIMONIALS_IMAGE_URL,
+      process.env.NEXT_PUBLIC_PROJECTS_VIDEO_URL,
     ]
       .filter((url): url is string => Boolean(url))
       .map((url) => new URL(url).origin),
@@ -36,7 +37,7 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       `img-src 'self' data: blob: ${backendOrigins.join(' ')}`.trim(),
-      "media-src 'self'",
+      `media-src 'self' ${backendOrigins.join(' ')}`.trim(),
       "font-src 'self' data:",
       "style-src 'self' 'unsafe-inline'",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
@@ -51,6 +52,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '300mb',
+    },
+  },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },

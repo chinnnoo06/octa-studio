@@ -7,15 +7,22 @@ import type { TProject } from '@/schemas/projects/projects.schemas';
 
 export const ProjectHero = ({ project }: { project: TProject }) => {
   const photos = project.images.length;
+  const videos = project.videos.length;
+
+  // "4 fotos" o "4 fotos · 1 video": el video solo se nombra si lo hay.
+  const gallery = [
+    `${photos} ${photos === 1 ? 'foto' : 'fotos'}`,
+    videos > 0 ? `${videos} ${videos === 1 ? 'video' : 'videos'}` : null,
+  ].filter(Boolean).join(' · ');
 
   const facts = [
     { icon: FaBuilding, label: 'Cliente', value: project.name },
     { icon: FaTag, label: 'Sector', value: project.sector },
-    { icon: FaImages, label: 'Galería', value: `${photos} ${photos === 1 ? 'foto' : 'fotos'}` },
+    { icon: FaImages, label: 'Galería', value: gallery },
   ];
 
   return (
-    <section data-section="project-hero" className="bg-primary pt-20 lg:pt-30">
+    <section data-section="project-hero" className="bg-primary pt-20 lg:pt-25">
       <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
         <RevealOnLoad
           variants={fadeBlur}

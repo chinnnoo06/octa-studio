@@ -55,7 +55,13 @@ export const EditBlogImage = ({ blog }: { blog: TBlog }) => {
             <FormSection>
                 <FormSectionTitle>Nueva imagen</FormSectionTitle>
 
-                <ImageField image={image} onChange={setImage} error={error} label="Nueva imagen destacada" />
+                <ImageField
+                    image={image}
+                    onChange={setImage}
+                    error={error}
+                    label="Nueva imagen destacada"
+                    hint="Se recomienda una foto horizontal: se recorta para llenar el encabezado de la entrada y las tarjetas."
+                />
             </FormSection>
 
             <ActionButton loading={updateBlogImage.loading} className="w-full">

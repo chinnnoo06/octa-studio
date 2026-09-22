@@ -6,12 +6,11 @@ import StepArrow from './StepArrow';
 
 type TProcessCardProps = {
   step: TProcessStep;
-  index: number;
   hasArrow?: boolean;
   className?: string;
 }
 
-export const ProcessCard = ({ step, index, hasArrow = false, className }: TProcessCardProps) => {
+export const ProcessCard = ({ step, hasArrow = false, className }: TProcessCardProps) => {
   return (
     <Reveal
       className={cn(

@@ -16,15 +16,11 @@ export const metadata: Metadata = { title: 'Blogs' };
 export default async function AdminBlogsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const { page } = await searchParams;
 
-  // Cualquier cosa que no sea un entero positivo cae en la 1: cubre `?page=0`,
-  // `?page=-3`, `?page=abc` y `?page=` vacio.
   const requested = Number(page);
   const current = Number.isInteger(requested) && requested > 0 ? requested : 1;
 
   const { blogs, pagination } = await getBlogsService(current);
 
-  // El tope no se sabe hasta consultar. Si pidieron una pagina que no existe se
-  // redirige en vez de pintar una tabla vacia, y asi la URL dice la verdad.
   if (pagination.totalPages > 0 && current > pagination.totalPages) {
     redirect(BASE_PATH);
   }

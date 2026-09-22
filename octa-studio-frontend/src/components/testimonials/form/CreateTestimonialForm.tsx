@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
@@ -18,7 +18,7 @@ import { ImageField } from "@/components/ui/form/ImageField";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
 export const CreateTestimonialForm = () => {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<TCreateTestimonialForm>({
+    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateTestimonialForm>({
         resolver: zodResolver(CreateTestimonialFormSchema),
         defaultValues: { quote: '', name: '', rating: 5, image: undefined }
     })
@@ -30,7 +30,7 @@ export const CreateTestimonialForm = () => {
         if (createTestimonial.success) toast.success(createTestimonial.success);
     }, [createTestimonial.error, createTestimonial.success]);
 
-    const image = watch('image');
+    const image = useWatch({ control, name: 'image' });
 
     const onSubmit = (data: TCreateTestimonialForm) => createTestimonial.handleCreateTestimonial(data)
 

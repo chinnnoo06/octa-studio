@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -12,6 +13,8 @@ export default async function ImagenBlogPage({ params }: { params: Promise<{ id:
   const { id } = await params;
 
   const blog = await getBlogByIdService(id);
+
+  if (!blog) notFound();
 
   return (
     <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">

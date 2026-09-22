@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FiMapPin } from 'react-icons/fi';
 import { CONTACT } from '@/utils/data/contact';
 import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Logo } from '@/components/ui/Logo';

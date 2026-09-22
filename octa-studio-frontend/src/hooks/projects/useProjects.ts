@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useActionStatus } from '../ui/useActionStatus'
-import { TCreateProjectForm, TProjectImagesForm, TUpdateProjectForm } from '@/schemas/projects/projects.form.schemas'
+import { TCreateProjectForm, TProjectImagesForm, TProjectVideosForm, TUpdateProjectForm } from '@/schemas/projects/projects.form.schemas'
 import { createProject } from '@/actions/projects/create-project-action'
 import { updateProject } from '@/actions/projects/update-project-action'
 import { deleteProject } from '@/actions/projects/delete-project-action'
 import { updateProjectImages } from '@/actions/projects/update-project-images-action'
+import { updateProjectVideos } from '@/actions/projects/update-project-videos-action'
 
 export const useProjects = () => {
     const createStatus = useActionStatus()
@@ -21,6 +22,11 @@ export const useProjects = () => {
 
     const [errorImages, setErrorImages] = useState<string | null>(null)
     const [successImages, setSuccessImages] = useState<string | null>(null)
+
+    const videosStatus = useActionStatus()
+
+    const [errorVideos, setErrorVideos] = useState<string | null>(null)
+    const [successVideos, setSuccessVideos] = useState<string | null>(null)
 
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
@@ -76,6 +82,23 @@ export const useProjects = () => {
         if (res.success) setSuccessImages(res.success)
     }
 
+    const handleUpdateProjectVideos = async (id: string, data: TProjectVideosForm) => {
+        if (videosStatus.loading) return
+
+        setErrorVideos(null)
+        setSuccessVideos(null)
+
+        videosStatus.startLoading()
+
+        const res = await updateProjectVideos(id, data)
+
+        videosStatus.stopLoading()
+
+        if (res.error) return setErrorVideos(res.error)
+
+        if (res.success) setSuccessVideos(res.success)
+    }
+
     const handleDeleteProject = async (id: string) => {
         if (deleteStatus.loading) return
 
@@ -113,6 +136,13 @@ export const useProjects = () => {
             loading: imagesStatus.loading,
             error: errorImages,
             success: successImages
+        },
+
+        updateProjectVideos: {
+            handleUpdateProjectVideos,
+            loading: videosStatus.loading,
+            error: errorVideos,
+            success: successVideos
         },
 
         deleteProject: {

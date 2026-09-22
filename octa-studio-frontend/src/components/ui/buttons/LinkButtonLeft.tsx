@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { HiArrowUpLeft } from 'react-icons/hi2';
-import { TLinkButtonProps } from '@/types/buttons.types';
+import { TLinkButtonProps } from './types';
 
 export const LinkButtonLeft = ({ href, children }: TLinkButtonProps) => {
   const isExternal = /^https?:\/\//.test(href);

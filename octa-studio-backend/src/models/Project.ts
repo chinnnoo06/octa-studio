@@ -50,6 +50,14 @@ const ProjectSchema = new Schema<TProject>({
             message: "At least one image is required"
         }
     },
+    videos: {
+        type: [String],
+        default: [],
+        validate: {
+            validator: (arr: string[]) => arr.length <= 5,
+            message: "Up to 5 videos are allowed"
+        }
+    },
     seo: {
         type: ProjectSEOSchema,
         required: true

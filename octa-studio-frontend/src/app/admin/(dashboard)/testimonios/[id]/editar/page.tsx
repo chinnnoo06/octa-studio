@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditTestimonialForm } from '@/components/testimonials/form/EditTestimonialForm';
@@ -12,6 +13,8 @@ export default async function EditarTestimonioPage({ params }: { params: Promise
   const { id } = await params;
 
   const testimonial = await getTestimonialService(id);
+
+  if (!testimonial) notFound();
 
   return (
     <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">

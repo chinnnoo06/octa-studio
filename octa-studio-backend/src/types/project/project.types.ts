@@ -11,6 +11,8 @@ export type TProject = {
     description: string,
     sector: string,
     images: string[],
+    /** Nombres de archivo en uploads/projects/videos. Opcionales, maximo 5. */
+    videos: string[],
     seo: TProjectSEO
 };
 

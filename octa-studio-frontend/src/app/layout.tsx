@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
-import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import ToastNotification from '@/components/ui/ToastNotification';
 
 const inter = Inter({
@@ -53,12 +52,10 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${gentleman.variable}`}
     >
-      <ReactQueryProvider>
       <body className="bg-primary text-fourth antialiased">
         {children}
          <ToastNotification />
       </body>
-      </ReactQueryProvider>
     </html>
   );
 }

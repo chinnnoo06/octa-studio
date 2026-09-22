@@ -10,7 +10,7 @@ import Img from '@/assets/media/stands/ImgStand12.webp';
 
 export const Services = () => {
   return (
-    <section data-section="services" className="bg-primary py-20 lg:py-30">
+    <section data-section="services" className="bg-primary py-20 lg:py-25">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="border-fourth/30 flex flex-col gap-10 border-t pt-10 lg:flex-row">
@@ -42,7 +42,7 @@ export const Services = () => {
         </div>
 
         <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-hidden pb-5 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 xl:grid-cols-4">
-          {SERVICES.map((service, i) => (
+          {SERVICES.map((service) => (
             <Reveal
               key={service.href}
               className="w-75 shrink-0 snap-start sm:w-auto sm:shrink"

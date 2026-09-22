@@ -2,9 +2,13 @@ import { z } from "zod"
 
 const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
 
+/** Mismo tope que el backend por imagen. */
+const IMAGE_MAX_SIZE = 10 * 1024 * 1024
+
 export const TestimonialImageFieldSchema = z
     .instanceof(File, { message: "Campo obligatorio" })
     .refine((file) => IMAGE_TYPES.includes(file.type), { message: "Solo JPG, PNG o WebP" })
+    .refine((file) => file.size <= IMAGE_MAX_SIZE, { message: "Cada imagen debe pesar 10 MB o menos" })
 
 export const CreateTestimonialFormSchema = z.object({
     quote: z.string().trim().min(1, { message: "Campo obligatorio" }),

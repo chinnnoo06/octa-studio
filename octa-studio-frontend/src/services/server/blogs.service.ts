@@ -33,7 +33,6 @@ export const getBlogsService = async (page: number = 1, category?: string) => {
   };
 };
 
-
 export const getBlogByIdService = async (id: string) => {
   const token = await getToken();
 
@@ -47,6 +46,11 @@ export const getBlogByIdService = async (id: string) => {
     },
     cache: "no-store",
   });
+
+  // Id inexistente (404) o mal formado (400): la pagina responde 404.
+  if (req.status === 404 || req.status === 400) {
+    return null;
+  }
 
   if (!req.ok) {
     throw new Error("Request Failed");
@@ -63,7 +67,6 @@ export const getBlogByIdService = async (id: string) => {
   return result.data.blog;
 };
 
-/** `null` cuando el slug no existe, para que la pagina responda 404. */
 export const getBlogBySlugService = async (slug: string) => {
   const url = `${process.env.API_URL}/blogs/${slug}`;
 
@@ -75,7 +78,8 @@ export const getBlogBySlugService = async (slug: string) => {
     next: { revalidate: 3600, tags: ["blogs"] },
   });
 
-  if (req.status === 404) {
+  // Slug inexistente (404) o rechazado por el backend (400): la pagina responde 404.
+  if (req.status === 404 || req.status === 400) {
     return null;
   }
 

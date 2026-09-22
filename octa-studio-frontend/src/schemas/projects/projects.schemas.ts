@@ -12,6 +12,7 @@ export const ProjectSchema = z.object({
   sector: z.string(),
   slug: z.string(),
   images: z.array(z.string()),
+  videos: z.array(z.string()).default([]),
   seo: ProjectSEOSchema,
 });
 

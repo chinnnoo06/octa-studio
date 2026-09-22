@@ -6,7 +6,7 @@ export const NAV_LINKS: TNavLink[] = [
   { label: 'Nosotros',  href: '/nosotros' },
   { label: 'Servicios', href: '/servicios' },
   { label: 'Proyectos', href: '/proyectos' },
-  { label: 'Blog',     href: '/blogs' },
+  { label: 'Blogs',    href: '/blogs' },
   { label: 'Contacto',  href: '/contacto' },
 ];
 

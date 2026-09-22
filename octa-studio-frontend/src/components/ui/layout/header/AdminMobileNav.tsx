@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ADMIN_LINKS, ADMIN_LOGOUT } from '@/utils/data/navigation';
-import { logout } from '@/actions/logout.action';
+import { ADMIN_LINKS } from '@/utils/data/navigation';
+import { LogoutButton } from '@/components/auth/LogoutButton';
 
 type TAdminMobileNavProps = {
     menuVisible: boolean;
@@ -17,7 +17,6 @@ export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps
 
     const isActive = (href: string) => pathname === href;
 
-    const LogoutIcon = ADMIN_LOGOUT.icon;
 
     return (
         <div
@@ -66,12 +65,7 @@ export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps
                 </nav>
 
                 {/* Fuera del <nav>: cerrar sesion es una accion, no navegacion. */}
-                <form action={logout} className="border-secondary/30 mt-auto border-t">
-                    <button type="submit" className={`${ITEM} w-full cursor-pointer text-red-600`}>
-                        <LogoutIcon aria-hidden="true" className="size-4.5 shrink-0" />
-                        {ADMIN_LOGOUT.label}
-                    </button>
-                </form>
+                <LogoutButton className={`${ITEM} border-secondary/30 mt-auto border-t`} />
             </div>
         </div>
     );

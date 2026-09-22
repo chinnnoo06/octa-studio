@@ -13,10 +13,4 @@ export const BLOG_CATEGORIES = [
   'Tendencias en Exhibición Comercial',
   'Noticias Octa',
 ] as const;
-/** Copy del bloque de suscripción que cierra la sección. */
-export const BLOG_NEWSLETTER = {
-  title: 'No te pierdas ninguno',
-  description:
-    'Escribimos sobre ferias, montaje y producción cada pocas semanas. Sin spam y te puedes dar de baja cuando quieras.',
-} as const;
 

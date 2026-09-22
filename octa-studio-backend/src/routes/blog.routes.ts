@@ -18,7 +18,7 @@ router.get("/",
 )
 
 router.post("/",
-    auth(),
+    auth,
     blogsUploads.fields([
         { name: "blogImage", maxCount: 1 }
     ]),
@@ -31,7 +31,7 @@ router.post("/",
 )
 
 router.post("/content-images",
-    auth(),
+    auth,
     blogContentUploads.fields([
         { name: "image", maxCount: 1 }
     ]),
@@ -41,7 +41,7 @@ router.post("/content-images",
 )
 
 router.patch("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     validateBlogInput,
     handleInputErrors,
@@ -50,7 +50,7 @@ router.patch("/:id",
 )
 
 router.patch("/:id/image",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateBlogExists,
@@ -63,7 +63,7 @@ router.patch("/:id/image",
 )
 
 router.delete("/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateBlogExists,
@@ -71,7 +71,7 @@ router.delete("/:id",
 )
 
 router.get("/id/:id",
-    auth(),
+    auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     handleInputErrors,
     validateBlogExists,

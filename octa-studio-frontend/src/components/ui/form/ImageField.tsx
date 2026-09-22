@@ -11,10 +11,12 @@ type TImageFieldProps = {
     error?: string;
     id?: string;
     label?: string;
+    /** Nota bajo el recuadro, p. ej. la orientacion recomendada. */
+    hint?: string;
 };
 
 /** Una sola imagen, con vista previa. Es `ImagesField` para el caso de un archivo. */
-export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada' }: TImageFieldProps) => {
+export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada', hint }: TImageFieldProps) => {
     const preview = useMemo(() => (image ? URL.createObjectURL(image) : null), [image]);
 
     useEffect(() => {
@@ -38,13 +40,16 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
                     className="border-secondary/50 text-fourth/75 hover:border-secondary flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-5 py-8 text-center text-xs transition-colors duration-300 lg:text-sm"
                 >
                     <FiImage aria-hidden="true" className="size-6" />
-                    {image ? 'Haz clic para cambiar la imagen' : 'Haz clic para elegir una imagen'}
+                    {image ? 'Haz clic para cambiar la imagen' : 'Haz clic para elegir una imagen'} · JPG, PNG o WebP
                 </label>
 
                 <input id={id} type="file" accept="image/jpeg,image/png,image/webp" onChange={onSelect} className="sr-only" />
 
+                {hint && <p className="text-fourth/75 text-xs lg:text-sm">{hint}</p>}
+
                 {preview && image && (
                     <div className="relative w-fit">
+                        {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
                         <img
                             src={preview}
                             alt={`Vista previa: ${image.name}`}

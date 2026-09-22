@@ -9,7 +9,7 @@ export const Projects = ({ projects }: { projects: TProject[] }) => {
   if (projects.length === 0) return null;
 
   return (
-    <section data-section="projects" className="py-20 lg:py-30 bg-primary">
+    <section data-section="projects" className="py-20 lg:py-25 bg-primary">
       <div className="mx-auto max-w-[1700px] px-5 lg:px-15 flex flex-col gap-10">
 
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">

@@ -7,7 +7,7 @@ import { COVERAGE } from '@/utils/data/about';
 
 export const Coverage = () => {
   return (
-    <section data-section="coverage" className="bg-primary py-20 lg:py-30">
+    <section data-section="coverage" className="bg-primary py-20 lg:py-25">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary mx-auto flex max-w-4xl flex-col items-center gap-2.5 text-center">
@@ -31,7 +31,7 @@ export const Coverage = () => {
           </Reveal>
 
           <div className="flex flex-col gap-5 justify-center flex-1 ">
-            {COVERAGE.map((item, i) => (
+            {COVERAGE.map((item) => (
               <Reveal
                 key={item.title}
                 className="hover:bg-secondary/15 flex flex-col gap-2.5 rounded-xl p-5 transition-colors duration-300 lg:py-7.5 lg:pr-5 lg:pl-10"

@@ -8,7 +8,7 @@ const VARIANT = ['dark', 'tint', 'white'] as const;
 
 export const Channels = () => {
   return (
-    <section data-section="channels" className="bg-primary py-20 lg:py-30">
+    <section data-section="channels" className="bg-primary py-20 lg:py-25">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col gap-2.5">

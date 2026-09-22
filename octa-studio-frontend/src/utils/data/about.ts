@@ -1,5 +1,4 @@
 import type { TCoverageItem, TPillar, TPurpose, TStat } from '@/types/content.types';
-import { CONTACT } from '@/utils/data/contact';
 
 export const STATS: TStat[] = [
   {
