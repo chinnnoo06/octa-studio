@@ -6,8 +6,8 @@ import ImgBanner from '@/assets/media/backgrounds/ImgBackground5.webp';
 
 export const Hero = () => {
   return (
-    <section data-section="projects-hero" className="bg-primary pt-20 lg:pt-25">
-      <div className="flex flex-col gap-20 lg:gap-25">
+    <section data-section="projects-hero" className="bg-primary pt-15 lg:pt-20">
+      <div className="flex flex-col gap-15 lg:gap-20">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
           <div className="flex gap-10">
             <RevealOnLoad

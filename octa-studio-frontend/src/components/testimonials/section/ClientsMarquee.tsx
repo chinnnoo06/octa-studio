@@ -8,9 +8,9 @@ import type { TSectionSpacing } from '@/types/content.types';
 const MIN_TILES = 10;
 
 const SPACING: Record<TSectionSpacing, string> = {
-  both: 'py-20 lg:py-25',
-  top: 'pt-20 lg:pt-25',
-  bottom: 'pb-20 lg:pb-25',
+  both: 'py-15 lg:py-20',
+  top: 'pt-15 lg:pt-20',
+  bottom: 'pb-15 lg:pb-20',
   none: '',
 };
 

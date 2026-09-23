@@ -9,7 +9,7 @@ import { FooterBottomBar } from './FooterBottomBar';
 
 export const Footer = () => {
   return (
-    <footer data-section="footer" className="bg-fourth relative overflow-hidden py-20 lg:py-25">
+    <footer data-section="footer" className="bg-fourth relative overflow-hidden py-15 lg:py-20">
       <Image src={Img} alt="" fill sizes="100vw" placeholder="blur" className="object-cover object-left lg:object-center" />
 
       <div aria-hidden="true" className="bg-fourth/25 absolute inset-0" />

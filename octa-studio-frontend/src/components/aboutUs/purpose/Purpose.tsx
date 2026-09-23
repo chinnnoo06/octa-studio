@@ -12,7 +12,7 @@ export const Purpose = () => {
   const [mision, vision] = PURPOSE;
 
   return (
-    <section data-section="purpose" className="bg-thrird py-20 lg:py-25">
+    <section data-section="purpose" className="bg-thrird py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col gap-2.5">

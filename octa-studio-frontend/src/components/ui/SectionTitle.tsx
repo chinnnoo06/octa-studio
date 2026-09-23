@@ -16,7 +16,7 @@ type TSectionTitleProps = {
 
 const SIZE = {
   section: 'text-[2rem] small:text-[2.25rem] md:text-[3rem] lg:text-[3.5rem]',
-  hero: 'text-[2.5rem] small:text-[2.75rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem]',
+  hero: 'text-[2.5rem] small:text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem]',
 } as const;
 
 const LINE = 'h-[1.2em]';

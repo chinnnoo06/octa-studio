@@ -7,7 +7,7 @@ import { COVERAGE } from '@/utils/data/about';
 
 export const Coverage = () => {
   return (
-    <section data-section="coverage" className="bg-primary py-20 lg:py-25">
+    <section data-section="coverage" className="bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary mx-auto flex max-w-4xl flex-col items-center gap-2.5 text-center">

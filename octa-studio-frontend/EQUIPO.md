@@ -114,7 +114,7 @@ en las secciones; usa esos con sus opacidades (`text-fourth/75`,
 
 ### Recetas que se repiten
 
-- Marco de sección: `py-20 lg:py-25`, contenedor `max-w-[1700px] px-5 lg:px-15`.
+- Marco de sección: `py-15 lg:py-20`, contenedor `max-w-[1700px] px-5 lg:px-15`.
 - Título de sección: `Eyebrow` en Gentleman + `SectionTitle`.
 - Texto de lectura: `text-fourth/75 text-base lg:text-lg`; texto de tarjeta:
   `text-sm lg:text-base`.

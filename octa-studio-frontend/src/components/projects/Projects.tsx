@@ -14,7 +14,7 @@ type TProjectsProps = {
 
 export const Projects = ({ projects, pagination }: TProjectsProps) => {
   return (
-    <section id="portafolio" data-section="projects" className="bg-primary scroll-mt-18 py-20 lg:py-25">
+    <section id="portafolio" data-section="projects" className="bg-primary scroll-mt-18 py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         {/* Misma cabecera que en la home: titulo a la izquierda, texto de

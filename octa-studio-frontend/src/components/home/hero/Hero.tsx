@@ -23,7 +23,7 @@ export const Hero = () => {
 
       <div className="relative z-10 w-full">
 
-        <div className="flex flex-col justify-between gap-20 md:min-h-155 lg:min-h-225 pt-20 lg:pt-25">
+        <div className="flex flex-col justify-between gap-20 md:min-h-155 lg:min-h-225 pt-15 lg:pt-20">
 
           {/* ── Bloque superior ───────────────────────────────────────────── */}
           <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-10 lg:gap-20 px-5 lg:px-15 md:flex-row">
