@@ -22,8 +22,8 @@ export const Stats = () => {
 
         <div className="grid gap-10 xl:grid-cols-2 ">
 
-          <div className="flex flex-col gap-5">
-            <Reveal variants={fadeUpScale} className="overflow-hidden rounded-xl">
+          <div className="flex flex-col md:flex-row xl:flex-col gap-5">
+            <Reveal variants={fadeUpScale} className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl xl:mx-0 xl:max-w-none">
               <video
                 autoPlay
                 muted
@@ -31,19 +31,19 @@ export const Stats = () => {
                 playsInline
                 poster={ImgPoster.src}
                 aria-label="Montaje de un stand en vídeo"
-                className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
+                className="aspect-4/3 w-full rounded-xl object-cover xl:aspect-auto xl:h-110"
               >
                 <source src="/media/videos/Video2.mp4" type="video/mp4" />
               </video>
             </Reveal>
 
-            <Reveal variants={fadeUpScale} className="relative overflow-hidden rounded-xl">
+            <Reveal variants={fadeUpScale} className="relative mx-auto w-full max-w-2xl overflow-hidden rounded-xl xl:mx-0 xl:max-w-none">
               <Image
                 src={ImgStand}
                 alt="Stand de Octa Building Studio terminado"
                 quality={90}
-                sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
-                className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
+                sizes="(min-width: 1820px) 770px, (min-width: 1280px) calc(50vw - 80px), (min-width: 712px) 672px, calc(100vw - 40px)"
+                className="aspect-4/3 w-full rounded-xl object-cover xl:aspect-auto xl:h-110"
               />
 
               <StatCard stat={first} variant="overlay" />

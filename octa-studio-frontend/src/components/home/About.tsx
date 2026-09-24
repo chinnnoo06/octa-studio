@@ -34,13 +34,13 @@ export const About = () => {
                 <LinkButton href='/nosotros'>Conoce Octa Building Studio</LinkButton>
             </div>
 
-            <Reveal variants={fadeUpScale} className="rounded-xl overflow-hidden bg-white w-full">
+            <Reveal variants={fadeUpScale} className="w-full max-w-2xl mx-auto overflow-hidden rounded-xl bg-white xl:mx-0 xl:max-w-none">
               <Image
                 src={Img}
                 alt="Imagen del logo de Octa Building Studio"
-                sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
+                sizes="(min-width: 1820px) 770px, (min-width: 1280px) calc(50vw - 80px), (min-width: 712px) 672px, calc(100vw - 40px)"
                 quality={90}
-                className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
+                className="aspect-4/3 w-full object-cover xl:aspect-auto xl:h-110"
               />
             </Reveal>
           </div>

@@ -17,11 +17,11 @@ export const Services = () => {
           <div className="text-secondary flex w-full flex-col gap-10 lg:w-1/2">
             <Eyebrow>Nuestros Servicios</Eyebrow>
 
-            <Reveal variants={fadeUpScale} className="overflow-hidden rounded-xl">
+            <Reveal variants={fadeUpScale} className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl lg:mx-0 lg:max-w-none">
               <Image
                 src={Img}
                 alt="Montaje de un stand en feria"
-                sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
+                sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), (min-width: 712px) 672px, calc(100vw - 40px)"
                 quality={90}
                 className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
               />

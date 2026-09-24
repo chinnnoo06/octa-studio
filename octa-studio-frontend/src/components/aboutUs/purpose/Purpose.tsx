@@ -21,11 +21,11 @@ export const Purpose = () => {
         </div>
 
         <div className="grid gap-5 xl:grid-cols-2">
-          <Reveal className="lg:h-110">
+          <Reveal className="xl:h-110">
             <PurposeBlock purpose={mision} variant="tint" />
           </Reveal>
 
-          <Reveal variants={fadeUpScale} className="overflow-hidden rounded-xl">
+          <Reveal variants={fadeUpScale} className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl xl:mx-0 xl:max-w-none">
             <video
               autoPlay
               muted
@@ -33,26 +33,26 @@ export const Purpose = () => {
               playsInline
               poster={ImgPoster.src}
               aria-label="Recorrido por un stand terminado"
-              className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
+              className="aspect-4/3 w-full object-cover xl:aspect-auto xl:h-110"
             >
               <source src="/media/videos/Video3.mp4" type="video/mp4" />
             </video>
           </Reveal>
 
-          <Reveal className="xl:col-start-2 xl:row-start-2 lg:h-110">
+          <Reveal className="xl:col-start-2 xl:row-start-2 xl:h-110">
             <PurposeBlock purpose={vision} variant="dark" />
           </Reveal>
 
           <Reveal
             variants={fadeUpScale}
-            className="relative overflow-hidden rounded-xl xl:col-start-1 xl:row-start-2"
+            className="relative mx-auto w-full max-w-2xl overflow-hidden rounded-xl xl:mx-0 xl:max-w-none xl:col-start-1 xl:row-start-2"
           >
             <Image
               src={ImgStand}
               alt=""
               quality={90}
-              sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
-              className="aspect-4/3 w-full object-cover lg:aspect-auto lg:h-110"
+              sizes="(min-width: 1820px) 770px, (min-width: 1280px) calc(50vw - 80px), (min-width: 712px) 672px, calc(100vw - 40px)"
+              className="aspect-4/3 w-full object-cover xl:aspect-auto xl:h-110"
             />
 
             <div aria-hidden="true" className="bg-fourth/50 absolute inset-0" />

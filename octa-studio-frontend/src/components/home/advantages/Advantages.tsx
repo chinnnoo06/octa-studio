@@ -58,7 +58,7 @@ export const Advantages = () => {
             src={ImgMontaje}
             alt="Stand de PCP montado por Octa en feria"
             title="Montaje y desmontaje con equipo propio"
-            className="aspect-4/3 sm:col-span-2 lg:aspect-auto lg:h-110"
+            className="aspect-4/3 sm:col-span-2 sm:aspect-auto sm:h-110"
             sizes="(min-width: 1024px) 50vw, 100vw"
             quality={90}
           />

@@ -33,13 +33,13 @@ export const ServiceDetail = ({ service, flip = false }: TServiceDetailProps) =>
     >
       <Reveal
         variants={fadeUpScale}
-        className={`overflow-hidden rounded-xl ${flip ? 'lg:order-2' : ''}`}
+        className={`mx-auto w-full max-w-2xl overflow-hidden rounded-xl lg:mx-0 lg:max-w-none ${flip ? 'lg:order-2' : ''}`}
       >
         <Image
           src={service.image}
           alt={service.alt}
           quality={90}
-          sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), calc(100vw - 40px)"
+          sizes="(min-width: 1820px) 770px, (min-width: 1024px) calc(50vw - 80px), (min-width: 712px) 672px, calc(100vw - 40px)"
           className="aspect-4/3 w-full rounded-xl object-cover lg:aspect-auto lg:h-110"
         />
       </Reveal>
