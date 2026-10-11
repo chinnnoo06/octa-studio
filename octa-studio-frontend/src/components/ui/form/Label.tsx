@@ -8,7 +8,7 @@ export const Label = ({ htmlFor, children, className }: TLabelProps) => {
   return (
     <label
       htmlFor={htmlFor}
-      className={`block text-[10px] lg:text-xs font-semibold uppercase text-secondary mb-2.5 ${className ?? ''}`}
+      className={`text-ink mb-1.5 flex items-center gap-1 text-[13px] font-semibold ${className ?? ''}`}
     >
       {children}
     </label>

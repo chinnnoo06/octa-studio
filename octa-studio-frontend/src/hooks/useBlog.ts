@@ -4,6 +4,7 @@ import { TCreateBlogForm, TUpdateBlogImageForm, TUpdateBlogForm } from '@/schema
 import { createBlog } from '@/actions/blog/create-blog-action'
 import { updateBlog } from '@/actions/blog/update-blog-action'
 import { deleteBlog } from '@/actions/blog/delete-blog-action'
+import { deleteBlogs } from '@/actions/blog/delete-blogs-action'
 import { updateBlogImage } from '@/actions/blog/update-blog-image-action'
 
 export const useBlog = () => {
@@ -24,6 +25,11 @@ export const useBlog = () => {
 
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
+
+    const bulkStatus = useActionStatus()
+
+    const [errorBulk, setErrorBulk] = useState<string | null>(null)
+    const [successBulk, setSuccessBulk] = useState<string | null>(null)
 
     const handleCreateBlog = async (data: TCreateBlogForm) => {
         if (createStatus.loading) return
@@ -76,6 +82,27 @@ export const useBlog = () => {
         if (res.success) setSuccessImages(res.success)
     }
 
+    const handleDeleteBlogs = async (ids: string[]) => {
+        if (bulkStatus.loading) return
+
+        setErrorBulk(null)
+        setSuccessBulk(null)
+
+        bulkStatus.startLoading()
+
+        const res = await deleteBlogs(ids)
+
+        bulkStatus.stopLoading()
+
+        if (res.error) {
+            setErrorBulk(res.error)
+            return false
+        }
+
+        if (res.success) setSuccessBulk(res.success)
+        return true
+    }
+
     const handleDeleteBlog = async (id: string) => {
         if (deleteStatus.loading) return
 
@@ -120,6 +147,13 @@ export const useBlog = () => {
             loading: deleteStatus.loading,
             error: errorDelete,
             success: successDelete
+        },
+
+        deleteBlogs: {
+            handleDeleteBlogs,
+            loading: bulkStatus.loading,
+            error: errorBulk,
+            success: successBulk
         }
     }
 }

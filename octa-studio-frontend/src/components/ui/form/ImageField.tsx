@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { FiImage, FiX } from 'react-icons/fi';
 import { SpanError } from './SpanError';
 import { Label } from './Label';
+import { MediaTile } from './MediaTile';
 
 type TImageFieldProps = {
     image: File | null;
@@ -14,6 +14,7 @@ type TImageFieldProps = {
     hint?: string;
 };
 
+/** Una sola imagen: un cuadro que se pulsa para elegirla o cambiarla. */
 export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada', hint }: TImageFieldProps) => {
     const preview = useMemo(() => (image ? URL.createObjectURL(image) : null), [image]);
 
@@ -24,47 +25,32 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
     }, [preview]);
 
     const onSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(event.target.files?.[0] ?? null);
+        // Cancelar el selector no borra la imagen ya elegida.
+        const file = event.target.files?.[0];
+        if (file) onChange(file);
         event.target.value = '';
     };
 
     return (
         <div className="form-group">
-            <Label htmlFor={id}>{label}</Label>
+            <Label htmlFor={id}>{label} · JPG, PNG o WebP</Label>
 
-            <div className="flex flex-col gap-5">
-                <label
-                    htmlFor={id}
-                    className="border-secondary/50 text-fourth/75 hover:border-secondary flex cursor-pointer flex-col items-center justify-center gap-2.5 rounded-lg border border-dashed px-5 py-10 text-center text-xs transition-colors duration-300 lg:text-sm"
-                >
-                    <FiImage aria-hidden="true" className="size-6" />
-                    {image ? 'Haz clic para cambiar la imagen' : 'Haz clic para elegir una imagen'} · JPG, PNG o WebP
-                </label>
-
-                <input id={id} type="file" accept="image/jpeg,image/png,image/webp" onChange={onSelect} className="sr-only" />
-
-                {hint && <p className="text-fourth/75 text-xs lg:text-sm">{hint}</p>}
-
+            <MediaTile
+                htmlFor={id}
+                hoverText="Cambiar imagen"
+                onRemove={() => onChange(null)}
+                removeLabel={image ? `Quitar ${image.name}` : undefined}
+                className="mt-1 max-w-70"
+            >
                 {preview && image && (
-                    <div className="relative w-fit">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
-                        <img
-                            src={preview}
-                            alt={`Vista previa: ${image.name}`}
-                            className="border-secondary/30 h-40 w-auto max-w-full rounded-lg border object-cover"
-                        />
-
-                        <button
-                            type="button"
-                            onClick={() => onChange(null)}
-                            aria-label={`Quitar ${image.name}`}
-                            className="bg-secondary text-primary absolute -top-2 -right-2 inline-flex cursor-pointer items-center justify-center rounded-full p-1.5 transition-colors duration-300 hover:bg-red-600"
-                        >
-                            <FiX aria-hidden="true" className="size-4 lg:size-4.5" />
-                        </button>
-                    </div>
+                    // eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob)
+                    <img src={preview} alt={`Vista previa: ${image.name}`} className="h-full w-full object-contain" />
                 )}
-            </div>
+            </MediaTile>
+
+            <input id={id} type="file" accept="image/jpeg,image/png,image/webp" onChange={onSelect} className="sr-only" />
+
+            {hint && <p className="mt-2.5 text-[13px] leading-[1.55] text-gray-600">{hint}</p>}
 
             <SpanError message={error} />
         </div>

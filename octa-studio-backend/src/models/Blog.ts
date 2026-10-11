@@ -1,6 +1,6 @@
 import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { BlogCategory, TBlog, TBlogSEO } from "../types/blog/blog.types";
+import { BlogCategory, BlogStatus, TBlog, TBlogSEO } from "../types/blog/blog.types";
 
 const BlogSEOSchema = new Schema<TBlogSEO>(
     {
@@ -48,6 +48,21 @@ const BlogSchema = new Schema<TBlog>(
             required: true,
             trim: true,
             enum: Object.values(BlogCategory)
+        },
+
+        // Los blogs creados antes de existir el campo no lo tienen en la BD;
+        // por eso las consultas publicas filtran por "no es borrador".
+        status: {
+            type: String,
+            required: true,
+            enum: Object.values(BlogStatus),
+            default: BlogStatus.PUBLISHED
+        },
+
+        views: {
+            type: Number,
+            min: 0,
+            default: 0
         },
 
         readingTime: {

@@ -1,50 +1,66 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { LinkButton } from '@/components/ui/buttons/LinkButton';
-import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { Pagination } from '@/components/ui/Pagination';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
+import { TableToolbar } from '@/components/ui/table/TableToolbar';
+import { TablePagination } from '@/components/ui/table/TablePagination';
 import { BlogsTable } from '@/components/blogs/table/BlogsTable';
-import { getBlogsService } from '@/services/server/blog.service';
+import { getAdminBlogsService } from '@/services/server/blog.service';
+import { BLOG_CATEGORIES, BLOG_STATUS_LABELS, BLOG_STATUSES } from '@/utils/data/blogs';
+import { pickParams } from '@/utils/queryString';
+import { isFilteredList } from '@/utils/tableFilters';
+import type { TFilterField } from '@/types/common.types';
 
 const BASE_PATH = '/admin/blogs';
 
+const PARAM_KEYS = ['page', 'search', 'category', 'status', 'from', 'to', 'sort', 'order'] as const;
+
+const FILTERS: TFilterField[] = [
+  {
+    type: 'select',
+    name: 'status',
+    label: 'Estado',
+    options: BLOG_STATUSES.map((status) => ({ value: status, label: BLOG_STATUS_LABELS[status] })),
+  },
+  {
+    type: 'select',
+    name: 'category',
+    label: 'Categoría',
+    options: BLOG_CATEGORIES.map((category) => ({ value: category, label: category })),
+  },
+  { type: 'dates' },
+];
+
 export const metadata: Metadata = { title: 'Blogs' };
 
-export default async function AdminBlogsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-  const { page } = await searchParams;
+export default async function AdminBlogsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const params = pickParams(await searchParams, PARAM_KEYS);
 
-  const requested = Number(page);
-  const current = Number.isInteger(requested) && requested > 0 ? requested : 1;
+  const { blogs, pagination } = await getAdminBlogsService(params);
 
-  const { blogs, pagination } = await getBlogsService(current);
-
-  if (pagination.totalPages > 0 && current > pagination.totalPages) {
+  // Una pagina que ya no existe (p. ej. tras borrar) vuelve a la primera con los mismos filtros.
+  if (pagination.totalPages > 0 && Number(params.page ?? 1) > pagination.totalPages) {
     redirect(BASE_PATH);
   }
 
+  const filtered = isFilteredList(FILTERS, params);
+
   return (
-    <section className="flex flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Administra los blogs</Eyebrow>
-          <SectionTitle lead="Nuestros" rotating="Blogs" as='h1' />
-        </div>
+    <section>
+      <AdminHeading title="Blogs" />
 
-        <div className="hidden xl:flex">
-          <LinkButtonLeft href={`${BASE_PATH}/crear`}>Crear blog</LinkButtonLeft>
-        </div>
+      <TableToolbar
+        basePath={BASE_PATH}
+        params={params}
+        searchPlaceholder="Buscar por título, extracto o categoría..."
+        filters={FILTERS}
+        addHref={`${BASE_PATH}/crear`}
+        addLabel="Nuevo blog"
+      />
 
-        <div className="flex xl:hidden">
-          <LinkButton href={`${BASE_PATH}/crear`}>Crear blog</LinkButton>
-        </div>
-      </div>
+      <BlogsTable blogs={blogs} basePath={BASE_PATH} params={params} filtered={filtered} />
 
-      <BlogsTable blogs={blogs} />
-
-      <Pagination pagination={pagination} basePath={BASE_PATH} />
+      <TablePagination pagination={pagination} basePath={BASE_PATH} params={params} />
     </section>
   );
 }

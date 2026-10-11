@@ -1,21 +1,31 @@
 "use client";
 
 import { useLockBodyScroll } from "@/hooks/ui/useLockBodyScroll";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { FaArrowLeft, FaCheck } from "react-icons/fa6";
-import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
 export type TConfirmationModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  context: string;
+  context: ReactNode;
   loading?: boolean;
+  confirmLabel?: string;
 };
 
-export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, loading = false }: TConfirmationModalProps) => {
+const BUTTON =
+  "cursor-pointer rounded-[7px] px-4.5 py-2.5 text-[13px] font-semibold transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-60";
+
+export const ConfirmationModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  context,
+  loading = false,
+  confirmLabel = "Eliminar",
+}: TConfirmationModalProps) => {
   useLockBodyScroll(isOpen);
 
   useEffect(() => {
@@ -34,48 +44,41 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, 
 
   return createPortal(
     <div
-      className="fixed inset-0 z-100 flex items-center justify-center px-5 backdrop-blur-sm bg-black/5"
+      className="fixed inset-0 z-120 flex items-center justify-center bg-slate-900/55 p-3.75 backdrop-blur-[2px]"
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
-        className="max-w-xl w-full bg-primary rounded-lg shadow-lg p-5"
+        className="bg-primary w-full max-w-[460px] rounded-[12px] p-6.25 shadow-[0_24px_64px_rgba(0,0,0,0.25)]"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex flex-col text-center gap-5">
-          <h3
-            id="confirmation-modal-title"
-            className="text-secondary font-semibold text-lg lg:text-xl"
+        <h3 id="confirmation-modal-title" className="text-ink mb-2.5 text-[19px] font-semibold">
+          {title}
+        </h3>
+
+        <p className="mb-5 text-[14px] leading-[1.55] text-gray-600">{context}</p>
+
+        <div className="flex flex-wrap justify-end gap-2">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={loading}
+            className={`${BUTTON} text-ink bg-slate-100 hover:bg-slate-200`}
           >
-            {title}
-          </h3>
+            Cancelar
+          </button>
 
-          <p className="text-fourth/75 text-sm lg:text-base">{context}</p>
-
-          <div className="flex flex-col sm:flex-row gap-2.5 justify-center">
-            <ActionButton
-              variant="outline"
-              type="button"
-              onClick={onClose}
-              disabled={loading}
-              className="w-full sm:w-1/2"
-            >
-              <FaArrowLeft className="size-4 lg:size-4.5" aria-hidden="true" />
-              Cancelar
-            </ActionButton>
-
-            <ActionButton
-              type="button"
-              onClick={onConfirm}
-              loading={loading}
-              className="w-full sm:w-1/2"
-            >
-              <FaCheck className="size-4 lg:size-4.5" aria-hidden="true" />
-              {loading ? "Eliminando..." : "Confirmar"}
-            </ActionButton>
-          </div>
+          <button
+            type="button"
+            onClick={onConfirm}
+            disabled={loading}
+            aria-busy={loading}
+            className={`${BUTTON} text-primary bg-red-700 hover:bg-red-800`}
+          >
+            {loading ? "Eliminando..." : confirmLabel}
+          </button>
         </div>
       </div>
     </div>,

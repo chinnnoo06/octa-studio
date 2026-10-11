@@ -9,6 +9,7 @@ import { UpdateProjectVideosFormSchema } from '@/schemas/project/project.form.sc
 import { TProject } from "@/schemas/project/project.schemas";
 import { useProject } from "@/hooks/useProject";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
+import { ADMIN_FORM_ID } from "@/components/ui/buttons/FormSubmitButton";
 import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { VideosField } from "@/components/ui/form/VideosField";
@@ -39,13 +40,13 @@ export const EditProjectVideosForm = ({ project }: { project: TProject }) => {
     };
 
     return (
-        <form className="space-y-10" onSubmit={onSubmit} noValidate>
+        <form id={ADMIN_FORM_ID} className="mx-auto flex w-full max-w-240 flex-col gap-5" onSubmit={onSubmit} noValidate>
             <FormSection>
                 <FormSectionTitle>Videos actuales</FormSectionTitle>
 
                 <CurrentVideos videos={project.videos} name={project.name} />
 
-                <p className="text-fourth/75 flex items-start gap-2.5 text-xs lg:text-sm">
+                <p className="flex items-start gap-2.5 text-[13px] leading-[1.55] text-gray-600">
                     <FiAlertTriangle aria-hidden="true" className="mt-0.5 size-4 lg:size-4.5 shrink-0 text-red-600" />
                     Al guardar, estos videos se reemplazan por los nuevos y se borran del servidor.
                     Para conservar alguno, vuelve a subirlo junto con los demás. Si guardas sin

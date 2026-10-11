@@ -16,6 +16,7 @@ import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { ImageField } from "@/components/ui/form/ImageField";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
+import { ADMIN_FORM_ID } from "@/components/ui/buttons/FormSubmitButton";
 
 export const CreateTestimonialForm = () => {
     const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateTestimonialForm>({
@@ -35,7 +36,7 @@ export const CreateTestimonialForm = () => {
     const onSubmit = (data: TCreateTestimonialForm) => createTestimonial.handleCreateTestimonial(data)
 
     return (
-        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form id={ADMIN_FORM_ID} className="mx-auto flex w-full max-w-240 flex-col gap-5" onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormSection>
                 <FormSectionTitle>Datos del testimonio</FormSectionTitle>
 

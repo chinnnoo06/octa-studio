@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { body } from "express-validator";
-import { TBlogDocument } from "../types/blog/blog.types";
+import { BlogStatus, TBlogDocument } from "../types/blog/blog.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
 import { blogRepository } from "../repositories/blog.repository";
@@ -18,6 +18,7 @@ export const validateBlogInput = async (req: Request, res: Response, next: NextF
     await body("title").notEmpty().withMessage("Title is required").run(req)
     await body("excerpt").notEmpty().withMessage("Excerpt is required").run(req)
     await body("category").notEmpty().withMessage("Category is required").run(req)
+    await body("status").isIn(Object.values(BlogStatus)).withMessage("Invalid status").run(req)
     await body("readingTime").isInt({ min: 1 }).withMessage("Reading time must be a whole number of minutes, 1 or more").toInt().run(req)
 
     await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
@@ -42,7 +43,8 @@ export const validateBlogExistsBySlug = async (req: Request<TSlugParams>, res: R
     const { slug } = req.params
 
     try {
-        const Blog = await blogRepository.findBySlug(slug.trim().toLowerCase())
+        // Ruta publica: un borrador responde igual que un slug inexistente.
+        const Blog = await blogRepository.findPublishedBySlug(slug.trim().toLowerCase())
 
         if (!Blog) {
             throw new HttpError(404, "Blog not found")

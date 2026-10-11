@@ -7,6 +7,7 @@ import { CtaSection } from '@/components/sections/CtaSection';
 import { getBlogBySlugService, getBlogsService } from '@/services/server/blog.service';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 import { Post } from '@/components/blogs/post/Post';
+import { BlogViewTracker } from '@/components/blogs/post/BlogViewTracker';
 
 const RELATED = 3;
 
@@ -68,6 +69,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <BlogStructuredData blog={blog} imageUrl={IMAGE_URL} />
+      <BlogViewTracker slug={blog.slug} />
       <Post blog={blog} />
       <CtaSection line="Ya sabes cómo lo hacemos. Cuéntanos tu próxima feria." />
       <RelatedPosts blogs={related} />

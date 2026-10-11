@@ -27,6 +27,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
+    "google-auth-library": "^11.2.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.9.5",
     "mongoose-paginate-v2": "^1.9.5",

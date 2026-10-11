@@ -1,5 +1,7 @@
 import z from "zod";
-import { TestimonialSchema, TTestimonial } from "@/schemas/testimonial/testimonial.schemas";
+import { AdminTestimonialsResponseSchema, TestimonialSchema, TTestimonial } from "@/schemas/testimonial/testimonial.schemas";
+import { TAdminListParams } from "@/types/common.types";
+import { toQueryString } from "@/utils/queryString";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
 
@@ -61,4 +63,36 @@ export const getTestimonialService = async (id: string): Promise<TTestimonial | 
   }
 
   return result.data;
+};
+
+/** Listado del panel: buscador, filtro por valoracion y fechas, orden y paginas. */
+export const getAdminTestimonialsService = async (params: TAdminListParams) => {
+  const token = await getToken();
+
+  const url = `${process.env.API_URL}/testimonials/admin?${toQueryString(params)}`;
+
+  const req = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ...originHeader()
+    },
+    cache: "no-store",
+  });
+
+  if (!req.ok) {
+    throw new Error("Request Failed");
+  }
+
+  const json = await req.json();
+  const result = AdminTestimonialsResponseSchema.safeParse(json);
+
+  if (!result.success) {
+    throw new Error("Respuesta inesperada de GET /testimonials/admin");
+  }
+
+  return {
+    testimonials: result.data.testimonials,
+    pagination: result.data.pagination,
+  };
 };

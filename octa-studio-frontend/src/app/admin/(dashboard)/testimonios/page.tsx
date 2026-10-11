@@ -1,35 +1,56 @@
 import type { Metadata } from 'next';
-import { LinkButton } from '@/components/ui/buttons/LinkButton';
-import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { redirect } from 'next/navigation';
+
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
+import { TableToolbar } from '@/components/ui/table/TableToolbar';
+import { TablePagination } from '@/components/ui/table/TablePagination';
 import { TestimonialsTable } from '@/components/testimonials/table/TestimonialsTable';
-import { getTestimonialsService } from '@/services/server/testimonial.service';
+import { getAdminTestimonialsService } from '@/services/server/testimonial.service';
+import { pickParams } from '@/utils/queryString';
+import { isFilteredList } from '@/utils/tableFilters';
+import type { TFilterField } from '@/types/common.types';
+
+const BASE_PATH = '/admin/testimonios';
+
+const PARAM_KEYS = ['page', 'search', 'rating', 'from', 'to', 'sort', 'order'] as const;
+
+const FILTERS: TFilterField[] = [
+  {
+    type: 'select',
+    name: 'rating',
+    label: 'Valoración',
+    options: [5, 4, 3, 2, 1, 0].map((n) => ({ value: String(n), label: `${n} ${n === 1 ? 'estrella' : 'estrellas'}` })),
+  },
+  { type: 'dates' },
+];
 
 export const metadata: Metadata = { title: 'Testimonios' };
 
-export default async function AdminTestimoniosPage() {
-  const testimonials = await getTestimonialsService()
+export default async function AdminTestimoniosPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const params = pickParams(await searchParams, PARAM_KEYS);
+
+  const { testimonials, pagination } = await getAdminTestimonialsService(params);
+
+  if (pagination.totalPages > 0 && Number(params.page ?? 1) > pagination.totalPages) {
+    redirect(BASE_PATH);
+  }
 
   return (
-    <section className="flex flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Administra los testimonios</Eyebrow>
-          <SectionTitle lead="Nuestros" rotating="Testimonios" as='h1' />
-        </div>
+    <section>
+      <AdminHeading title="Testimonios" />
 
-        <div className="hidden xl:flex">
-          <LinkButtonLeft href={`/admin/testimonios/crear`}>Crear testimonio</LinkButtonLeft>
-        </div>
+      <TableToolbar
+        basePath={BASE_PATH}
+        params={params}
+        searchPlaceholder="Buscar por nombre o testimonio..."
+        filters={FILTERS}
+        addHref={`${BASE_PATH}/crear`}
+        addLabel="Nuevo testimonio"
+      />
 
-        <div className="flex xl:hidden">
-          <LinkButton href={`/admin/testimonios/crear`}>Crear testimonio</LinkButton>
-        </div>
-      </div>
+      <TestimonialsTable testimonials={testimonials} basePath={BASE_PATH} params={params} filtered={isFilteredList(FILTERS, params)} />
 
-      <TestimonialsTable testimonials={testimonials} />
-
+      <TablePagination pagination={pagination} basePath={BASE_PATH} params={params} />
     </section>
   );
 }

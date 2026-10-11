@@ -1,3 +1,4 @@
+import { TAdminListQuery } from "../common/common.dtos";
 import { TProjectSEO } from "./project.types";
 
 export type TProjectDto = {
@@ -9,4 +10,8 @@ export type TProjectDto = {
 
 export type TGetProjectsQuery = {
     page?: string,
+}
+
+export type TGetAdminProjectsQuery = TAdminListQuery & {
+    sector?: string
 }

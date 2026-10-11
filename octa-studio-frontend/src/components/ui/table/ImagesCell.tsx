@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const ARROW =
-    'text-fourth/75 hover:bg-secondary/15 hover:text-secondary inline-flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors duration-300';
+    'text-gray-600 hover:bg-slate-100 hover:text-ink inline-flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors duration-300';
 
 type TImagesCellProps = { images: string[]; name: string; baseUrl: string };
 
@@ -13,7 +13,7 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
     const [index, setIndex] = useState(0);
 
     if (images.length === 0) {
-        return <span className="text-fourth/75 text-xs lg:text-sm">Sin imágenes</span>;
+        return <span className="text-[12px] text-gray-600 italic">Sin imágenes</span>;
     }
 
     const many = images.length > 1;
@@ -29,13 +29,13 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
                 </button>
             )}
 
-            <div className="border-secondary/30 bg-primary shrink-0 rounded border p-0.5">
+            <div className="shrink-0 rounded-[4px] bg-slate-50">
                 <Image
                     src={`${baseUrl}/${images[index]}`}
                     alt={`Imagen ${index + 1} de ${images.length} de ${name}`}
-                    width={56}
-                    height={40}
-                    className="h-10 w-14 object-contain"
+                    width={80}
+                    height={60}
+                    className="h-15 w-20 rounded-[4px] object-contain"
                 />
             </div>
 
@@ -46,7 +46,7 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
             )}
 
             {many && (
-                <span aria-live="polite" className="text-fourth/75 shrink-0 text-xs lg:text-sm">
+                <span aria-live="polite" className="shrink-0 text-[12px] text-gray-600">
                     {index + 1}/{images.length}
                 </span>
             )}

@@ -16,6 +16,7 @@ import authRouter from './routes/auth.routes'
 import projectRouter from './routes/project.routes'
 import blogRouter from './routes/blog.routes'
 import testimonialRouter from './routes/testimonial.routes'
+import analyticsRouter from './routes/analytics.routes'
 
 import { scheduleOrphanContentImagesCleanup } from './jobs/cleanOrphanContentImages.job'
 
@@ -45,6 +46,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/projects", projectRouter);
 server.use("/api/blogs", blogRouter);
 server.use("/api/testimonials", testimonialRouter);
+server.use("/api/analytics", analyticsRouter);
 
 server.use(errorHandler);
 

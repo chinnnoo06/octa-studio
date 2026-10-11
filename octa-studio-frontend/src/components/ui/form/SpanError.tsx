@@ -8,8 +8,8 @@ export const SpanError = ({ message }: TSpanErrorProps) => {
   if (!message) return null;
 
   return (
-    <span role="alert" className="text-red-500 text-[10px] lg:text-xs flex items-center mt-2.5">
-      <FaCircleExclamation aria-hidden="true" className="inline-block size-4 lg:size-4.5 mr-1.5" />
+    <span role="alert" className="mt-1.5 flex items-center text-[12px] text-red-700">
+      <FaCircleExclamation aria-hidden="true" className="mr-1.25 inline-block size-3.5" />
       {message}
     </span>
   );

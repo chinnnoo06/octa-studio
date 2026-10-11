@@ -3,17 +3,23 @@ import path from "path";
 
 import { projectRepository } from "../repositories/project.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TProjectDto } from "../types/project/project.dtos";
+import { TGetAdminProjectsQuery, TProjectDto } from "../types/project/project.dtos";
 import { TProjectDocument } from "../types/project/project.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
+import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
 import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "projects");
 const videosDir = path.resolve(UPLOADS_PATH, "projects/videos");
 
 const PROJECTS_PER_PAGE = 6;
+
+/** El panel muestra mas filas por pagina que la web. */
+const ADMIN_PROJECTS_PER_PAGE = 10;
+
+const ADMIN_SORTABLE = ["name", "sector", "createdAt"];
 
 const deleteFilesFromDisk = (dir: string, names: string[]) => {
     names.forEach(name => {
@@ -131,15 +137,51 @@ export const ProjectService = {
 
         return {
             projects: result.docs,
-            pagination: {
-                page: result.page,
-                limit: result.limit,
-                total: result.totalDocs,
-                totalPages: result.totalPages,
-                hasNextPage: result.hasNextPage,
-                hasPrevPage: result.hasPrevPage
-            }
+            pagination: toPagination(result)
         }
+    },
+
+    async getAdminProjects({ page, search, sector, from, to, sort, order }: TGetAdminProjectsQuery) {
+        const filter = {
+            ...searchFilter(search, ["name", "description", "sector"]),
+            ...(sector ? { sector } : {}),
+            ...dateRangeFilter(from, to)
+        }
+
+        const [result, sectors] = await Promise.all([
+            projectRepository.findPaginated(
+                Number(page ?? 1),
+                ADMIN_PROJECTS_PER_PAGE,
+                filter,
+                buildSort(sort, order, ADMIN_SORTABLE)
+            ),
+            projectRepository.findSectors()
+        ])
+
+        return {
+            projects: result.docs,
+            pagination: toPagination(result),
+            // Opciones del filtro "Sector": los que existen, no una lista fija.
+            sectors
+        }
+    },
+
+    /** Borrado masivo del panel: cada proyecto se lleva sus fotos y videos. */
+    async deleteProjects(ids: string[]) {
+        const projects = await projectRepository.findByIds(ids)
+
+        if (projects.length === 0) {
+            throw new HttpError(404, "No projects found to delete");
+        }
+
+        await projectRepository.deleteByIds(projects.map(project => String(project._id)))
+
+        projects.forEach(project => {
+            deleteImagesFromDisk(project.images)
+            deleteVideosFromDisk(project.videos)
+        })
+
+        return projects.length
     },
 
     async getTotalCount() {

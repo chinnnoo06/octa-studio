@@ -1,50 +1,52 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { LinkButton } from '@/components/ui/buttons/LinkButton';
-import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { Pagination } from '@/components/ui/Pagination';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
+import { TableToolbar } from '@/components/ui/table/TableToolbar';
+import { TablePagination } from '@/components/ui/table/TablePagination';
 import { ProjectsTable } from '@/components/projects/table/ProjectsTable';
-import { getProjectsService } from '@/services/server/project.service';
+import { getAdminProjectsService } from '@/services/server/project.service';
+import { pickParams } from '@/utils/queryString';
+import { isFilteredList } from '@/utils/tableFilters';
+import type { TFilterField } from '@/types/common.types';
 
 const BASE_PATH = '/admin/proyectos';
 
+const PARAM_KEYS = ['page', 'search', 'sector', 'from', 'to', 'sort', 'order'] as const;
+
 export const metadata: Metadata = { title: 'Proyectos' };
 
-export default async function AdminProyectosPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-  const { page } = await searchParams;
+export default async function AdminProyectosPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const params = pickParams(await searchParams, PARAM_KEYS);
 
-  const requested = Number(page);
-  const current = Number.isInteger(requested) && requested > 0 ? requested : 1;
+  const { projects, pagination, sectors } = await getAdminProjectsService(params);
 
-  const { projects, pagination } = await getProjectsService(current);
-
-  if (pagination.totalPages > 0 && current > pagination.totalPages) {
+  if (pagination.totalPages > 0 && Number(params.page ?? 1) > pagination.totalPages) {
     redirect(BASE_PATH);
   }
 
+  // Los sectores salen de los proyectos que existen, no de una lista fija.
+  const filters: TFilterField[] = [
+    { type: 'select', name: 'sector', label: 'Sector', options: sectors.map((sector) => ({ value: sector, label: sector })) },
+    { type: 'dates' },
+  ];
+
   return (
-    <section className="flex flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Administra los proyectos</Eyebrow>
-          <SectionTitle lead="Nuestros" rotating="Proyectos" as='h1' />
-        </div>
+    <section>
+      <AdminHeading title="Proyectos" />
 
-        <div className="hidden xl:flex">
-          <LinkButtonLeft href={`${BASE_PATH}/crear`}>Crear proyecto</LinkButtonLeft>
-        </div>
+      <TableToolbar
+        basePath={BASE_PATH}
+        params={params}
+        searchPlaceholder="Buscar por nombre, descripción o sector..."
+        filters={filters}
+        addHref={`${BASE_PATH}/crear`}
+        addLabel="Nuevo proyecto"
+      />
 
-        <div className="flex xl:hidden">
-          <LinkButton href={`${BASE_PATH}/crear`}>Crear proyecto</LinkButton>
-        </div>
-      </div>
+      <ProjectsTable projects={projects} basePath={BASE_PATH} params={params} filtered={isFilteredList(filters, params)} />
 
-      <ProjectsTable projects={projects} />
-
-      <Pagination pagination={pagination} basePath={BASE_PATH} />
+      <TablePagination pagination={pagination} basePath={BASE_PATH} params={params} />
     </section>
   );
 }

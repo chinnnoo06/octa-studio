@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BackButton } from '@/components/ui/buttons/BackButton';
-import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { FormSubmitButton } from '@/components/ui/buttons/FormSubmitButton';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
 import { EditProjectImagesForm } from '@/components/projects/form/images/EditProjectImagesForm';
 import { getProjectByIdService } from '@/services/server/project.service';
 
@@ -17,21 +16,8 @@ export default async function ImagenesProyectoPage({ params }: { params: Promise
   if (!project) notFound();
 
   return (
-    <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Actualiza las imágenes</Eyebrow>
-          <SectionTitle lead="Imágenes del" rotating="Proyecto" as='h1' />
-        </div>
-
-        <div className="hidden xl:flex">
-          <BackButtonLeft />
-        </div>
-
-        <div className="flex xl:hidden">
-          <BackButton />
-        </div>
-      </div>
+    <section className="w-full">
+      <AdminHeading title="Imágenes del proyecto" subtitle="Reemplaza la galería de imágenes del proyecto." actions={<><BackButton /><FormSubmitButton>Reemplazar imágenes</FormSubmitButton></>} narrow />
 
       <EditProjectImagesForm project={project} />
     </section>

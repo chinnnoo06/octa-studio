@@ -8,7 +8,8 @@ import { SITE, SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  // 900 solo lo usan las cifras grandes del dashboard.
+  weight: ['400', '500', '600', '700', '900'],
   variable: '--font-inter',
   display: 'swap',
 });

@@ -36,3 +36,12 @@ export type TBackButtonProps = {
     label?: string;
     className?: string;
 }
+
+export type TPanelButtonProps = {
+    href?: string;
+    onClick?: () => void;
+    children: React.ReactNode;
+    variant?: 'primary' | 'outline';
+    className?: string;
+}
+

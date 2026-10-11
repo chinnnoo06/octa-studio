@@ -3,6 +3,7 @@ import { useActionStatus } from './ui/useActionStatus'
 import { TCreateTestimonialForm, TUpdateTestimonialImageForm, TUpdateTestimonialForm } from '@/schemas/testimonial/testimonial.form.schemas'
 import { createTestimonial } from '@/actions/testimonial/create-testimonial-action'
 import { deleteTestimonial } from '@/actions/testimonial/delete-testimonial-action'
+import { deleteTestimonials } from '@/actions/testimonial/delete-testimonials-action'
 import { updateTestimonial } from '@/actions/testimonial/update-testimonial-action'
 import { updateTestimonialImage } from '@/actions/testimonial/update-testimonial-image-action'
 import { TTestimonial } from '@/schemas/testimonial/testimonial.schemas'
@@ -24,6 +25,11 @@ export const useTestimonial = () => {
 
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
+
+    const bulkStatus = useActionStatus()
+
+    const [errorBulk, setErrorBulk] = useState<string | null>(null)
+    const [successBulk, setSuccessBulk] = useState<string | null>(null)
 
     const handleCreateTestimonial = async (data: TCreateTestimonialForm) => {
         if (createStatus.loading) return
@@ -76,6 +82,27 @@ export const useTestimonial = () => {
         if (res.success) setSuccessImage(res.success)
     }
 
+    const handleDeleteTestimonials = async (ids: TTestimonial['_id'][]) => {
+        if (bulkStatus.loading) return
+
+        setErrorBulk(null)
+        setSuccessBulk(null)
+
+        bulkStatus.startLoading()
+
+        const res = await deleteTestimonials(ids)
+
+        bulkStatus.stopLoading()
+
+        if (res.error) {
+            setErrorBulk(res.error)
+            return false
+        }
+
+        if (res.success) setSuccessBulk(res.success)
+        return true
+    }
+
     const handleDeleteTestimonial = async (id: TTestimonial['_id']) => {
         if (deleteStatus.loading) return
 
@@ -120,6 +147,13 @@ export const useTestimonial = () => {
             loading: deleteStatus.loading,
             error: errorDelete,
             success: successDelete
+        },
+
+        deleteTestimonials: {
+            handleDeleteTestimonials,
+            loading: bulkStatus.loading,
+            error: errorBulk,
+            success: successBulk
         }
     }
 }

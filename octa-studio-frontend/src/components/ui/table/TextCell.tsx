@@ -25,7 +25,7 @@ export const TextCell = ({ text }: { text: string }) => {
     }, [text, expanded]);
 
     return (
-        <div className="flex max-w-100 flex-col items-start gap-2.5">
+        <div className="flex max-w-100 flex-col items-start gap-1.25">
             <p ref={ref} className={expanded ? '' : 'line-clamp-2'}>
                 {text}
             </p>
@@ -35,7 +35,7 @@ export const TextCell = ({ text }: { text: string }) => {
                     type="button"
                     onClick={() => setExpanded((v) => !v)}
                     aria-expanded={expanded}
-                    className="text-secondary hover:text-secondary/75 cursor-pointer text-xs lg:text-sm font-medium underline underline-offset-2 transition-colors duration-300"
+                    className="text-secondary hover:text-secondary/75 cursor-pointer text-[12px] font-semibold underline underline-offset-2 transition-colors duration-300"
                 >
                     {expanded ? 'Ver menos' : 'Ver más'}
                 </button>

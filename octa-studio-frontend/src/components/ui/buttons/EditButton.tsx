@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { FiEdit2 } from 'react-icons/fi';
+import { FaPenToSquare } from 'react-icons/fa6';
+import { ICON_BUTTON } from './iconButton';
 import { TEditButtonProps } from './types';
 
 export const EditButton = ({ href, label, className }: TEditButtonProps) => {
@@ -7,9 +8,10 @@ export const EditButton = ({ href, label, className }: TEditButtonProps) => {
     <Link
       href={href}
       aria-label={label}
-      className={`text-fourth/75 hover:bg-secondary/15 hover:text-secondary inline-flex items-center justify-center rounded-lg p-2.5 transition-colors duration-300 ${className ?? ''}`}
+      title={label}
+      className={`${ICON_BUTTON.base} ${ICON_BUTTON.edit} ${className ?? ''}`}
     >
-      <FiEdit2 aria-hidden="true" className="size-4 lg:size-4.5" />
+      <FaPenToSquare aria-hidden="true" className={ICON_BUTTON.icon} />
     </Link>
   );
 };

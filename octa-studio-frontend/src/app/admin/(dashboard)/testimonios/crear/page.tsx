@@ -1,29 +1,15 @@
 import type { Metadata } from 'next';
 import { CreateTestimonialForm } from '@/components/testimonials/form/CreateTestimonialForm';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BackButton } from '@/components/ui/buttons/BackButton';
-import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
+import { FormSubmitButton } from '@/components/ui/buttons/FormSubmitButton';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
 
 export const metadata: Metadata = { title: 'Crear testimonio' };
 
 export default function CrearTestimonioPage() {
   return (
-    <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Agrega un nuevo testimonio</Eyebrow>
-          <SectionTitle lead="Crear" rotating="Testimonio" as='h1' />
-        </div>
-
-        <div className="hidden xl:flex">
-          <BackButtonLeft />
-        </div>
-
-        <div className="flex xl:hidden">
-          <BackButton />
-        </div>
-      </div>
+    <section className="w-full">
+      <AdminHeading title="Crear testimonio" subtitle="Agrega la opinión de un cliente con el logo de su empresa." actions={<><BackButton /><FormSubmitButton>Crear testimonio</FormSubmitButton></>} narrow />
 
       <CreateTestimonialForm />
     </section>

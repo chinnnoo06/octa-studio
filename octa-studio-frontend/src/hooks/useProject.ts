@@ -4,6 +4,7 @@ import { TCreateProjectForm, TUpdateProjectImagesForm, TUpdateProjectVideosForm,
 import { createProject } from '@/actions/project/create-project-action'
 import { updateProject } from '@/actions/project/update-project-action'
 import { deleteProject } from '@/actions/project/delete-project-action'
+import { deleteProjects } from '@/actions/project/delete-projects-action'
 import { updateProjectImages } from '@/actions/project/update-project-images-action'
 import { updateProjectVideos } from '@/actions/project/update-project-videos-action'
 
@@ -30,6 +31,11 @@ export const useProject = () => {
 
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
+
+    const bulkStatus = useActionStatus()
+
+    const [errorBulk, setErrorBulk] = useState<string | null>(null)
+    const [successBulk, setSuccessBulk] = useState<string | null>(null)
 
     const handleCreateProject = async (data: TCreateProjectForm) => {
         if (createStatus.loading) return
@@ -99,6 +105,27 @@ export const useProject = () => {
         if (res.success) setSuccessVideos(res.success)
     }
 
+    const handleDeleteProjects = async (ids: string[]) => {
+        if (bulkStatus.loading) return
+
+        setErrorBulk(null)
+        setSuccessBulk(null)
+
+        bulkStatus.startLoading()
+
+        const res = await deleteProjects(ids)
+
+        bulkStatus.stopLoading()
+
+        if (res.error) {
+            setErrorBulk(res.error)
+            return false
+        }
+
+        if (res.success) setSuccessBulk(res.success)
+        return true
+    }
+
     const handleDeleteProject = async (id: string) => {
         if (deleteStatus.loading) return
 
@@ -150,6 +177,13 @@ export const useProject = () => {
             loading: deleteStatus.loading,
             error: errorDelete,
             success: successDelete
+        },
+
+        deleteProjects: {
+            handleDeleteProjects,
+            loading: bulkStatus.loading,
+            error: errorBulk,
+            success: successBulk
         }
     }
 }

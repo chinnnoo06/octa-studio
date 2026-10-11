@@ -33,7 +33,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormSection>
                 <FormSectionTitle>Credenciales</FormSectionTitle>
 
@@ -83,7 +83,7 @@ export const LoginForm = () => {
             </FormSection>
 
 
-            <ActionButton loading={loading} className="w-full">
+            <ActionButton loading={loading}>
                 <FaRightToBracket aria-hidden="true" className="size-4 lg:size-4.5" />
                 {loading ? 'Entrando...' : 'Entrar'}
             </ActionButton>

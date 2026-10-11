@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BackButton } from '@/components/ui/buttons/BackButton';
-import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { FormSubmitButton } from '@/components/ui/buttons/FormSubmitButton';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
 import { EditTestimonialImageForm } from '@/components/testimonials/form/images/EditTestimonialImageForm';
 import { getTestimonialService } from '@/services/server/testimonial.service';
 
@@ -17,21 +16,8 @@ export default async function ImagenTestimonioPage({ params }: { params: Promise
   if (!testimonial) notFound();
 
   return (
-    <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Actualiza la imagen</Eyebrow>
-          <SectionTitle lead="Imagen del" rotating="Testimonio" as='h1' />
-        </div>
-
-        <div className="hidden xl:flex">
-          <BackButtonLeft />
-        </div>
-
-        <div className="flex xl:hidden">
-          <BackButton />
-        </div>
-      </div>
+    <section className="w-full">
+      <AdminHeading title="Imagen del testimonio" subtitle="Reemplaza el logo o la foto de la empresa." actions={<><BackButton /><FormSubmitButton>Reemplazar imagen</FormSubmitButton></>} narrow />
 
       <EditTestimonialImageForm testimonial={testimonial} />
     </section>

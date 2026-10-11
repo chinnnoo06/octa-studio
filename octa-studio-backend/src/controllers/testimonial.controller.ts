@@ -1,11 +1,42 @@
 import type { NextFunction, Request, Response } from "express";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TMongoIdParams } from "../types/common/common.dtos";
+import { TBulkDeleteDto, TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithTestimonial } from "../types/express/testimonial";
-import { TTestimonialDto } from "../types/testimonial/testimonial.dtos";
+import { TGetAdminTestimonialsQuery, TTestimonialDto } from "../types/testimonial/testimonial.dtos";
 import { TestimonialService } from "../services/testimonial.service";
 
 export class TestimonialController {
+
+    static getAdminTestimonials = async (req: Request<{}, {}, {}, TGetAdminTestimonialsQuery>, res: Response, next: NextFunction) => {
+        try {
+            const { testimonials, pagination } = await TestimonialService.getAdminTestimonials(req.query)
+
+            return res.status(200).json({
+                status: "success",
+                testimonials,
+                pagination
+            });
+
+        } catch (error) {
+            console.error("Error retrieving the admin testimonials:", error);
+            next(error)
+        }
+    }
+
+    static deleteTestimonials = async (req: Request<{}, {}, TBulkDeleteDto>, res: Response, next: NextFunction) => {
+        try {
+            const deleted = await TestimonialService.deleteTestimonials(req.body.ids)
+
+            return res.status(200).json({
+                status: "success",
+                message: `${deleted} testimonial(s) deleted successfully`
+            });
+
+        } catch (error) {
+            console.error("Error deleting the testimonials:", error);
+            next(error)
+        }
+    }
 
     static getTestimonials = async (req: Request, res: Response, next: NextFunction) => {
         try {

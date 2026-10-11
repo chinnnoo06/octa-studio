@@ -10,6 +10,7 @@ export const ProjectSchema = z.object({
   images: z.array(z.string()),
   videos: z.array(z.string()).default([]),
   seo: SEOSchema,
+  createdAt: z.string().optional(),
 });
 
 export type TProject = z.infer<typeof ProjectSchema>;

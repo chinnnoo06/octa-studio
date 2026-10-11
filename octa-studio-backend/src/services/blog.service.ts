@@ -1,13 +1,14 @@
 import fs from "fs";
 import path from "path";
 
-import { blogRepository } from "../repositories/blog.repository";
+import { blogRepository, PUBLIC_BLOG_FILTER } from "../repositories/blog.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TBlogDto } from "../types/blog/blog.dtos";
+import { TBlogDto, TGetAdminBlogsQuery } from "../types/blog/blog.dtos";
 import { BlogCategory, TBlogDocument } from "../types/blog/blog.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
+import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
 import { CONTENT_IMAGES_PATH, extractContentImages } from "../utils/blogContent";
 import { PUBLIC_URL, UPLOADS_PATH } from "../config/env";
 
@@ -15,6 +16,13 @@ const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
 const contentImagesDir = path.resolve(UPLOADS_PATH, "blogs", "content");
 
 const BLOGS_PER_PAGE = 6;
+
+/** El panel muestra mas filas por pagina que la web. */
+const ADMIN_BLOGS_PER_PAGE = 10;
+
+const ADMIN_SORTABLE = ["title", "category", "status", "views", "createdAt"];
+
+const MOST_READ = 5;
 
 const deleteFromDisk = (dir: string, names: string[]) => {
     names.forEach(name => {
@@ -35,21 +43,67 @@ const deleteContentImages = (names: string[]) => deleteFromDisk(contentImagesDir
 export const BlogService = {
 
     async getBlogs(page: number, category?: BlogCategory) {
-        const filter = category ? { category } : {}
+        const filter = {
+            ...PUBLIC_BLOG_FILTER,
+            ...(category ? { category } : {})
+        }
 
         const result = await blogRepository.findPaginated(page, BLOGS_PER_PAGE, filter)
 
         return {
             blogs: result.docs,
-            pagination: {
-                page: result.page,
-                limit: result.limit,
-                total: result.totalDocs,
-                totalPages: result.totalPages,
-                hasNextPage: result.hasNextPage,
-                hasPrevPage: result.hasPrevPage
-            }
+            pagination: toPagination(result)
         }
+    },
+
+    async getAdminBlogs({ page, search, category, status, from, to, sort, order }: TGetAdminBlogsQuery) {
+        const filter = {
+            ...searchFilter(search, ["title", "excerpt", "category"]),
+            ...(category ? { category } : {}),
+            ...(status ? { status } : {}),
+            ...dateRangeFilter(from, to)
+        }
+
+        const result = await blogRepository.findPaginated(
+            Number(page ?? 1),
+            ADMIN_BLOGS_PER_PAGE,
+            filter,
+            buildSort(sort, order, ADMIN_SORTABLE)
+        )
+
+        return {
+            blogs: result.docs,
+            pagination: toPagination(result)
+        }
+    },
+
+    /** Datos internos del bloque "Blog" del dashboard. */
+    async getStats() {
+        const [totals, mostRead, latest] = await Promise.all([
+            blogRepository.getTotals(),
+            blogRepository.findMostRead(MOST_READ),
+            blogRepository.findLatestPublished()
+        ])
+
+        return {
+            total: totals.total,
+            published: totals.total - totals.drafts,
+            drafts: totals.drafts,
+            totalViews: totals.totalViews,
+            mostRead: mostRead.map(blog => ({
+                _id: String(blog._id),
+                title: blog.title,
+                slug: blog.slug,
+                views: blog.views ?? 0
+            })),
+            latest: latest
+                ? { _id: String(latest._id), title: latest.title, slug: latest.slug, createdAt: latest.createdAt }
+                : null
+        }
+    },
+
+    async registerView(slug: string) {
+        await blogRepository.incrementViews(slug)
     },
 
     async createBlog(data: TBlogDto, files?: TMulterFiles) {
@@ -101,6 +155,7 @@ export const BlogService = {
         blog.title = data.title
         blog.excerpt = data.excerpt
         blog.category = data.category
+        blog.status = data.status
         blog.readingTime = data.readingTime
         blog.content = data.content
         blog.seo = data.seo
@@ -150,5 +205,23 @@ export const BlogService = {
 
         deleteFeaturedImage(blog.image)
         deleteContentImages(extractContentImages(blog.content))
+    },
+
+    /** Borrado masivo del panel: cada blog se lleva su imagen y las de su contenido. */
+    async deleteBlogs(ids: string[]) {
+        const blogs = await blogRepository.findByIds(ids)
+
+        if (blogs.length === 0) {
+            throw new HttpError(404, "No blogs found to delete");
+        }
+
+        await blogRepository.deleteByIds(blogs.map(blog => String(blog._id)))
+
+        blogs.forEach(blog => {
+            deleteFeaturedImage(blog.image)
+            deleteContentImages(extractContentImages(blog.content))
+        })
+
+        return blogs.length
     }
 }

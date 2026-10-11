@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { BlogCategorySchema } from "@/schemas/enums.schemas"
+import { BlogCategorySchema, BlogStatusSchema } from "@/schemas/enums.schemas"
 
 const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
 const IMAGE_MAX_SIZE = 10 * 1024 * 1024
@@ -11,6 +11,7 @@ export const CreateBlogFormSchema = z.object({
     title: z.string().trim().min(1, { message: "Campo obligatorio" }),
     excerpt: z.string().trim().min(1, { message: "Campo obligatorio" }).max(300, { message: "Maximo 300 caracteres" }),
     category: BlogCategorySchema,
+    status: BlogStatusSchema,
     readingTime: z.number({ error: "Campo obligatorio" }).int({ message: "Solo minutos enteros" }).min(1, { message: "Mínimo 1 minuto" }),
     content: z.string().refine(htmlHasContent, { message: "Campo Obligatorio" }),
     image: z

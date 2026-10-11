@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { PaginationSchema } from "../common/common.response.schemas";
-import { BlogSchema } from "./blog.schemas";
+import { BlogSchema, BlogStatsSchema } from "./blog.schemas";
 
 export const BlogsResponseSchema = z.object({
   status: z.literal("success"),
@@ -9,3 +9,8 @@ export const BlogsResponseSchema = z.object({
 });
 
 export type TBlogsResponse = z.infer<typeof BlogsResponseSchema>;
+
+export const BlogStatsResponseSchema = z.object({
+  status: z.literal("success"),
+  stats: BlogStatsSchema,
+});

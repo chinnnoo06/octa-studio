@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TMongoIdParams } from "../types/common/common.dtos";
+import { TBulkDeleteDto, TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
 import { TRequestWithBlog } from "../types/express/blog";
-import { TBlogDto, TGetBlogsQuery } from "../types/blog/blog.dtos";
+import { TBlogDto, TGetAdminBlogsQuery, TGetBlogsQuery } from "../types/blog/blog.dtos";
 import { BlogService } from "../services/blog.service";
 
 export class BlogController {
@@ -121,6 +121,64 @@ export class BlogController {
 
         } catch (error) {
             console.error("Error retrieving the blogs:", error);
+            next(error)
+        }
+    }
+
+    static getAdminBlogs = async (req: Request<{}, {}, {}, TGetAdminBlogsQuery>, res: Response, next: NextFunction) => {
+        try {
+            const { blogs, pagination } = await BlogService.getAdminBlogs(req.query)
+
+            return res.status(200).json({
+                status: "success",
+                blogs,
+                pagination
+            });
+
+        } catch (error) {
+            console.error("Error retrieving the admin blogs:", error);
+            next(error)
+        }
+    }
+
+    static getBlogStats = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const stats = await BlogService.getStats()
+
+            return res.status(200).json({
+                status: "success",
+                stats
+            });
+
+        } catch (error) {
+            console.error("Error retrieving the blog stats:", error);
+            next(error)
+        }
+    }
+
+    static registerView = async (req: Request<TSlugParams>, res: Response, next: NextFunction) => {
+        try {
+            await BlogService.registerView(req.params.slug.trim().toLowerCase())
+
+            return res.status(204).end();
+
+        } catch (error) {
+            console.error("Error registering the blog view:", error);
+            next(error)
+        }
+    }
+
+    static deleteBlogs = async (req: Request<{}, {}, TBulkDeleteDto>, res: Response, next: NextFunction) => {
+        try {
+            const deleted = await BlogService.deleteBlogs(req.body.ids)
+
+            return res.status(200).json({
+                status: "success",
+                message: `${deleted} blog(s) deleted successfully`
+            });
+
+        } catch (error) {
+            console.error("Error deleting the blogs:", error);
             next(error)
         }
     }

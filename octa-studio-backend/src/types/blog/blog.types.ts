@@ -11,6 +11,12 @@ export enum BlogCategory {
     OCTA_NEWS = 'Noticias Octa'
 }
 
+/** Un borrador solo se ve en el panel; la web publica lo trata como inexistente. */
+export enum BlogStatus {
+    PUBLISHED = 'published',
+    DRAFT = 'draft'
+}
+
 export type TBlogSEO = {
     metaTitle: string,
     metaDescription: string
@@ -21,6 +27,9 @@ export type TBlog = {
     title: string,
     excerpt: string,
     category: BlogCategory,
+    status: BlogStatus,
+    /** Contador interno: sube una vez por sesion de navegador al abrir el articulo. */
+    views: number,
     readingTime: number,
     image: string,
     content: string,

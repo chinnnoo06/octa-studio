@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { param, query } from "express-validator";
-import { BlogCategory } from "../types/blog/blog.types";
+import { BlogCategory, BlogStatus } from "../types/blog/blog.types";
 import { auth } from "../middlewares/auth";
 import { converToWebP, convertContentImageToWebP } from "../middlewares/convertToWebp";
 import { blogContentUploads, blogsUploads } from "../middlewares/uploads";
-import { handleInputErrors, parseJsonFields, validateImagesFormat } from "../middlewares/reqValidation";
+import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat } from "../middlewares/reqValidation";
 import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
 import { BlogController } from "../controllers/blog.controller";
 
@@ -15,6 +15,35 @@ router.get("/",
     query('category').optional().isIn(Object.values(BlogCategory)).withMessage('Invalid category'),
     handleInputErrors,
     BlogController.getBlogs
+)
+
+// Listado del panel: incluye borradores y acepta buscador, filtros y orden.
+router.get("/admin",
+    auth,
+    validateAdminListQuery,
+    query('category').optional().isIn(Object.values(BlogCategory)).withMessage('Invalid category'),
+    query('status').optional().isIn(Object.values(BlogStatus)).withMessage('Invalid status'),
+    handleInputErrors,
+    BlogController.getAdminBlogs
+)
+
+router.get("/stats",
+    auth,
+    BlogController.getBlogStats
+)
+
+router.post("/bulk-delete",
+    auth,
+    validateBulkDelete,
+    handleInputErrors,
+    BlogController.deleteBlogs
+)
+
+// Publica: la llama la ficha del articulo una vez por sesion de navegador.
+router.post("/:slug/views",
+    param('slug').notEmpty().withMessage('Slug is required'),
+    handleInputErrors,
+    BlogController.registerView
 )
 
 router.post("/",

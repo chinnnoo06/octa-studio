@@ -1,7 +1,15 @@
 import { ADMIN_LOGOUT } from '@/utils/data/navigation';
 import { logout } from '@/actions/auth/logout.action';
 
-export const LogoutButton = ({ className }: { className: string }) => {
+type TLogoutButtonProps = {
+    className: string;
+    iconClassName?: string;
+    labelClassName?: string;
+    /** Sin icono: el enlace de texto del header. */
+    showIcon?: boolean;
+};
+
+export const LogoutButton = ({ className, iconClassName, labelClassName, showIcon = true }: TLogoutButtonProps) => {
     const LogoutIcon = ADMIN_LOGOUT.icon;
 
     const handleLogout = async () => {
@@ -9,9 +17,9 @@ export const LogoutButton = ({ className }: { className: string }) => {
     }
 
     return (
-        <button onClick={handleLogout} className={`${className} w-full cursor-pointer text-red-600 border-t border-secondary/30`}>
-            <LogoutIcon aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
-            {ADMIN_LOGOUT.label}
+        <button type="button" onClick={handleLogout} className={`cursor-pointer ${className}`}>
+            {showIcon && <LogoutIcon aria-hidden="true" className={`shrink-0 ${iconClassName ?? ''}`} />}
+            <span className={labelClassName}>{ADMIN_LOGOUT.label}</span>
         </button>
     );
 };

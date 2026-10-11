@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { validationResult } from "express-validator";
+import { body, query, validationResult } from "express-validator";
 import { TMulterFiles } from "../types/multer/multer.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 
@@ -17,6 +17,26 @@ export const handleInputErrors = (req: Request, res: Response, next: NextFunctio
 
         return res.status(400).json({ errors: errors.array() })
     }
+
+    next()
+}
+
+/** Query comun de los listados del panel: pagina, buscador, rango de fechas y orden. */
+export const validateAdminListQuery = async (req: Request, res: Response, next: NextFunction) => {
+    await query("page").optional().isInt({ min: 1 }).withMessage("Page must be an integer greater than 0").run(req)
+    await query("search").optional().isString().trim().isLength({ max: 100 }).withMessage("Search is too long").run(req)
+    await query("from").optional().isISO8601().withMessage("From must be a YYYY-MM-DD date").run(req)
+    await query("to").optional().isISO8601().withMessage("To must be a YYYY-MM-DD date").run(req)
+    await query("sort").optional().isString().run(req)
+    await query("order").optional().isIn(["asc", "desc"]).withMessage("Order must be asc or desc").run(req)
+
+    next()
+}
+
+/** Cuerpo del borrado masivo: una lista no vacia de ids de Mongo. */
+export const validateBulkDelete = async (req: Request, res: Response, next: NextFunction) => {
+    await body("ids").isArray({ min: 1, max: 100 }).withMessage("Ids must be a list of 1 to 100 items").run(req)
+    await body("ids.*").isMongoId().withMessage("Invalid Id").run(req)
 
     next()
 }

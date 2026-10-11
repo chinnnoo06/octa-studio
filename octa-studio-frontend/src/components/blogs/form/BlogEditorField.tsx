@@ -8,7 +8,7 @@ import { SpanError } from '@/components/ui/form/SpanError';
 const BlogEditor = dynamic(() => import('./BlogEditor').then((m) => m.BlogEditor), {
     ssr: false,
     loading: () => (
-        <div aria-busy="true" className="border-secondary/50 h-100 w-full animate-pulse rounded-lg border bg-white" />
+        <div aria-busy="true" className="border-slate-200 h-100 w-full animate-pulse rounded-lg border bg-white" />
     ),
 });
 

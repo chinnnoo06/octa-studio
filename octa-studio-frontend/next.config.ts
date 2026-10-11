@@ -15,6 +15,24 @@ const backendOrigins = [
   ),
 ];
 
+// Analitica del sitio publico: solo se abren sus dominios si estan configuradas.
+const gaSources = process.env.NEXT_PUBLIC_GA_ID
+  ? {
+      script: ['https://www.googletagmanager.com'],
+      connect: ['https://*.google-analytics.com', 'https://*.analytics.google.com', 'https://www.googletagmanager.com'],
+      img: ['https://*.google-analytics.com', 'https://www.googletagmanager.com'],
+    }
+  : { script: [], connect: [], img: [] };
+
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
+
+// us.i.posthog.com -> us-assets.i.posthog.com (scripts de extensiones que carga posthog-js).
+const posthogAssets = posthogHost.replace(/^https:\/\/(\w+)\.i\./, 'https://$1-assets.i.');
+
+const posthogSources = process.env.NEXT_PUBLIC_POSTHOG_KEY
+  ? { script: [posthogAssets], connect: [posthogHost, posthogAssets] }
+  : { script: [], connect: [] };
+
 const remotePatterns = backendOrigins.map((origin) => {
   const { protocol, hostname, port } = new URL(origin);
 
@@ -36,12 +54,12 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      `img-src 'self' data: blob: ${backendOrigins.join(' ')}`.trim(),
+      `img-src 'self' data: blob: ${[...backendOrigins, ...gaSources.img].join(' ')}`.trim(),
       `media-src 'self' ${backendOrigins.join(' ')}`.trim(),
       "font-src 'self' data:",
       "style-src 'self' 'unsafe-inline'",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
-      `connect-src 'self'${isDev ? ' ws: wss:' : ''}`,
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} ${[...gaSources.script, ...posthogSources.script].join(' ')}`.trim(),
+      `connect-src 'self'${isDev ? ' ws: wss:' : ''} ${[...gaSources.connect, ...posthogSources.connect].join(' ')}`.trim(),
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",

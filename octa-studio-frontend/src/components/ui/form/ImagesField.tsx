@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { FiImage, FiX } from 'react-icons/fi';
 import { SpanError } from './SpanError';
 import { Label } from './Label';
+import { MEDIA_GRID, MediaTile } from './MediaTile';
 
 type TImagesFieldProps = {
     images: File[];
@@ -12,6 +12,7 @@ type TImagesFieldProps = {
     max?: number;
 };
 
+/** Galeria: un cuadro por imagen (la primera es la principal) y el "+ Añadir" al final. */
 export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldProps) => {
     const previews = useMemo(() => images.map((image) => URL.createObjectURL(image)), [images]);
 
@@ -19,10 +20,17 @@ export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldPr
         return () => previews.forEach((url) => URL.revokeObjectURL(url));
     }, [previews]);
 
-    const onSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onAdd = (event: React.ChangeEvent<HTMLInputElement>) => {
         const picked = Array.from(event.target.files ?? []);
 
         onChange([...images, ...picked].slice(0, max));
+        event.target.value = '';
+    };
+
+    // Pulsar un cuadro con imagen la reemplaza en su misma posicion.
+    const onReplace = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) onChange(images.map((image, i) => (i === index ? file : image)));
         event.target.value = '';
     };
 
@@ -32,57 +40,42 @@ export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldPr
 
     return (
         <div className="form-group">
-            <Label htmlFor="images">Imágenes del proyecto</Label>
+            <Label htmlFor="images">Imágenes del proyecto ({images.length} de {max}) · JPG, PNG o WebP</Label>
 
-            <div className="flex flex-col gap-5">
-                <label
-                    htmlFor="images"
-                    aria-disabled={full}
-                    className={`border-secondary/50 text-fourth/75 flex flex-col items-center justify-center gap-2.5 rounded-lg border border-dashed px-5 py-10 text-center text-xs transition-colors duration-300 lg:text-sm ${full
-                        ? 'cursor-not-allowed opacity-50'
-                        : 'hover:border-secondary cursor-pointer'
-                        }`}
-                >
-                    <FiImage aria-hidden="true" className="size-6" />
-                    {full
-                        ? `Máximo ${max} imágenes`
-                        : `Haz clic para elegir imágenes (${images.length} de ${max}) · JPG, PNG o WebP`}
-                </label>
+            <ul role="list" className={`${MEDIA_GRID} mt-1`}>
+                {previews.map((preview, i) => (
+                    <li key={preview}>
+                        <MediaTile
+                            htmlFor={`images-replace-${i}`}
+                            hoverText="Cambiar imagen"
+                            principal={i === 0}
+                            onRemove={() => removeAt(i)}
+                            removeLabel={`Quitar ${images[i].name}`}
+                        >
+                            {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
+                            <img src={preview} alt={`Vista previa ${i + 1}: ${images[i].name}`} className="h-full w-full object-contain" />
+                        </MediaTile>
 
-                <input
-                    id="images"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    multiple
-                    disabled={full}
-                    onChange={onSelect}
-                    className="sr-only"
-                />
+                        <input id={`images-replace-${i}`} type="file" accept="image/jpeg,image/png,image/webp" onChange={onReplace(i)} className="sr-only" />
+                    </li>
+                ))}
 
-                {previews.length > 0 && (
-                    <ul role="list" className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-                        {previews.map((preview, i) => (
-                            <li key={preview} className="group relative">
-                                {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
-                                <img
-                                    src={preview}
-                                    alt={`Vista previa ${i + 1}: ${images[i].name}`}
-                                    className="border-secondary/30 aspect-square w-full rounded-lg border object-cover"
-                                />
-
-                                <button
-                                    type="button"
-                                    onClick={() => removeAt(i)}
-                                    aria-label={`Quitar ${images[i].name}`}
-                                    className="bg-secondary text-primary absolute -top-2 -right-2 inline-flex cursor-pointer items-center justify-center rounded-full p-1.5 transition-colors duration-300 hover:bg-red-600"
-                                >
-                                    <FiX aria-hidden="true" className="size-4 lg:size-4.5" />
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                {!full && (
+                    <li>
+                        <MediaTile htmlFor="images" />
+                    </li>
                 )}
-            </div>
+            </ul>
+
+            <input
+                id="images"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+                disabled={full}
+                onChange={onAdd}
+                className="sr-only"
+            />
 
             <SpanError message={error} />
         </div>

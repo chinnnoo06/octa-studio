@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
 
+/** Fila con hover suave; se tinta cuando su checkbox de seleccion masiva esta marcado. */
 export const TableRow = ({ children }: { children: ReactNode }) => {
-    return <tr className="border-secondary/30 border-b last:border-b-0">{children}</tr>;
+    return (
+        <tr className="border-b border-slate-100 transition-colors duration-150 last:border-b-0 hover:bg-[#fafbfd] has-[.bulk-select:checked]:bg-secondary/6">
+            {children}
+        </tr>
+    );
 };

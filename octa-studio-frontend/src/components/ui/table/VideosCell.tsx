@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const ARROW =
-    'text-fourth/75 hover:bg-secondary/15 hover:text-secondary inline-flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors duration-300';
+    'text-gray-600 hover:bg-slate-100 hover:text-ink inline-flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors duration-300';
 
 type TVideosCellProps = { videos: string[]; name: string; baseUrl: string };
 
@@ -12,7 +12,7 @@ export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
     const [index, setIndex] = useState(0);
 
     if (videos.length === 0) {
-        return <span className="text-fourth/75 text-xs lg:text-sm">Sin videos</span>;
+        return <span className="text-[12px] text-gray-600 italic">Sin videos</span>;
     }
 
     const many = videos.length > 1;
@@ -28,7 +28,7 @@ export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
                 </button>
             )}
 
-            <div className="border-secondary/30 bg-primary shrink-0 rounded border p-0.5">
+            <div className="shrink-0 rounded-[4px] bg-slate-50">
                 <video
                     key={videos[index]}
                     src={`${baseUrl}/${videos[index]}`}
@@ -36,7 +36,7 @@ export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
                     muted
                     playsInline
                     preload="metadata"
-                    className="h-10 w-14 object-contain"
+                    className="h-15 w-20 rounded-[4px] object-contain"
                 />
             </div>
 
@@ -47,7 +47,7 @@ export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
             )}
 
             {many && (
-                <span aria-live="polite" className="text-fourth/75 shrink-0 text-xs lg:text-sm">
+                <span aria-live="polite" className="shrink-0 text-[12px] text-gray-600">
                     {index + 1}/{videos.length}
                 </span>
             )}

@@ -1,4 +1,4 @@
-import { FiFileText, FiFolder, FiLogOut, FiPlus, FiMessageSquare } from 'react-icons/fi';
+import { FaClipboard, FaComments, FaHammer, FaHouse, FaRightFromBracket } from 'react-icons/fa6';
 import type { TAdminLink, TNavLink } from '@/types/content.types';
 
 export const NAV_LINKS: TNavLink[] = [
@@ -15,14 +15,15 @@ export const LEGAL_LINKS: TNavLink[] = [
   { label: 'Licencia y Creditos', href: '/creditos' },
 ];
 
+/** Raiz del panel: el dashboard de metricas. */
+export const ADMIN_HOME = '/admin';
 
+// Crear cada entidad vive en el boton "Nuevo" de su listado, no en la sidebar.
 export const ADMIN_LINKS: TAdminLink[] = [
-  { label: 'Blogs',              href: '/admin/blogs',              icon: FiFileText },
-  { label: 'Crear blog',         href: '/admin/blogs/crear',        icon: FiPlus },
-  { label: 'Proyectos',          href: '/admin/proyectos',          icon: FiFolder },
-  { label: 'Crear proyecto',     href: '/admin/proyectos/crear',    icon: FiPlus },
-  { label: 'Testimonios',        href: '/admin/testimonios',        icon: FiMessageSquare },
-  { label: 'Crear testimonio',   href: '/admin/testimonios/crear',  icon: FiPlus },
+  { label: 'Inicio',      href: ADMIN_HOME,           icon: FaHouse },
+  { label: 'Blogs',       href: '/admin/blogs',       icon: FaClipboard },
+  { label: 'Proyectos',   href: '/admin/proyectos',   icon: FaHammer },
+  { label: 'Testimonios', href: '/admin/testimonios', icon: FaComments },
 ];
 
-export const ADMIN_LOGOUT = { label: 'Cerrar sesión', icon: FiLogOut } as const;
+export const ADMIN_LOGOUT = { label: 'Cerrar sesión', icon: FaRightFromBracket } as const;

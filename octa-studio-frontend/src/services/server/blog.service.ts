@@ -1,4 +1,6 @@
-import { BlogsResponseSchema } from "@/schemas/blog/blog.response.schemas";
+import { BlogsResponseSchema, BlogStatsResponseSchema } from "@/schemas/blog/blog.response.schemas";
+import { TAdminListParams } from "@/types/common.types";
+import { toQueryString } from "@/utils/queryString";
 import { BlogSchema } from "@/schemas/blog/blog.schemas";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
@@ -97,4 +99,62 @@ export const getBlogBySlugService = async (slug: string) => {
   }
 
   return result.data;
+};
+
+/** Listado del panel: incluye borradores y acepta buscador, filtros y orden. */
+export const getAdminBlogsService = async (params: TAdminListParams) => {
+  const token = await getToken();
+
+  const url = `${process.env.API_URL}/blogs/admin?${toQueryString(params)}`;
+
+  const req = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ...originHeader()
+    },
+    cache: "no-store",
+  });
+
+  if (!req.ok) {
+    throw new Error("Request Failed");
+  }
+
+  const json = await req.json();
+  const result = BlogsResponseSchema.safeParse(json);
+
+  if (!result.success) {
+    throw new Error("Respuesta inesperada de GET /blogs/admin");
+  }
+
+  return {
+    blogs: result.data.blogs,
+    pagination: result.data.pagination,
+  };
+};
+
+/** Bloque "Blog" del dashboard. `null` si el backend no responde: el resto del panel sigue. */
+export const getBlogStatsService = async () => {
+  const token = await getToken();
+
+  const url = `${process.env.API_URL}/blogs/stats`;
+
+  try {
+    const req = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...originHeader()
+      },
+      cache: "no-store",
+    });
+
+    if (!req.ok) return null;
+
+    const result = BlogStatsResponseSchema.safeParse(await req.json());
+
+    return result.success ? result.data.stats : null;
+  } catch {
+    return null;
+  }
 };

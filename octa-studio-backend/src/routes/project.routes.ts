@@ -2,7 +2,7 @@ import { Router } from "express";
 import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
 import { projectMediaUploads, projectsUploads, projectVideosUploads } from "../middlewares/uploads";
-import { handleInputErrors, parseJsonFields, validateImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
+import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
 import { validateProjectExists, validateProjectExistsBySlug, validateProjectInput } from "../middlewares/project";
 import { ProjectController } from "../controllers/project.controller";
 import { param, query } from "express-validator";
@@ -13,6 +13,27 @@ router.get("/",
     query('page').optional().isInt({ min: 1 }).withMessage('Page must be an integer greater than 0'),
     handleInputErrors,
     ProjectController.getProjects
+)
+
+// Listado del panel: buscador, filtro por sector y fechas, y orden por columna.
+router.get("/admin",
+    auth,
+    validateAdminListQuery,
+    query('sector').optional().isString().trim(),
+    handleInputErrors,
+    ProjectController.getAdminProjects
+)
+
+router.get("/count",
+    auth,
+    ProjectController.getProjectsCount
+)
+
+router.post("/bulk-delete",
+    auth,
+    validateBulkDelete,
+    handleInputErrors,
+    ProjectController.deleteProjects
 )
 
 router.post("/",

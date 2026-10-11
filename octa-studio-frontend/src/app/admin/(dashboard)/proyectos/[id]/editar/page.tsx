@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BackButton } from '@/components/ui/buttons/BackButton';
-import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { FormSubmitButton } from '@/components/ui/buttons/FormSubmitButton';
+import { AdminHeading } from '@/components/ui/layout/AdminHeading';
 import { EditProjectForm } from '@/components/projects/form/EditProjectForm';
 import { getProjectByIdService } from '@/services/server/project.service';
 
@@ -17,21 +16,8 @@ export default async function EditarProyectoPage({ params }: { params: Promise<{
   if (!project) notFound();
 
   return (
-    <section className="mx-auto flex w-full max-w-4xl flex-col gap-10">
-      <div className="flex flex-col xl:flex-row justify-between gap-5">
-        <div className="text-secondary flex flex-col gap-2.5">
-          <Eyebrow>Edita el proyecto</Eyebrow>
-          <SectionTitle lead="Editar" rotating="Proyecto" as='h1' />
-        </div>
-
-        <div className="hidden xl:flex">
-          <BackButtonLeft />
-        </div>
-
-        <div className="flex xl:hidden">
-          <BackButton />
-        </div>
-      </div>
+    <section className="w-full">
+      <AdminHeading title="Editar proyecto" subtitle="Edita la información del proyecto y su SEO." actions={<><BackButton /><FormSubmitButton>Guardar cambios</FormSubmitButton></>} narrow />
 
       <EditProjectForm project={project} />
     </section>

@@ -3,11 +3,16 @@ import path from "path";
 
 import { testimonialRepository } from "../repositories/testimonial.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TTestimonialDto } from "../types/testimonial/testimonial.dtos";
+import { TGetAdminTestimonialsQuery, TTestimonialDto } from "../types/testimonial/testimonial.dtos";
 import { TTestimonialDocument } from "../types/testimonial/testimonial.types";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
+import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
 import { UPLOADS_PATH } from "../config/env";
+
+const ADMIN_TESTIMONIALS_PER_PAGE = 10;
+
+const ADMIN_SORTABLE = ["name", "rating", "createdAt"];
 
 const imagesDir = path.resolve(UPLOADS_PATH, "testimonials");
 
@@ -23,6 +28,41 @@ const deleteImageFromDisk = (name: string) => {
 }
 
 export const TestimonialService = {
+
+    async getAdminTestimonials({ page, search, rating, from, to, sort, order }: TGetAdminTestimonialsQuery) {
+        const filter = {
+            ...searchFilter(search, ["name", "quote"]),
+            ...(rating !== undefined && rating !== "" ? { rating: Number(rating) } : {}),
+            ...dateRangeFilter(from, to)
+        }
+
+        const result = await testimonialRepository.findPaginated(
+            Number(page ?? 1),
+            ADMIN_TESTIMONIALS_PER_PAGE,
+            filter,
+            buildSort(sort, order, ADMIN_SORTABLE)
+        )
+
+        return {
+            testimonials: result.docs,
+            pagination: toPagination(result)
+        }
+    },
+
+    /** Borrado masivo del panel: cada testimonio se lleva su logo. */
+    async deleteTestimonials(ids: string[]) {
+        const testimonials = await testimonialRepository.findByIds(ids)
+
+        if (testimonials.length === 0) {
+            throw new HttpError(404, "No testimonials found to delete");
+        }
+
+        await testimonialRepository.deleteByIds(testimonials.map(testimonial => String(testimonial._id)))
+
+        testimonials.forEach(testimonial => deleteImageFromDisk(testimonial.image))
+
+        return testimonials.length
+    },
 
     async getTestimonials() {
         return await testimonialRepository.findAll()
