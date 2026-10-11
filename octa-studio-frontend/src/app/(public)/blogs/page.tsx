@@ -1,23 +1,30 @@
 import { redirect } from 'next/navigation';
-import { pageMetadata } from '@/utils/metadata';
+import type { Metadata } from 'next';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { Hero } from '@/components/blogs/Hero';
 import { Posts } from '@/components/blogs/Posts';
 import { BLOG_CATEGORIES } from '@/utils/data/blogs';
 import { slugify } from '@/utils/slugify';
-import { getBlogsService } from '@/services/server/blogs.service';
+import { getBlogsService } from '@/services/server/blog.service';
 
-export const metadata = pageMetadata({
-  title: 'Blog',
-  description:
-    'Lo que aprendimos montando stands: presupuestos, renders, tiempos de recinto y logística de feria.',
-  path: '/blogs',
-});
+export const metadata: Metadata = {
+  title: 'Blog de stands, ferias y eventos',
+  description: 'Consejos para planear tu stand: presupuestos, renders, tiempos de recinto, logística de feria y montaje en expos de México y Estados Unidos.',
+  alternates: { canonical: '/blogs' },
+  openGraph: {
+    ...SHARED_OPEN_GRAPH,
+    url: '/blogs',
+    title: 'Blog de stands, ferias y eventos | Octa Building Studio',
+    description: 'Consejos para planear tu stand: presupuestos, renders, tiempos de recinto, logística de feria y montaje en expos de México y Estados Unidos.',
+  },
+  twitter: {
+    ...SHARED_TWITTER,
+    title: 'Blog de stands, ferias y eventos | Octa Building Studio',
+    description: 'Consejos para planear tu stand: presupuestos, renders, tiempos de recinto, logística de feria y montaje en expos de México y Estados Unidos.',
+  },
+};
 
-export default async function BlogsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ page?: string; categoria?: string }>;
-}) {
+export default async function BlogsPage({ searchParams }: { searchParams: Promise<{ page?: string; categoria?: string }> }) {
   const { page, categoria } = await searchParams;
 
   const requested = Number(page);

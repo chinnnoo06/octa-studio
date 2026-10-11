@@ -7,9 +7,9 @@ export const VideosButton = ({ href, label, className }: TImagesButtonProps) => 
     <Link
       href={href}
       aria-label={label}
-      className={`text-fourth/75 hover:bg-secondary/15 hover:text-secondary inline-flex items-center justify-center rounded-lg p-2 transition-colors duration-300 ${className ?? ''}`}
+      className={`text-fourth/75 hover:bg-secondary/15 hover:text-secondary inline-flex items-center justify-center rounded-lg p-2.5 transition-colors duration-300 ${className ?? ''}`}
     >
-      <FiVideo aria-hidden="true" className="size-4.5" />
+      <FiVideo aria-hidden="true" className="size-4 lg:size-4.5" />
     </Link>
   );
 };

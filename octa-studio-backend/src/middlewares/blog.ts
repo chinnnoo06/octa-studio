@@ -23,8 +23,6 @@ export const validateBlogInput = async (req: Request, res: Response, next: NextF
     await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
     await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)
 
-    // El HTML del editor se sanea aqui y se sigue con la version limpia: lo
-    // que llega al service y al modelo ya no lleva nada fuera de la lista.
     await body("content")
         .isString().withMessage("Content must be an HTML string")
         .bail()

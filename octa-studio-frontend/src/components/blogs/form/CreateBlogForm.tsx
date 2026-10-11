@@ -6,9 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { CreateBlogFormSchema, TCreateBlogForm } from '@/schemas/blogs/blogs.form.schemas';
+import { CreateBlogFormSchema, TCreateBlogForm } from '@/schemas/blog/blog.form.schemas';
 import { BLOG_CATEGORIES } from '@/utils/data/blogs';
-import { useBlogs } from "@/hooks/blogs/useBlogs";
+import { useBlog } from "@/hooks/useBlog";
 import { Label } from "@/components/ui/form/Label";
 import { Input } from "@/components/ui/form/Input";
 import { Textarea } from "@/components/ui/form/Textarea";
@@ -36,7 +36,7 @@ export const CreateBlogForm = () => {
         }
     })
 
-    const { createBlog } = useBlogs();
+    const { createBlog } = useBlog();
 
     useEffect(() => {
         if (createBlog.error) toast.error(createBlog.error);
@@ -48,7 +48,7 @@ export const CreateBlogForm = () => {
     const onSubmit = (data: TCreateBlogForm) => createBlog.handleCreateBlog(data)
 
     return (
-        <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
 
             <FormSection>
                 <FormSectionTitle>Datos del blog</FormSectionTitle>
@@ -124,7 +124,7 @@ export const CreateBlogForm = () => {
             </FormSection>
 
             <ActionButton loading={createBlog.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
                 {createBlog.loading ? 'Guardando...' : 'Crear blog'}
             </ActionButton>
         </form>

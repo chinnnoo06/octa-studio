@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { CreateTestimonialFormSchema, TCreateTestimonialForm } from '@/schemas/testimonials/testimonials.form.schemas';
-import { useTestimonials } from "@/hooks/testimonials/useTestimonials";
+import { CreateTestimonialFormSchema, TCreateTestimonialForm } from '@/schemas/testimonial/testimonial.form.schemas';
+import { useTestimonial } from "@/hooks/useTestimonial";
 import { Label } from "@/components/ui/form/Label";
 import { Input } from "@/components/ui/form/Input";
 import { Textarea } from "@/components/ui/form/Textarea";
@@ -23,7 +23,7 @@ export const CreateTestimonialForm = () => {
         defaultValues: { quote: '', name: '', rating: 5, image: undefined }
     })
 
-    const { createTestimonial } = useTestimonials();
+    const { createTestimonial } = useTestimonial();
 
     useEffect(() => {
         if (createTestimonial.error) toast.error(createTestimonial.error);
@@ -35,7 +35,7 @@ export const CreateTestimonialForm = () => {
     const onSubmit = (data: TCreateTestimonialForm) => createTestimonial.handleCreateTestimonial(data)
 
     return (
-        <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormSection>
                 <FormSectionTitle>Datos del testimonio</FormSectionTitle>
 
@@ -75,7 +75,7 @@ export const CreateTestimonialForm = () => {
             </FormSection>
 
             <ActionButton loading={createTestimonial.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
                 {createTestimonial.loading ? 'Guardando...' : 'Crear testimonio'}
             </ActionButton>
         </form>

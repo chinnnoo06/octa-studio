@@ -57,7 +57,7 @@ export const Purpose = () => {
 
             <div aria-hidden="true" className="bg-fourth/50 absolute inset-0" />
 
-            <p className="text-primary absolute inset-0 flex flex-col justify-end gap-1 p-5 text-xl lg:text-2xl font-semibold uppercase lg:p-10">
+            <p className="text-primary absolute inset-0 flex flex-col justify-end gap-1.5 p-5 text-xl lg:text-2xl font-semibold uppercase lg:p-10">
               {PURPOSE_CLOSING.map((line) => (
                 <span key={line}>{line}</span>
               ))}

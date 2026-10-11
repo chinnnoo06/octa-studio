@@ -1,12 +1,16 @@
 import type { MetadataRoute } from 'next';
+import { SITE } from '@/utils/data/site';
 
-/**
- * Bloqueo total de indexacion mientras el sitio esta en desarrollo y tras
- * contrasena. Antes de publicar: cambiar a `{ allow: '/' }`, quitar el
- * `noindex` del layout raiz y anadir el sitemap.
- */
+export const dynamic = 'force-static';
+
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: '*', disallow: '/' },
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/admin', '/api'],
+    },
+    sitemap: `${SITE.url}/sitemap.xml`,
+    host: SITE.url,
   };
 }

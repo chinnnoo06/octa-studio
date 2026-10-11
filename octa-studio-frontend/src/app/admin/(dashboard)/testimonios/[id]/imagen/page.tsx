@@ -4,8 +4,8 @@ import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditTestimonialImage } from '@/components/testimonials/images/EditTestimonialImage';
-import { getTestimonialService } from '@/services/server/testimonials.service';
+import { EditTestimonialImageForm } from '@/components/testimonials/form/images/EditTestimonialImageForm';
+import { getTestimonialService } from '@/services/server/testimonial.service';
 
 export const metadata: Metadata = { title: 'Imagen del testimonio' };
 
@@ -33,7 +33,7 @@ export default async function ImagenTestimonioPage({ params }: { params: Promise
         </div>
       </div>
 
-      <EditTestimonialImage testimonial={testimonial} />
+      <EditTestimonialImageForm testimonial={testimonial} />
     </section>
   );
 }

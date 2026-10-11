@@ -4,8 +4,8 @@ import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditBlogImage } from '@/components/blogs/images/EditBlogImage';
-import { getBlogByIdService } from '@/services/server/blogs.service';
+import { EditBlogImageForm } from '@/components/blogs/form/images/EditBlogImageForm';
+import { getBlogByIdService } from '@/services/server/blog.service';
 
 export const metadata: Metadata = { title: 'Imagen del blog' };
 
@@ -33,7 +33,7 @@ export default async function ImagenBlogPage({ params }: { params: Promise<{ id:
         </div>
       </div>
 
-      <EditBlogImage blog={blog} />
+      <EditBlogImageForm blog={blog} />
     </section>
   );
 }

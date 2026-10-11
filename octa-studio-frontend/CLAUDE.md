@@ -55,7 +55,7 @@ src/
 ## Reglas de oro
 
 **Datos del backend con tipos de schema.** Todo componente que pinta blogs,
-proyectos o testimonios recibe `TBlog`, `TProject` o `TTestiomonial`
+proyectos o testimonios recibe `TBlog`, `TProject` o `TTestimonial`
 (`src/schemas`). Nada de adaptadores hacia los tipos de `utils/data`; esos
 quedan solo para secciones aún estáticas.
 
@@ -104,6 +104,9 @@ pnpm build
 
 ## Despliegue
 
-Cada push a `main` despliega en Vercel. El sitio está tras contraseña y con
-`noindex` hasta la publicación. En Render, el backend necesita `PUBLIC_URL`
+Cada push a `main` despliega en Vercel. El sitio ya es indexable (robots,
+sitemap y metadata abiertos); lo único que lo oculta es la contraseña. El SEO
+sigue a full-color: `SITE`/`BUSINESS` en `site.ts`, JSON-LD en `components/seo`
+y cada page con su `openGraph`/`twitter` sobre `SHARED_OPEN_GRAPH`/`SHARED_TWITTER`.
+Falta `public/og-image.jpg` (1200×630). En Render, el backend necesita `PUBLIC_URL`
 con su propio origen para normalizar las rutas de las imágenes del blog.

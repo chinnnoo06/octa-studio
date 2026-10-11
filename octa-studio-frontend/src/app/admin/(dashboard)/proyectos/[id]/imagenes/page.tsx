@@ -4,8 +4,8 @@ import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditProjectImages } from '@/components/projects/images/EditProjectImages';
-import { getProjectByIdService } from '@/services/server/projects.service';
+import { EditProjectImagesForm } from '@/components/projects/form/images/EditProjectImagesForm';
+import { getProjectByIdService } from '@/services/server/project.service';
 
 export const metadata: Metadata = { title: 'Imágenes del proyecto' };
 
@@ -33,7 +33,7 @@ export default async function ImagenesProyectoPage({ params }: { params: Promise
         </div>
       </div>
 
-      <EditProjectImages project={project} />
+      <EditProjectImagesForm project={project} />
     </section>
   );
 }

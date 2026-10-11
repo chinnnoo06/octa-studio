@@ -5,12 +5,13 @@ import { Table } from '@/components/ui/table/Table';
 import { TableHead } from '@/components/ui/table/TableHead';
 import { TableRow } from '@/components/ui/table/TableRow';
 import { TableEmpty } from '@/components/ui/table/TableEmpty';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import { ImagesCell } from '@/components/ui/table/ImagesCell';
+import { VideosCell } from '@/components/ui/table/VideosCell';
+import { TextCell } from '@/components/ui/table/TextCell';
+import type { TProject } from '@/schemas/project/project.schemas';
 import { DeleteProjectButton } from './DeleteProjectButton';
-import { DescriptionCell } from './DescriptionCell';
-import { ProjectImages } from './ProjectImages';
 
-const COLUMNS = ['Imágenes', 'Nombre', 'Descripción', 'Sector', 'Acciones'] as const;
+const COLUMNS = ['Imágenes', 'Videos', 'Nombre', 'Descripción', 'Sector', 'Acciones'] as const;
 
 export const ProjectsTable = ({ projects }: { projects: TProject[] }) => {
     if (projects.length === 0) {
@@ -24,19 +25,23 @@ export const ProjectsTable = ({ projects }: { projects: TProject[] }) => {
             <tbody className="text-fourth/75">
                 {projects.map((project) => (
                     <TableRow key={project._id}>
-                        <td className="px-5 py-4 text-sm lg:text-base align-top">
-                            <ProjectImages images={project.images} name={project.name} />
+                        <td className="p-5 text-sm lg:text-base align-top">
+                            <ImagesCell images={project.images} name={project.name} baseUrl={process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL!} />
                         </td>
 
-                        <td className={`px-5 py-4 text-sm lg:text-base align-top text-secondary font-medium`}>{project.name}</td>
-
-                        <td className="px-5 py-4 text-sm lg:text-base align-top">
-                            <DescriptionCell description={project.description} />
+                        <td className="p-5 text-sm lg:text-base align-top">
+                            <VideosCell videos={project.videos} name={project.name} baseUrl={process.env.NEXT_PUBLIC_PROJECTS_VIDEO_URL!} />
                         </td>
 
-                        <td className={`px-5 py-4 text-sm lg:text-base align-top whitespace-nowrap`}>{project.sector}</td>
+                        <td className="p-5 text-sm lg:text-base align-top text-secondary font-medium whitespace-nowrap">{project.name}</td>
 
-                        <td className={`px-5 py-4 text-sm lg:text-base align-top text-right whitespace-nowrap`}>
+                        <td className="p-5 text-sm lg:text-base align-top">
+                            <TextCell text={project.description} />
+                        </td>
+
+                        <td className="p-5 text-sm lg:text-base align-top whitespace-nowrap">{project.sector}</td>
+
+                        <td className="p-5 text-sm lg:text-base align-top text-right whitespace-nowrap">
                             <span className="inline-flex items-center gap-2.5">
                                 <ImagesButton
                                     href={`/admin/proyectos/${project._id}/imagenes`}

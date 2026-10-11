@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { NAV_LINKS } from "@/utils/data/navigation";
-import { isActiveHref } from "@/utils/isActiveHref";
+import { isActiveHref } from "@/utils/activeHref";
 import { usePathname } from "next/navigation";
 
 type TMobileNavProps = {
@@ -62,7 +62,7 @@ export const MobileNav = ({ menuVisible, toggleMenu }: TMobileNavProps) => {
                                                 {link.label}
                                             </span>
                                         </span>
-                                        <HiOutlineArrowLongRight className={`size-5 stroke-1 text-primary transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 ${isActive ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                                        <HiOutlineArrowLongRight className={`size-4 lg:size-4.5 stroke-1 text-primary transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 ${isActive ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
                                             }`} />
                                     </Link>
                                 </li>

@@ -64,7 +64,7 @@ refresca al instante. Los fetch con token (fichas por id del panel) no se
 cachean.
 
 Las tarjetas y fichas públicas usan los tipos derivados de los schemas
-(`TBlog`, `TProject`, `TTestiomonial`); los tipos de `utils/data` quedan solo
+(`TBlog`, `TProject`, `TTestimonial`); los tipos de `utils/data` quedan solo
 para las secciones todavía estáticas.
 
 ## Cosas que hay que saber
@@ -76,5 +76,5 @@ para las secciones todavía estáticas.
   mostraría.
 - **Los fondos de las secciones alternan** blanco / `secondary/15` / foto
   oscura, y la última sección antes del footer siempre es blanca.
-- **Despliegue:** cada push a `main` despliega en Vercel. El sitio está tras
-  contraseña y con `noindex` hasta que se publique.
+- **Despliegue:** cada push a `main` despliega en Vercel. El SEO está listo
+  para indexar; lo único que oculta el sitio es la contraseña.

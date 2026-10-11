@@ -3,7 +3,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { RevealOnLoad } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { fadeBlur } from '@/utils/motion/reveal';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import type { TProject } from '@/schemas/project/project.schemas';
 
 export const ProjectHero = ({ project }: { project: TProject }) => {
   const photos = project.images.length;

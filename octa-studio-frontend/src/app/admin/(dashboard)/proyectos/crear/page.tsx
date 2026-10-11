@@ -26,7 +26,6 @@ export default function CrearProyectoPage() {
       </div>
 
       <CreateProjectForm />
-
     </section>
   );
 }

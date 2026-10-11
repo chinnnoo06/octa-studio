@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Marquee } from '@/components/ui/Marquee';
-import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
+import type { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 import type { TSectionSpacing } from '@/types/content.types';
 
 const MIN_TILES = 10;
@@ -16,11 +16,11 @@ const SPACING: Record<TSectionSpacing, string> = {
 
 const EDGE_FADE = 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)';
 
-const Row = ({ logos, direction, duration }: { logos: TTestiomonial[]; direction: 'left' | 'right'; duration: number }) => {
+const Row = ({ logos, direction, duration }: { logos: TTestimonial[]; direction: 'left' | 'right'; duration: number }) => {
   const repeats = Math.max(1, Math.ceil(MIN_TILES / logos.length));
 
   return (
-    <Marquee duration={duration} direction={direction} gap={20} className="py-1">
+    <Marquee duration={duration} direction={direction} gap={20} className="py-1.5">
       {Array.from({ length: repeats }, (_, r) =>
         logos.map((t) => (
           <div
@@ -43,7 +43,7 @@ const Row = ({ logos, direction, duration }: { logos: TTestiomonial[]; direction
 };
 
 type TClientsMarqueeProps = {
-  testimonials: TTestiomonial[];
+  testimonials: TTestimonial[];
   spacing?: TSectionSpacing;
 };
 

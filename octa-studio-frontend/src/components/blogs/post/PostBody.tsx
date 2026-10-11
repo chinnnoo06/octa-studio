@@ -3,7 +3,7 @@ import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { BlogContent } from './BlogContent';
 import { formatDate } from '@/utils/formatDate';
 import { slugify } from '@/utils/slugify';
-import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 const LABEL = 'text-secondary text-xs font-semibold uppercase lg:text-sm';
 const VALUE = 'text-fourth/75 text-sm lg:text-base';

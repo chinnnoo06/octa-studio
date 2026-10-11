@@ -3,19 +3,19 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { useTestimonials } from '@/hooks/testimonials/useTestimonials';
+import { useTestimonial } from '@/hooks/useTestimonial';
 import { ConfirmationModal } from '@/components/ui/ConfirmationModal';
 import { ModalTrigger } from '@/components/ui/ModalTrigger';
 import { DeleteButton } from '@/components/ui/buttons/DeleteButton';
-import { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
+import { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 
 type TDeleteTestimonialButtonProps = {
-    id: TTestiomonial['_id'];
+    id: TTestimonial['_id'];
     name: string;
 };
 
 export const DeleteTestimonialButton = ({ id, name }: TDeleteTestimonialButtonProps) => {
-    const { deleteTestimonial } = useTestimonials();
+    const { deleteTestimonial } = useTestimonial();
 
     useEffect(() => {
         if (deleteTestimonial.error) toast.error(deleteTestimonial.error);

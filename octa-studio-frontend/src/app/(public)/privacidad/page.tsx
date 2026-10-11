@@ -1,14 +1,25 @@
-import { pageMetadata } from '@/utils/metadata';
+import type { Metadata } from 'next';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { LegalPage } from '@/components/legal/LegalPage';
 import { LegalBlock } from '@/components/legal/LegalBlock';
 import { CONTACT } from '@/utils/data/contact';
 
-export const metadata = pageMetadata({
+export const metadata: Metadata = {
   title: 'Aviso de privacidad y aviso legal',
-  description:
-    'Qué datos recibe Octa Building Studio cuando nos contactas, para qué los usa, cómo ejercer tus derechos y en qué términos se ofrece este sitio.',
-  path: '/privacidad',
-});
+  description: 'Qué datos recibe Octa Building Studio cuando nos contactas, para qué los usa, cómo ejercer tus derechos y en qué términos se ofrece este sitio.',
+  alternates: { canonical: '/privacidad' },
+  openGraph: {
+    ...SHARED_OPEN_GRAPH,
+    url: '/privacidad',
+    title: 'Aviso de privacidad y aviso legal | Octa Building Studio',
+    description: 'Qué datos recibe Octa Building Studio cuando nos contactas, para qué los usa, cómo ejercer tus derechos y en qué términos se ofrece este sitio.',
+  },
+  twitter: {
+    ...SHARED_TWITTER,
+    title: 'Aviso de privacidad y aviso legal | Octa Building Studio',
+    description: 'Qué datos recibe Octa Building Studio cuando nos contactas, para qué los usa, cómo ejercer tus derechos y en qué términos se ofrece este sitio.',
+  },
+};
 
 const [proyectos, direccion] = CONTACT.emails;
 

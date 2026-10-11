@@ -5,9 +5,9 @@ import { TestimonialCarousel } from './TestimonialCarousel';
 import { Reveal } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import Img from '@/assets/media/backgrounds/ImgBackground3.webp';
-import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
+import type { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 
-export const Testimonials = ({ testimonials }: { testimonials: TTestiomonial[] }) => {
+export const Testimonials = ({ testimonials }: { testimonials: TTestimonial[] }) => {
   if (testimonials.length === 0) return null;
 
   return (

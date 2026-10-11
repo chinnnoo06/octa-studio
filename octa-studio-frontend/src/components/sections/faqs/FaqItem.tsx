@@ -31,7 +31,7 @@ export const FaqItem = ({ item, isOpen, onToggle, id }: TFaqItemProps) => {
             isOpen ? 'bg-secondary/15 rotate-180' : ''
           }`}
         >
-          <FiChevronDown className="size-4 lg:size-5" />
+          <FiChevronDown className="size-4 lg:size-4.5" />
         </span>
       </button>
 

@@ -6,7 +6,7 @@ import { ADMIN_LINKS } from '@/utils/data/navigation';
 import { LogoutButton } from '@/components/auth/LogoutButton';
 
 const ITEM =
-    'flex items-center gap-2.5 px-5 py-3.5 text-sm lg:text-base transition-colors duration-300';
+    'flex items-center gap-2.5 px-5 py-2.5 text-sm lg:text-base transition-colors duration-300';
 
 export const Sidebar = () => {
     const pathname = usePathname();
@@ -32,7 +32,7 @@ export const Sidebar = () => {
                                             : 'text-secondary hover:bg-secondary/15'
                                             }`}
                                     >
-                                        <Icon aria-hidden="true" className="size-4.5 shrink-0" />
+                                        <Icon aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                                         {label}
                                     </Link>
                                 </li>

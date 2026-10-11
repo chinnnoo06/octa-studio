@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { Reveal } from '@/components/ui/Reveal';
 import { fadeUpScale } from '@/utils/motion/reveal';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import type { TProject } from '@/schemas/project/project.schemas';
 
 const ARROW =
   'cursor-pointer border-secondary text-secondary hover:bg-secondary hover:text-primary flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-xl border-2 transition-colors duration-300';
@@ -119,7 +119,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
         {many && (
           <div className="flex items-center gap-5">
             <button type="button" onClick={prev} aria-label="Anterior" className={ARROW}>
-              <FaChevronLeft aria-hidden="true" className="size-4 lg:size-5" />
+              <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
             </button>
 
             <ul className="flex items-center gap-2.5">
@@ -139,7 +139,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
             </ul>
 
             <button type="button" onClick={next} aria-label="Siguiente" className={ARROW}>
-              <FaChevronRight aria-hidden="true" className="size-4 lg:size-5" />
+              <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
             </button>
           </div>
         )}

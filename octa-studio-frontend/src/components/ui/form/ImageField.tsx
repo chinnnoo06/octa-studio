@@ -11,11 +11,9 @@ type TImageFieldProps = {
     error?: string;
     id?: string;
     label?: string;
-    /** Nota bajo el recuadro, p. ej. la orientacion recomendada. */
     hint?: string;
 };
 
-/** Una sola imagen, con vista previa. Es `ImagesField` para el caso de un archivo. */
 export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada', hint }: TImageFieldProps) => {
     const preview = useMemo(() => (image ? URL.createObjectURL(image) : null), [image]);
 
@@ -34,10 +32,10 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
         <div className="form-group">
             <Label htmlFor={id}>{label}</Label>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
                 <label
                     htmlFor={id}
-                    className="border-secondary/50 text-fourth/75 hover:border-secondary flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-5 py-8 text-center text-xs transition-colors duration-300 lg:text-sm"
+                    className="border-secondary/50 text-fourth/75 hover:border-secondary flex cursor-pointer flex-col items-center justify-center gap-2.5 rounded-lg border border-dashed px-5 py-10 text-center text-xs transition-colors duration-300 lg:text-sm"
                 >
                     <FiImage aria-hidden="true" className="size-6" />
                     {image ? 'Haz clic para cambiar la imagen' : 'Haz clic para elegir una imagen'} · JPG, PNG o WebP
@@ -62,7 +60,7 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
                             aria-label={`Quitar ${image.name}`}
                             className="bg-secondary text-primary absolute -top-2 -right-2 inline-flex cursor-pointer items-center justify-center rounded-full p-1.5 transition-colors duration-300 hover:bg-red-600"
                         >
-                            <FiX aria-hidden="true" className="size-3.5" />
+                            <FiX aria-hidden="true" className="size-4 lg:size-4.5" />
                         </button>
                     </div>
                 )}

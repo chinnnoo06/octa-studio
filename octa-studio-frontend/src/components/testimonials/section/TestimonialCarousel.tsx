@@ -4,12 +4,12 @@ import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar } from 'react-icons/fa6';
-import type { TTestiomonial } from '@/schemas/testimonials/testimonials.schemas';
+import type { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 
 const ARROW =
   'cursor-pointer border-primary text-primary hover:bg-primary hover:text-secondary flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-xl border-2 transition-colors duration-300 ';
 
-export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomonial[] }) => {
+export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestimonial[] }) => {
   const [emblaRef, embla] = useEmblaCarousel({
     loop: true,
     align: 'start',
@@ -76,7 +76,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomon
                   />
                 </div>
 
-                <FaQuoteLeft aria-hidden="true" className="text-primary/75 size-6 lg:size-8" />
+                <FaQuoteLeft aria-hidden="true" className="text-primary/75 size-4 lg:size-4.5" />
 
                 <p className="text-primary text-base text-balance lg:text-lg">
                   {t.quote}
@@ -84,7 +84,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomon
 
                 <div className="flex items-center gap-1.5" aria-label={`${t.rating} de 5`}>
                   {Array.from({ length: t.rating }, (_, s) => (
-                    <FaStar key={s} aria-hidden="true" className="text-primary size-4 lg:size-5" />
+                    <FaStar key={s} aria-hidden="true" className="text-primary size-4 lg:size-4.5" />
                   ))}
                 </div>
 
@@ -99,7 +99,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomon
 
       <div className="flex items-center gap-5">
         <button type="button" onClick={prev} aria-label="Testimonio anterior" className={ARROW}>
-          <FaChevronLeft aria-hidden="true" className="size-4 lg:size-5" />
+          <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
         </button>
 
         <ul className="flex items-center gap-2.5">
@@ -119,7 +119,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestiomon
         </ul>
 
         <button type="button" onClick={next} aria-label="Testimonio siguiente" className={ARROW}>
-          <FaChevronRight aria-hidden="true" className="size-4 lg:size-5" />
+          <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
         </button>
       </div>
     </div>

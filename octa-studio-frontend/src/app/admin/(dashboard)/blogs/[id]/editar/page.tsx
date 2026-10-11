@@ -5,7 +5,7 @@ import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditBlogForm } from '@/components/blogs/form/EditBlogForm';
-import { getBlogByIdService } from '@/services/server/blogs.service';
+import { getBlogByIdService } from '@/services/server/blog.service';
 
 export const metadata: Metadata = { title: 'Editar blog' };
 

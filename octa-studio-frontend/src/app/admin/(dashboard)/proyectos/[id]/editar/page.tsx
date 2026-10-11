@@ -5,7 +5,7 @@ import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EditProjectForm } from '@/components/projects/form/EditProjectForm';
-import { getProjectByIdService } from '@/services/server/projects.service';
+import { getProjectByIdService } from '@/services/server/project.service';
 
 export const metadata: Metadata = { title: 'Editar proyecto' };
 

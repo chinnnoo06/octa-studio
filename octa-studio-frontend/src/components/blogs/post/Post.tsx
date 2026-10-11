@@ -1,4 +1,4 @@
-import { TBlog } from '@/schemas/blogs/blogs.schemas'
+import { TBlog } from '@/schemas/blog/blog.schemas'
 import { PostHero } from './PostHero'
 import { PostBody } from './PostBody'
 

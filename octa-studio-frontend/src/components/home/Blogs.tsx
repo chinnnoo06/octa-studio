@@ -3,7 +3,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { BlogCard } from '@/components/blogs/BlogCard';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
-import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 export const Blogs = ({ blogs }: { blogs: TBlog[] }) => {
   if (blogs.length === 0) return null;

@@ -1,34 +1,46 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { pageMetadata } from '@/utils/metadata';
+import { BlogStructuredData } from '@/components/seo/BlogStructuredData';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { RelatedPosts } from '@/components/blogs/post/RelatedPosts';
 import { CtaSection } from '@/components/sections/CtaSection';
-import { getBlogBySlugService, getBlogsService } from '@/services/server/blogs.service';
-import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import { getBlogBySlugService, getBlogsService } from '@/services/server/blog.service';
+import type { TBlog } from '@/schemas/blog/blog.schemas';
 import { Post } from '@/components/blogs/post/Post';
 
 const RELATED = 3;
+
+const IMAGE_URL = process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL!;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlogBySlugService(slug);
 
-  if (!blog) {
-    return { title: 'Entrada no encontrada' };
-  }
+  if (!blog) return { title: 'Entrada no encontrada' };
 
-  const base = pageMetadata({
-    title: blog.seo.metaTitle,
-    description: blog.seo.metaDescription,
-    path: `/blogs/${blog.slug}`,
-  });
-
-  const image = { url: `${process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL}/${blog.image}`, alt: blog.title };
+  const blogUrl = `/blogs/${slug}`;
+  const image = { url: `${IMAGE_URL}/${blog.image}`, alt: blog.title };
 
   return {
-    ...base,
-    openGraph: { ...base.openGraph, type: 'article', publishedTime: blog.createdAt, images: [image] },
-    twitter: { ...base.twitter, images: [image] },
+    title: blog.seo.metaTitle,
+    description: blog.seo.metaDescription,
+    alternates: { canonical: blogUrl },
+    openGraph: {
+      ...SHARED_OPEN_GRAPH,
+      type: 'article',
+      url: blogUrl,
+      title: blog.seo.metaTitle,
+      description: blog.seo.metaDescription,
+      publishedTime: blog.createdAt,
+      section: blog.category,
+      images: [image],
+    },
+    twitter: {
+      ...SHARED_TWITTER,
+      title: blog.seo.metaTitle,
+      description: blog.seo.metaDescription,
+      images: [image],
+    },
   };
 }
 
@@ -55,6 +67,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
+      <BlogStructuredData blog={blog} imageUrl={IMAGE_URL} />
       <Post blog={blog} />
       <CtaSection line="Ya sabes cómo lo hacemos. Cuéntanos tu próxima feria." />
       <RelatedPosts blogs={related} />

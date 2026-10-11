@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { useProjects } from '@/hooks/projects/useProjects';
+import { useProject } from '@/hooks/useProject';
 import { ConfirmationModal } from '@/components/ui/ConfirmationModal';
 import { ModalTrigger } from '@/components/ui/ModalTrigger';
 import { DeleteButton } from '@/components/ui/buttons/DeleteButton';
@@ -14,7 +14,7 @@ type TDeleteProjectButtonProps = {
 };
 
 export const DeleteProjectButton = ({ id, name }: TDeleteProjectButtonProps) => {
-    const { deleteProject } = useProjects();
+    const { deleteProject } = useProject();
 
     useEffect(() => {
         if (deleteProject.error) toast.error(deleteProject.error);

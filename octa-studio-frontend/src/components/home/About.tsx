@@ -21,7 +21,7 @@ export const About = () => {
         <div className="mx-auto max-w-[1700px] px-5 lg:px-15 flex flex-col xl:flex-row gap-10">
           <div className="flex w-full xl:w-1/2 flex-col justify-between gap-10">
             <div className="text-secondary flex flex-col gap-5">
-              <div className='flex flex-col gap-.5'>
+              <div className='flex flex-col gap-2.5'>
                 <Eyebrow>Sobre Octa Building Studio</Eyebrow>
                 <WipeHeading text="Más de 20 años convirtiendo marcas en experiencias" />
               </div>

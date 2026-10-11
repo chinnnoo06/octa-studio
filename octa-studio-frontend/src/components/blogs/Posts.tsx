@@ -5,14 +5,13 @@ import { Pagination } from '@/components/ui/Pagination';
 import { slugify } from '@/utils/slugify';
 import { BlogCard } from '@/components/blogs/BlogCard';
 import { CategoryFilter } from '@/components/blogs/CategoryFilter';
-import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import type { TBlog } from '@/schemas/blog/blog.schemas';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
 import type { TBlogCategory } from '@/types/content.types';
 
 type TPostsProps = {
   blogs: TBlog[];
   pagination: TPagination;
-  /** Categoria activa; sin ella se listan todas. */
   category?: TBlogCategory;
 };
 

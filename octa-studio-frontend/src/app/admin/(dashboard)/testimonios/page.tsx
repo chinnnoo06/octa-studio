@@ -4,7 +4,7 @@ import { LinkButtonLeft } from '@/components/ui/buttons/LinkButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { TestimonialsTable } from '@/components/testimonials/table/TestimonialsTable';
-import { getTestimonialsService } from '@/services/server/testimonials.service';
+import { getTestimonialsService } from '@/services/server/testimonial.service';
 
 export const metadata: Metadata = { title: 'Testimonios' };
 

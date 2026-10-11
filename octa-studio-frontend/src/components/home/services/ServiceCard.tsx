@@ -15,7 +15,7 @@ export const ServiceCard = ({ service }: { service: TService }) => {
 
         <span
           aria-hidden="true"
-          className="border-secondary text-secondary group-hover:border-primary group-hover:text-primary flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border px-4 transition-colors duration-300 lg:h-12 lg:px-5"
+          className="border-secondary text-secondary group-hover:border-primary group-hover:text-primary flex h-10 shrink-0 items-center justify-center gap-2.5 rounded-full border px-5 transition-colors duration-300 lg:h-12"
         >
           <span className="text-sm lg:text-base font-medium">Ver más</span>
           <HiArrowUpRight aria-hidden="true" className="size-4 lg:size-4.5 stroke-1" />

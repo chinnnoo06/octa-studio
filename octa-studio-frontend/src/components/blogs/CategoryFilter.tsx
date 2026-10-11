@@ -4,7 +4,7 @@ import { slugify } from '@/utils/slugify';
 
 /** La pildora de ServiceCard: la activa va en solido, el resto con borde. */
 const PILL =
-  'flex h-10 shrink-0 items-center justify-center rounded-full border px-4 text-sm lg:text-base font-medium whitespace-nowrap transition-colors duration-300 lg:h-12 lg:px-5';
+  'flex h-10 shrink-0 items-center justify-center rounded-full border px-5 text-sm lg:text-base font-medium whitespace-nowrap transition-colors duration-300 lg:h-12';
 
 const ON = `${PILL} border-secondary bg-secondary text-primary`;
 const OFF = `${PILL} border-secondary text-secondary hover:bg-secondary/15`;

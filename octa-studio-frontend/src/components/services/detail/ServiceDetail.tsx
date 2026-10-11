@@ -52,7 +52,7 @@ export const ServiceDetail = ({ service, flip = false }: TServiceDetailProps) =>
             aria-hidden="true"
             className="bg-secondary/15 text-secondary flex size-10 shrink-0 items-center justify-center rounded-full lg:size-12"
           >
-            <Icon className="size-5 lg:size-6" />
+            <Icon className="size-4 lg:size-4.5" />
           </span>
         </div>
 
@@ -66,7 +66,7 @@ export const ServiceDetail = ({ service, flip = false }: TServiceDetailProps) =>
 
         <ul role="list" className="flex flex-col">
           {service.includes.map((item, i) => (
-            <li key={item} className="border-fourth/30 flex gap-5 border-t py-3 last:border-b">
+            <li key={item} className="border-fourth/30 flex gap-5 border-t py-2.5 last:border-b">
               <span aria-hidden="true" className="text-secondary shrink-0 text-sm lg:text-base font-medium">
                 0{i + 1}
               </span>

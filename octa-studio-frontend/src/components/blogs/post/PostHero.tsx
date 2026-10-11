@@ -6,7 +6,7 @@ import { Reveal, RevealOnLoad } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import { formatDate } from '@/utils/formatDate';
 import { slugify } from '@/utils/slugify';
-import type { TBlog } from '@/schemas/blogs/blogs.schemas';
+import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 export const PostHero = ({ blog }: { blog: TBlog }) => {
   return (
@@ -30,7 +30,7 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
             {formatDate(blog.createdAt)}
             <span aria-hidden="true" className="bg-fourth/30 size-1 rounded-full" />
             <span className="flex items-center gap-1.5">
-              <FaRegClock aria-hidden="true" className="size-3" />
+              <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
               {blog.readingTime} min de lectura
             </span>
           </p>

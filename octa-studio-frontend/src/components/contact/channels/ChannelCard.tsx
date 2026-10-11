@@ -35,14 +35,14 @@ export const ChannelCard = ({ channel, variant }: TChannelCardProps) => {
           aria-hidden="true"
           className={`flex size-10 shrink-0 items-center justify-center rounded-full lg:size-12 ${badge}`}
         >
-          <Icon className="size-5 lg:size-6" />
+          <Icon className="size-4 lg:size-4.5" />
         </span>
 
         <a
           href={primary.href}
           target={external ? '_blank' : undefined}
           rel={external ? 'noopener noreferrer' : undefined}
-          className={`flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border px-4 transition-colors duration-300 lg:h-12 lg:px-5 ${light ? 'border-primary text-primary hover:bg-primary hover:text-secondary' : 'border-secondary text-secondary hover:bg-secondary hover:text-primary'}`}
+          className={`flex h-10 shrink-0 items-center justify-center gap-2.5 rounded-full border px-5 transition-colors duration-300 lg:h-12 ${light ? 'border-primary text-primary hover:bg-primary hover:text-secondary' : 'border-secondary text-secondary hover:bg-secondary hover:text-primary'}`}
         >
           <span className="text-sm lg:text-base font-medium">{channel.action}</span>
           <HiArrowUpRight aria-hidden="true" className="size-4 lg:size-4.5 stroke-1" />
@@ -74,7 +74,7 @@ export const ChannelCard = ({ channel, variant }: TChannelCardProps) => {
                 href={link.href}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
-                className="group flex flex-col gap-1 py-5"
+                className="group flex flex-col gap-1.5 py-5"
               >
                 <span className={`text-sm lg:text-base font-medium ${light ? 'text-primary/75' : 'text-secondary'}`}>
                   {link.label}

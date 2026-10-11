@@ -1,14 +1,25 @@
-import { pageMetadata } from '@/utils/metadata';
+import type { Metadata } from 'next';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { LegalPage } from '@/components/legal/LegalPage';
 import { LegalBlock } from '@/components/legal/LegalBlock';
 import { DEVELOPER, IMAGE_CREDITS, MAGNIFIC_ATTRIBUTION } from '@/utils/data/credits';
 
-export const metadata = pageMetadata({
+export const metadata: Metadata = {
   title: 'Créditos',
-  description:
-    'Autoría de las imágenes de terceros y de las generadas con herramientas usadas en el sitio de Octa Building Studio.',
-  path: '/creditos',
-});
+  description: 'Autoría de las imágenes de terceros y de las generadas con herramientas usadas en el sitio de Octa Building Studio.',
+  alternates: { canonical: '/creditos' },
+  openGraph: {
+    ...SHARED_OPEN_GRAPH,
+    url: '/creditos',
+    title: 'Créditos | Octa Building Studio',
+    description: 'Autoría de las imágenes de terceros y de las generadas con herramientas usadas en el sitio de Octa Building Studio.',
+  },
+  twitter: {
+    ...SHARED_TWITTER,
+    title: 'Créditos | Octa Building Studio',
+    description: 'Autoría de las imágenes de terceros y de las generadas con herramientas usadas en el sitio de Octa Building Studio.',
+  },
+};
 
 const LINK = 'text-secondary underline underline-offset-4 transition-colors duration-300 hover:text-secondary/75';
 
@@ -34,7 +45,7 @@ export default function CreditosPage() {
           {IMAGE_CREDITS.map((credit) => (
             <li
               key={credit.title}
-              className="border-fourth/30 flex flex-col gap-1 border-t py-4 first:border-t-0 first:pt-0"
+              className="border-fourth/30 flex flex-col gap-1.5 border-t py-5 first:border-t-0 first:pt-0"
             >
               <span className="text-secondary text-sm lg:text-base font-medium">{credit.title}</span>
               <span className="text-sm lg:text-base">Usado en: {credit.usedIn}</span>

@@ -4,8 +4,8 @@ import { BackButton } from '@/components/ui/buttons/BackButton';
 import { BackButtonLeft } from '@/components/ui/buttons/BackButtonLeft';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { EditProjectVideos } from '@/components/projects/videos/EditProjectVideos';
-import { getProjectByIdService } from '@/services/server/projects.service';
+import { EditProjectVideosForm } from '@/components/projects/form/videos/EditProjectVideosForm';
+import { getProjectByIdService } from '@/services/server/project.service';
 
 export const metadata: Metadata = { title: 'Videos del proyecto' };
 
@@ -33,7 +33,7 @@ export default async function VideosProyectoPage({ params }: { params: Promise<{
         </div>
       </div>
 
-      <EditProjectVideos project={project} />
+      <EditProjectVideosForm project={project} />
     </section>
   );
 }

@@ -7,7 +7,7 @@ import { Logo } from '@/components/ui/Logo';
 import { HamburgerButton } from './HamburgerButton';
 import { useHeader } from '@/hooks/ui/useHeader';
 import { MobileNav } from './MobileNav';
-import { isActiveHref } from '@/utils/isActiveHref';
+import { isActiveHref } from '@/utils/activeHref';
 import { CONTACT } from '@/utils/data/contact';
 import { HiOutlinePhone } from 'react-icons/hi2';
 
@@ -41,7 +41,7 @@ export const Header = () => {
                       <Link
                         href={link.href}
                         aria-current={isActive ? 'page' : undefined}
-                        className="group relative inline-block py-1"
+                        className="group relative inline-block py-1.5"
                       >
                         <span
                           className="text-sm xl:text-base leading-none transition-colors duration-300 text-primary"
@@ -64,7 +64,7 @@ export const Header = () => {
               href={CONTACT.phone.href}
               className="text-primary hover:text-primary/75 inline-flex items-center gap-2.5 text-sm leading-none whitespace-nowrap transition-colors duration-300 xl:text-base"
             >
-              <HiOutlinePhone className="size-3.5 shrink-0 xl:size-4" />
+              <HiOutlinePhone className="size-4 lg:size-4.5 shrink-0" />
               {CONTACT.phone.display}
             </a>
           </div>

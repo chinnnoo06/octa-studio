@@ -35,11 +35,11 @@ export const VideosField = ({ videos, onChange, error, max = 5 }: TVideosFieldPr
         <div className="form-group">
             <Label htmlFor="videos">Videos del proyecto (opcional)</Label>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
                 <label
                     htmlFor="videos"
                     aria-disabled={full}
-                    className={`border-secondary/50 text-fourth/75 flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-5 py-8 text-center text-xs transition-colors duration-300 lg:text-sm ${full
+                    className={`border-secondary/50 text-fourth/75 flex flex-col items-center justify-center gap-2.5 rounded-lg border border-dashed px-5 py-10 text-center text-xs transition-colors duration-300 lg:text-sm ${full
                         ? 'cursor-not-allowed opacity-50'
                         : 'hover:border-secondary cursor-pointer'
                         }`}
@@ -61,7 +61,7 @@ export const VideosField = ({ videos, onChange, error, max = 5 }: TVideosFieldPr
                 />
 
                 {previews.length > 0 && (
-                    <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         {previews.map((preview, i) => (
                             <li key={preview} className="group relative">
                                 <video
@@ -80,7 +80,7 @@ export const VideosField = ({ videos, onChange, error, max = 5 }: TVideosFieldPr
                                     aria-label={`Quitar ${videos[i].name}`}
                                     className="bg-secondary text-primary absolute -top-2 -right-2 inline-flex cursor-pointer items-center justify-center rounded-full p-1.5 transition-colors duration-300 hover:bg-red-600"
                                 >
-                                    <FiX aria-hidden="true" className="size-3.5" />
+                                    <FiX aria-hidden="true" className="size-4 lg:size-4.5" />
                                 </button>
                             </li>
                         ))}

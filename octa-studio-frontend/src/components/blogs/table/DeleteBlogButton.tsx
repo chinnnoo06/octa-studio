@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { useBlogs } from '@/hooks/blogs/useBlogs';
+import { useBlog } from '@/hooks/useBlog';
 import { ConfirmationModal } from '@/components/ui/ConfirmationModal';
 import { ModalTrigger } from '@/components/ui/ModalTrigger';
 import { DeleteButton } from '@/components/ui/buttons/DeleteButton';
@@ -15,7 +15,7 @@ type TDeleteBlogButtonProps = {
 };
 
 export const DeleteBlogButton = ({ id, name }: TDeleteBlogButtonProps) => {
-    const { deleteBlog } = useBlogs();
+    const { deleteBlog } = useBlog();
 
     useEffect(() => {
         if (deleteBlog.error) toast.error(deleteBlog.error);

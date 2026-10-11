@@ -6,9 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { UpdateProjectFormSchema, TUpdateProjectForm } from '@/schemas/projects/projects.form.schemas';
-import { TProject } from "@/schemas/projects/projects.schemas";
-import { useProjects } from "@/hooks/projects/useProjects";
+import { UpdateProjectFormSchema, TUpdateProjectForm } from '@/schemas/project/project.form.schemas';
+import { TProject } from "@/schemas/project/project.schemas";
+import { useProject } from "@/hooks/useProject";
 import { Label } from "@/components/ui/form/Label";
 import { Input } from "@/components/ui/form/Input";
 import { Textarea } from "@/components/ui/form/Textarea";
@@ -32,7 +32,7 @@ export const EditProjectForm = ({ project }: { project: TProject }) => {
         }
     })
 
-    const { updateProject } = useProjects();
+    const { updateProject } = useProject();
 
     useEffect(() => {
         if (updateProject.error) toast.error(updateProject.error);
@@ -42,7 +42,7 @@ export const EditProjectForm = ({ project }: { project: TProject }) => {
     const onSubmit = (data: TUpdateProjectForm) => updateProject.handleUpdateProject(project._id, data)
 
     return (
-        <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
 
             <FormSection>
                 <FormSectionTitle>Información</FormSectionTitle>
@@ -83,7 +83,7 @@ export const EditProjectForm = ({ project }: { project: TProject }) => {
             </FormSection>
 
             <ActionButton loading={updateProject.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
                 {updateProject.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>

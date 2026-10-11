@@ -1,15 +1,26 @@
 import { redirect } from 'next/navigation';
-import { pageMetadata } from '@/utils/metadata';
+import type { Metadata } from 'next';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { Hero } from '@/components/projects/Hero';
 import { Projects } from '@/components/projects/Projects';
-import { getProjectsService } from '@/services/server/projects.service';
+import { getProjectsService } from '@/services/server/project.service';
 
-export const metadata = pageMetadata({
-  title: 'Proyectos',
-  description:
-    'Una selección de los stands y montajes que hemos producido para marcas nacionales e internacionales.',
-  path: '/proyectos',
-});
+export const metadata: Metadata = {
+  title: 'Proyectos de stands y montajes',
+  description: 'Portafolio de stands, escenarios y montajes que hemos diseñado, fabricado e instalado para marcas nacionales e internacionales en expos y congresos.',
+  alternates: { canonical: '/proyectos' },
+  openGraph: {
+    ...SHARED_OPEN_GRAPH,
+    url: '/proyectos',
+    title: 'Proyectos de stands y montajes | Octa Building Studio',
+    description: 'Portafolio de stands, escenarios y montajes que hemos diseñado, fabricado e instalado para marcas nacionales e internacionales en expos y congresos.',
+  },
+  twitter: {
+    ...SHARED_TWITTER,
+    title: 'Proyectos de stands y montajes | Octa Building Studio',
+    description: 'Portafolio de stands, escenarios y montajes que hemos diseñado, fabricado e instalado para marcas nacionales e internacionales en expos y congresos.',
+  },
+};
 
 export default async function ProyectosPage({
   searchParams,

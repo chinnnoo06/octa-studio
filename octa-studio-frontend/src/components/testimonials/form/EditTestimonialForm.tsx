@@ -6,9 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { UpdateTestimonialFormSchema, TUpdateTestimonialForm } from '@/schemas/testimonials/testimonials.form.schemas';
-import { TTestiomonial } from "@/schemas/testimonials/testimonials.schemas";
-import { useTestimonials } from "@/hooks/testimonials/useTestimonials";
+import { UpdateTestimonialFormSchema, TUpdateTestimonialForm } from '@/schemas/testimonial/testimonial.form.schemas';
+import { TTestimonial } from "@/schemas/testimonial/testimonial.schemas";
+import { useTestimonial } from "@/hooks/useTestimonial";
 import { Label } from "@/components/ui/form/Label";
 import { Input } from "@/components/ui/form/Input";
 import { Textarea } from "@/components/ui/form/Textarea";
@@ -17,7 +17,7 @@ import { FormSection } from "@/components/ui/form/FormSection";
 import { FormSectionTitle } from "@/components/ui/form/FormSectionTitle";
 import { ActionButton } from "@/components/ui/buttons/ActionButton";
 
-export const EditTestimonialForm = ({ testimonial }: { testimonial: TTestiomonial }) => {
+export const EditTestimonialForm = ({ testimonial }: { testimonial: TTestimonial }) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TUpdateTestimonialForm>({
         resolver: zodResolver(UpdateTestimonialFormSchema),
         defaultValues: {
@@ -27,7 +27,7 @@ export const EditTestimonialForm = ({ testimonial }: { testimonial: TTestiomonia
         }
     })
 
-    const { updateTestimonial } = useTestimonials();
+    const { updateTestimonial } = useTestimonial();
 
     useEffect(() => {
         if (updateTestimonial.error) toast.error(updateTestimonial.error);
@@ -37,7 +37,7 @@ export const EditTestimonialForm = ({ testimonial }: { testimonial: TTestiomonia
     const onSubmit = (data: TUpdateTestimonialForm) => updateTestimonial.handleUpdateTestimonial(testimonial._id, data)
 
     return (
-        <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormSection>
                 <FormSectionTitle>Datos del testimonio</FormSectionTitle>
 
@@ -66,7 +66,7 @@ export const EditTestimonialForm = ({ testimonial }: { testimonial: TTestiomonia
             </FormSection>
 
             <ActionButton loading={updateTestimonial.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
                 {updateTestimonial.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>

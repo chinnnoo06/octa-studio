@@ -1,43 +1,49 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { pageMetadata } from '@/utils/metadata';
+import { ProjectStructuredData } from '@/components/seo/ProjectStructuredData';
+import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { ProjectHero } from '@/components/projects/detail/ProjectHero';
 import { ProjectCarousel } from '@/components/projects/detail/ProjectCarousel';
 import { RelatedProjects } from '@/components/projects/detail/RelatedProjects';
 import { CtaSection } from '@/components/sections/CtaSection';
-import { getProjectBySlugService, getProjectsService } from '@/services/server/projects.service';
-
-type TProjectPageProps = { params: Promise<{ slug: string }> };
+import { getProjectBySlugService, getProjectsService } from '@/services/server/project.service';
 
 const RELATED = 2;
 
-export async function generateMetadata({ params }: TProjectPageProps): Promise<Metadata> {
+const IMAGE_URL = process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL!;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProjectBySlugService(slug);
 
-  if (!project) {
-    return { title: 'Proyecto no encontrado' };
-  }
+  if (!project) return { title: 'Proyecto no encontrado' };
 
-  const base = pageMetadata({
-    title: project.seo.metaTitle,
-    description: project.seo.metaDescription,
-    path: `/proyectos/${project.slug}`,
-  });
-
-  const image = {
-    url: `${process.env.NEXT_PUBLIC_PROJECTS_IMAGE_URL}/${project.images[0]}`,
-    alt: `Proyecto ${project.name}, ${project.sector}`,
-  };
+  const projectUrl = `/proyectos/${slug}`;
+  const image = project.images[0]
+    ? { url: `${IMAGE_URL}/${project.images[0]}`, alt: `Proyecto ${project.name}, ${project.sector}` }
+    : undefined;
 
   return {
-    ...base,
-    openGraph: { ...base.openGraph, images: [image] },
-    twitter: { ...base.twitter, images: [image] },
+    title: project.seo.metaTitle,
+    description: project.seo.metaDescription,
+    alternates: { canonical: projectUrl },
+    openGraph: {
+      ...SHARED_OPEN_GRAPH,
+      url: projectUrl,
+      title: project.seo.metaTitle,
+      description: project.seo.metaDescription,
+      ...(image && { images: [image] }),
+    },
+    twitter: {
+      ...SHARED_TWITTER,
+      title: project.seo.metaTitle,
+      description: project.seo.metaDescription,
+      ...(image && { images: [image] }),
+    },
   };
 }
 
-export default async function ProjectPage({ params }: TProjectPageProps) {
+export default async function ProjectPage({ params }: {params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await getProjectBySlugService(slug);
 
@@ -49,6 +55,7 @@ export default async function ProjectPage({ params }: TProjectPageProps) {
 
   return (
     <>
+      <ProjectStructuredData project={project} imageUrl={IMAGE_URL} />
       <ProjectHero project={project} />
       <ProjectCarousel project={project} />
       <CtaSection line="¿Un stand así para tu marca? Cuéntanos fecha, recinto y metros." />

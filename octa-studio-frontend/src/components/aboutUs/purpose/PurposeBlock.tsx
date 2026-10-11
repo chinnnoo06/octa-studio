@@ -32,7 +32,7 @@ export const PurposeBlock = ({ purpose, variant }: TPurposeBlockProps) => {
         {purpose.points.map((point, i) => (
           <li
             key={point}
-            className={`flex gap-5 border-t py-3 last:pb-0 ${light ? 'border-primary/30' : 'border-fourth/30'}`}
+            className={`flex gap-5 border-t py-2.5 last:pb-0 ${light ? 'border-primary/30' : 'border-fourth/30'}`}
           >
             <span
               aria-hidden="true"

@@ -3,7 +3,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import type { TProject } from '@/schemas/project/project.schemas';
 
 export const RelatedProjects = ({ projects }: { projects: TProject[] }) => {
   if (projects.length === 0) return null;

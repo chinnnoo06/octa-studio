@@ -10,7 +10,7 @@ type TAdminMobileNavProps = {
     toggleMenu: () => void;
 };
 
-const ITEM = 'flex items-center gap-2.5 px-5 py-4 text-base transition-colors duration-300';
+const ITEM = 'flex items-center gap-2.5 px-5 py-5 text-base transition-colors duration-300';
 
 export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps) => {
     const pathname = usePathname();
@@ -55,7 +55,7 @@ export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps
                                             : 'text-secondary hover:bg-secondary/15'
                                             }`}
                                     >
-                                        <Icon aria-hidden="true" className="size-4.5 shrink-0" />
+                                        <Icon aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                                         {label}
                                     </Link>
                                 </li>

@@ -7,7 +7,7 @@ const PROSE = [
   '[&_h4]:text-secondary [&_h4]:text-base [&_h4]:lg:text-lg [&_h4]:font-semibold',
   '[&_a]:text-secondary [&_a]:underline [&_a]:underline-offset-4',
   '[&_strong]:text-fourth [&_strong]:font-semibold',
-  '[&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-6 [&_ol]:pl-6 [&_li]:mb-2',
+  '[&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-5 [&_ol]:pl-5 [&_li]:mb-2.5',
   '[&_blockquote]:border-secondary [&_blockquote]:border-l-4 [&_blockquote]:pl-5 [&_blockquote]:text-secondary [&_blockquote]:font-medium',
   // Mismo tope de ancho que la imagen principal de la entrada.
   '[&_img]:rounded-xl [&_img]:w-full [&_img]:max-w-6xl [&_img]:aspect-4/3 [&_img]:object-cover [&_img]:lg:aspect-auto [&_img]:lg:h-110',

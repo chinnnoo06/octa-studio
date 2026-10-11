@@ -6,11 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
 import { toast } from "react-toastify";
 
-import { UpdateBlogFormSchema, TUpdateBlogForm } from '@/schemas/blogs/blogs.form.schemas';
+import { UpdateBlogFormSchema, TUpdateBlogForm } from '@/schemas/blog/blog.form.schemas';
 import { BLOG_CATEGORIES } from '@/utils/data/blogs';
 import { withAbsoluteContentImages } from '@/utils/blogContentImages';
-import { TBlog } from "@/schemas/blogs/blogs.schemas";
-import { useBlogs } from "@/hooks/blogs/useBlogs";
+import { TBlog } from "@/schemas/blog/blog.schemas";
+import { useBlog } from "@/hooks/useBlog";
 import { Label } from "@/components/ui/form/Label";
 import { Input } from "@/components/ui/form/Input";
 import { Textarea } from "@/components/ui/form/Textarea";
@@ -39,7 +39,7 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
         }
     })
 
-    const { updateBlog } = useBlogs();
+    const { updateBlog } = useBlog();
 
     useEffect(() => {
         if (updateBlog.error) toast.error(updateBlog.error);
@@ -49,7 +49,7 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
     const onSubmit = (data: TUpdateBlogForm) => updateBlog.handleUpdateBlog(blog._id, data)
 
     return (
-        <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='space-y-10' onSubmit={handleSubmit(onSubmit)} noValidate>
 
             <FormSection>
                 <FormSectionTitle>Datos del blog</FormSectionTitle>
@@ -113,7 +113,7 @@ export const EditBlogForm = ({ blog }: { blog: TBlog }) => {
             </FormSection>
 
             <ActionButton loading={updateBlog.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
                 {updateBlog.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>

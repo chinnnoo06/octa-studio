@@ -4,7 +4,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { Pagination } from '@/components/ui/Pagination';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import type { TProject } from '@/schemas/project/project.schemas';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
 
 type TProjectsProps = {
@@ -17,8 +17,6 @@ export const Projects = ({ projects, pagination }: TProjectsProps) => {
     <section id="portafolio" data-section="projects" className="bg-primary scroll-mt-18 py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
-        {/* Misma cabecera que en la home: titulo a la izquierda, texto de
-            apoyo y boton a la derecha; las tarjetas apaisadas debajo. */}
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="text-secondary flex flex-col gap-2.5">
             <Eyebrow>Portafolio</Eyebrow>

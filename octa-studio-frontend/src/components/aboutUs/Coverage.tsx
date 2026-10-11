@@ -30,11 +30,11 @@ export const Coverage = () => {
             </video>
           </Reveal>
 
-          <div className="flex flex-col gap-5 justify-center flex-1 ">
+          <div className="flex flex-col gap-5 justify-center flex-1">
             {COVERAGE.map((item) => (
               <Reveal
                 key={item.title}
-                className="hover:bg-secondary/15 flex flex-col gap-2.5 rounded-xl p-5 transition-colors duration-300 lg:py-7.5 lg:pr-5 lg:pl-10"
+                className="hover:bg-secondary/15 flex flex-col gap-2.5 rounded-xl p-5 transition-colors duration-300 lg:pl-10"
               >
                 <h3 className="text-secondary text-xl lg:text-2xl font-semibold uppercase">
                   {item.title}

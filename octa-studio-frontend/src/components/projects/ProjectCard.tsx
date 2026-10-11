@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import type { TProject } from '@/schemas/projects/projects.schemas';
+import type { TProject } from '@/schemas/project/project.schemas';
 
 export const ProjectCard = ({ project }: { project: TProject }) => {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -39,7 +39,7 @@ export const ProjectCard = ({ project }: { project: TProject }) => {
         <span aria-hidden="true" className="absolute inset-0 bg-black/30" />
       </div>
 
-      <div className="bg-secondary/15 group-hover:bg-secondary flex items-center justify-between gap-5 px-5 py-4 transition-colors duration-300 lg:px-6 lg:py-5">
+      <div className="bg-secondary/15 group-hover:bg-secondary flex items-center justify-between gap-5 p-5 transition-colors duration-300">
         <h3 className="font-gentleman text-secondary text-5xl lg:text-6xl leading-[0.7] font-normal tracking-[0.04em] normal-case transition-colors duration-300 group-hover:text-white">
           {project.name}
         </h3>
