@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { FiChevronRight } from 'react-icons/fi';
 import type { TBreadcrumbItem } from '@/types/common.types';
 
-/** Miga de pan visible; arranca en Inicio y el ultimo paso es la pagina actual. */
 export const Breadcrumb = ({ items }: { items: TBreadcrumbItem[] }) => {
   const steps = [{ name: 'Inicio', path: '/' }, ...items];
 
