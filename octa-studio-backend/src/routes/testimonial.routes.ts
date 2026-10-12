@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { param, query } from "express-validator";
 import { auth } from "../middlewares/auth";
-import { handleInputErrors, validateAdminListQuery, validateBulkDelete, validateImagesFormat } from "../middlewares/reqValidation";
+import { handleInputErrors, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat } from "../middlewares/reqValidation";
 import { converToWebP } from "../middlewares/convertToWebp";
 import { testimonialsUploads } from "../middlewares/uploads";
 import { validateTestimonialExists, validateTestimonialInput } from "../middlewares/testimonial";
@@ -41,26 +41,19 @@ router.post("/",
     TestimonialController.createTestimonial
 )
 
+// Edicion completa en una sola peticion: datos y, opcional, el logo de la empresa.
 router.put("/:id",
     auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    validateTestimonialInput,
-    handleInputErrors,
-    validateTestimonialExists,
-    TestimonialController.updateTestimonial
-)
-
-router.patch("/:id/image",
-    auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    handleInputErrors,
-    validateTestimonialExists,
     testimonialsUploads.fields([
         { name: "testimonialImage", maxCount: 1 }
     ]),
-    validateImagesFormat,
+    param('id').isMongoId().withMessage('Invalide Id'),
+    validateOptionalImagesFormat,
+    validateTestimonialInput,
+    handleInputErrors,
+    validateTestimonialExists,
     converToWebP,
-    TestimonialController.updateTestimonialImage
+    TestimonialController.updateTestimonial
 )
 
 router.delete("/:id",

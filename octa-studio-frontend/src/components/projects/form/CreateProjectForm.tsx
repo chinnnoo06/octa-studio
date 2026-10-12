@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
@@ -22,6 +23,8 @@ import { ImagesField } from "@/components/ui/form/ImagesField";
 import { VideosField } from "@/components/ui/form/VideosField";
 
 export const CreateProjectForm = () => {
+    const router = useRouter();
+
     const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateProjectForm>({
         resolver: zodResolver(CreateProjectFormSchema),
         defaultValues: {
@@ -38,8 +41,11 @@ export const CreateProjectForm = () => {
 
     useEffect(() => {
         if (createProject.error) toast.error(createProject.error);
-        if (createProject.success) toast.success(createProject.success);
-    }, [createProject.error, createProject.success]);
+        if (createProject.success) {
+            toast.success(createProject.success);
+            router.push('/admin/proyectos');
+        }
+    }, [createProject.error, createProject.success, router]);
 
     const images = useWatch({ control, name: 'images' });
     const videos = useWatch({ control, name: 'videos' });
@@ -53,10 +59,10 @@ export const CreateProjectForm = () => {
         <form id={ADMIN_FORM_ID} className="mx-auto flex w-full max-w-240 flex-col gap-5" onSubmit={handleSubmit(onSubmit)} noValidate>
 
             <FormSection>
-                <FormSectionTitle>Información</FormSectionTitle>
+                <FormSectionTitle>Información del Proyecto</FormSectionTitle>
 
                 <div className="form-group">
-                    <Label htmlFor="name">Nombre</Label>
+                    <Label htmlFor="name">Nombre del Proyecto</Label>
                     <Input type="text" id="name" placeholder="Nombre del proyecto" {...register("name")} />
                     <SpanError message={errors.name?.message} />
                 </div>
@@ -77,18 +83,18 @@ export const CreateProjectForm = () => {
             <FormSection>
                 <FormSectionTitle>SEO</FormSectionTitle>
 
-                <FormHint>Optimiza cómo se muestra en los buscadores: el meta título es el enlace azul de Google y la meta descripción, el texto de debajo.</FormHint>
+                <FormHint>Optimiza cómo se muestra este proyecto en los buscadores. Si dejas los campos vacíos, se usará el nombre del proyecto y su descripción.</FormHint>
 
                 <div className="form-group">
                     <Label htmlFor="metaTitle">Meta título</Label>
-                    <Input type="text" id="metaTitle" placeholder="Máximo 60 caracteres" {...register("seo.metaTitle")} />
+                    <Input type="text" id="metaTitle" placeholder="Opcional · recomendado 40-60 caracteres" {...register("seo.metaTitle")} />
                     <CharCounter value={seo?.metaTitle} optimalMin={40} max={60} />
                     <SpanError message={errors.seo?.metaTitle?.message} />
                 </div>
 
                 <div className="form-group">
                     <Label htmlFor="metaDescription">Meta descripción</Label>
-                    <Textarea id="metaDescription" rows={3} placeholder="Máximo 160 caracteres" {...register("seo.metaDescription")} />
+                    <Textarea id="metaDescription" rows={3} placeholder="Opcional · recomendado 120-160 caracteres" {...register("seo.metaDescription")} />
                     <CharCounter value={seo?.metaDescription} optimalMin={120} max={160} />
                     <SpanError message={errors.seo?.metaDescription?.message} />
                 </div>

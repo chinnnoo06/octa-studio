@@ -4,12 +4,14 @@ import path from "path";
 import { blogRepository, PUBLIC_BLOG_FILTER } from "../repositories/blog.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
 import { TBlogDto, TGetAdminBlogsQuery } from "../types/blog/blog.dtos";
-import { BlogCategory, TBlogDocument } from "../types/blog/blog.types";
+import { TBlogDocument } from "../types/blog/blog.types";
+import { blogCategoryRepository } from "../repositories/blogCategory.repository";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
+import { buildSeo, truncate } from "../utils/seo";
 import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
-import { CONTENT_IMAGES_PATH, extractContentImages } from "../utils/blogContent";
+import { CONTENT_IMAGES_PATH, contentToText, extractContentImages } from "../utils/blogContent";
 import { PUBLIC_URL, UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
@@ -20,7 +22,10 @@ const BLOGS_PER_PAGE = 6;
 /** El panel muestra mas filas por pagina que la web. */
 const ADMIN_BLOGS_PER_PAGE = 10;
 
-const ADMIN_SORTABLE = ["title", "category", "status", "views", "createdAt"];
+const ADMIN_SORTABLE = ["title", "status", "views", "createdAt"];
+
+/** Largo del extracto que se genera del contenido cuando se deja vacio. */
+const AUTO_EXCERPT_LENGTH = 160;
 
 const MOST_READ = 5;
 
@@ -40,12 +45,34 @@ const deleteFromDisk = (dir: string, names: string[]) => {
 const deleteFeaturedImage = (name: string) => deleteFromDisk(imagesDir, [name])
 const deleteContentImages = (names: string[]) => deleteFromDisk(contentImagesDir, names)
 
+/** Extracto escrito a mano o, si se dejo vacio, el inicio del contenido. */
+const resolveExcerpt = (data: TBlogDto) => data.excerpt?.trim() || truncate(contentToText(data.content), AUTO_EXCERPT_LENGTH)
+
+/** Id de categoria valido o `null` ("Sin categoría"). */
+const resolveCategory = async (id?: string) => {
+    if (!id) return null
+
+    const category = await blogCategoryRepository.findById(id)
+
+    if (!category) throw new HttpError(400, "The selected blog category does not exist");
+
+    return category._id
+}
+
 export const BlogService = {
 
-    async getBlogs(page: number, category?: BlogCategory) {
+    /** Listado publico; `categorySlug` viene del filtro `/blogs?categoria=`. */
+    async getBlogs(page: number, categorySlug?: string) {
+        const category = categorySlug ? await blogCategoryRepository.findBySlug(categorySlug) : null
+
+        // Una categoria que no existe devuelve una pagina vacia, no todo el blog.
+        if (categorySlug && !category) {
+            return { blogs: [], pagination: toPagination({ page, limit: BLOGS_PER_PAGE, totalDocs: 0, totalPages: 0, hasNextPage: false, hasPrevPage: false }) }
+        }
+
         const filter = {
             ...PUBLIC_BLOG_FILTER,
-            ...(category ? { category } : {})
+            ...(category ? { category: category._id } : {})
         }
 
         const result = await blogRepository.findPaginated(page, BLOGS_PER_PAGE, filter)
@@ -58,7 +85,7 @@ export const BlogService = {
 
     async getAdminBlogs({ page, search, category, status, from, to, sort, order }: TGetAdminBlogsQuery) {
         const filter = {
-            ...searchFilter(search, ["title", "excerpt", "category"]),
+            ...searchFilter(search, ["title", "excerpt"]),
             ...(category ? { category } : {}),
             ...(status ? { status } : {}),
             ...dateRangeFilter(from, to)
@@ -122,8 +149,15 @@ export const BlogService = {
                 throw new HttpError(400, "A featured image is required for the blog");
             }
 
+            const excerpt = resolveExcerpt(data)
+
             await blogRepository.createBlog({
-                ...data,
+                title: data.title,
+                excerpt,
+                category: await resolveCategory(data.category),
+                status: data.status,
+                content: data.content,
+                seo: buildSeo(data.seo, data.title, excerpt),
                 slug,
                 image
             })
@@ -134,7 +168,8 @@ export const BlogService = {
         }
     },
 
-    async updateBlog(blog: TBlogDocument, data: TBlogDto) {
+    /** Edita datos y, si llega, reemplaza la imagen destacada (la anterior se borra al guardar). */
+    async updateBlog(blog: TBlogDocument, data: TBlogDto, files?: TMulterFiles) {
         const slug = buildSlug(data.title)
 
         if (slug !== blog.slug) {
@@ -145,44 +180,30 @@ export const BlogService = {
             }
         }
 
+        const newImage = files?.blogImage?.[0]?.filename
+        const oldImage = blog.image
+
         // Las imagenes del cuerpo que ya no aparecen en el HTML nuevo se borran
         // del disco despues de guardar, para no dejar huerfanos.
         const before = extractContentImages(blog.content)
         const after = new Set(extractContentImages(data.content))
         const removed = before.filter(name => !after.has(name))
 
+        const excerpt = resolveExcerpt(data)
+
         blog.slug = slug
         blog.title = data.title
-        blog.excerpt = data.excerpt
-        blog.category = data.category
+        blog.excerpt = excerpt
+        blog.category = await resolveCategory(data.category)
         blog.status = data.status
-        blog.readingTime = data.readingTime
         blog.content = data.content
-        blog.seo = data.seo
+        blog.seo = buildSeo(data.seo, data.title, excerpt)
+        if (newImage) blog.image = newImage
 
         await blog.save()
 
         deleteContentImages(removed)
-    },
-
-    async updateBlogImage(blog: TBlogDocument, files?: TMulterFiles) {
-        try {
-            const image = files?.blogImage?.[0]?.filename
-
-            if (!image) {
-                throw new HttpError(400, "A featured image is required for the blog");
-            }
-
-            const oldImage = blog.image
-
-            blog.image = image
-            await blog.save()
-
-            deleteFeaturedImage(oldImage)
-        } catch (error) {
-            deleteAllUploadedFiles(files);
-            throw error
-        }
+        if (newImage) deleteFeaturedImage(oldImage)
     },
 
     uploadContentImage(files?: TMulterFiles) {

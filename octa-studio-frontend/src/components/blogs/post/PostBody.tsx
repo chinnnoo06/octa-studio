@@ -2,7 +2,6 @@ import { FaRegCalendar, FaRegClock, FaTag } from 'react-icons/fa6';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { BlogContent } from './BlogContent';
 import { formatDate } from '@/utils/formatDate';
-import { slugify } from '@/utils/slugify';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 const LABEL = 'text-secondary text-xs font-semibold uppercase lg:text-sm';
@@ -46,15 +45,17 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
               </span>
               <div className="flex flex-col gap-0.5">
                 <span className={LABEL}>Categoría</span>
-                <span className={VALUE}>{blog.category}</span>
+                <span className={VALUE}>{blog.category?.name ?? 'Sin categoría'}</span>
               </div>
             </li>
           </ul>
 
           <div className="border-secondary/30 flex flex-col items-start gap-5 border-t pt-5 lg:pt-10">
-            <LinkButton href={`/blogs?categoria=${slugify(blog.category)}#entradas`}>
-              Ver la categoría
-            </LinkButton>
+            {blog.category && (
+              <LinkButton href={`/blogs?categoria=${blog.category.slug}#entradas`}>
+                Ver la categoría
+              </LinkButton>
+            )}
             <LinkButton href="/blogs#entradas">Volver al blog</LinkButton>
           </div>
         </div>

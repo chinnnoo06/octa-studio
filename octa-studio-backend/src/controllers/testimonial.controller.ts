@@ -86,9 +86,10 @@ export class TestimonialController {
 
     static updateTestimonial = async (req: TRequestWithTestimonial<TMongoIdParams, {}, TTestimonialDto>, res: Response, next: NextFunction) => {
         const data = req.body
+        const files = req.files as TMulterFiles
 
         try {
-            await TestimonialService.updateTestimonial(req.Testimonial, data)
+            await TestimonialService.updateTestimonial(req.Testimonial, data, files)
 
             return res.status(200).json({
                 status: "success",
@@ -97,23 +98,6 @@ export class TestimonialController {
 
         } catch (error) {
             console.error("Error updating the testimonial:", error);
-            next(error)
-        }
-    }
-
-    static updateTestimonialImage = async (req: TRequestWithTestimonial<TMongoIdParams>, res: Response, next: NextFunction) => {
-        const files = req.files as TMulterFiles
-
-        try {
-            await TestimonialService.updateTestimonialImage(req.Testimonial, files)
-
-            return res.status(200).json({
-                status: "success",
-                message: "Testimonial image updated successfully"
-            });
-
-        } catch (error) {
-            console.error("Error updating the testimonial image:", error);
             next(error)
         }
     }

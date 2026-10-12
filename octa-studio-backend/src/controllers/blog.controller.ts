@@ -27,9 +27,10 @@ export class BlogController {
 
     static updateBlog = async (req: TRequestWithBlog<TMongoIdParams, {}, TBlogDto>, res: Response, next: NextFunction) => {
         const data = req.body
+        const files = req.files as TMulterFiles
 
         try {
-            await BlogService.updateBlog(req.Blog, data)
+            await BlogService.updateBlog(req.Blog, data, files)
 
             return res.status(200).json({
                 status: "success",
@@ -38,23 +39,6 @@ export class BlogController {
 
         } catch (error) {
             console.error("Error updating the blog:", error);
-            next(error)
-        }
-    }
-
-    static updateBlogImage = async (req: TRequestWithBlog<TMongoIdParams>, res: Response, next: NextFunction) => {
-        const files = req.files as TMulterFiles
-
-        try {
-            await BlogService.updateBlogImage(req.Blog, files)
-
-            return res.status(200).json({
-                status: "success",
-                message: "Blog image updated successfully"
-            });
-
-        } catch (error) {
-            console.error("Error updating the blog image:", error);
             next(error)
         }
     }

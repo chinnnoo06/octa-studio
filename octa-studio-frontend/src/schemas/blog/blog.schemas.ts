@@ -1,17 +1,20 @@
 import { z } from "zod";
 import { SEOSchema } from "../common/common.schemas";
-import { BlogCategorySchema, BlogStatusSchema } from "@/schemas/enums.schemas";
+import { BlogStatusSchema } from "@/schemas/enums.schemas";
+import { BlogCategoryRefSchema } from "@/schemas/blogCategory/blogCategory.schemas";
 
 export const BlogSchema = z.object({
   _id: z.string(),
   slug: z.string(),
   title: z.string(),
   excerpt: z.string(),
-  category: BlogCategorySchema,
+  /** `null` = "Sin categoría". */
+  category: BlogCategoryRefSchema.nullable().default(null),
   // Los blogs anteriores a estos campos no los traen: cuentan como publicados y sin vistas.
   status: BlogStatusSchema.default("published"),
   views: z.number().default(0),
-  readingTime: z.number(),
+  /** Calculado por el backend a partir del contenido. */
+  readingTime: z.number().default(1),
   image: z.string(),
   content: z.string(),
   seo: SEOSchema,

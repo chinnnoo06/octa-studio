@@ -17,8 +17,10 @@ import projectRouter from './routes/project.routes'
 import blogRouter from './routes/blog.routes'
 import testimonialRouter from './routes/testimonial.routes'
 import analyticsRouter from './routes/analytics.routes'
+import blogCategoryRouter from './routes/blogCategory.routes'
 
 import { scheduleOrphanContentImagesCleanup } from './jobs/cleanOrphanContentImages.job'
+import { runBlogCategoriesMigration } from './jobs/migrateBlogCategories.job'
 
 connection();
 
@@ -47,9 +49,11 @@ server.use("/api/projects", projectRouter);
 server.use("/api/blogs", blogRouter);
 server.use("/api/testimonials", testimonialRouter);
 server.use("/api/analytics", analyticsRouter);
+server.use("/api/blog-categories", blogCategoryRouter);
 
 server.use(errorHandler);
 
+runBlogCategoriesMigration();
 scheduleOrphanContentImagesCleanup();
 
 export default server

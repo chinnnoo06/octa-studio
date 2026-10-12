@@ -87,28 +87,20 @@ export const TestimonialService = {
         }
     },
 
-    async updateTestimonial(testimonial: TTestimonialDocument, data: TTestimonialDto) {
-        testimonial.quote = data.quote
-        testimonial.name = data.name
-        testimonial.rating = data.rating
-
-        await testimonial.save()
-    },
-
-    async updateTestimonialImage(testimonial: TTestimonialDocument, files?: TMulterFiles) {
+    /** Edita los datos y, si llega, reemplaza el logo (el anterior se borra al guardar). */
+    async updateTestimonial(testimonial: TTestimonialDocument, data: TTestimonialDto, files?: TMulterFiles) {
         try {
-            const image = files?.testimonialImage?.[0]?.filename
-
-            if (!image) {
-                throw new HttpError(400, "A company image is required for the testimonial");
-            }
-
+            const newImage = files?.testimonialImage?.[0]?.filename
             const oldImage = testimonial.image
 
-            testimonial.image = image
+            testimonial.quote = data.quote
+            testimonial.name = data.name
+            testimonial.rating = data.rating
+            if (newImage) testimonial.image = newImage
+
             await testimonial.save()
 
-            deleteImageFromDisk(oldImage)
+            if (newImage) deleteImageFromDisk(oldImage)
         } catch (error) {
             deleteAllUploadedFiles(files);
             throw error

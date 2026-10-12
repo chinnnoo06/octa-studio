@@ -5,7 +5,6 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal, RevealOnLoad } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import { formatDate } from '@/utils/formatDate';
-import { slugify } from '@/utils/slugify';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 export const PostHero = ({ blog }: { blog: TBlog }) => {
@@ -13,12 +12,16 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
     <div className="flex flex-col gap-10">
       <RevealOnLoad variants={fadeBlur} className="w-full flex flex-col gap-5">
         <div className="text-secondary flex flex-col items-start gap-2.5">
-          <Link
-            href={`/blogs?categoria=${slugify(blog.category)}#entradas`}
-            className="hover:text-secondary/75 transition-colors duration-300"
-          >
-            <Eyebrow>{blog.category}</Eyebrow>
-          </Link>
+          {blog.category ? (
+            <Link
+              href={`/blogs?categoria=${blog.category.slug}#entradas`}
+              className="hover:text-secondary/75 transition-colors duration-300"
+            >
+              <Eyebrow>{blog.category.name}</Eyebrow>
+            </Link>
+          ) : (
+            <Eyebrow>Blog</Eyebrow>
+          )}
 
           <h1 className="text-[1.8rem] small:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-bold uppercase leading-[1.2] tracking-[-0.02em]">
             {blog.title}

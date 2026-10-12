@@ -30,7 +30,7 @@ export const TableCard = ({ id, title, media, meta = [], extra, date, actions, s
                 </span>
 
                 {media && (
-                    <div className="flex size-16.25 shrink-0 items-center justify-center overflow-hidden rounded-[6px] bg-slate-50">
+                    <div className="shrink-0 self-center">
                         {media}
                     </div>
                 )}

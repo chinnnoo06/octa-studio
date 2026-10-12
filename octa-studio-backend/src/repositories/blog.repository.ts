@@ -6,17 +6,21 @@ import { BlogStatus, TBlog } from "../types/blog/blog.types";
  *  al campo `status` no lo tienen y cuentan como publicados. */
 export const PUBLIC_BLOG_FILTER = { status: { $ne: BlogStatus.DRAFT } }
 
+/** Lo que viaja de la categoria con cada blog. */
+const CATEGORY_POPULATE = { path: "category", select: "name slug" }
+
 export const blogRepository = {
 
     async findById(id: string) {
-        return Blog.findById(id);
+        return Blog.findById(id).populate(CATEGORY_POPULATE);
     },
 
     async findPaginated(page: number, limit: number, filter: QueryFilter<TBlog>, sort: Record<string, SortOrder> = { createdAt: -1 }) {
         return Blog.paginate(filter, {
             page,
             limit,
-            sort
+            sort,
+            populate: CATEGORY_POPULATE
         });
     },
 
@@ -25,7 +29,7 @@ export const blogRepository = {
     },
 
     async findPublishedBySlug(slug: string) {
-        return Blog.findOne({ slug, ...PUBLIC_BLOG_FILTER });
+        return Blog.findOne({ slug, ...PUBLIC_BLOG_FILTER }).populate(CATEGORY_POPULATE);
     },
 
     async findByIds(ids: string[]) {

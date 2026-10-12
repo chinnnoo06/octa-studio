@@ -1,4 +1,4 @@
-import { FaClipboard, FaComments, FaHammer, FaHouse, FaRightFromBracket } from 'react-icons/fa6';
+import { FaClipboard, FaComments, FaHammer, FaHouse, FaRightFromBracket, FaTags } from 'react-icons/fa6';
 import type { TAdminLink, TNavLink } from '@/types/content.types';
 
 export const NAV_LINKS: TNavLink[] = [
@@ -22,6 +22,7 @@ export const ADMIN_HOME = '/admin';
 export const ADMIN_LINKS: TAdminLink[] = [
   { label: 'Inicio',      href: ADMIN_HOME,           icon: FaHouse },
   { label: 'Blogs',       href: '/admin/blogs',       icon: FaClipboard },
+  { label: 'Categorías Blog', href: '/admin/blog-categorias', icon: FaTags },
   { label: 'Proyectos',   href: '/admin/proyectos',   icon: FaHammer },
   { label: 'Testimonios', href: '/admin/testimonios', icon: FaComments },
 ];

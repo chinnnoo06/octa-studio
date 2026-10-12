@@ -2,21 +2,21 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { Pagination } from '@/components/ui/Pagination';
-import { slugify } from '@/utils/slugify';
 import { BlogCard } from '@/components/blogs/BlogCard';
 import { CategoryFilter } from '@/components/blogs/CategoryFilter';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
-import type { TBlogCategory } from '@/types/content.types';
+import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
 
 type TPostsProps = {
   blogs: TBlog[];
   pagination: TPagination;
+  categories: TBlogCategory[];
   category?: TBlogCategory;
 };
 
-export const Posts = ({ blogs, pagination, category }: TPostsProps) => {
-  const active = category ? slugify(category) : undefined;
+export const Posts = ({ blogs, pagination, categories, category }: TPostsProps) => {
+  const active = category?.slug;
   const basePath = active ? `/blogs?categoria=${active}` : '/blogs';
 
   return (
@@ -28,7 +28,7 @@ export const Posts = ({ blogs, pagination, category }: TPostsProps) => {
           <SectionTitle lead="Últimas" rotating="entradas" />
         </div>
 
-        <CategoryFilter active={active} />
+        <CategoryFilter categories={categories} active={active} />
 
         {blogs.length > 0 ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

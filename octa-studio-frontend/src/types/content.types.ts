@@ -1,6 +1,5 @@
 import type { StaticImageData } from 'next/image';
 import type { IconType } from 'react-icons';
-import type { BLOG_CATEGORIES } from '@/utils/data/blogs';
 
 export type TNavLink = { label: string; href: string };
 
@@ -44,8 +43,6 @@ export type TService = {
   alt: string;
 };
 
-/** Una de las categorias de `BLOG_CATEGORIES`; el tipo sale de la lista. */
-export type TBlogCategory = (typeof BLOG_CATEGORIES)[number];
 
 export type TFaq = {
   question: string;

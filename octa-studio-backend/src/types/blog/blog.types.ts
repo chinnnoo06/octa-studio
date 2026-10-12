@@ -1,15 +1,4 @@
-import { HydratedDocument } from "mongoose";
-
-export enum BlogCategory {
-    STAND_DESIGN = 'Diseño de Stands',
-    ASSEMBLY_AND_LOGISTICS = 'Montaje y Logística',
-    MATERIALS_AND_SUSTAINABILITY = 'Materiales y Sustentabilidad',
-    SUCCESS_CASES = 'Casos de Éxito / Proyectos',
-    EXHIBITOR_GUIDES = 'Guías para Expositores',
-    FAIRS_AND_EVENTS = 'Ferias y Eventos',
-    EXHIBITION_TRENDS = 'Tendencias en Exhibición Comercial',
-    OCTA_NEWS = 'Noticias Octa'
-}
+import { HydratedDocument, Types } from "mongoose";
 
 /** Un borrador solo se ve en el panel; la web publica lo trata como inexistente. */
 export enum BlogStatus {
@@ -26,15 +15,19 @@ export type TBlog = {
     slug: string,
     title: string,
     excerpt: string,
-    category: BlogCategory,
+    /** Referencia a BlogCategory; `null` = "Sin categoría". */
+    category: Types.ObjectId | null,
     status: BlogStatus,
     /** Contador interno: sube una vez por sesion de navegador al abrir el articulo. */
     views: number,
-    readingTime: number,
     image: string,
     content: string,
     seo: TBlogSEO
 }
 
+/** El tiempo de lectura no se guarda: es un virtual calculado del contenido. */
+export type TBlogVirtuals = {
+    readingTime: number
+}
 
 export type TBlogDocument = HydratedDocument<TBlog>

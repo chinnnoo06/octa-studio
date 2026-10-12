@@ -1,14 +1,11 @@
 import { FaHammer } from 'react-icons/fa6';
 import { EditButton } from '@/components/ui/buttons/EditButton';
-import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
-import { VideosButton } from '@/components/ui/buttons/VideosButton';
 import { Table } from '@/components/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/ui/table/TableHead';
 import { TableRow } from '@/components/ui/table/TableRow';
 import { TableCell } from '@/components/ui/table/TableCell';
 import { TableEmpty } from '@/components/ui/table/TableEmpty';
 import { TableCard, TableCardList } from '@/components/ui/table/TableCards';
-import { ImageCell } from '@/components/ui/table/ImageCell';
 import { ImagesCell } from '@/components/ui/table/ImagesCell';
 import { VideosCell } from '@/components/ui/table/VideosCell';
 import { TextCell } from '@/components/ui/table/TextCell';
@@ -21,11 +18,11 @@ import { DeleteProjectButton } from './DeleteProjectButton';
 import { BulkDeleteProjects } from './BulkDeleteProjects';
 
 const COLUMNS: TTableColumn[] = [
-    { label: 'Imágenes', align: 'center' },
-    'Videos',
+    { label: 'Portada', align: 'center' },
     { label: 'Nombre', sortKey: 'name' },
     'Descripción',
     { label: 'Sector', sortKey: 'sector' },
+    'Videos',
     { label: 'Creado', sortKey: 'createdAt' },
     'Acciones',
 ];
@@ -42,8 +39,6 @@ type TProjectsTableProps = {
 
 const Actions = ({ project }: { project: TProject }) => (
     <>
-        <ImagesButton href={`/admin/proyectos/${project._id}/imagenes`} label={`Actualizar las imágenes de ${project.name}`} />
-        <VideosButton href={`/admin/proyectos/${project._id}/videos`} label={`Actualizar los videos de ${project.name}`} />
         <EditButton href={`/admin/proyectos/${project._id}/editar`} label={`Editar el proyecto ${project.name}`} />
         <DeleteProjectButton id={project._id} name={project.name} />
     </>
@@ -74,15 +69,15 @@ export const ProjectsTable = ({ projects, basePath, params, filtered }: TProject
                                 <ImagesCell images={project.images} name={project.name} baseUrl={IMAGE_URL} />
                             </TableCell>
 
-                            <TableCell>
-                                <VideosCell videos={project.videos} name={project.name} baseUrl={VIDEO_URL} />
-                            </TableCell>
-
                             <TableCell className="whitespace-nowrap"><strong className="font-semibold">{project.name}</strong></TableCell>
 
                             <TableCell><TextCell text={project.description} /></TableCell>
 
                             <TableCell><StatusBadge>{project.sector}</StatusBadge></TableCell>
+
+                            <TableCell>
+                                <VideosCell videos={project.videos} name={project.name} baseUrl={VIDEO_URL} />
+                            </TableCell>
 
                             <TableCell className="whitespace-nowrap">{project.createdAt ? formatShortDate(project.createdAt) : '—'}</TableCell>
 
@@ -103,11 +98,9 @@ export const ProjectsTable = ({ projects, basePath, params, filtered }: TProject
                         id={project._id}
                         selectLabel={`Seleccionar ${project.name}`}
                         title={project.name}
-                        media={project.images[0] ? <ImageCell image={project.images[0]} name={project.name} baseUrl={IMAGE_URL} /> : undefined}
-                        meta={[
-                            { label: 'Sector', value: project.sector },
-                            { label: 'Medios', value: `${project.images.length} img · ${project.videos.length} video(s)` },
-                        ]}
+                        media={<ImagesCell images={project.images} name={project.name} baseUrl={IMAGE_URL} />}
+                        meta={[{ label: 'Sector', value: project.sector }]}
+                        extra={<VideosCell videos={project.videos} name={project.name} baseUrl={VIDEO_URL} />}
                         date={project.createdAt ? formatShortDate(project.createdAt) : undefined}
                         actions={<Actions project={project} />}
                     />

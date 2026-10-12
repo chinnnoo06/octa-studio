@@ -26,12 +26,6 @@ export type TDeleteButtonProps = {
     className?: string;
 }
 
-export type TImagesButtonProps = {
-    href: string;
-    label: string;
-    className?: string;
-}
-
 export type TBackButtonProps = {
     label?: string;
     className?: string;

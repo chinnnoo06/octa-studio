@@ -77,3 +77,9 @@ export const extractContentImages = (html: string) => {
 /** Texto plano del HTML, para comprobar que el articulo no esta vacio. */
 export const contentToText = (html: string) =>
     sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} }).replace(/\s+/g, " ").trim();
+
+/** Minutos de lectura del HTML: 200 palabras por minuto, minimo 1. */
+export const readingTimeOf = (html: string) => {
+    const words = contentToText(html).split(" ").filter(Boolean).length;
+    return Math.max(1, Math.ceil(words / 200));
+};

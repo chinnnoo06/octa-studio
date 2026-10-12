@@ -21,7 +21,7 @@ type TBlogEditorFieldProps = {
 export const BlogEditorField = ({ value, onChange, error }: TBlogEditorFieldProps) => {
     return (
         <div className="form-group">
-            <Label htmlFor="content">Contenido</Label>
+            <Label htmlFor="content">Contenido:</Label>
             <BlogEditor id="content" value={value} onChange={onChange} />
             <SpanError message={error} />
         </div>

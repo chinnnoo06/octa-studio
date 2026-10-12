@@ -9,6 +9,7 @@ import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
 import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
+import { buildSeo } from "../utils/seo";
 import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "projects");
@@ -20,6 +21,9 @@ const PROJECTS_PER_PAGE = 6;
 const ADMIN_PROJECTS_PER_PAGE = 10;
 
 const ADMIN_SORTABLE = ["name", "sector", "createdAt"];
+
+/** Tope de fotos y de videos por proyecto, el mismo del formulario. */
+const MAX_MEDIA = 5;
 
 const deleteFilesFromDisk = (dir: string, names: string[]) => {
     names.forEach(name => {
@@ -59,7 +63,15 @@ export const ProjectService = {
             // Los videos son opcionales: sin campo, lista vacia.
             const videos = files?.projectVideos?.map(file => file.filename) ?? []
 
-            await projectRepository.createProject({ ...data, slug, images, videos })
+            await projectRepository.createProject({
+                name: data.name,
+                description: data.description,
+                sector: data.sector,
+                seo: buildSeo(data.seo, data.name, data.description),
+                slug,
+                images,
+                videos
+            })
 
         } catch (error) {
             deleteAllUploadedFiles(files);
@@ -67,58 +79,53 @@ export const ProjectService = {
         }
     },
 
-    async updateProject(project: TProjectDocument, data: TProjectDto) {
-        const slug = buildSlug(data.name)
-
-        if (slug !== project.slug) {
-            const slugTaken = await projectRepository.findBySlug(slug)
-
-            if (slugTaken) {
-                throw new HttpError(409, "A project with that name already exists");
-            }
-        }
-
-        project.slug = slug
-        project.name = data.name
-        project.description = data.description
-        project.sector = data.sector
-        project.seo = data.seo
-
-        await project.save()
-    },
-
-    async updateProjectImages(project: TProjectDocument, files?: TMulterFiles) {
+    /**
+     * Edicion completa: datos, SEO y medios. `keepImages`/`keepVideos` son los
+     * archivos actuales que se conservan (en ese orden); los nuevos se agregan
+     * detras. Lo que deja de estar se borra del disco despues de guardar.
+     */
+    async updateProject(project: TProjectDocument, data: TProjectDto, files?: TMulterFiles) {
         try {
-            const images = files?.projectImages?.map(file => file.filename) ?? []
+            const slug = buildSlug(data.name)
+
+            if (slug !== project.slug) {
+                const slugTaken = await projectRepository.findBySlug(slug)
+
+                if (slugTaken) {
+                    throw new HttpError(409, "A project with that name already exists");
+                }
+            }
+
+            // Solo se aceptan como "conservados" archivos que ya eran del proyecto.
+            const keptImages = (data.keepImages ?? project.images).filter(name => project.images.includes(name))
+            const keptVideos = (data.keepVideos ?? project.videos).filter(name => project.videos.includes(name))
+
+            const images = [...keptImages, ...(files?.projectImages?.map(file => file.filename) ?? [])]
+            const videos = [...keptVideos, ...(files?.projectVideos?.map(file => file.filename) ?? [])]
 
             if (images.length === 0) {
                 throw new HttpError(400, "At least one image is required for the project");
             }
 
-            // Keep a copy before overwriting, to delete the old files once the save succeeds
-            const oldImages = [...project.images]
+            if (images.length > MAX_MEDIA || videos.length > MAX_MEDIA) {
+                throw new HttpError(400, `A project can have up to ${MAX_MEDIA} images and ${MAX_MEDIA} videos`);
+            }
 
+            const removedImages = project.images.filter(name => !images.includes(name))
+            const removedVideos = project.videos.filter(name => !videos.includes(name))
+
+            project.slug = slug
+            project.name = data.name
+            project.description = data.description
+            project.sector = data.sector
+            project.seo = buildSeo(data.seo, data.name, data.description)
             project.images = images
-            await project.save()
-
-            deleteImagesFromDisk(oldImages)
-        } catch (error) {
-            deleteAllUploadedFiles(files);
-            throw error
-        }
-    },
-
-    /** Reemplaza todos los videos; sin archivos, los quita. Los viejos se borran del disco tras guardar. */
-    async updateProjectVideos(project: TProjectDocument, files?: TMulterFiles) {
-        try {
-            const videos = files?.projectVideos?.map(file => file.filename) ?? []
-
-            const oldVideos = [...project.videos]
-
             project.videos = videos
+
             await project.save()
 
-            deleteVideosFromDisk(oldVideos)
+            deleteImagesFromDisk(removedImages)
+            deleteVideosFromDisk(removedVideos)
         } catch (error) {
             deleteAllUploadedFiles(files);
             throw error

@@ -29,9 +29,10 @@ export class ProjectController {
 
      static updateProject = async (req: TRequestWithProject<TMongoIdParams, {}, TProjectDto>, res: Response, next: NextFunction) => {
         const data = req.body
+        const files = req.files as TMulterFiles
 
         try {
-            await ProjectService.updateProject(req.Project, data)
+            await ProjectService.updateProject(req.Project, data, files)
 
             return res.status(200).json({
                 status: "success",
@@ -39,38 +40,6 @@ export class ProjectController {
             });
         } catch (error) {
             console.error("Error updating the project:", error);
-            next(error)
-        }
-    }
-
-    static updateProjectImages = async (req: TRequestWithProject<TMongoIdParams>, res: Response, next: NextFunction) => {
-        const files = req.files as TMulterFiles
-
-        try {
-            await ProjectService.updateProjectImages(req.Project, files)
-
-            return res.status(200).json({
-                status: "success",
-                message: "Project images updated successfully"
-            });
-        } catch (error) {
-            console.error("Error updating the project images:", error);
-            next(error)
-        }
-    }
-
-    static updateProjectVideos = async (req: TRequestWithProject<TMongoIdParams>, res: Response, next: NextFunction) => {
-        const files = req.files as TMulterFiles
-
-        try {
-            await ProjectService.updateProjectVideos(req.Project, files)
-
-            return res.status(200).json({
-                status: "success",
-                message: "Project videos updated successfully"
-            });
-        } catch (error) {
-            console.error("Error updating the project videos:", error);
             next(error)
         }
     }

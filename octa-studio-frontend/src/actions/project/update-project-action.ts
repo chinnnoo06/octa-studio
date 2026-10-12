@@ -8,6 +8,7 @@ import { TActionState } from "@/types/common.types"
 import { originHeader } from "@/services/api.headers"
 import { getToken } from "@/services/auth/auth.token"
 
+/** Edicion completa en una sola peticion: datos, SEO y archivos (multipart). */
 export const updateProject = async (id: string, data: TUpdateProjectForm): Promise<TActionState> => {
 
     const parsed = UpdateProjectFormSchema.safeParse(data)
@@ -23,19 +24,27 @@ export const updateProject = async (id: string, data: TUpdateProjectForm): Promi
 
     const url = `${process.env.API_URL}/projects/${id}`
 
+    const formData = new FormData()
+
+    formData.append("name", parsed.data.name)
+    formData.append("description", parsed.data.description)
+    formData.append("sector", parsed.data.sector)
+    formData.append("seo", JSON.stringify(parsed.data.seo))
+
+    // Los archivos actuales que se conservan; los que faltan, el backend los borra.
+    formData.append("keepImages", JSON.stringify(parsed.data.keepImages))
+    formData.append("keepVideos", JSON.stringify(parsed.data.keepVideos))
+
+    parsed.data.images.forEach((image) => formData.append("projectImages", image))
+    parsed.data.videos.forEach((video) => formData.append("projectVideos", video))
+
     const req = await fetch(url, {
         method: 'PATCH',
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
             ...originHeader()
         },
-        body: JSON.stringify({
-            name: parsed.data.name,
-            description: parsed.data.description,
-            sector: parsed.data.sector,
-            seo: parsed.data.seo
-        })
+        body: formData
     })
 
     const json = await req.json()
@@ -55,7 +64,7 @@ export const updateProject = async (id: string, data: TUpdateProjectForm): Promi
 
     // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
 
-    updateTag('projects')
+    updateTag('project/update-project-action.ts0')
 
     return {
         error: "",

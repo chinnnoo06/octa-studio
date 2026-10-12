@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import { useActionStatus } from './ui/useActionStatus'
-import { TCreateProjectForm, TUpdateProjectImagesForm, TUpdateProjectVideosForm, TUpdateProjectForm } from '@/schemas/project/project.form.schemas'
+import { TCreateProjectForm, TUpdateProjectForm } from '@/schemas/project/project.form.schemas'
 import { createProject } from '@/actions/project/create-project-action'
 import { updateProject } from '@/actions/project/update-project-action'
 import { deleteProject } from '@/actions/project/delete-project-action'
 import { deleteProjects } from '@/actions/project/delete-projects-action'
-import { updateProjectImages } from '@/actions/project/update-project-images-action'
-import { updateProjectVideos } from '@/actions/project/update-project-videos-action'
 
 export const useProject = () => {
     const createStatus = useActionStatus()
     const updateStatus = useActionStatus()
     const deleteStatus = useActionStatus()
+    const bulkStatus = useActionStatus()
 
     const [errorCreate, setErrorCreate] = useState<string | null>(null)
     const [successCreate, setSuccessCreate] = useState<string | null>(null)
@@ -19,20 +18,8 @@ export const useProject = () => {
     const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
     const [successUpdate, setSuccessUpdate] = useState<string | null>(null)
 
-    const imagesStatus = useActionStatus()
-
-    const [errorImages, setErrorImages] = useState<string | null>(null)
-    const [successImages, setSuccessImages] = useState<string | null>(null)
-
-    const videosStatus = useActionStatus()
-
-    const [errorVideos, setErrorVideos] = useState<string | null>(null)
-    const [successVideos, setSuccessVideos] = useState<string | null>(null)
-
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
-
-    const bulkStatus = useActionStatus()
 
     const [errorBulk, setErrorBulk] = useState<string | null>(null)
     const [successBulk, setSuccessBulk] = useState<string | null>(null)
@@ -71,38 +58,21 @@ export const useProject = () => {
         if (res.success) setSuccessUpdate(res.success)
     }
 
-    const handleUpdateProjectImages = async (id: string, data: TUpdateProjectImagesForm) => {
-        if (imagesStatus.loading) return
+    const handleDeleteProject = async (id: string) => {
+        if (deleteStatus.loading) return
 
-        setErrorImages(null)
-        setSuccessImages(null)
+        setErrorDelete(null)
+        setSuccessDelete(null)
 
-        imagesStatus.startLoading()
+        deleteStatus.startLoading()
 
-        const res = await updateProjectImages(id, data)
+        const res = await deleteProject(id)
 
-        imagesStatus.stopLoading()
+        deleteStatus.stopLoading()
 
-        if (res.error) return setErrorImages(res.error)
+        if (res.error) return setErrorDelete(res.error)
 
-        if (res.success) setSuccessImages(res.success)
-    }
-
-    const handleUpdateProjectVideos = async (id: string, data: TUpdateProjectVideosForm) => {
-        if (videosStatus.loading) return
-
-        setErrorVideos(null)
-        setSuccessVideos(null)
-
-        videosStatus.startLoading()
-
-        const res = await updateProjectVideos(id, data)
-
-        videosStatus.stopLoading()
-
-        if (res.error) return setErrorVideos(res.error)
-
-        if (res.success) setSuccessVideos(res.success)
+        if (res.success) setSuccessDelete(res.success)
     }
 
     const handleDeleteProjects = async (ids: string[]) => {
@@ -126,23 +96,6 @@ export const useProject = () => {
         return true
     }
 
-    const handleDeleteProject = async (id: string) => {
-        if (deleteStatus.loading) return
-
-        setErrorDelete(null)
-        setSuccessDelete(null)
-
-        deleteStatus.startLoading()
-
-        const res = await deleteProject(id)
-
-        deleteStatus.stopLoading()
-
-        if (res.error) return setErrorDelete(res.error)
-
-        if (res.success) setSuccessDelete(res.success)
-    }
-
     return {
         createProject: {
             handleCreateProject,
@@ -156,20 +109,6 @@ export const useProject = () => {
             loading: updateStatus.loading,
             error: errorUpdate,
             success: successUpdate
-        },
-
-        updateProjectImages: {
-            handleUpdateProjectImages,
-            loading: imagesStatus.loading,
-            error: errorImages,
-            success: successImages
-        },
-
-        updateProjectVideos: {
-            handleUpdateProjectVideos,
-            loading: videosStatus.loading,
-            error: errorVideos,
-            success: successVideos
         },
 
         deleteProject: {

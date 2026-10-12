@@ -1,6 +1,5 @@
 import { FaEye, FaNewspaper } from 'react-icons/fa6';
 import { EditButton } from '@/components/ui/buttons/EditButton';
-import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
 import { Table } from '@/components/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/ui/table/TableHead';
 import { TableRow } from '@/components/ui/table/TableRow';
@@ -20,7 +19,7 @@ import { BulkDeleteBlogs } from './BulkDeleteBlogs';
 const COLUMNS: TTableColumn[] = [
     { label: 'Imagen', align: 'center' },
     { label: 'Título', sortKey: 'title' },
-    { label: 'Categoría', sortKey: 'category' },
+    'Categoría',
     { label: 'Estado', sortKey: 'status' },
     { label: 'Vistas', sortKey: 'views' },
     { label: 'Creado', sortKey: 'createdAt' },
@@ -45,7 +44,6 @@ const StatusCell = ({ blog }: { blog: TBlog }) => (
 
 const Actions = ({ blog }: { blog: TBlog }) => (
     <>
-        <ImagesButton href={`/admin/blogs/${blog._id}/imagen`} label={`Actualizar la imagen destacada de ${blog.title}`} />
         <EditButton href={`/admin/blogs/${blog._id}/editar`} label={`Editar el blog ${blog.title}`} />
         <DeleteBlogButton id={blog._id} name={blog.title} />
     </>
@@ -78,7 +76,7 @@ export const BlogsTable = ({ blogs, basePath, params, filtered }: TBlogsTablePro
 
                             <TableCell><strong className="font-semibold">{blog.title}</strong></TableCell>
 
-                            <TableCell>{blog.category}</TableCell>
+                            <TableCell>{blog.category?.name ?? <span className="text-gray-600 italic">Sin categoría</span>}</TableCell>
 
                             <TableCell><StatusCell blog={blog} /></TableCell>
 
@@ -110,7 +108,7 @@ export const BlogsTable = ({ blogs, basePath, params, filtered }: TBlogsTablePro
                         title={blog.title}
                         media={<ImageCell image={blog.image} name={blog.title} baseUrl={IMAGE_URL} />}
                         meta={[
-                            { label: 'Categoría', value: blog.category },
+                            { label: 'Categoría', value: blog.category?.name ?? 'Sin categoría' },
                             { label: 'Vistas', value: blog.views.toLocaleString('es-MX') },
                         ]}
                         extra={<StatusCell blog={blog} />}

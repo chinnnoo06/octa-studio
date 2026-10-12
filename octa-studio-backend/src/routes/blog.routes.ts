@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { param, query } from "express-validator";
-import { BlogCategory, BlogStatus } from "../types/blog/blog.types";
+import { BlogStatus } from "../types/blog/blog.types";
 import { auth } from "../middlewares/auth";
 import { converToWebP, convertContentImageToWebP } from "../middlewares/convertToWebp";
 import { blogContentUploads, blogsUploads } from "../middlewares/uploads";
-import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat } from "../middlewares/reqValidation";
+import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat } from "../middlewares/reqValidation";
 import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
 import { BlogController } from "../controllers/blog.controller";
 
@@ -12,7 +12,7 @@ const router: Router = Router();
 
 router.get("/",
     query('page').optional().isInt({ min: 1 }).withMessage('Page must be an integer greater than 0'),
-    query('category').optional().isIn(Object.values(BlogCategory)).withMessage('Invalid category'),
+    query('category').optional().isString().trim().isLength({ max: 120 }).withMessage('Invalid category'),
     handleInputErrors,
     BlogController.getBlogs
 )
@@ -21,7 +21,7 @@ router.get("/",
 router.get("/admin",
     auth,
     validateAdminListQuery,
-    query('category').optional().isIn(Object.values(BlogCategory)).withMessage('Invalid category'),
+    query('category').optional({ values: 'falsy' }).isMongoId().withMessage('Invalid category'),
     query('status').optional().isIn(Object.values(BlogStatus)).withMessage('Invalid status'),
     handleInputErrors,
     BlogController.getAdminBlogs
@@ -69,26 +69,20 @@ router.post("/content-images",
     BlogController.uploadContentImage
 )
 
+// Edicion completa en una sola peticion: datos, SEO y, opcional, la imagen destacada.
 router.patch("/:id",
     auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    validateBlogInput,
-    handleInputErrors,
-    validateBlogExists,
-    BlogController.updateBlog
-)
-
-router.patch("/:id/image",
-    auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    handleInputErrors,
-    validateBlogExists,
     blogsUploads.fields([
         { name: "blogImage", maxCount: 1 }
     ]),
-    validateImagesFormat,
+    parseJsonFields(["seo"]),
+    param('id').isMongoId().withMessage('Invalide Id'),
+    validateOptionalImagesFormat,
+    validateBlogInput,
+    handleInputErrors,
+    validateBlogExists,
     converToWebP,
-    BlogController.updateBlogImage
+    BlogController.updateBlog
 )
 
 router.delete("/:id",

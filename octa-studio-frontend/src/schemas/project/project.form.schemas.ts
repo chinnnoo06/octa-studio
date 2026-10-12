@@ -1,45 +1,34 @@
 import { z } from "zod"
+import { ImageFileSchema, SEOFormSchema, VideoFileSchema } from "@/schemas/common/common.form.schemas"
 
-const IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
-const IMAGE_MAX_SIZE = 10 * 1024 * 1024
-
-const VIDEO_TYPES = ["video/mp4", "video/webm"]
-const VIDEO_MAX_SIZE = 50 * 1024 * 1024
+const MAX_MEDIA = 5
 
 export const CreateProjectFormSchema = z.object({
     name: z.string().trim().min(1, { message: "Campo obligatorio" }),
     description: z.string().trim().min(1, { message: "Campo obligatorio" }),
     sector: z.string().trim().min(1, { message: "Campo obligatorio" }),
-    seo: z.object({
-        metaTitle: z.string().trim().min(1, { message: "Campo obligatorio" }).max(60, { message: "Maximo 60 caracteres" }),
-        metaDescription: z.string().trim().min(1, { message: "Campo obligatorio" }).max(160, { message: "Maximo 160 caracteres" }),
-    }),
+    seo: SEOFormSchema,
     images: z
-        .array(
-            z
-                .instanceof(File, { message: "Campo obligatorio" })
-                .refine((file) => IMAGE_TYPES.includes(file.type), { message: "Solo JPG, PNG o WebP" })
-                .refine((file) => file.size <= IMAGE_MAX_SIZE, { message: "Cada imagen debe pesar 10 MB o menos" }),
-        )
+        .array(ImageFileSchema)
         .min(1, { message: "Sube al menos una imagen" })
-        .max(5, { message: "Maximo 5 imagenes" }),
-    videos: z
-        .array(
-            z
-                .instanceof(File, { message: "Archivo no válido" })
-                .refine((file) => VIDEO_TYPES.includes(file.type), { message: "Solo MP4 o WebM" })
-                .refine((file) => file.size <= VIDEO_MAX_SIZE, { message: "Cada video debe pesar 50 MB o menos" }),
-        )
-        .max(5, { message: "Maximo 5 videos" }),
+        .max(MAX_MEDIA, { message: "Maximo 5 imagenes" }),
+    videos: z.array(VideoFileSchema).max(MAX_MEDIA, { message: "Maximo 5 videos" }),
 })
 
-export const UpdateProjectFormSchema = CreateProjectFormSchema.omit({ images: true, videos: true })
-
-export const UpdateProjectImagesFormSchema = CreateProjectFormSchema.pick({ images: true })
-
-export const UpdateProjectVideosFormSchema = CreateProjectFormSchema.pick({ videos: true })
+/**
+ * Edicion con medios: `keepImages`/`keepVideos` son los archivos actuales que
+ * se conservan; `images`/`videos`, los nuevos. Entre ambos: 1 a 5 fotos y
+ * hasta 5 videos.
+ */
+export const UpdateProjectFormSchema = CreateProjectFormSchema.extend({
+    keepImages: z.array(z.string()),
+    keepVideos: z.array(z.string()),
+    images: z.array(ImageFileSchema),
+    videos: z.array(VideoFileSchema),
+})
+    .refine((data) => data.keepImages.length + data.images.length >= 1, { message: "El proyecto necesita al menos una imagen", path: ["images"] })
+    .refine((data) => data.keepImages.length + data.images.length <= MAX_MEDIA, { message: "Maximo 5 imagenes", path: ["images"] })
+    .refine((data) => data.keepVideos.length + data.videos.length <= MAX_MEDIA, { message: "Maximo 5 videos", path: ["videos"] })
 
 export type TCreateProjectForm = z.infer<typeof CreateProjectFormSchema>
 export type TUpdateProjectForm = z.infer<typeof UpdateProjectFormSchema>
-export type TUpdateProjectImagesForm = z.infer<typeof UpdateProjectImagesFormSchema>
-export type TUpdateProjectVideosForm = z.infer<typeof UpdateProjectVideosFormSchema>

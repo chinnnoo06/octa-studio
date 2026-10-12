@@ -10,50 +10,69 @@ type TImagesFieldProps = {
     onChange: (images: File[]) => void;
     error?: string;
     max?: number;
+    /** Al editar: nombres de las imagenes guardadas que se conservan. */
+    existing?: string[];
+    onExistingChange?: (names: string[]) => void;
+    existingBaseUrl?: string;
 };
 
-/** Galeria: un cuadro por imagen (la primera es la principal) y el "+ Añadir" al final. */
-export const ImagesField = ({ images, onChange, error, max = 5 }: TImagesFieldProps) => {
+/**
+ * Galeria: primero las imagenes guardadas, luego las nuevas (la primera de
+ * todas es la principal) y al final el "+ Añadir".
+ */
+export const ImagesField = ({ images, onChange, error, max = 5, existing = [], onExistingChange, existingBaseUrl = '' }: TImagesFieldProps) => {
     const previews = useMemo(() => images.map((image) => URL.createObjectURL(image)), [images]);
 
     useEffect(() => {
         return () => previews.forEach((url) => URL.revokeObjectURL(url));
     }, [previews]);
 
+    const total = existing.length + images.length;
+    const full = total >= max;
+
     const onAdd = (event: React.ChangeEvent<HTMLInputElement>) => {
         const picked = Array.from(event.target.files ?? []);
 
-        onChange([...images, ...picked].slice(0, max));
+        onChange([...images, ...picked].slice(0, max - existing.length));
         event.target.value = '';
     };
 
-    // Pulsar un cuadro con imagen la reemplaza en su misma posicion.
+    // Pulsar un cuadro con imagen nueva la reemplaza en su misma posicion.
     const onReplace = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) onChange(images.map((image, i) => (i === index ? file : image)));
         event.target.value = '';
     };
 
-    const removeAt = (index: number) => onChange(images.filter((_, i) => i !== index));
-
-    const full = images.length >= max;
-
     return (
         <div className="form-group">
-            <Label htmlFor="images">Imágenes del proyecto ({images.length} de {max}) · JPG, PNG o WebP</Label>
+            <Label htmlFor="images">Imágenes del proyecto ({total} de {max}) · JPG, PNG o WebP</Label>
 
             <ul role="list" className={`${MEDIA_GRID} mt-1`}>
+                {existing.map((name, i) => (
+                    <li key={name}>
+                        <MediaTile
+                            principal={i === 0}
+                            onRemove={onExistingChange ? () => onExistingChange(existing.filter((n) => n !== name)) : undefined}
+                            removeLabel={`Quitar la imagen ${i + 1}`}
+                        >
+                            {/* eslint-disable-next-line @next/next/no-img-element -- imagen guardada en el backend */}
+                            <img src={`${existingBaseUrl}/${name}`} alt={`Imagen actual ${i + 1}`} className="h-full w-full object-contain" />
+                        </MediaTile>
+                    </li>
+                ))}
+
                 {previews.map((preview, i) => (
                     <li key={preview}>
                         <MediaTile
                             htmlFor={`images-replace-${i}`}
                             hoverText="Cambiar imagen"
-                            principal={i === 0}
-                            onRemove={() => removeAt(i)}
+                            principal={existing.length === 0 && i === 0}
+                            onRemove={() => onChange(images.filter((_, j) => j !== i))}
                             removeLabel={`Quitar ${images[i].name}`}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) */}
-                            <img src={preview} alt={`Vista previa ${i + 1}: ${images[i].name}`} className="h-full w-full object-contain" />
+                            <img src={preview} alt={`Vista previa: ${images[i].name}`} className="h-full w-full object-contain" />
                         </MediaTile>
 
                         <input id={`images-replace-${i}`} type="file" accept="image/jpeg,image/png,image/webp" onChange={onReplace(i)} className="sr-only" />

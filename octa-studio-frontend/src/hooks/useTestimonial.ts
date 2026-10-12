@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { useActionStatus } from './ui/useActionStatus'
-import { TCreateTestimonialForm, TUpdateTestimonialImageForm, TUpdateTestimonialForm } from '@/schemas/testimonial/testimonial.form.schemas'
+import { TCreateTestimonialForm, TUpdateTestimonialForm } from '@/schemas/testimonial/testimonial.form.schemas'
 import { createTestimonial } from '@/actions/testimonial/create-testimonial-action'
+import { updateTestimonial } from '@/actions/testimonial/update-testimonial-action'
 import { deleteTestimonial } from '@/actions/testimonial/delete-testimonial-action'
 import { deleteTestimonials } from '@/actions/testimonial/delete-testimonials-action'
-import { updateTestimonial } from '@/actions/testimonial/update-testimonial-action'
-import { updateTestimonialImage } from '@/actions/testimonial/update-testimonial-image-action'
-import { TTestimonial } from '@/schemas/testimonial/testimonial.schemas'
 
 export const useTestimonial = () => {
     const createStatus = useActionStatus()
     const updateStatus = useActionStatus()
-    const imageStatus = useActionStatus()
     const deleteStatus = useActionStatus()
+    const bulkStatus = useActionStatus()
 
     const [errorCreate, setErrorCreate] = useState<string | null>(null)
     const [successCreate, setSuccessCreate] = useState<string | null>(null)
@@ -20,13 +18,8 @@ export const useTestimonial = () => {
     const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
     const [successUpdate, setSuccessUpdate] = useState<string | null>(null)
 
-    const [errorImage, setErrorImage] = useState<string | null>(null)
-    const [successImage, setSuccessImage] = useState<string | null>(null)
-
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
-
-    const bulkStatus = useActionStatus()
 
     const [errorBulk, setErrorBulk] = useState<string | null>(null)
     const [successBulk, setSuccessBulk] = useState<string | null>(null)
@@ -48,7 +41,7 @@ export const useTestimonial = () => {
         if (res.success) setSuccessCreate(res.success)
     }
 
-    const handleUpdateTestimonial = async (id: TTestimonial['_id'], data: TUpdateTestimonialForm) => {
+    const handleUpdateTestimonial = async (id: string, data: TUpdateTestimonialForm) => {
         if (updateStatus.loading) return
 
         setErrorUpdate(null)
@@ -65,24 +58,24 @@ export const useTestimonial = () => {
         if (res.success) setSuccessUpdate(res.success)
     }
 
-    const handleUpdateTestimonialImage = async (id: TTestimonial['_id'], data: TUpdateTestimonialImageForm) => {
-        if (imageStatus.loading) return
+    const handleDeleteTestimonial = async (id: string) => {
+        if (deleteStatus.loading) return
 
-        setErrorImage(null)
-        setSuccessImage(null)
+        setErrorDelete(null)
+        setSuccessDelete(null)
 
-        imageStatus.startLoading()
+        deleteStatus.startLoading()
 
-        const res = await updateTestimonialImage(id, data)
+        const res = await deleteTestimonial(id)
 
-        imageStatus.stopLoading()
+        deleteStatus.stopLoading()
 
-        if (res.error) return setErrorImage(res.error)
+        if (res.error) return setErrorDelete(res.error)
 
-        if (res.success) setSuccessImage(res.success)
+        if (res.success) setSuccessDelete(res.success)
     }
 
-    const handleDeleteTestimonials = async (ids: TTestimonial['_id'][]) => {
+    const handleDeleteTestimonials = async (ids: string[]) => {
         if (bulkStatus.loading) return
 
         setErrorBulk(null)
@@ -103,23 +96,6 @@ export const useTestimonial = () => {
         return true
     }
 
-    const handleDeleteTestimonial = async (id: TTestimonial['_id']) => {
-        if (deleteStatus.loading) return
-
-        setErrorDelete(null)
-        setSuccessDelete(null)
-
-        deleteStatus.startLoading()
-
-        const res = await deleteTestimonial(id)
-
-        deleteStatus.stopLoading()
-
-        if (res.error) return setErrorDelete(res.error)
-
-        if (res.success) setSuccessDelete(res.success)
-    }
-
     return {
         createTestimonial: {
             handleCreateTestimonial,
@@ -133,13 +109,6 @@ export const useTestimonial = () => {
             loading: updateStatus.loading,
             error: errorUpdate,
             success: successUpdate
-        },
-
-        updateTestimonialImage: {
-            handleUpdateTestimonialImage,
-            loading: imageStatus.loading,
-            error: errorImage,
-            success: successImage
         },
 
         deleteTestimonial: {

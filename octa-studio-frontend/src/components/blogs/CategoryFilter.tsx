@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { BLOG_CATEGORIES } from '@/utils/data/blogs';
-import { slugify } from '@/utils/slugify';
+import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
 
 /** La pildora de ServiceCard: la activa va en solido, el resto con borde. */
 const PILL =
@@ -9,7 +8,7 @@ const PILL =
 const ON = `${PILL} border-secondary bg-secondary text-primary`;
 const OFF = `${PILL} border-secondary text-secondary hover:bg-secondary/15`;
 
-export const CategoryFilter = ({ active }: {active?: string;}) => {
+export const CategoryFilter = ({ categories, active }: { categories: TBlogCategory[]; active?: string }) => {
   return (
     <nav aria-label="Categorías del blog">
       <ul
@@ -22,8 +21,7 @@ export const CategoryFilter = ({ active }: {active?: string;}) => {
           </Link>
         </li>
 
-        {BLOG_CATEGORIES.map((category) => {
-          const slug = slugify(category);
+        {categories.map(({ slug, name }) => {
           const on = slug === active;
 
           return (
@@ -33,7 +31,7 @@ export const CategoryFilter = ({ active }: {active?: string;}) => {
                 aria-current={on ? 'page' : undefined}
                 className={on ? ON : OFF}
               >
-                {category}
+                {name}
               </Link>
             </li>
           );

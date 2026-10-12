@@ -6,7 +6,7 @@ import { AdminHeading } from '@/components/ui/layout/AdminHeading';
 import { EditProjectForm } from '@/components/projects/form/EditProjectForm';
 import { getProjectByIdService } from '@/services/server/project.service';
 
-export const metadata: Metadata = { title: 'Editar proyecto' };
+export const metadata: Metadata = { title: 'Editar Proyecto' };
 
 export default async function EditarProyectoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -17,7 +17,7 @@ export default async function EditarProyectoPage({ params }: { params: Promise<{
 
   return (
     <section className="w-full">
-      <AdminHeading title="Editar proyecto" subtitle="Edita la información del proyecto y su SEO." actions={<><BackButton /><FormSubmitButton>Guardar cambios</FormSubmitButton></>} narrow />
+      <AdminHeading title="Editar Proyecto" subtitle="Edita la información, las imágenes, los videos y el SEO del proyecto." actions={<><BackButton /><FormSubmitButton>Guardar cambios</FormSubmitButton></>} narrow />
 
       <EditProjectForm project={project} />
     </section>

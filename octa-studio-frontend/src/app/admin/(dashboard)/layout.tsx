@@ -12,7 +12,9 @@ export default async function DashboardLayout({ children }: Readonly<{ children:
   await verifySession();
 
   // El panel ocupa la ventana completa: header fijo arriba y el contenido
-  // con su propio scroll, como una aplicacion.
+  // con su propio scroll, como una aplicacion. `relative` en <main> es
+  // necesario: los inputs de archivo ocultos (`sr-only`, absolutos) se
+  // ubicarian respecto a la pagina y le añadirian un segundo scroll en blanco.
   return (
     <div className="text-ink flex h-dvh flex-col">
       <AdminHeader />
@@ -20,7 +22,7 @@ export default async function DashboardLayout({ children }: Readonly<{ children:
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar />
 
-        <main className="bg-canvas min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-3.75 pt-5 pb-10 md:px-7.5 md:pt-7.5 xl:px-10">
+        <main className="bg-canvas relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-3.75 pt-5 pb-10 md:px-7.5 md:pt-7.5 xl:px-10">
           {children}
         </main>
       </div>

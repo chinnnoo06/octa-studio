@@ -19,7 +19,7 @@ export const BlogStructuredData = ({ blog, imageUrl }: TBlogStructuredDataProps)
     mainEntityOfPage: blogUrl,
     image: `${imageUrl}/${blog.image}`,
     datePublished: blog.createdAt,
-    articleSection: blog.category,
+    articleSection: blog.category?.name,
     inLanguage: 'es-MX',
     timeRequired: `PT${blog.readingTime}M`,
     author: { '@id': `${SITE.url}/#negocio` },

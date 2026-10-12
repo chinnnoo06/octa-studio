@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { useActionStatus } from './ui/useActionStatus'
-import { TCreateBlogForm, TUpdateBlogImageForm, TUpdateBlogForm } from '@/schemas/blog/blog.form.schemas'
+import { TCreateBlogForm, TUpdateBlogForm } from '@/schemas/blog/blog.form.schemas'
 import { createBlog } from '@/actions/blog/create-blog-action'
 import { updateBlog } from '@/actions/blog/update-blog-action'
 import { deleteBlog } from '@/actions/blog/delete-blog-action'
 import { deleteBlogs } from '@/actions/blog/delete-blogs-action'
-import { updateBlogImage } from '@/actions/blog/update-blog-image-action'
 
 export const useBlog = () => {
     const createStatus = useActionStatus()
     const updateStatus = useActionStatus()
     const deleteStatus = useActionStatus()
+    const bulkStatus = useActionStatus()
 
     const [errorCreate, setErrorCreate] = useState<string | null>(null)
     const [successCreate, setSuccessCreate] = useState<string | null>(null)
@@ -18,15 +18,8 @@ export const useBlog = () => {
     const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
     const [successUpdate, setSuccessUpdate] = useState<string | null>(null)
 
-    const imagesStatus = useActionStatus()
-
-    const [errorImages, setErrorImages] = useState<string | null>(null)
-    const [successImages, setSuccessImages] = useState<string | null>(null)
-
     const [errorDelete, setErrorDelete] = useState<string | null>(null)
     const [successDelete, setSuccessDelete] = useState<string | null>(null)
-
-    const bulkStatus = useActionStatus()
 
     const [errorBulk, setErrorBulk] = useState<string | null>(null)
     const [successBulk, setSuccessBulk] = useState<string | null>(null)
@@ -65,21 +58,21 @@ export const useBlog = () => {
         if (res.success) setSuccessUpdate(res.success)
     }
 
-    const handleUpdateBlogImage = async (id: string, data: TUpdateBlogImageForm) => {
-        if (imagesStatus.loading) return
+    const handleDeleteBlog = async (id: string) => {
+        if (deleteStatus.loading) return
 
-        setErrorImages(null)
-        setSuccessImages(null)
+        setErrorDelete(null)
+        setSuccessDelete(null)
 
-        imagesStatus.startLoading()
+        deleteStatus.startLoading()
 
-        const res = await updateBlogImage(id, data)
+        const res = await deleteBlog(id)
 
-        imagesStatus.stopLoading()
+        deleteStatus.stopLoading()
 
-        if (res.error) return setErrorImages(res.error)
+        if (res.error) return setErrorDelete(res.error)
 
-        if (res.success) setSuccessImages(res.success)
+        if (res.success) setSuccessDelete(res.success)
     }
 
     const handleDeleteBlogs = async (ids: string[]) => {
@@ -103,23 +96,6 @@ export const useBlog = () => {
         return true
     }
 
-    const handleDeleteBlog = async (id: string) => {
-        if (deleteStatus.loading) return
-
-        setErrorDelete(null)
-        setSuccessDelete(null)
-
-        deleteStatus.startLoading()
-
-        const res = await deleteBlog(id)
-
-        deleteStatus.stopLoading()
-
-        if (res.error) return setErrorDelete(res.error)
-
-        if (res.success) setSuccessDelete(res.success)
-    }
-
     return {
         createBlog: {
             handleCreateBlog,
@@ -133,13 +109,6 @@ export const useBlog = () => {
             loading: updateStatus.loading,
             error: errorUpdate,
             success: successUpdate
-        },
-
-        updateBlogImage: {
-            handleUpdateBlogImage,
-            loading: imagesStatus.loading,
-            error: errorImages,
-            success: successImages
         },
 
         deleteBlog: {

@@ -12,10 +12,12 @@ type TImageFieldProps = {
     id?: string;
     label?: string;
     hint?: string;
+    /** Al editar: la imagen guardada, que se ve mientras no se elija otra. */
+    currentUrl?: string;
 };
 
 /** Una sola imagen: un cuadro que se pulsa para elegirla o cambiarla. */
-export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada', hint }: TImageFieldProps) => {
+export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imagen destacada', hint, currentUrl }: TImageFieldProps) => {
     const preview = useMemo(() => (image ? URL.createObjectURL(image) : null), [image]);
 
     useEffect(() => {
@@ -31,24 +33,29 @@ export const ImageField = ({ image, onChange, error, id = 'image', label = 'Imag
         event.target.value = '';
     };
 
+    const src = preview ?? currentUrl;
+
     return (
         <div className="form-group">
-            <Label htmlFor={id}>{label} · JPG, PNG o WebP</Label>
+            <Label htmlFor={id}>{label}</Label>
 
             <MediaTile
                 htmlFor={id}
-                hoverText="Cambiar imagen"
-                onRemove={() => onChange(null)}
+                hoverText="Cambiar Imagen"
+                // La X solo descarta la imagen nueva; la guardada se reemplaza eligiendo otra.
+                onRemove={image ? () => onChange(null) : undefined}
                 removeLabel={image ? `Quitar ${image.name}` : undefined}
                 className="mt-1 max-w-70"
             >
-                {preview && image && (
-                    // eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob)
-                    <img src={preview} alt={`Vista previa: ${image.name}`} className="h-full w-full object-contain" />
+                {src && (
+                    // eslint-disable-next-line @next/next/no-img-element -- vista previa local (blob) o imagen guardada
+                    <img src={src} alt={image ? `Vista previa: ${image.name}` : 'Imagen actual'} className="h-full w-full object-contain" />
                 )}
             </MediaTile>
 
             <input id={id} type="file" accept="image/jpeg,image/png,image/webp" onChange={onSelect} className="sr-only" />
+
+            {currentUrl && image && <p className="mt-2 text-[12px] text-gray-600">Al guardar, la imagen actual se reemplaza por esta.</p>}
 
             {hint && <p className="mt-2.5 text-[13px] leading-[1.55] text-gray-600">{hint}</p>}
 

@@ -18,8 +18,13 @@ export const validateProjectInput = async (req: Request, res: Response, next: Ne
     await body("description").notEmpty().withMessage("Description is required").run(req)
     await body("sector").notEmpty().withMessage("Sector is required").run(req)
 
-    await body("seo.metaTitle").notEmpty().withMessage("Meta title is required").run(req)
-    await body("seo.metaDescription").notEmpty().withMessage("Meta description is required").run(req)
+    // SEO opcional: lo vacio lo llena el servicio con el titulo y el resumen.
+    await body("seo.metaTitle").optional({ values: "falsy" }).isString().isLength({ max: 60 }).withMessage("Meta title must be 60 characters or less").run(req)
+    await body("seo.metaDescription").optional({ values: "falsy" }).isString().isLength({ max: 160 }).withMessage("Meta description must be 160 characters or less").run(req)
+
+    // Al editar: archivos actuales que se conservan (los demas se borran).
+    await body("keepImages").optional().isArray({ max: 5 }).withMessage("keepImages must be a list").run(req)
+    await body("keepVideos").optional().isArray({ max: 5 }).withMessage("keepVideos must be a list").run(req)
 
     next()
 }

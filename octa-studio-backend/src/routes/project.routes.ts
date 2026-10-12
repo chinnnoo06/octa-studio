@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { auth } from "../middlewares/auth";
 import { converToWebP } from "../middlewares/convertToWebp";
-import { projectMediaUploads, projectsUploads, projectVideosUploads } from "../middlewares/uploads";
-import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
+import { projectMediaUploads } from "../middlewares/uploads";
+import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
 import { validateProjectExists, validateProjectExistsBySlug, validateProjectInput } from "../middlewares/project";
 import { ProjectController } from "../controllers/project.controller";
 import { param, query } from "express-validator";
@@ -51,38 +51,23 @@ router.post("/",
     ProjectController.createProject
 )
 
+// Edicion completa en una sola peticion: datos, SEO, fotos y videos
+// (los que se conservan van en keepImages/keepVideos; los nuevos, como archivos).
 router.patch("/:id",
     auth,
+    projectMediaUploads.fields([
+        { name: "projectImages", maxCount: 5 },
+        { name: "projectVideos", maxCount: 5 }
+    ]),
+    parseJsonFields(["seo", "keepImages", "keepVideos"]),
     param('id').isMongoId().withMessage('Invalide Id'),
+    validateOptionalImagesFormat,
+    validateVideosFormat,
     validateProjectInput,
     handleInputErrors,
     validateProjectExists,
-    ProjectController.updateProject
-)
-
-router.patch("/:id/images",
-    auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    handleInputErrors,
-    validateProjectExists,
-    projectsUploads.fields([
-        { name: "projectImages", maxCount: 5 }
-    ]),
-    validateImagesFormat,
     converToWebP,
-    ProjectController.updateProjectImages
-)
-
-router.patch("/:id/videos",
-    auth,
-    param('id').isMongoId().withMessage('Invalide Id'),
-    handleInputErrors,
-    validateProjectExists,
-    projectVideosUploads.fields([
-        { name: "projectVideos", maxCount: 5 }
-    ]),
-    validateVideosFormat,
-    ProjectController.updateProjectVideos
+    ProjectController.updateProject
 )
 
 router.delete("/:id",

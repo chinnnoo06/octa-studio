@@ -1,6 +1,7 @@
 import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { BlogCategory, BlogStatus, TBlog, TBlogSEO } from "../types/blog/blog.types";
+import { BlogStatus, TBlog, TBlogSEO, TBlogVirtuals } from "../types/blog/blog.types";
+import { readingTimeOf } from "../utils/blogContent";
 
 const BlogSEOSchema = new Schema<TBlogSEO>(
     {
@@ -20,7 +21,7 @@ const BlogSEOSchema = new Schema<TBlogSEO>(
     { _id: false }
 )
 
-const BlogSchema = new Schema<TBlog>(
+const BlogSchema = new Schema<TBlog, PaginateModel<TBlog>, {}, {}, TBlogVirtuals>(
     {
         slug: {
             type: String,
@@ -36,6 +37,7 @@ const BlogSchema = new Schema<TBlog>(
             trim: true
         },
 
+        // Si se deja vacio en el formulario, el servicio lo genera del contenido.
         excerpt: {
             type: String,
             required: true,
@@ -44,10 +46,9 @@ const BlogSchema = new Schema<TBlog>(
         },
 
         category: {
-            type: String,
-            required: true,
-            trim: true,
-            enum: Object.values(BlogCategory)
+            type: Schema.Types.ObjectId,
+            ref: "BlogCategory",
+            default: null
         },
 
         // Los blogs creados antes de existir el campo no lo tienen en la BD;
@@ -63,16 +64,6 @@ const BlogSchema = new Schema<TBlog>(
             type: Number,
             min: 0,
             default: 0
-        },
-
-        readingTime: {
-            type: Number,
-            required: true,
-            min: 1,
-            validate: {
-                validator: Number.isInteger,
-                message: "Reading time must be a whole number of minutes"
-            }
         },
 
         image: {
@@ -94,8 +85,16 @@ const BlogSchema = new Schema<TBlog>(
     },
     {
         timestamps: true,
+        // El tiempo de lectura viaja en las respuestas aunque no se guarde.
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 )
+
+// Minutos de lectura calculados del contenido (200 palabras por minuto).
+BlogSchema.virtual("readingTime").get(function () {
+    return readingTimeOf(this.content ?? "")
+})
 
 BlogSchema.plugin(mongoosePaginate);
 

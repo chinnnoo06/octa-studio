@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: blog.seo.metaTitle,
       description: blog.seo.metaDescription,
       publishedTime: blog.createdAt,
-      section: blog.category,
+      section: blog.category?.name,
       images: [image],
     },
     twitter: {
@@ -60,7 +60,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   if (!blog) notFound();
 
   const [{ blogs: sameCategory }, { blogs: latest }] = await Promise.all([
-    getBlogsService(1, blog.category),
+    getBlogsService(1, blog.category?.slug),
     getBlogsService(1),
   ]);
 

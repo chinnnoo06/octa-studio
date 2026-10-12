@@ -44,7 +44,8 @@ export const validateBulkDelete = async (req: Request, res: Response, next: Next
 /** Tope por imagen, el mismo que valida el formulario. */
 const IMAGE_MAX_SIZE = 10 * 1024 * 1024;
 
-export const validateImagesFormat = (req: Request, res: Response, next: NextFunction) => {
+/** Al crear la imagen es obligatoria; al editar es opcional (`validateOptionalImagesFormat`). */
+const checkImagesFormat = (required: boolean) => (req: Request, res: Response, next: NextFunction) => {
     const files = req.files as TMulterFiles | undefined;
 
     // Every image field is checked, whatever its name (projectImages, blogImage, ...);
@@ -55,6 +56,8 @@ export const validateImagesFormat = (req: Request, res: Response, next: NextFunc
         .flatMap(field => field ?? []);
 
     if (imagesFiles.length === 0) {
+        if (!required) return next();
+
         deleteAllUploadedFiles(files);
 
         return res.status(400).json({
@@ -99,6 +102,11 @@ export const validateImagesFormat = (req: Request, res: Response, next: NextFunc
 
     next();
 };
+
+export const validateImagesFormat = checkImagesFormat(true);
+
+/** Edicion: sin imagenes nuevas pasa; si vienen, se validan igual que al crear. */
+export const validateOptionalImagesFormat = checkImagesFormat(false);
 
 const ALLOWED_VIDEO_FORMATS = [
     "video/mp4",

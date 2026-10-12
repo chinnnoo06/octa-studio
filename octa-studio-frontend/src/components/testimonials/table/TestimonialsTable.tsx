@@ -1,5 +1,4 @@
 import { FaComments, FaStar } from 'react-icons/fa6';
-import { ImagesButton } from '@/components/ui/buttons/ImagesButton';
 import { EditButton } from '@/components/ui/buttons/EditButton';
 import { Table } from '@/components/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/ui/table/TableHead';
@@ -44,7 +43,6 @@ const Rating = ({ rating }: { rating: number }) => (
 
 const Actions = ({ testimonial }: { testimonial: TTestimonial }) => (
     <>
-        <ImagesButton href={`/admin/testimonios/${testimonial._id}/imagen`} label={`Actualizar la imagen del testimonio de ${testimonial.name}`} />
         <EditButton href={`/admin/testimonios/${testimonial._id}/editar`} label={`Editar el testimonio de ${testimonial.name}`} />
         <DeleteTestimonialButton id={testimonial._id} name={testimonial.name} />
     </>
@@ -72,7 +70,7 @@ export const TestimonialsTable = ({ testimonials, basePath, params, filtered }: 
                             </TableCell>
 
                             <TableCell variant="image">
-                                <ImageCell image={t.image} name={t.name} baseUrl={IMAGE_URL} />
+                                <ImageCell image={t.image} name={t.name} baseUrl={IMAGE_URL} fit="contain" />
                             </TableCell>
 
                             <TableCell className="whitespace-nowrap"><strong className="font-semibold">{t.name}</strong></TableCell>
@@ -100,7 +98,7 @@ export const TestimonialsTable = ({ testimonials, basePath, params, filtered }: 
                         id={t._id}
                         selectLabel={`Seleccionar el testimonio de ${t.name}`}
                         title={t.name}
-                        media={<ImageCell image={t.image} name={t.name} baseUrl={IMAGE_URL} />}
+                        media={<ImageCell image={t.image} name={t.name} baseUrl={IMAGE_URL} fit="contain" />}
                         extra={
                             <div className="flex flex-col gap-1.25">
                                 <Rating rating={t.rating} />

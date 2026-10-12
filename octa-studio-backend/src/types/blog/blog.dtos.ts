@@ -1,22 +1,26 @@
 import { TAdminListQuery } from "../common/common.dtos";
-import { BlogCategory, BlogStatus, TBlogSEO } from "./blog.types";
+import { BlogStatus, TBlogSEO } from "./blog.types";
 
 export type TGetBlogsQuery = {
     page?: string,
-    category?: BlogCategory
+    /** Slug de la categoria (filtro publico `/blogs?categoria=`). */
+    category?: string
 }
 
 export type TGetAdminBlogsQuery = TAdminListQuery & {
-    category?: BlogCategory,
+    /** Id de la categoria. */
+    category?: string,
     status?: BlogStatus
 }
 
 export type TBlogDto = {
     title: string,
-    excerpt: string,
-    category: BlogCategory,
+    /** Vacio: se genera a partir del contenido. */
+    excerpt?: string,
+    /** Id de la categoria; vacio = "Sin categoría". */
+    category?: string,
     status: BlogStatus,
-    readingTime: number,
     content: string,
-    seo: TBlogSEO
+    /** Vacio o a medias: el servicio completa con el titulo y el extracto. */
+    seo?: Partial<TBlogSEO>
 }

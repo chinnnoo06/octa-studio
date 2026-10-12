@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaFloppyDisk } from 'react-icons/fa6';
@@ -19,6 +20,8 @@ import { ActionButton } from "@/components/ui/buttons/ActionButton";
 import { ADMIN_FORM_ID } from "@/components/ui/buttons/FormSubmitButton";
 
 export const CreateTestimonialForm = () => {
+    const router = useRouter();
+
     const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TCreateTestimonialForm>({
         resolver: zodResolver(CreateTestimonialFormSchema),
         defaultValues: { quote: '', name: '', rating: 5, image: undefined }
@@ -28,8 +31,11 @@ export const CreateTestimonialForm = () => {
 
     useEffect(() => {
         if (createTestimonial.error) toast.error(createTestimonial.error);
-        if (createTestimonial.success) toast.success(createTestimonial.success);
-    }, [createTestimonial.error, createTestimonial.success]);
+        if (createTestimonial.success) {
+            toast.success(createTestimonial.success);
+            router.push('/admin/testimonios');
+        }
+    }, [createTestimonial.error, createTestimonial.success, router]);
 
     const image = useWatch({ control, name: 'image' });
 

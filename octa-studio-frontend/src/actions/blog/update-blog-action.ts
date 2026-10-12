@@ -8,6 +8,7 @@ import { TActionState } from "@/types/common.types"
 import { originHeader } from "@/services/api.headers"
 import { getToken } from "@/services/auth/auth.token"
 
+/** Edicion completa en una sola peticion: datos, SEO y archivos (multipart). */
 export const updateBlog = async (id: string, data: TUpdateBlogForm): Promise<TActionState> => {
 
     const parsed = UpdateBlogFormSchema.safeParse(data)
@@ -23,14 +24,25 @@ export const updateBlog = async (id: string, data: TUpdateBlogForm): Promise<TAc
 
     const url = `${process.env.API_URL}/blogs/${id}`
 
+    const formData = new FormData()
+
+    formData.append("title", parsed.data.title)
+    formData.append("excerpt", parsed.data.excerpt)
+    formData.append("category", parsed.data.category)
+    formData.append("status", parsed.data.status)
+    formData.append("content", parsed.data.content)
+    formData.append("seo", JSON.stringify(parsed.data.seo))
+
+    // Sin imagen nueva, el backend conserva la actual.
+    if (parsed.data.image) formData.append("blogImage", parsed.data.image)
+
     const req = await fetch(url, {
         method: 'PATCH',
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
             ...originHeader()
         },
-        body: JSON.stringify(parsed.data)
+        body: formData
     })
 
     const json = await req.json()
@@ -50,7 +62,7 @@ export const updateBlog = async (id: string, data: TUpdateBlogForm): Promise<TAc
 
     // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
 
-    updateTag('blogs')
+    updateTag('blog/update-blog-action.ts0')
 
     return {
         error: "",

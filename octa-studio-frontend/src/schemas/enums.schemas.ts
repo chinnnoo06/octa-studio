@@ -1,8 +1,5 @@
 import { z } from "zod"
-import { BLOG_CATEGORIES, BLOG_STATUSES } from "@/utils/data/blogs"
-
-export const BlogCategorySchema = z.enum(BLOG_CATEGORIES, { error: "Elige una categoría" })
-export type TBlogCategory = z.infer<typeof BlogCategorySchema>
+import { BLOG_STATUSES } from "@/utils/data/blogs"
 
 export const BlogStatusSchema = z.enum(BLOG_STATUSES, { error: "Elige un estado" })
 export type TBlogStatus = z.infer<typeof BlogStatusSchema>

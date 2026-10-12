@@ -1,56 +1,37 @@
 'use client';
 
 import { useState } from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-const ARROW =
-    'text-gray-600 hover:bg-slate-100 hover:text-ink inline-flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors duration-300';
+import { FaCirclePlay } from 'react-icons/fa6';
+import { MediaPreviewModal } from './MediaPreviewModal';
 
 type TVideosCellProps = { videos: string[]; name: string; baseUrl: string };
 
+/** Pildora "▶ 2 videos" que abre los videos en la galeria; sin videos queda en gris. */
 export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
-    const [index, setIndex] = useState(0);
+    const [open, setOpen] = useState(false);
 
     if (videos.length === 0) {
-        return <span className="text-[12px] text-gray-600 italic">Sin videos</span>;
+        return <span className="text-[12px] whitespace-nowrap text-slate-400">Sin videos</span>;
     }
 
-    const many = videos.length > 1;
-
-    const prev = () => setIndex((i) => (i === 0 ? videos.length - 1 : i - 1));
-    const next = () => setIndex((i) => (i === videos.length - 1 ? 0 : i + 1));
-
     return (
-        <div className="flex min-w-45 items-center gap-2.5">
-            {many && (
-                <button type="button" onClick={prev} aria-label={`Video anterior de ${name}`} className={ARROW}>
-                    <FiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
-                </button>
-            )}
+        <>
+            <button
+                type="button"
+                onClick={() => setOpen(true)}
+                aria-label={`Ver los videos de ${name}`}
+                className="bg-secondary/8 text-secondary hover:bg-secondary/15 inline-flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold whitespace-nowrap transition-colors duration-150"
+            >
+                <FaCirclePlay aria-hidden="true" className="size-3.5" />
+                {videos.length} {videos.length === 1 ? 'video' : 'videos'}
+            </button>
 
-            <div className="shrink-0 rounded-[4px] bg-slate-50">
-                <video
-                    key={videos[index]}
-                    src={`${baseUrl}/${videos[index]}`}
-                    aria-label={`Video ${index + 1} de ${videos.length} de ${name}`}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="h-15 w-20 rounded-[4px] object-contain"
-                />
-            </div>
-
-            {many && (
-                <button type="button" onClick={next} aria-label={`Video siguiente de ${name}`} className={ARROW}>
-                    <FiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
-                </button>
-            )}
-
-            {many && (
-                <span aria-live="polite" className="shrink-0 text-[12px] text-gray-600">
-                    {index + 1}/{videos.length}
-                </span>
-            )}
-        </div>
+            <MediaPreviewModal
+                open={open}
+                onClose={() => setOpen(false)}
+                title={`Videos de ${name}`}
+                items={videos.map((video) => ({ type: 'video', src: `${baseUrl}/${video}` }))}
+            />
+        </>
     );
 };
