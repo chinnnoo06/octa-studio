@@ -1,6 +1,6 @@
 import { BlogsResponseSchema, BlogStatsResponseSchema, RelatedBlogsResponseSchema } from "@/schemas/blog/blog.response.schemas";
 import { TAdminListParams } from "@/types/common.types";
-import { toQueryString } from "@/utils/queryString";
+import { toQueryString } from "@/utils/admin/queryString";
 import { BlogSchema } from "@/schemas/blog/blog.schemas";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";

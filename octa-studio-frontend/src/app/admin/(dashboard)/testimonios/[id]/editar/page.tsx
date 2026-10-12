@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { EditTestimonialForm } from '@/components/testimonials/form/EditTestimonialForm';
+import { EditTestimonialForm } from '@/components/admin/dashboard/testimonials/form/EditTestimonialForm';
 import { getTestimonialService } from '@/services/server/testimonial.service';
-import { BackButton } from '@/components/ui/buttons/BackButton';
-import { FormSubmitButton } from '@/components/ui/buttons/FormSubmitButton';
-import { AdminHeading } from '@/components/ui/layout/AdminHeading';
+import { BackButton } from '@/components/admin/ui/buttons/BackButton';
+import { FormSubmitButton } from '@/components/admin/ui/buttons/FormSubmitButton';
+import { AdminHeading } from '@/components/admin/layout/AdminHeading';
 
 export const metadata: Metadata = { title: 'Editar Testimonio' };
 

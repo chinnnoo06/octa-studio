@@ -1,4 +1,15 @@
 import type { TCoverageItem, TPillar, TPurpose, TStat } from '@/types/content.types';
+import ImgStandCircle1 from '@/assets/media/stands/ImgStandCircle1.webp';
+import ImgStandCircle2 from '@/assets/media/stands/ImgStandCircle2.webp';
+import ImgStandCircle3 from '@/assets/media/stands/ImgStandCircle3.webp';
+import ImgStandCircle4 from '@/assets/media/stands/ImgStandCircle4.webp';
+
+export const ABOUT_HERO_STANDS = [
+  { src: ImgStandCircle1, alt: 'Stand con arco curvo y rótulo corporativo' },
+  { src: ImgStandCircle2, alt: 'Stand con mostrador y perfiles retroiluminados' },
+  { src: ImgStandCircle3, alt: 'Stand con logotipo de gran formato y área de descanso' },
+  { src: ImgStandCircle4, alt: 'Stand corporativo en rojo con zona de demostración' },
+] as const;
 
 export const STATS: TStat[] = [
   {

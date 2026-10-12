@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
-import { AdminHeading } from '@/components/ui/layout/AdminHeading';
-import { DashboardShell } from '@/components/dashboard/DashboardShell';
-import { DashboardNotices } from '@/components/dashboard/DashboardNotices';
-import { DashboardError } from '@/components/dashboard/DashboardError';
-import { GeneralAnalytics } from '@/components/dashboard/GeneralAnalytics';
-import { BlogStats } from '@/components/dashboard/BlogStats';
-import { BlogAnalytics } from '@/components/dashboard/BlogAnalytics';
-import { QuickActions } from '@/components/dashboard/QuickActions';
+import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { DashboardShell } from '@/components/admin/dashboard/home/DashboardShell';
+import { DashboardNotices } from '@/components/admin/dashboard/home/DashboardNotices';
+import { DashboardError } from '@/components/admin/dashboard/home/DashboardError';
+import { GeneralAnalytics } from '@/components/admin/dashboard/home/GeneralAnalytics';
+import { BlogStats } from '@/components/admin/dashboard/home/BlogStats';
+import { BlogAnalytics } from '@/components/admin/dashboard/home/BlogAnalytics';
+import { QuickActions } from '@/components/admin/dashboard/home/QuickActions';
 import { DashboardPeriodSchema } from '@/schemas/enums.schemas';
 import { getDashboardService } from '@/services/server/analytics.service';
 import { getBlogStatsService } from '@/services/server/blog.service';

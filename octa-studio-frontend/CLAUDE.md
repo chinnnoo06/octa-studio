@@ -43,13 +43,17 @@ src/
     admin/                 panel: login y dashboard (blogs, proyectos, testimonios)
     api/admin/             route handler: sube imágenes del editor al backend
   components/
-    ui/ layout/ sections/  primitivos, header/footer/sidebar, secciones compartidas
+    admin/                 todo el panel, pensado para copiarse a otras apps
+      auth/ layout/ ui/    login, sidebar/headers del panel, botones, form, tabla y modal (genéricos)
+      dashboard/           lo propio de esta app: home/ (métricas) y forms/tablas por entidad
+    ui/ sections/          primitivos, header/footer públicos, secciones compartidas
     home/ aboutUs/ services/ contact/ legal/   secciones de cada página
-    blogs/ projects/ testimonials/             tarjetas, fichas, forms y tablas
+    blogs/ projects/ testimonials/             tarjetas y fichas públicas
   services/server/         fetch al backend (Data Cache por tag)
   actions/                 Server Actions del panel (updateTag)
   schemas/                 Zod: respuestas y formularios
-  utils/data/              copy de las secciones todavía estáticas
+  utils/admin/             helpers solo del panel: gráficas, métricas, filtros y query de listados
+  utils/data/              copy de las secciones todavía estáticas (admin.ts: links del sidebar)
 ```
 
 ## Reglas de oro

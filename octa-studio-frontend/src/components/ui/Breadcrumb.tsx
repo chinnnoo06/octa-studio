@@ -8,7 +8,7 @@ export const Breadcrumb = ({ items }: { items: TBreadcrumbItem[] }) => {
 
   return (
     <nav aria-label="Migas de pan">
-      <ol className="text-fourth/75 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs lg:text-sm">
+      <ol className="text-fourth/75 flex flex-wrap items-center gap-x-1.5 gap-y-1.5 text-xs lg:text-sm">
         {steps.map((step, i) => {
           const last = i === steps.length - 1;
 
@@ -23,7 +23,7 @@ export const Breadcrumb = ({ items }: { items: TBreadcrumbItem[] }) => {
                   <Link href={step.path} className="hover:text-secondary transition-colors duration-300">
                     {step.name}
                   </Link>
-                  <FiChevronRight aria-hidden="true" className="size-3.5 shrink-0" />
+                  <FiChevronRight aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                 </>
               )}
             </li>

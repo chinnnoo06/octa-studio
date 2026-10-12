@@ -16,15 +16,11 @@ body {
   --color-fourth: #000000;
   --color-muted: #bfbfbf;
 
-  /* Panel de administracion: el azul de marca llevado a tonos oscuros para
-     header y sidebar, el lienzo gris claro y la tinta de los textos. */
-  --color-panel: #18394e;
-  --color-panel-soft: #325367;
-  --color-panel-active: #426e8a;
-  --color-panel-link: #75a1bd;
-  --color-canvas: #f7f9fb;
-  --color-ink: #181818;
-  --color-tooltip: #1e2533;
+  /* Panel de administracion: mismo orden y valores que los del sitio, con sufijo -admin. */
+  --color-primary-admin: var(--color-primary);
+  --color-secondary-admin: var(--color-secondary);
+  --color-thrird-admin: var(--color-thrird);
+  --color-fourth-admin: var(--color-fourth);
 
   --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
 

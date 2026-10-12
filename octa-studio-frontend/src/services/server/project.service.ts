@@ -1,6 +1,6 @@
 import { AdminProjectsResponseSchema, ProjectsCountResponseSchema, ProjectsResponseSchema } from "@/schemas/project/project.response.schemas";
 import { TAdminListParams } from "@/types/common.types";
-import { toQueryString } from "@/utils/queryString";
+import { toQueryString } from "@/utils/admin/queryString";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
 import { ProjectSchema } from "@/schemas/project/project.schemas";

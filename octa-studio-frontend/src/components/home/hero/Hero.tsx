@@ -5,6 +5,7 @@ import { TickLine } from '@/components/ui/TickLine';
 import { RevealOnLoad } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import Img from "@/assets/media/stands/ImgStand1.webp"
+import { HERO_SERVICES } from '@/utils/data/hero';
 
 export const Hero = () => {
   return (
@@ -46,7 +47,7 @@ export const Hero = () => {
                 <TickLine className="hidden lg:flex text-primary min-h-55" />
 
                 <ul role="list" className="flex flex-col gap-5">
-                  {['Stands y ferias', 'Eventos masivos', 'Congresos', 'Activaciones'].map((item, i) => (
+                  {HERO_SERVICES.map((item, i) => (
                     <li key={item} className="flex items-baseline gap-2.5">
                       <span className="text-primary text-base lg:text-lg font-medium">
                         {String(i + 1).padStart(2, '0')}

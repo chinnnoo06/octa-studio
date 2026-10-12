@@ -1,7 +1,7 @@
 import z from "zod";
 import { AdminTestimonialsResponseSchema, TestimonialSchema, TTestimonial } from "@/schemas/testimonial/testimonial.schemas";
 import { TAdminListParams } from "@/types/common.types";
-import { toQueryString } from "@/utils/queryString";
+import { toQueryString } from "@/utils/admin/queryString";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
 

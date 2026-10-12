@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { AdminHeading } from '@/components/ui/layout/AdminHeading';
-import { TableToolbar } from '@/components/ui/table/TableToolbar';
-import { TablePagination } from '@/components/ui/table/TablePagination';
-import { TestimonialsTable } from '@/components/testimonials/table/TestimonialsTable';
+import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { TableToolbar } from '@/components/admin/ui/table/TableToolbar';
+import { TablePagination } from '@/components/admin/ui/table/TablePagination';
+import { TestimonialsTable } from '@/components/admin/dashboard/testimonials/table/TestimonialsTable';
 import { getAdminTestimonialsService } from '@/services/server/testimonial.service';
-import { pickParams } from '@/utils/queryString';
-import { isFilteredList } from '@/utils/tableFilters';
+import { pickParams } from '@/utils/admin/queryString';
+import { isFilteredList } from '@/utils/admin/tableFilters';
 import type { TFilterField } from '@/types/common.types';
 
 const BASE_PATH = '/admin/testimonios';
