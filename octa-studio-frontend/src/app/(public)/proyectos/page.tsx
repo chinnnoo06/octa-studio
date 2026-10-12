@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { Hero } from '@/components/projects/Hero';
 import { Projects } from '@/components/projects/Projects';
 import { getProjectsService } from '@/services/server/project.service';
@@ -42,6 +43,7 @@ export default async function ProyectosPage({
 
   return (
     <>
+      <BreadcrumbStructuredData items={[{ name: 'Proyectos', path: '/proyectos' }]} />
       <Hero />
       <Projects projects={projects} pagination={pagination} />
     </>

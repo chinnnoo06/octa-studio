@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import { accordionPanel } from '@/utils/motion/accordion';
 import type { TFaq } from '@/types/content.types';
@@ -35,21 +35,20 @@ export const FaqItem = ({ item, isOpen, onToggle, id }: TFaqItemProps) => {
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            {...accordionPanel}
-            id={`${id}-panel`}
-            role="region"
-            aria-labelledby={`${id}-trigger`}
-            className="overflow-hidden"
-          >
-            <p className="text-fourth/75 max-w-3xl pb-5 text-sm leading-relaxed lg:text-base">
-              {item.answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        {...accordionPanel}
+        initial={false}
+        animate={isOpen ? 'open' : 'closed'}
+        inert={!isOpen}
+        id={`${id}-panel`}
+        role="region"
+        aria-labelledby={`${id}-trigger`}
+        className="overflow-hidden"
+      >
+        <p className="text-fourth/75 max-w-3xl pb-5 text-sm leading-relaxed lg:text-base">
+          {item.answer}
+        </p>
+      </motion.div>
     </>
   );
 };

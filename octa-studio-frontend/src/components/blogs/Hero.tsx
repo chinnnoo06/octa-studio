@@ -3,23 +3,29 @@ import { RevealOnLoad } from '@/components/ui/Reveal';
 import { BannerLogo } from '@/components/sections/BannerLogo';
 import { fadeBlur } from '@/utils/motion/reveal';
 import ImgBanner from '@/assets/media/backgrounds/ImgBackground6.webp';
+import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
 
-export const Hero = () => {
+const SUBTITLE = 'text-secondary text-2xl font-bold uppercase leading-[1.2] lg:text-3xl';
+
+/** En la pagina de una categoria, su nombre pasa a ser el h1 y su descripcion el texto. */
+export const Hero = ({ category }: { category?: TBlogCategory }) => {
   return (
     <section data-section="blogs-hero" className="bg-primary pt-15 lg:pt-20">
       <div className="flex flex-col gap-15 lg:gap-20">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
           <RevealOnLoad variants={fadeBlur} className="flex flex-col gap-10">
-            <SectionTitle as="h1" size="hero" lead="Nuestro" rotating="blog" />
+            <SectionTitle as={category ? 'h2' : 'h1'} size="hero" lead="Nuestro" rotating="blog" />
 
             <div className="flex flex-col gap-5">
-              <h2 className="text-secondary text-2xl font-bold uppercase leading-[1.2] lg:text-3xl">
-                Lo que aprendimos montando, contado para quien va a exponer.
-              </h2>
+              {category ? (
+                <h1 className={SUBTITLE}>{category.name}</h1>
+              ) : (
+                <h2 className={SUBTITLE}>Lo que aprendimos montando, contado para quien va a exponer.</h2>
+              )}
 
               <p className="text-fourth/75 max-w-5xl text-base lg:text-lg">
-                Cómo se decide el tamaño de un stand, qué revisar en el render antes de
-                fabricar y por qué los tiempos de recinto mandan sobre todo lo demás.
+                {category?.description ||
+                  'Cómo se decide el tamaño de un stand, qué revisar en el render antes de fabricar y por qué los tiempos de recinto mandan sobre todo lo demás.'}
               </p>
             </div>
           </RevealOnLoad>

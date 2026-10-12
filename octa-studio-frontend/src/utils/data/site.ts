@@ -12,12 +12,15 @@ export const SITE = {
   ogImageWidth: 1200,
   ogImageHeight: 630,
   ogImageAlt: 'Octa Building Studio – Diseño, fabricación y montaje de stands para expos y eventos',
+  logo: '/logo.png',
+  themeColor: '#18608C',
 } as const;
 
 export const BUSINESS = {
   legalName: 'Octa Building Studio',
   email: CONTACT.emails[0].address,
   phone: CONTACT.phone.href.replace('tel:', ''),
+  whatsapp: `+${CONTACT.whatsapp.number}`,
   address: {
     locality: 'Guadalajara',
     region: 'Jalisco',

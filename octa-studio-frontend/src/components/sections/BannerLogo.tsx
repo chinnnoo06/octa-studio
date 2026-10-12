@@ -59,7 +59,7 @@ export const BannerLogo = ({ image, className }: TBannerLogoProps) => {
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <motion.div style={{ x, y }} className="w-50 lg:w-100">
-            <Logo sizes="(min-width: 1024px) 400px, 200px" />
+            <Logo />
           </motion.div>
         </div>
       </div>

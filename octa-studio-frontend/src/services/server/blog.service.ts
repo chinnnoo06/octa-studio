@@ -1,4 +1,4 @@
-import { BlogsResponseSchema, BlogStatsResponseSchema } from "@/schemas/blog/blog.response.schemas";
+import { BlogsResponseSchema, BlogStatsResponseSchema, RelatedBlogsResponseSchema } from "@/schemas/blog/blog.response.schemas";
 import { TAdminListParams } from "@/types/common.types";
 import { toQueryString } from "@/utils/queryString";
 import { BlogSchema } from "@/schemas/blog/blog.schemas";
@@ -99,6 +99,32 @@ export const getBlogBySlugService = async (slug: string) => {
   }
 
   return result.data;
+};
+
+/**
+ * Entradas sugeridas al final del articulo; el backend ya las elige (misma
+ * categoria primero). Son secundarias: si fallan, la ficha sale sin ellas.
+ */
+export const getRelatedBlogsService = async (slug: string) => {
+  const url = `${process.env.API_URL}/blogs/${slug}/related`;
+
+  try {
+    const req = await fetch(url, {
+      method: "GET",
+      headers: {
+        ...originHeader()
+      },
+      next: { revalidate: 3600, tags: ["blogs"] },
+    });
+
+    if (!req.ok) return [];
+
+    const result = RelatedBlogsResponseSchema.safeParse(await req.json());
+
+    return result.success ? result.data.blogs : [];
+  } catch {
+    return [];
+  }
 };
 
 /** Listado del panel: incluye borradores y acepta buscador, filtros y orden. */

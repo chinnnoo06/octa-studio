@@ -18,7 +18,7 @@ export const AdminHeader = () => {
                 <div className="flex items-center justify-between">
                     <Link href={ADMIN_HOME} className="flex h-12.5 items-center gap-2.5 md:h-15" aria-label="Ir al inicio del panel">
                         <div className="h-full w-auto [&_img]:h-full [&_img]:w-auto">
-                            <Logo sizes="128px" />
+                            <Logo />
                         </div>
 
                         <span className="border-primary/30 text-primary border-l pl-2.5 text-xl font-semibold uppercase md:text-[26px]">

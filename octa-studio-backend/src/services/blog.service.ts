@@ -4,7 +4,7 @@ import path from "path";
 import { blogRepository, PUBLIC_BLOG_FILTER } from "../repositories/blog.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
 import { TBlogDto, TGetAdminBlogsQuery } from "../types/blog/blog.dtos";
-import { TBlogDocument } from "../types/blog/blog.types";
+import { TBlog, TBlogDocument, TBlogVirtuals } from "../types/blog/blog.types";
 import { blogCategoryRepository } from "../repositories/blogCategory.repository";
 import { deleteAllUploadedFiles } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
@@ -28,6 +28,18 @@ const ADMIN_SORTABLE = ["title", "status", "views", "createdAt"];
 const AUTO_EXCERPT_LENGTH = 160;
 
 const MOST_READ = 5;
+
+/** Entradas sugeridas al final de cada articulo. */
+const RELATED_BLOGS = 3;
+
+/**
+ * Lo que necesita una tarjeta: todo menos el HTML. El tiempo de lectura se
+ * calcula antes de quitarlo, asi los listados pesan poco y lo siguen trayendo.
+ */
+const toSummary = (blog: TBlogDocument) => {
+    const { content, ...summary } = blog.toJSON<TBlog & TBlogVirtuals>()
+    return summary
+}
 
 const deleteFromDisk = (dir: string, names: string[]) => {
     names.forEach(name => {
@@ -61,7 +73,7 @@ const resolveCategory = async (id?: string) => {
 
 export const BlogService = {
 
-    /** Listado publico; `categorySlug` viene del filtro `/blogs?categoria=`. */
+    /** Listado publico; `categorySlug` viene de la pagina `/blogs/categoria/:slug`. */
     async getBlogs(page: number, categorySlug?: string) {
         const category = categorySlug ? await blogCategoryRepository.findBySlug(categorySlug) : null
 
@@ -78,7 +90,7 @@ export const BlogService = {
         const result = await blogRepository.findPaginated(page, BLOGS_PER_PAGE, filter)
 
         return {
-            blogs: result.docs,
+            blogs: result.docs.map(toSummary),
             pagination: toPagination(result)
         }
     },
@@ -99,7 +111,7 @@ export const BlogService = {
         )
 
         return {
-            blogs: result.docs,
+            blogs: result.docs.map(toSummary),
             pagination: toPagination(result)
         }
     },
@@ -127,6 +139,23 @@ export const BlogService = {
                 ? { _id: String(latest._id), title: latest.title, slug: latest.slug, createdAt: latest.createdAt }
                 : null
         }
+    },
+
+    /** Primero los de la misma categoria y, si faltan, los mas recientes del blog. */
+    async getRelatedBlogs(blog: TBlogDocument) {
+        const categoryId = blog.populated("category") ?? blog.category
+
+        const sameCategory = categoryId
+            ? await blogRepository.findLatest({ category: categoryId }, [blog._id], RELATED_BLOGS)
+            : []
+
+        const latest = await blogRepository.findLatest(
+            {},
+            [blog._id, ...sameCategory.map(related => related._id)],
+            RELATED_BLOGS - sameCategory.length
+        )
+
+        return [...sameCategory, ...latest].map(toSummary)
     },
 
     async registerView(slug: string) {

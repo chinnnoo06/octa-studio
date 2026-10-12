@@ -1,5 +1,6 @@
 import type { TProject } from '@/schemas/project/project.schemas';
 import { SITE } from '@/utils/data/site';
+import { breadcrumbList } from './BreadcrumbStructuredData';
 
 type TProjectStructuredDataProps = {
   project: TProject;
@@ -21,15 +22,10 @@ export const ProjectStructuredData = ({ project, imageUrl }: TProjectStructuredD
     creator: { '@id': `${SITE.url}/#negocio` },
   };
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Proyectos', item: `${SITE.url}/proyectos` },
-      { '@type': 'ListItem', position: 3, name: project.name, item: projectUrl },
-    ],
-  };
+  const breadcrumb = breadcrumbList([
+    { name: 'Proyectos', path: '/proyectos' },
+    { name: project.name, path: `/proyectos/${project.slug}` },
+  ]);
 
   return (
     <script

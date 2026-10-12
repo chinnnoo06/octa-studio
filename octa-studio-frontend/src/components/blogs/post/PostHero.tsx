@@ -2,19 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegClock } from 'react-icons/fa6';
 import { Eyebrow } from '@/components/ui/Eyebrow';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { Reveal, RevealOnLoad } from '@/components/ui/Reveal';
 import { fadeBlur } from '@/utils/motion/reveal';
 import { formatDate } from '@/utils/formatDate';
+import { blogBreadcrumb, blogCategoryPath } from '@/utils/blogBreadcrumb';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 export const PostHero = ({ blog }: { blog: TBlog }) => {
   return (
     <div className="flex flex-col gap-10">
       <RevealOnLoad variants={fadeBlur} className="w-full flex flex-col gap-5">
+        <Breadcrumb items={blogBreadcrumb(blog)} />
+
         <div className="text-secondary flex flex-col items-start gap-2.5">
           {blog.category ? (
             <Link
-              href={`/blogs?categoria=${blog.category.slug}#entradas`}
+              href={`${blogCategoryPath(blog.category.slug)}#entradas`}
               className="hover:text-secondary/75 transition-colors duration-300"
             >
               <Eyebrow>{blog.category.name}</Eyebrow>

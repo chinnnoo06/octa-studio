@@ -19,9 +19,15 @@ export const BlogSchema = z.object({
   content: z.string(),
   seo: SEOSchema,
   createdAt: z.string(),
+  updatedAt: z.string().optional(),
 });
 
 export type TBlog = z.infer<typeof BlogSchema>;
+
+/** Lo que traen los listados y los relacionados: todo menos el HTML del articulo. */
+export const BlogSummarySchema = BlogSchema.omit({ content: true });
+
+export type TBlogSummary = z.infer<typeof BlogSummarySchema>;
 
 /** Bloque "Blog" del dashboard: datos internos, no de Google Analytics. */
 export const BlogStatsSchema = z.object({

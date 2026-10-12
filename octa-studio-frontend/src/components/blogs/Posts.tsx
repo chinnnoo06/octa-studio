@@ -4,12 +4,13 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Pagination } from '@/components/ui/Pagination';
 import { BlogCard } from '@/components/blogs/BlogCard';
 import { CategoryFilter } from '@/components/blogs/CategoryFilter';
-import type { TBlog } from '@/schemas/blog/blog.schemas';
+import type { TBlogSummary } from '@/schemas/blog/blog.schemas';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
 import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
+import { blogCategoryPath } from '@/utils/blogBreadcrumb';
 
 type TPostsProps = {
-  blogs: TBlog[];
+  blogs: TBlogSummary[];
   pagination: TPagination;
   categories: TBlogCategory[];
   category?: TBlogCategory;
@@ -17,7 +18,7 @@ type TPostsProps = {
 
 export const Posts = ({ blogs, pagination, categories, category }: TPostsProps) => {
   const active = category?.slug;
-  const basePath = active ? `/blogs?categoria=${active}` : '/blogs';
+  const basePath = active ? blogCategoryPath(active) : '/blogs';
 
   return (
     <section id="entradas" data-section="blogs" className="bg-primary scroll-mt-18 py-15 lg:py-20">

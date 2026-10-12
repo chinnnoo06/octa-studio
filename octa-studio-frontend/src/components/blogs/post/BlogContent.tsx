@@ -3,6 +3,8 @@ import { withAbsoluteContentImages } from '@/utils/blogContentImages';
 const PROSE = [
   'text-fourth/75 text-base lg:text-lg flex flex-col gap-5',
   '[&_h2]:text-secondary [&_h2]:text-xl [&_h2]:lg:text-2xl [&_h2]:font-bold [&_h2]:uppercase [&_h2]:mt-5',
+  // Las anclas del indice no quedan tapadas por el header fijo.
+  '[&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24',
   '[&_h3]:text-secondary [&_h3]:text-lg [&_h3]:lg:text-xl [&_h3]:font-bold [&_h3]:uppercase',
   '[&_h4]:text-secondary [&_h4]:text-base [&_h4]:lg:text-lg [&_h4]:font-semibold',
   '[&_a]:text-secondary [&_a]:underline [&_a]:underline-offset-4',

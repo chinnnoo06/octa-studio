@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegClock } from 'react-icons/fa6';
-import type { TBlog } from '@/schemas/blog/blog.schemas';
+import type { TBlogSummary } from '@/schemas/blog/blog.schemas';
 import { formatDate } from '@/utils/formatDate';
 
-export const BlogCard = ({ blog }: { blog: TBlog }) => {
+export const BlogCard = ({ blog }: { blog: TBlogSummary }) => {
   return (
     <Link
       href={`/blogs/${blog.slug}`}

@@ -1,5 +1,6 @@
 import { SITE, BUSINESS } from '@/utils/data/site';
 import { SERVICES } from '@/utils/data/services';
+import { CONTACT } from '@/utils/data/contact';
 
 const localBusiness = {
   '@context': 'https://schema.org',
@@ -9,9 +10,29 @@ const localBusiness = {
   legalName: BUSINESS.legalName,
   description: SITE.description,
   url: SITE.url,
+  logo: `${SITE.url}${SITE.logo}`,
   image: `${SITE.url}${SITE.ogImage}`,
   telephone: BUSINESS.phone,
   email: BUSINESS.email,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: BUSINESS.phone,
+      email: BUSINESS.email,
+      areaServed: ['MX', 'US'],
+      availableLanguage: 'es',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      name: 'WhatsApp',
+      telephone: BUSINESS.whatsapp,
+      url: CONTACT.whatsapp.url,
+      areaServed: ['MX', 'US'],
+      availableLanguage: 'es',
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: BUSINESS.address.locality,

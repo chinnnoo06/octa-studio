@@ -1,5 +1,7 @@
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 import { SITE } from '@/utils/data/site';
+import { blogBreadcrumb } from '@/utils/blogBreadcrumb';
+import { breadcrumbList } from './BreadcrumbStructuredData';
 
 type TBlogStructuredDataProps = {
   blog: TBlog;
@@ -19,6 +21,7 @@ export const BlogStructuredData = ({ blog, imageUrl }: TBlogStructuredDataProps)
     mainEntityOfPage: blogUrl,
     image: `${imageUrl}/${blog.image}`,
     datePublished: blog.createdAt,
+    dateModified: blog.updatedAt ?? blog.createdAt,
     articleSection: blog.category?.name,
     inLanguage: 'es-MX',
     timeRequired: `PT${blog.readingTime}M`,
@@ -26,20 +29,10 @@ export const BlogStructuredData = ({ blog, imageUrl }: TBlogStructuredDataProps)
     publisher: { '@id': `${SITE.url}/#negocio` },
   };
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blogs` },
-      { '@type': 'ListItem', position: 3, name: blog.title, item: blogUrl },
-    ],
-  };
-
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify([blogPosting, breadcrumb]) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify([blogPosting, breadcrumbList(blogBreadcrumb(blog))]) }}
     />
   );
 };

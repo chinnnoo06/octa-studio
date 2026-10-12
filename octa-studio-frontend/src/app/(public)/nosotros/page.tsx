@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { Hero } from '@/components/aboutUs/hero/Hero';
 import { Stats } from '@/components/aboutUs/stats/Stats';
 import { Testimonials } from '@/components/testimonials/section/Testimonials';
@@ -32,6 +33,7 @@ export default async function NosotrosPage() {
 
   return (
     <>
+      <BreadcrumbStructuredData items={[{ name: 'Nosotros', path: '/nosotros' }]} />
       <Hero />
       <Purpose />
       <Testimonials testimonials={testimonials} />

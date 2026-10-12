@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { Hero } from '@/components/contact/Hero';
 import { Channels } from '@/components/contact/channels/Channels';
 import { Faqs } from '@/components/sections/faqs/Faqs';
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function ContactoPage() {
   return (
     <>
+      <BreadcrumbStructuredData items={[{ name: 'Contacto', path: '/contacto' }]} />
       <Hero />
       <Channels />
       <Faqs />

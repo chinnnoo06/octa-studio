@@ -32,6 +32,16 @@ export const blogRepository = {
         return Blog.findOne({ slug, ...PUBLIC_BLOG_FILTER }).populate(CATEGORY_POPULATE);
     },
 
+    /** Publicados mas recientes que cumplen `filter`, sin los `excludeIds`. */
+    async findLatest(filter: QueryFilter<TBlog>, excludeIds: unknown[], limit: number) {
+        if (limit <= 0) return [];
+
+        return Blog.find({ ...PUBLIC_BLOG_FILTER, ...filter, _id: { $nin: excludeIds } })
+            .sort({ createdAt: -1 })
+            .limit(limit)
+            .populate(CATEGORY_POPULATE);
+    },
+
     async findByIds(ids: string[]) {
         return Blog.find({ _id: { $in: ids } });
     },

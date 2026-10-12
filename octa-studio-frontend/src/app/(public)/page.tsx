@@ -1,3 +1,4 @@
+import { FaqStructuredData } from '@/components/seo/FaqStructuredData';
 import { Hero } from '@/components/home/hero/Hero';
 import { About } from '@/components/home/About';
 import { Services } from '@/components/home/services/Services';
@@ -33,6 +34,7 @@ export default async function HomePage() {
       <Advantages />  
       <ClientsMarquee testimonials={testimonials} spacing="bottom" />
       <CtaSection /> 
+      <FaqStructuredData />
       <Faqs />
       <Testimonials testimonials={testimonials} />
       <Blogs blogs={blogs} />   

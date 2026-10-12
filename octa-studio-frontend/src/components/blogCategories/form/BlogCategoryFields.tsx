@@ -58,7 +58,7 @@ export const BlogCategoryFields = ({ register, control, setValue, errors }: TBlo
                     <Label htmlFor="slug">Slug (URL Amigable):</Label>
                     <Input type="text" id="slug" placeholder="ej: diseno-de-stands (se genera si se deja vacío)" {...slugField} />
                     <p className="mt-1.5 text-[13px] leading-[1.55] text-gray-600">
-                        Se usará en la URL: <code className="rounded bg-slate-100 px-1 text-[12px]">/blogs?categoria=&lt;slug&gt;</code>
+                        Se usará en la URL: <code className="rounded bg-slate-100 px-1 text-[12px]">/blogs/categoria/&lt;slug&gt;</code>
                     </p>
                     <SpanError message={errors.slug?.message} />
                 </div>

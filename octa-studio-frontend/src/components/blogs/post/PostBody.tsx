@@ -1,7 +1,10 @@
 import { FaRegCalendar, FaRegClock, FaTag } from 'react-icons/fa6';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { BlogContent } from './BlogContent';
+import { PostToc } from './PostToc';
 import { formatDate } from '@/utils/formatDate';
+import { withHeadingAnchors } from '@/utils/blogToc';
+import { blogCategoryPath } from '@/utils/blogBreadcrumb';
 import type { TBlog } from '@/schemas/blog/blog.schemas';
 
 const LABEL = 'text-secondary text-xs font-semibold uppercase lg:text-sm';
@@ -10,6 +13,8 @@ const VALUE = 'text-fourth/75 text-sm lg:text-base';
 const TILE = 'bg-primary text-secondary flex size-10 shrink-0 items-center justify-center rounded-xl lg:size-12';
 
 export const PostBody = ({ blog }: { blog: TBlog }) => {
+  const { html, toc } = withHeadingAnchors(blog.content);
+
   return (
     <div className="flex flex-col gap-10 lg:flex-row">
       <aside className="flex lg:sticky lg:top-24 lg:w-80 lg:shrink-0 lg:self-start">
@@ -52,7 +57,7 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
 
           <div className="border-secondary/30 flex flex-col items-start gap-5 border-t pt-5 lg:pt-10">
             {blog.category && (
-              <LinkButton href={`/blogs?categoria=${blog.category.slug}#entradas`}>
+              <LinkButton href={`${blogCategoryPath(blog.category.slug)}#entradas`}>
                 Ver la categoría
               </LinkButton>
             )}
@@ -62,7 +67,8 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
       </aside>
 
       <article className="min-w-0 flex-1">
-        <BlogContent html={blog.content} />
+        <PostToc items={toc} />
+        <BlogContent html={html} />
       </article>
     </div>
   );

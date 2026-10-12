@@ -9,7 +9,7 @@ import { TableCard, TableCardList } from '@/components/ui/table/TableCards';
 import { ImageCell } from '@/components/ui/table/ImageCell';
 import { StatusBadge } from '@/components/ui/table/StatusBadge';
 import { BulkCheckbox, BulkSelectionProvider } from '@/components/ui/table/BulkSelection';
-import type { TBlog } from '@/schemas/blog/blog.schemas';
+import type { TBlogSummary } from '@/schemas/blog/blog.schemas';
 import type { TAdminListParams } from '@/types/common.types';
 import { BLOG_STATUS_LABELS } from '@/utils/data/blogs';
 import { formatShortDate } from '@/utils/formatDate';
@@ -29,20 +29,20 @@ const COLUMNS: TTableColumn[] = [
 const IMAGE_URL = process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL!;
 
 type TBlogsTableProps = {
-    blogs: TBlog[];
+    blogs: TBlogSummary[];
     basePath: string;
     params: TAdminListParams;
     /** Hay busqueda o filtros: el vacio dice "sin resultados", no "crea el primero". */
     filtered: boolean;
 };
 
-const StatusCell = ({ blog }: { blog: TBlog }) => (
+const StatusCell = ({ blog }: { blog: TBlogSummary }) => (
     <StatusBadge tone={blog.status === 'published' ? 'success' : 'warning'}>
         {BLOG_STATUS_LABELS[blog.status]}
     </StatusBadge>
 );
 
-const Actions = ({ blog }: { blog: TBlog }) => (
+const Actions = ({ blog }: { blog: TBlogSummary }) => (
     <>
         <EditButton href={`/admin/blogs/${blog._id}/editar`} label={`Editar el blog ${blog.title}`} />
         <DeleteBlogButton id={blog._id} name={blog.title} />

@@ -3,9 +3,9 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Reveal } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { BlogCard } from '@/components/blogs/BlogCard';
-import type { TBlog } from '@/schemas/blog/blog.schemas';
+import type { TBlogSummary } from '@/schemas/blog/blog.schemas';
 
-export const RelatedPosts = ({ blogs }: { blogs: TBlog[] }) => {
+export const RelatedPosts = ({ blogs }: { blogs: TBlogSummary[] }) => {
   if (blogs.length === 0) return null;
 
   return (

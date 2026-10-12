@@ -9,7 +9,7 @@ export const FooterBrand = () => {
       <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-start">
         <div className="w-35 shrink-0 transition-transform duration-300 hover:scale-[1.03] xl:w-40">
           <Link href="/" className="no-underline" aria-label="Ir al inicio">
-            <Logo sizes="(min-width: 1280px) 160px, 140px" />
+            <Logo />
           </Link>
         </div>
 

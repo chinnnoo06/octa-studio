@@ -25,7 +25,7 @@ export const Header = () => {
           <div className="flex items-center justify-start shrink-0">
             <div className="w-18 xl:w-23 shrink-0 transition-transform duration-300 hover:scale-[1.03]">
               <Link href="/" className="no-underline" aria-label="Ir al inicio">
-                <Logo sizes="(min-width: 1280px) 92px, 72px" />
+                <Logo />
               </Link>
             </div>
           </div>

@@ -108,5 +108,7 @@ Cada push a `main` despliega en Vercel. El sitio ya es indexable (robots,
 sitemap y metadata abiertos); lo único que lo oculta es la contraseña. El SEO
 sigue a full-color: `SITE`/`BUSINESS` en `site.ts`, JSON-LD en `components/seo`
 y cada page con su `openGraph`/`twitter` sobre `SHARED_OPEN_GRAPH`/`SHARED_TWITTER`.
-Falta `public/og-image.jpg` (1200×630). En Render, el backend necesita `PUBLIC_URL`
+`public/og-image.jpg` (1200×630) y `public/logo.png` salen del logo de
+`assets/media/brand`; `robots.ts`, `sitemap.ts`, `manifest.ts` y `llms.txt/route.ts`
+se arman con los datos de `utils/data`. En Render, el backend necesita `PUBLIC_URL`
 con su propio origen para normalizar las rutas de las imágenes del blog.

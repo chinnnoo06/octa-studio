@@ -101,6 +101,14 @@ router.get("/id/:id",
     BlogController.getBlog
 )
 
+// Publica: las entradas sugeridas al final del articulo, sin el HTML de cada una.
+router.get("/:slug/related",
+    param('slug').notEmpty().withMessage('Slug is required'),
+    handleInputErrors,
+    validateBlogExistsBySlug,
+    BlogController.getRelatedBlogs
+)
+
 router.get("/:slug",
     param('slug').notEmpty().withMessage('Slug is required'),
     handleInputErrors,

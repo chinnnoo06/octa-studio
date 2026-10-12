@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
+import { blogCategoryPath } from '@/utils/blogBreadcrumb';
 
 /** La pildora de ServiceCard: la activa va en solido, el resto con borde. */
 const PILL =
@@ -27,7 +28,7 @@ export const CategoryFilter = ({ categories, active }: { categories: TBlogCatego
           return (
             <li key={slug} className="snap-start">
               <Link
-                href={`/blogs?categoria=${slug}#entradas`}
+                href={`${blogCategoryPath(slug)}#entradas`}
                 aria-current={on ? 'page' : undefined}
                 className={on ? ON : OFF}
               >

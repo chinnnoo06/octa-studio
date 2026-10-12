@@ -109,6 +109,21 @@ export class BlogController {
         }
     }
 
+    static getRelatedBlogs = async (req: TRequestWithBlog, res: Response, next: NextFunction) => {
+        try {
+            const blogs = await BlogService.getRelatedBlogs(req.Blog)
+
+            return res.status(200).json({
+                status: "success",
+                blogs
+            });
+
+        } catch (error) {
+            console.error("Error retrieving the related blogs:", error);
+            next(error)
+        }
+    }
+
     static getAdminBlogs = async (req: Request<{}, {}, {}, TGetAdminBlogsQuery>, res: Response, next: NextFunction) => {
         try {
             const { blogs, pagination } = await BlogService.getAdminBlogs(req.query)
