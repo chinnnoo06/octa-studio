@@ -47,12 +47,11 @@ export class BlogController {
         const files = req.files as TMulterFiles
 
         try {
-            const { url, path } = BlogService.uploadContentImage(files)
+            const path = BlogService.uploadContentImage(files)
 
-            // TinyMCE espera `location`; `path` es la ruta relativa que queda guardada.
+            // Ruta relativa: el frontend la completa con el origen del backend que conoce.
             return res.status(201).json({
                 status: "success",
-                location: url,
                 path
             });
 

@@ -1,5 +1,4 @@
 import sanitizeHtml from "sanitize-html";
-import { PUBLIC_URL } from "../config/env";
 
 /** Ruta publica (relativa al backend) de las imagenes del cuerpo de un blog. */
 export const CONTENT_IMAGES_PATH = "/files/blogs/content";
@@ -26,15 +25,28 @@ const ALLOWED_ATTRIBUTES: sanitizeHtml.IOptions["allowedAttributes"] = {
     td: ["colspan", "rowspan"]
 };
 
-// Prefijos aceptados en `img src`: la ruta relativa, o la absoluta de este
-// mismo backend (que es lo que TinyMCE guarda tras subir la imagen).
-const ABSOLUTE_PREFIX = `${PUBLIC_URL}${CONTENT_IMAGES_PATH}/`;
 const RELATIVE_PREFIX = `${CONTENT_IMAGES_PATH}/`;
 
+// Nombre que multer le da a cada imagen: sin carpetas ni `..`.
+const FILE_NAME = /^[\w-]+\.\w+$/;
+
+/**
+ * Una imagen es nuestra si su ruta cae en la carpeta del contenido. El dominio
+ * no se compara: el editor la manda con el origen que conoce el frontend, y si
+ * no coincidiera con el del backend el guardado borraria imagenes validas.
+ */
 const toRelativeSrc = (src: string) => {
-    if (src.startsWith(ABSOLUTE_PREFIX)) return RELATIVE_PREFIX + src.slice(ABSOLUTE_PREFIX.length);
-    if (src.startsWith(RELATIVE_PREFIX)) return src;
-    return null;
+    let pathname: string;
+    try {
+        pathname = new URL(src, "http://relative.invalid").pathname;
+    } catch {
+        return null;
+    }
+
+    if (!pathname.startsWith(RELATIVE_PREFIX)) return null;
+
+    const name = pathname.slice(RELATIVE_PREFIX.length);
+    return FILE_NAME.test(name) ? RELATIVE_PREFIX + name : null;
 };
 
 /**

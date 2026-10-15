@@ -59,7 +59,7 @@ export const updateTestimonial = async (id: string, data: TUpdateTestimonialForm
 
     // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
 
-    updateTag('testimonial/update-testimonial-action.ts0')
+    updateTag('testimonials')
 
     return {
         error: "",

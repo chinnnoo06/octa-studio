@@ -8,5 +8,8 @@
 // NEXT_PUBLIC_BLOGS_IMAGE_URL es `<backend>/files/blogs`; de ahi sale el origen.
 const FILES_ORIGIN = new URL(process.env.NEXT_PUBLIC_BLOGS_IMAGE_URL as string).origin;
 
+/** URL absoluta de una ruta `/files/...` del backend. */
+export const absoluteFileUrl = (path: string) => `${FILES_ORIGIN}${path}`;
+
 export const withAbsoluteContentImages = (html: string) =>
   html.replace(/src="\/files\//g, `src="${FILES_ORIGIN}/files/`);

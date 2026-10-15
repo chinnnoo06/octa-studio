@@ -62,7 +62,7 @@ export const updateBlog = async (id: string, data: TUpdateBlogForm): Promise<TAc
 
     // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
 
-    updateTag('blog/update-blog-action.ts0')
+    updateTag('blogs')
 
     return {
         error: "",

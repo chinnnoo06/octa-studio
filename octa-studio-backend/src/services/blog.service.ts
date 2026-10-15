@@ -12,7 +12,7 @@ import { buildSlug } from "../utils/slug";
 import { buildSeo, truncate } from "../utils/seo";
 import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
 import { CONTENT_IMAGES_PATH, contentToText, extractContentImages } from "../utils/blogContent";
-import { PUBLIC_URL, UPLOADS_PATH } from "../config/env";
+import { UPLOADS_PATH } from "../config/env";
 
 const imagesDir = path.resolve(UPLOADS_PATH, "blogs");
 const contentImagesDir = path.resolve(UPLOADS_PATH, "blogs", "content");
@@ -242,12 +242,7 @@ export const BlogService = {
             throw new HttpError(400, "An image is required");
         }
 
-        const relativePath = `${CONTENT_IMAGES_PATH}/${file.filename}`
-
-        return {
-            path: relativePath,
-            url: `${PUBLIC_URL}${relativePath}`
-        }
+        return `${CONTENT_IMAGES_PATH}/${file.filename}`
     },
 
     async deleteBlog(blog: TBlogDocument) {

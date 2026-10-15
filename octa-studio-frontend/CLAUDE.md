@@ -114,5 +114,5 @@ sigue a full-color: `SITE`/`BUSINESS` en `site.ts`, JSON-LD en `components/seo`
 y cada page con su `openGraph`/`twitter` sobre `SHARED_OPEN_GRAPH`/`SHARED_TWITTER`.
 `public/og-image.jpg` (1200×630) sale del logo de `assets/media/brand`; el logo
 del JSON-LD es `app/icon.png` (`/icon.png`, el mismo del favicon); `robots.ts`, `sitemap.ts`, `manifest.ts` y `llms.txt/route.ts`
-se arman con los datos de `utils/data`. En Render, el backend necesita `PUBLIC_URL`
-con su propio origen para normalizar las rutas de las imágenes del blog.
+se arman con los datos de `utils/data`. Las imágenes del cuerpo del blog se guardan
+con ruta relativa; el origen del backend sale de `NEXT_PUBLIC_BLOGS_IMAGE_URL`.

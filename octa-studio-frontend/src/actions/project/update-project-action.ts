@@ -64,7 +64,7 @@ export const updateProject = async (id: string, data: TUpdateProjectForm): Promi
 
     // Tira el Data Cache de la web publica (home y listados), que cachea por tag.
 
-    updateTag('project/update-project-action.ts0')
+    updateTag('projects')
 
     return {
         error: "",

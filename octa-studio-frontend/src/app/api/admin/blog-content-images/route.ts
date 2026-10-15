@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { originHeader } from '@/services/api.headers';
 import { getToken } from '@/services/auth/auth.token';
+import { absoluteFileUrl } from '@/utils/blogContentImages';
 
 /**
  * Puente para las imagenes que TinyMCE sube al insertarlas en un articulo.
@@ -30,6 +31,12 @@ export async function POST(request: Request) {
     });
 
     const json = await res.json().catch(() => ({ message: 'Respuesta inesperada del servidor' }));
+
+    // TinyMCE espera `location`: la misma URL absoluta con la que el editor carga
+    // las imagenes que ya estaban guardadas.
+    if (res.ok && typeof json.path === 'string') {
+        json.location = absoluteFileUrl(json.path);
+    }
 
     return NextResponse.json(json, { status: res.status });
 }
