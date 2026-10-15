@@ -44,7 +44,7 @@ export const DashboardShell = ({ period, notices, children }: TDashboardShellPro
                 {children}
 
                 {isPending && (
-                    <div className="absolute inset-0 z-5 flex items-start justify-center rounded-[10px] bg-thrird-admin/60 pt-30 backdrop-blur-[1px]">
+                    <div className="absolute inset-0 z-5 flex items-start justify-center rounded-xl bg-thrird-admin/60 pt-30 backdrop-blur-[1px]">
                         <div aria-label="Cargando" className="border-t-secondary-admin size-11 animate-spin rounded-full border-4 border-fourth-admin/30" />
                     </div>
                 )}

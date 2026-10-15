@@ -8,7 +8,6 @@ export type TTableColumn =
     | string
     | {
         label: string;
-        /** Campo por el que ordena el backend; sin el, la columna no es ordenable. */
         sortKey?: string;
         align?: 'center' | 'right';
     };
@@ -16,9 +15,7 @@ export type TTableColumn =
 type TTableHeadProps = {
     columns: readonly TTableColumn[];
     alignLast?: boolean;
-    /** Primera columna con el checkbox de "seleccionar todos". */
     selectable?: boolean;
-    /** URL y query actuales: con ellas cada cabecera ordenable arma su enlace. */
     sorting?: { basePath: string; params: TAdminListParams };
 };
 

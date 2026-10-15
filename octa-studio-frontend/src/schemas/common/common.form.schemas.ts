@@ -16,10 +16,7 @@ export const VideoFileSchema = z
     .refine((file) => VIDEO_TYPES.includes(file.type), { message: "Solo MP4 o WebM" })
     .refine((file) => file.size <= VIDEO_MAX_SIZE, { message: "Cada video debe pesar 50 MB o menos" })
 
-/**
- * SEO opcional: lo que se deje vacio lo completa el backend con el titulo y
- * el resumen (extracto o descripcion), recortados a 60 y 160 caracteres.
- */
+
 export const SEOFormSchema = z.object({
     metaTitle: z.string().trim().max(60, { message: "Maximo 60 caracteres" }),
     metaDescription: z.string().trim().max(160, { message: "Maximo 160 caracteres" }),

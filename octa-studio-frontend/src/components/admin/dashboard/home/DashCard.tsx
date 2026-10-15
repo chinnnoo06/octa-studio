@@ -25,7 +25,7 @@ type TDashCardProps = {
 /** Tarjeta blanca de cada grafica o lista del dashboard. */
 export const DashCard = ({ title, tip, source, link, full = false, children }: TDashCardProps) => {
     return (
-        <div className={`bg-primary-admin flex min-w-0 flex-col rounded-[10px] border border-fourth-admin/30 p-5 shadow-lg ${full ? 'col-span-full' : ''}`}>
+        <div className={`bg-primary-admin flex min-w-0 flex-col rounded-xl border border-fourth-admin/30 p-5 shadow-lg ${full ? 'col-span-full' : ''}`}>
             <div className="mb-5 flex items-center justify-between gap-2.5">
                 <h3 className="group/tip text-fourth-admin relative m-0 text-sm lg:text-base font-semibold">
                     {title}

@@ -21,7 +21,7 @@ type TMediaTileProps = {
 export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, removeLabel, disabled, className }: TMediaTileProps) => {
   const filled = Boolean(children);
 
-  const box = `group/tile relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-[9px] border-2 transition-[border-color,background-color] duration-200 ${filled
+  const box = `group/tile relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border-2 transition-[border-color,background-color] duration-200 ${filled
     ? 'bg-primary-admin border-solid border-fourth-admin/30'
     : 'border-dashed border-fourth-admin/30 bg-thrird-admin/50'
     } ${disabled ? 'cursor-not-allowed opacity-50' : htmlFor ? 'hover:border-secondary-admin cursor-pointer' : ''} ${!filled && !disabled ? 'hover:bg-secondary-admin/6' : ''}`;
@@ -38,7 +38,7 @@ export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, r
       )}
 
       {principal && filled && (
-        <span className="bg-secondary-admin text-primary-admin pointer-events-none absolute top-1.25 left-1.25 z-2 rounded-[4px] px-1.5 py-0.5 text-[10px] leading-[1.2] font-semibold tracking-[0.3px] uppercase shadow-[0_1px_3px_color-mix(in_srgb,var(--color-fourth-admin)_12%,transparent)]">
+        <span className="bg-secondary-admin text-primary-admin pointer-events-none absolute top-1.25 left-1.25 z-2 rounded-xl px-1.5 py-0.5 text-[10px] leading-[1.2] font-semibold tracking-[0.3px] uppercase shadow-[0_1px_3px_color-mix(in_srgb,var(--color-fourth-admin)_12%,transparent)]">
           Principal
         </span>
       )}

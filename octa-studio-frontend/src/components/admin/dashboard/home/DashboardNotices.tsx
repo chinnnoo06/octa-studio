@@ -16,7 +16,7 @@ export const DashboardNotices = ({ dashboard }: { dashboard: TDashboard | null }
     return (
         <>
             {dashboard.partial && (
-                <div className="mb-5 rounded-[8px] border border-[#ffe0a3] bg-[#fff8e1] px-5 py-2.5 text-xs lg:text-sm text-[#8a6d3b]">
+                <div className="mb-5 rounded-xl border border-[#ffe0a3] bg-[#fff8e1] px-5 py-2.5 text-xs lg:text-sm text-[#8a6d3b]">
                     Algunos datos no se pudieron cargar completamente y no se guardaron en caché. Se reintentará en la próxima carga.
                 </div>
             )}

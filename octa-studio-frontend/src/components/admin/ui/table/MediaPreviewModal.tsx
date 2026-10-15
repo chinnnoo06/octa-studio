@@ -64,7 +64,7 @@ export const MediaPreviewModal = ({ open, onClose, items, title }: TMediaPreview
                     </div>
                 </div>
 
-                <div className="relative flex h-[70vh] items-center justify-center overflow-hidden rounded-[10px] bg-fourth-admin">
+                <div className="relative flex h-[70vh] items-center justify-center overflow-hidden rounded-xl bg-fourth-admin">
                     {current.type === 'image' ? (
                         // eslint-disable-next-line @next/next/no-img-element -- vista ampliada del backend
                         <img src={current.src} alt={`${title} (${index + 1} de ${items.length})`} className="max-h-full max-w-full object-contain" />
@@ -92,7 +92,7 @@ export const MediaPreviewModal = ({ open, onClose, items, title }: TMediaPreview
                                 type="button"
                                 onClick={() => setIndex(i)}
                                 aria-label={`Ver ${i + 1}`}
-                                className={`h-12 w-16 shrink-0 cursor-pointer overflow-hidden rounded-[6px] border-2 transition-all duration-150 ${i === index ? 'border-primary-admin' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                                className={`h-12 w-16 shrink-0 cursor-pointer overflow-hidden rounded-xl border-2 transition-all duration-150 ${i === index ? 'border-primary-admin' : 'border-transparent opacity-60 hover:opacity-100'}`}
                             >
                                 {/* eslint-disable-next-line @next/next/no-img-element -- miniatura del backend */}
                                 <img src={item.src} alt="" className="h-full w-full object-cover" />

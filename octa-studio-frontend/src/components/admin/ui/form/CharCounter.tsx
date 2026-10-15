@@ -24,9 +24,9 @@ export const CharCounter = ({ value = '', optimalMin, max }: TCharCounterProps) 
       <span>
         {length}/{max}
       </span>
-      <div className="h-1.25 w-20 overflow-hidden rounded-[3px] bg-fourth-admin/10" aria-hidden="true">
+      <div className="h-1.25 w-20 overflow-hidden rounded-xl bg-fourth-admin/10" aria-hidden="true">
         <div
-          className={`h-full rounded-[3px] transition-[width,background-color] duration-300 ${FILL[status]}`}
+          className={`h-full rounded-xl transition-[width,background-color] duration-300 ${FILL[status]}`}
           style={{ width: `${Math.min((length / max) * 100, 100)}%` }}
         />
       </div>

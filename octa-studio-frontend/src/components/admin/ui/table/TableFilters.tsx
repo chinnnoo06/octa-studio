@@ -15,11 +15,9 @@ const LABEL = 'text-xs lg:text-sm font-semibold tracking-[0.3px] text-fourth-adm
 const CONTROL =
     'text-fourth-admin bg-primary-admin focus:border-secondary-admin w-full min-w-0 cursor-pointer rounded-xl border border-fourth-admin/30 px-2.5 py-2.5 text-xs lg:text-sm transition-all duration-200 outline-none hover:border-fourth-admin/75 focus:shadow-lg';
 
-/** Claves que el panel maneja como filtros (las de fecha incluidas). */
 const filterKeys = (fields: TFilterField[]) =>
     fields.flatMap((f) => (f.type === 'select' ? [f.name] : ['from', 'to']));
 
-/** Panel desplegable de filtros. Aplica al enviar; "Limpiar" vacia todos los filtros. */
 export const TableFilters = ({ id, open, fields, params, onApply }: TTableFiltersProps) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -33,7 +31,7 @@ export const TableFilters = ({ id, open, fields, params, onApply }: TTableFilter
         <div
             id={id}
             inert={!open}
-            className={`bg-primary-admin overflow-hidden rounded-[10px] border border-fourth-admin/30 transition-all duration-300 ${open ? 'mb-5 max-h-125 p-5 opacity-100 shadow-lg' : 'mb-0 max-h-0 border-transparent p-0 opacity-0'}`}
+            className={`bg-primary-admin overflow-hidden rounded-xl border border-fourth-admin/30 transition-all duration-300 ${open ? 'mb-5 max-h-125 p-5 opacity-100 shadow-lg' : 'mb-0 max-h-0 border-transparent p-0 opacity-0'}`}
         >
             {/* `key` reinicia los valores por defecto cuando cambia la URL. */}
             <form key={JSON.stringify(params)} onSubmit={onSubmit} className="grid grid-cols-1 gap-5 md:grid-cols-2 min-[900px]:grid-cols-3 xl:grid-cols-4">

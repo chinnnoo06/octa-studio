@@ -10,20 +10,17 @@ export const TableCardList = ({ children }: { children: ReactNode }) => {
 type TTableCardProps = {
     id: string;
     title: ReactNode;
-    /** Miniatura a la izquierda (imagen, logo o placeholder). */
     media?: ReactNode;
-    /** Filas "Etiqueta: valor" o contenido libre bajo el titulo. */
     meta?: { label: string; value: ReactNode }[];
     extra?: ReactNode;
     date?: string;
     actions: ReactNode;
-    /** Etiqueta accesible del checkbox de seleccion. */
     selectLabel: string;
 };
 
 export const TableCard = ({ id, title, media, meta = [], extra, date, actions, selectLabel }: TTableCardProps) => {
     return (
-        <article className="bg-primary-admin has-[.bulk-select:checked]:border-secondary-admin relative flex flex-col gap-2.5 rounded-[9px] border border-fourth-admin/30 p-2.5 shadow-lg">
+        <article className="bg-primary-admin has-[.bulk-select:checked]:border-secondary-admin relative flex flex-col gap-2.5 rounded-xl border border-fourth-admin/30 p-2.5 shadow-lg">
             <div className="flex items-start gap-2.5">
                 <span className="self-center">
                     <BulkCheckbox id={id} label={selectLabel} />

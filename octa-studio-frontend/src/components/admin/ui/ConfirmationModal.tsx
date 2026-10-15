@@ -51,7 +51,7 @@ export const ConfirmationModal = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
-        className="bg-primary-admin w-full max-w-[460px] rounded-[12px] p-5 shadow-[0_24px_64px_color-mix(in_srgb,var(--color-fourth-admin)_25%,transparent)]"
+        className="bg-primary-admin w-full max-w-[460px] rounded-xl p-5 shadow-[0_24px_64px_color-mix(in_srgb,var(--color-fourth-admin)_25%,transparent)]"
         onClick={(event) => event.stopPropagation()}
       >
         <h3 id="confirmation-modal-title" className="text-fourth-admin mb-2.5 text-lg lg:text-xl font-semibold">

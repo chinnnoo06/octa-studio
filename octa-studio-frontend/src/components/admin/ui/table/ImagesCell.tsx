@@ -7,12 +7,8 @@ import { MediaPreviewModal } from './MediaPreviewModal';
 
 type TImagesCellProps = { images: string[]; name: string; baseUrl: string };
 
-const THUMB = 'relative block h-13.5 w-18 shrink-0 overflow-hidden rounded-[6px] border border-fourth-admin/30';
+const THUMB = 'relative block h-13.5 w-18 shrink-0 overflow-hidden rounded-xl border border-fourth-admin/30';
 
-/**
- * Portada de la galeria: la primera imagen a tamaño fijo, con efecto de pila y
- * contador cuando hay mas. Al pulsarla se abre la galeria completa.
- */
 export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
     const [open, setOpen] = useState(false);
 
@@ -38,8 +34,8 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
                 {/* Capas traseras: sugieren que hay mas fotos detras de la portada. */}
                 {extra > 0 && (
                     <>
-                        <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 -translate-y-1.5 rounded-[6px] border border-fourth-admin/30 bg-thrird-admin" />
-                        <span aria-hidden="true" className="absolute inset-0 translate-x-0.75 -translate-y-0.75 rounded-[6px] border border-fourth-admin/30 bg-thrird-admin/50" />
+                        <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 -translate-y-1.5 rounded-xl border border-fourth-admin/30 bg-thrird-admin" />
+                        <span aria-hidden="true" className="absolute inset-0 translate-x-0.75 -translate-y-0.75 rounded-xl border border-fourth-admin/30 bg-thrird-admin/50" />
                     </>
                 )}
 

@@ -8,7 +8,7 @@ import { LogoutButton } from '@/components/admin/auth/LogoutButton';
 
 /** Enlace de la sidebar: icono arriba y texto debajo, en columna estrecha. */
 export const SIDEBAR_ITEM =
-    'flex w-full flex-col items-center rounded-[10px] p-2.5 text-primary-admin/75 transition-all duration-300 hover:bg-primary-admin/15 hover:text-primary-admin';
+    'flex w-full flex-col items-center rounded-xl p-2.5 text-primary-admin/75 transition-all duration-300 hover:bg-primary-admin/15 hover:text-primary-admin';
 
 export const SIDEBAR_ICON = 'size-4 lg:size-4.5';
 

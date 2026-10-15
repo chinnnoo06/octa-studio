@@ -8,7 +8,6 @@ export const CreateTestimonialFormSchema = z.object({
     image: ImageFileSchema,
 })
 
-/** Al editar el logo es opcional: sin archivo nuevo se conserva el actual. */
 export const UpdateTestimonialFormSchema = CreateTestimonialFormSchema.extend({
     image: ImageFileSchema.optional(),
 })

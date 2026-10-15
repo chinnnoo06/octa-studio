@@ -32,7 +32,6 @@ type TBlogsTableProps = {
     blogs: TBlogSummary[];
     basePath: string;
     params: TAdminListParams;
-    /** Hay busqueda o filtros: el vacio dice "sin resultados", no "crea el primero". */
     filtered: boolean;
 };
 

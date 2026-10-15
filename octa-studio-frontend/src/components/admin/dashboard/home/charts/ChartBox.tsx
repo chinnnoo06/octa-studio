@@ -13,7 +13,7 @@ export const ChartBox = ({ children, height = 300, empty = false }: TChartBoxPro
     return (
         <div className="relative w-full" style={{ height }}>
             {empty ? (
-                <p className="m-0 flex h-full min-h-40 items-center justify-center rounded-[8px] border-2 border-dashed border-fourth-admin/30 p-5 text-center text-xs lg:text-sm text-fourth-admin/75">
+                <p className="m-0 flex h-full min-h-40 items-center justify-center rounded-xl border-2 border-dashed border-fourth-admin/30 p-5 text-center text-xs lg:text-sm text-fourth-admin/75">
                     {empty}
                 </p>
             ) : (

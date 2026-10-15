@@ -10,16 +10,12 @@ type TImagesFieldProps = {
     onChange: (images: File[]) => void;
     error?: string;
     max?: number;
-    /** Al editar: nombres de las imagenes guardadas que se conservan. */
     existing?: string[];
     onExistingChange?: (names: string[]) => void;
     existingBaseUrl?: string;
 };
 
-/**
- * Galeria: primero las imagenes guardadas, luego las nuevas (la primera de
- * todas es la principal) y al final el "+ Añadir".
- */
+
 export const ImagesField = ({ images, onChange, error, max = 5, existing = [], onExistingChange, existingBaseUrl = '' }: TImagesFieldProps) => {
     const previews = useMemo(() => images.map((image) => URL.createObjectURL(image)), [images]);
 
@@ -37,7 +33,6 @@ export const ImagesField = ({ images, onChange, error, max = 5, existing = [], o
         event.target.value = '';
     };
 
-    // Pulsar un cuadro con imagen nueva la reemplaza en su misma posicion.
     const onReplace = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) onChange(images.map((image, i) => (i === index ? file : image)));

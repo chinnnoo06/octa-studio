@@ -60,7 +60,7 @@ const Checkbox = ({ checked, indeterminate = false, onChange, label, rowMarker =
             onChange={onChange}
             aria-label={label}
             aria-checked={indeterminate ? 'mixed' : checked}
-            className={`bg-primary-admin hover:border-secondary-admin checked:border-secondary-admin checked:bg-secondary-admin focus-visible:outline-secondary-admin size-4.5 cursor-pointer appearance-none rounded-[4px] border-[1.5px] border-fourth-admin/30 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${indeterminate ? 'border-secondary-admin bg-secondary-admin' : ''} ${rowMarker ? 'bulk-select' : ''}`}
+            className={`bg-primary-admin hover:border-secondary-admin checked:border-secondary-admin checked:bg-secondary-admin focus-visible:outline-secondary-admin size-4.5 cursor-pointer appearance-none rounded-xl border-[1.5px] border-fourth-admin/30 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${indeterminate ? 'border-secondary-admin bg-secondary-admin' : ''} ${rowMarker ? 'bulk-select' : ''}`}
         />
         {(checked || indeterminate) && (
             <span aria-hidden="true" className="text-primary-admin pointer-events-none absolute inset-0 flex items-center justify-center">

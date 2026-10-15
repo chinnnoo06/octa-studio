@@ -9,7 +9,7 @@ type TImageCellProps = {
 };
 
 /** Miniatura de tamaño fijo (72x54): todas las filas quedan alineadas. */
-const THUMB = 'relative block h-13.5 w-18 shrink-0 overflow-hidden rounded-[6px] border border-fourth-admin/30';
+const THUMB = 'relative block h-13.5 w-18 shrink-0 overflow-hidden rounded-xl border border-fourth-admin/30';
 
 export const ImageCell = ({ image, name, baseUrl, fit = 'cover' }: TImageCellProps) => (
     <span className={`${THUMB} mx-auto ${fit === 'contain' ? 'bg-primary-admin p-1.5' : 'bg-thrird-admin'}`}>
