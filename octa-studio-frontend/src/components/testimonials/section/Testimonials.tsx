@@ -7,11 +7,11 @@ import { fadeBlur } from '@/utils/motion/reveal';
 import Img from '@/assets/media/backgrounds/ImgBackground3.webp';
 import type { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 
-export const Testimonials = ({ testimonials }: { testimonials: TTestimonial[] }) => {
+export const Testimonials = ({ id, testimonials }: { id: string; testimonials: TTestimonial[] }) => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section data-section="testimonials" className="bg-thrird">
+    <section id={id} data-section={id} className="scroll-mt-18 bg-thrird">
       <Reveal
         variants={fadeBlur}
         className="bg-fourth relative flex min-h-[60svh] items-center justify-center overflow-hidden py-15 lg:py-20 "

@@ -25,7 +25,7 @@ const LINK = 'text-secondary underline underline-offset-4 transition-colors dura
 
 export default function CreditosPage() {
   return (
-    <LegalPage lead="Licencia y" rotating="créditos" updated="16 de septiembre de 2026">
+    <LegalPage id="creditos-contenido" lead="Licencia y" rotating="créditos" updated="16 de septiembre de 2026">
       <p className="text-fourth/75 text-base lg:text-lg">
         Las fotografías de stands y montajes que aparecen en este sitio son de proyectos reales
         de Octa Building Studio. Los fondos de apoyo se generaron con Magnific y se acreditan

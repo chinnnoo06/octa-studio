@@ -55,7 +55,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <BlogStructuredData blog={blog} imageUrl={IMAGE_URL} />
       <BlogViewTracker slug={blog.slug} />
       <Post blog={blog} />
-      <CtaSection line="Ya sabes cómo lo hacemos. Cuéntanos tu próxima feria." />
+      <CtaSection id="blog-contacto" line="Ya sabes cómo lo hacemos. Cuéntanos tu próxima feria." />
       <RelatedPosts blogs={related} />
     </>
   );

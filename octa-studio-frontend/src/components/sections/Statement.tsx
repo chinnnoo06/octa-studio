@@ -3,14 +3,15 @@ import { Reveal } from '@/components/ui/Reveal';
 import { fadeUpScale } from '@/utils/motion/reveal';
 
 type TStatementProps = {
+  id: string;
   lead: string;
   highlight: string;
   images?: { src: StaticImageData; alt: string }[];
 };
 
-export const Statement = ({ lead, highlight, images }: TStatementProps) => {
+export const Statement = ({ id, lead, highlight, images }: TStatementProps) => {
   return (
-    <section data-section="statement" className="bg-primary flex min-h-[60svh] items-center py-15 lg:py-20">
+    <section id={id} data-section={id} className="scroll-mt-18 bg-primary flex min-h-[60svh] items-center py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col items-center gap-10 px-5 text-center lg:gap-15 lg:px-15">
         <h2 className="font-gentleman max-w-6xl text-7xl lg:text-[8rem] leading-[0.7] font-normal tracking-[0.04em] normal-case">
           <span className="text-secondary/75">{lead}</span>{' '}

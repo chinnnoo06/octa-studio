@@ -57,11 +57,11 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
 
           <div className="border-secondary/30 flex flex-col items-start gap-5 border-t pt-5 lg:pt-10">
             {blog.category && (
-              <LinkButton href={`${blogCategoryPath(blog.category.slug)}#entradas`}>
+              <LinkButton href={`${blogCategoryPath(blog.category.slug)}#blogs-entradas`}>
                 Ver la categoría
               </LinkButton>
             )}
-            <LinkButton href="/blogs#entradas">Volver al blog</LinkButton>
+            <LinkButton href="/blogs#blogs-entradas">Volver al blog</LinkButton>
           </div>
         </div>
       </aside>

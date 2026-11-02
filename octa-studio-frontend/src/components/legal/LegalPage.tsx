@@ -1,15 +1,16 @@
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 type TLegalPageProps = {
+  id: string;
   lead: string;
   rotating: string;
   updated: string;
   children: React.ReactNode;
 };
 
-export const LegalPage = ({ lead, rotating, updated, children }: TLegalPageProps) => {
+export const LegalPage = ({ id, lead, rotating, updated, children }: TLegalPageProps) => {
   return (
-    <section data-section="legal" className="bg-primary py-15 lg:py-20">
+    <section id={id} data-section={id} className="scroll-mt-18 bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 lg:px-15">
         <div className="text-secondary flex flex-col gap-5">
           <SectionTitle as="h1" size="hero" lead={lead} rotating={rotating} />

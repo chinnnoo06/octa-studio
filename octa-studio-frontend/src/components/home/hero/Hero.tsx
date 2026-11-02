@@ -9,7 +9,7 @@ import { HERO_SERVICES } from '@/utils/data/hero';
 
 export const Hero = () => {
   return (
-    <section data-section="hero" className="relative w-full overflow-x-clip">
+    <section id="inicio-portada" data-section="inicio-portada" className="scroll-mt-18 relative w-full overflow-x-clip">
       <Image
         src={Img}
         alt=""

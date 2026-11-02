@@ -36,11 +36,11 @@ export default async function NosotrosPage() {
       <BreadcrumbStructuredData items={[{ name: 'Nosotros', path: '/nosotros' }]} />
       <Hero />
       <Purpose />
-      <Testimonials testimonials={testimonials} />
+      <Testimonials id="nosotros-testimonios" testimonials={testimonials} />
       <Stats />
       <BrandMarquee spacing="bottom" />
-      <CtaSection line="Ya sabes quiénes somos. Ahora cuéntanos de ti." />
-      <ClientsMarquee testimonials={testimonials} spacing="top" />
+      <CtaSection id="nosotros-contacto" line="Ya sabes quiénes somos. Ahora cuéntanos de ti." />
+      <ClientsMarquee id="nosotros-clientes" testimonials={testimonials} spacing="top" />
       <Coverage />
     </>
   );

@@ -9,8 +9,8 @@ export const Process = () => {
   const [s1, s2, s3, s4, s5, s6] = PROCESS_STEPS;
 
   return (
-    <section data-section="process"
-      className="bg-fourth relative overflow-hidden py-15 lg:py-20"
+    <section id="inicio-proceso" data-section="inicio-proceso"
+      className="scroll-mt-18 bg-fourth relative overflow-hidden py-15 lg:py-20"
     >
       <Image
         src={Bg}

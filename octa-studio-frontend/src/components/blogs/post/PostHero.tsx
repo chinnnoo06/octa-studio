@@ -18,7 +18,7 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
         <div className="text-secondary flex flex-col items-start gap-2.5">
           {blog.category ? (
             <Link
-              href={`${blogCategoryPath(blog.category.slug)}#entradas`}
+              href={`${blogCategoryPath(blog.category.slug)}#blogs-entradas`}
               className="hover:text-secondary/75 transition-colors duration-300"
             >
               <Eyebrow>{blog.category.name}</Eyebrow>

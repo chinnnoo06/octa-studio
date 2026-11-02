@@ -78,6 +78,9 @@ sesión ya se verificó. La excepción es el route handler público de
 `max-w-[1700px] px-5 lg:px-15`, título `Eyebrow` + `SectionTitle`, lectura
 `text-base lg:text-lg`, tarjeta blanca con borde `border-fourth/30`, tarjeta
 azul claro sin borde. La última sección antes del footer siempre es blanca.
+Cada `<section>` lleva `id` y `data-section` iguales, `pagina-seccion` en español
+(`inicio-portada`, `blogs-entradas`) y `scroll-mt-18`; las compartidas reciben
+el `id` por prop desde la page.
 
 **Sin `cn()` salvo necesidad.** Las clases condicionales van con plantillas
 `${}`.

@@ -29,8 +29,8 @@ export default function ContactoPage() {
       <BreadcrumbStructuredData items={[{ name: 'Contacto', path: '/contacto' }]} />
       <Hero />
       <Channels />
-      <Faqs />
-      <Statement lead="En Octa, el valor agregado es" highlight="nuestro equipo." />
+      <Faqs id="contacto-preguntas" />
+      <Statement id="contacto-frase" lead="En Octa, el valor agregado es" highlight="nuestro equipo." />
     </>
   );
 }

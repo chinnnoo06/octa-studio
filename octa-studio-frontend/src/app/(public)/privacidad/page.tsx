@@ -25,7 +25,7 @@ const [proyectos, direccion] = CONTACT.emails;
 
 export default function PrivacidadPage() {
   return (
-    <LegalPage lead="Privacidad y" rotating="aviso legal" updated="16 de septiembre de 2026">
+    <LegalPage id="privacidad-contenido" lead="Privacidad y" rotating="aviso legal" updated="16 de septiembre de 2026">
       <p className="text-fourth/75 text-base lg:text-lg">
         Este sitio no tiene formularios ni recoge datos por su cuenta. Los únicos datos personales
         que llegan a Octa Building Studio son los que tú decides compartir cuando nos escribes por

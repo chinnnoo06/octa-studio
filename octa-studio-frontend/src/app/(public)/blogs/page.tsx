@@ -6,19 +6,24 @@ import { Posts } from '@/components/blogs/Posts';
 import { getBlogsService } from '@/services/server/blog.service';
 import { getBlogCategoriesService } from '@/services/server/blogCategory.service';
 import { blogCategoryPath } from '@/utils/blogBreadcrumb';
+import { paginatedMetadata } from '@/utils/paginatedMetadata';
 
 type TBlogsPageProps = { searchParams: Promise<{ page?: string; categoria?: string }> };
 
 const TITLE = 'Blog de stands, ferias y eventos';
 const DESCRIPTION = 'Consejos para planear tu stand: presupuestos, renders, tiempos de recinto, logística de feria y montaje en expos de México y Estados Unidos.';
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/blogs' },
-  openGraph: { ...SHARED_OPEN_GRAPH, url: '/blogs', title: `${TITLE} | Octa Building Studio`, description: DESCRIPTION },
-  twitter: { ...SHARED_TWITTER, title: `${TITLE} | Octa Building Studio`, description: DESCRIPTION },
-};
+export async function generateMetadata({ searchParams }: TBlogsPageProps): Promise<Metadata> {
+  const { page } = await searchParams;
+
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    ...paginatedMetadata('/blogs', page),
+    openGraph: { ...SHARED_OPEN_GRAPH, url: '/blogs', title: `${TITLE} | Octa Building Studio`, description: DESCRIPTION },
+    twitter: { ...SHARED_TWITTER, title: `${TITLE} | Octa Building Studio`, description: DESCRIPTION },
+  };
+}
 
 export default async function BlogsPage({ searchParams }: TBlogsPageProps) {
   const { page, categoria } = await searchParams;
@@ -34,7 +39,7 @@ export default async function BlogsPage({ searchParams }: TBlogsPageProps) {
   const [categories, { blogs, pagination }] = await Promise.all([getBlogCategoriesService(), getBlogsService(current)]);
 
   if (pagination.totalPages > 0 && current > pagination.totalPages) {
-    redirect('/blogs#entradas');
+    redirect('/blogs#blogs-entradas');
   }
 
   return (

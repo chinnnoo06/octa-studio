@@ -17,7 +17,7 @@ export const CategoryFilter = ({ categories, active }: { categories: TBlogCatego
         className="flex snap-x gap-2.5 overflow-x-auto pb-2.5 lg:flex-wrap lg:overflow-visible lg:pb-0"
       >
         <li className="snap-start">
-          <Link href="/blogs#entradas" aria-current={active ? undefined : 'page'} className={active ? OFF : ON}>
+          <Link href="/blogs#blogs-entradas" aria-current={active ? undefined : 'page'} className={active ? OFF : ON}>
             Todas
           </Link>
         </li>
@@ -28,7 +28,7 @@ export const CategoryFilter = ({ categories, active }: { categories: TBlogCatego
           return (
             <li key={slug} className="snap-start">
               <Link
-                href={`${blogCategoryPath(slug)}#entradas`}
+                href={`${blogCategoryPath(slug)}#blogs-entradas`}
                 aria-current={on ? 'page' : undefined}
                 className={on ? ON : OFF}
               >

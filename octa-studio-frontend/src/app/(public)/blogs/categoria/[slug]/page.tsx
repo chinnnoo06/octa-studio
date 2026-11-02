@@ -7,6 +7,7 @@ import { Posts } from '@/components/blogs/Posts';
 import { getBlogsService } from '@/services/server/blog.service';
 import { getBlogCategoriesService } from '@/services/server/blogCategory.service';
 import { blogCategoryPath } from '@/utils/blogBreadcrumb';
+import { paginatedMetadata } from '@/utils/paginatedMetadata';
 
 type TBlogCategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -19,8 +20,8 @@ const findCategory = async (slug: string) => {
 };
 
 /** El SEO de la categoria; si se dejo vacio, su nombre y su descripcion. */
-export async function generateMetadata({ params }: TBlogCategoryPageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params, searchParams }: TBlogCategoryPageProps): Promise<Metadata> {
+  const [{ slug }, { page }] = await Promise.all([params, searchParams]);
   const { category } = await findCategory(slug);
 
   if (!category) return { title: 'Categoría no encontrada' };
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: TBlogCategoryPageProps): Prom
   return {
     title,
     description,
-    alternates: { canonical: url },
+    ...paginatedMetadata(url, page),
     openGraph: { ...SHARED_OPEN_GRAPH, url, title: `${title} | Octa Building Studio`, description },
     twitter: { ...SHARED_TWITTER, title: `${title} | Octa Building Studio`, description },
   };
@@ -54,7 +55,7 @@ export default async function BlogCategoryPage({ params, searchParams }: TBlogCa
   const { blogs, pagination } = await getBlogsService(current, category.slug);
 
   if (pagination.totalPages > 0 && current > pagination.totalPages) {
-    redirect(`${blogCategoryPath(category.slug)}#entradas`);
+    redirect(`${blogCategoryPath(category.slug)}#blogs-entradas`);
   }
 
   return (

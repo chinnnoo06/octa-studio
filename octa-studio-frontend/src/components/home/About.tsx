@@ -17,7 +17,7 @@ const BOX_VARIANT = {
 
 export const About = () => {
   return (
-    <section data-section="about" className="py-15 lg:py-20 bg-thrird">
+    <section id="inicio-nosotros" data-section="inicio-nosotros" className="scroll-mt-18 py-15 lg:py-20 bg-thrird">
         <div className="mx-auto max-w-[1700px] px-5 lg:px-15 flex flex-col xl:flex-row gap-10">
           <div className="flex w-full xl:w-1/2 flex-col justify-between gap-10">
             <div className="text-secondary flex flex-col gap-5">

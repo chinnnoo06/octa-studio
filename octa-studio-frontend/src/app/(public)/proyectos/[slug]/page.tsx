@@ -58,7 +58,7 @@ export default async function ProjectPage({ params }: {params: Promise<{ slug: s
       <ProjectStructuredData project={project} imageUrl={IMAGE_URL} />
       <ProjectHero project={project} />
       <ProjectCarousel project={project} />
-      <CtaSection line="¿Un stand así para tu marca? Cuéntanos fecha, recinto y metros." />
+      <CtaSection id="proyecto-contacto" line="¿Un stand así para tu marca? Cuéntanos fecha, recinto y metros." />
       <RelatedProjects projects={related} />
     </>
   );

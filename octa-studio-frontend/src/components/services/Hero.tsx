@@ -8,7 +8,7 @@ import ImgBanner from '@/assets/media/backgrounds/ImgBackground2.webp';
 
 export const Hero = () => {
   return (
-    <section data-section="services-hero" className="bg-primary pt-15 lg:pt-20">
+    <section id="servicios-portada" data-section="servicios-portada" className="scroll-mt-18 bg-primary pt-15 lg:pt-20">
       <div className="flex flex-col gap-15 lg:gap-20">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
           <div className="flex gap-10">

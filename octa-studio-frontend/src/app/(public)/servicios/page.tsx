@@ -30,7 +30,7 @@ export default function ServiciosPage() {
       <BreadcrumbStructuredData items={[{ name: 'Servicios', path: '/servicios' }]} />
       <Hero />
       <ServiceDetails />
-      <CtaSection line="Elige el servicio. Del resto nos encargamos." />
+      <CtaSection id="servicios-contacto" line="Elige el servicio. Del resto nos encargamos." />
       <BrandMarquee spacing="top" />
       <Pillars />
     </>

@@ -32,11 +32,11 @@ export default async function HomePage() {
       <Projects projects={projects} />     
       <BrandMarquee spacing="none" />
       <Advantages />  
-      <ClientsMarquee testimonials={testimonials} spacing="bottom" />
-      <CtaSection /> 
+      <ClientsMarquee id="inicio-clientes" testimonials={testimonials} spacing="bottom" />
+      <CtaSection id="inicio-contacto" /> 
       <FaqStructuredData />
-      <Faqs />
-      <Testimonials testimonials={testimonials} />
+      <Faqs id="inicio-preguntas" />
+      <Testimonials id="inicio-testimonios" testimonials={testimonials} />
       <Blogs blogs={blogs} />   
     </>
   );

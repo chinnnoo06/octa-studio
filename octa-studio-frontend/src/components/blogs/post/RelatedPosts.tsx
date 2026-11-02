@@ -9,7 +9,7 @@ export const RelatedPosts = ({ blogs }: { blogs: TBlogSummary[] }) => {
   if (blogs.length === 0) return null;
 
   return (
-    <section data-section="blog-related" className="bg-primary py-15 lg:py-20">
+    <section id="blog-relacionados" data-section="blog-relacionados" className="scroll-mt-18 bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
@@ -18,7 +18,7 @@ export const RelatedPosts = ({ blogs }: { blogs: TBlogSummary[] }) => {
             <SectionTitle lead="Más del" rotating="blog" />
           </div>
 
-          <LinkButton href="/blogs#entradas">Ver todas las entradas</LinkButton>
+          <LinkButton href="/blogs#blogs-entradas">Ver todas las entradas</LinkButton>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

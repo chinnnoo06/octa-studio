@@ -6,7 +6,7 @@ import ImgBanner from '@/assets/media/backgrounds/ImgBackground7.webp';
 
 export const Hero = () => {
   return (
-    <section data-section="contact-hero" className="bg-primary pt-15 lg:pt-20">
+    <section id="contacto-portada" data-section="contacto-portada" className="scroll-mt-18 bg-primary pt-15 lg:pt-20">
       <div className="flex flex-col gap-15 lg:gap-20">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
             <RevealOnLoad variants={fadeBlur} className="flex flex-1 flex-col gap-10">

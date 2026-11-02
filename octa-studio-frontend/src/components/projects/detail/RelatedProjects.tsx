@@ -9,7 +9,7 @@ export const RelatedProjects = ({ projects }: { projects: TProject[] }) => {
   if (projects.length === 0) return null;
 
   return (
-    <section data-section="project-related" className="bg-primary py-15 lg:py-20">
+    <section id="proyecto-relacionados" data-section="proyecto-relacionados" className="scroll-mt-18 bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
@@ -18,7 +18,7 @@ export const RelatedProjects = ({ projects }: { projects: TProject[] }) => {
             <SectionTitle lead="Más" rotating="montajes" />
           </div>
 
-          <LinkButton href="/proyectos#portafolio">Ver todos los proyectos</LinkButton>
+          <LinkButton href="/proyectos#proyectos-portafolio">Ver todos los proyectos</LinkButton>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">

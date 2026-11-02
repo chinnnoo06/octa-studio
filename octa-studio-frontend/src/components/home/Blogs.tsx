@@ -9,7 +9,7 @@ export const Blogs = ({ blogs }: { blogs: TBlogSummary[] }) => {
   if (blogs.length === 0) return null;
 
   return (
-    <section data-section="blogs" className="bg-primary py-15 lg:py-20">
+    <section id="inicio-blog" data-section="inicio-blog" className="scroll-mt-18 bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col gap-5">

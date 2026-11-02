@@ -8,13 +8,13 @@ import { TickLine } from '@/components/ui/TickLine';
 import { zoomOnScroll } from '@/utils/motion/scroll';
 import Img from '@/assets/media/backgrounds/ImgBackground4.webp';
 
-export const CtaSection = ({ line = 'Desde el primer boceto hasta el desmontaje.' }: { line?: string }) => {
+export const CtaSection = ({ id, line = 'Desde el primer boceto hasta el desmontaje.' }: { id: string; line?: string }) => {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: zoomOnScroll.offset });
   const scale = useTransform(scrollYProgress, zoomOnScroll.range, zoomOnScroll.scale);
 
   return (
-    <section ref={ref} data-section="cta" className="bg-primary">
+    <section ref={ref} id={id} data-section={id} className="scroll-mt-18 bg-primary">
       <motion.div
         style={{ scale }}
         className="bg-fourth relative flex min-h-[60svh] items-center justify-center overflow-hidden py-15 lg:min-h-screen lg:py-20"

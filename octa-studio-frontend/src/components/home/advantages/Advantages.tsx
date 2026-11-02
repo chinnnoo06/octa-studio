@@ -13,7 +13,7 @@ import ImgTrato from '@/assets/media/stands/ImgStand10.webp';
 
 export const Advantages = () => {
   return (
-    <section data-section="advantages" className="bg-primary py-15 lg:py-20">
+    <section id="inicio-ventajas" data-section="inicio-ventajas" className="scroll-mt-18 bg-primary py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15">
 
         <div className="text-secondary flex flex-col items-center gap-2.5">

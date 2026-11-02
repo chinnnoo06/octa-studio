@@ -10,7 +10,7 @@ const SUBTITLE = 'text-secondary text-2xl font-bold uppercase leading-[1.2] lg:t
 /** En la pagina de una categoria, su nombre pasa a ser el h1 y su descripcion el texto. */
 export const Hero = ({ category }: { category?: TBlogCategory }) => {
   return (
-    <section data-section="blogs-hero" className="bg-primary pt-15 lg:pt-20">
+    <section id="blogs-portada" data-section="blogs-portada" className="scroll-mt-18 bg-primary pt-15 lg:pt-20">
       <div className="flex flex-col gap-15 lg:gap-20">
         <div className="mx-auto w-full max-w-[1700px] px-5 lg:px-15">
           <RevealOnLoad variants={fadeBlur} className="flex flex-col gap-10">

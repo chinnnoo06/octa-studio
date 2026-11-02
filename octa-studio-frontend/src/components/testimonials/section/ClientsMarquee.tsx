@@ -43,11 +43,12 @@ const Row = ({ logos, direction, duration }: { logos: TTestimonial[]; direction:
 };
 
 type TClientsMarqueeProps = {
+  id: string;
   testimonials: TTestimonial[];
   spacing?: TSectionSpacing;
 };
 
-export const ClientsMarquee = ({ testimonials, spacing = 'both' }: TClientsMarqueeProps) => {
+export const ClientsMarquee = ({ id, testimonials, spacing = 'both' }: TClientsMarqueeProps) => {
   const logos = testimonials.filter((t, i, all) => all.findIndex((o) => o.image === t.image) === i);
 
   if (logos.length === 0) return null;
@@ -56,7 +57,7 @@ export const ClientsMarquee = ({ testimonials, spacing = 'both' }: TClientsMarqu
   const shifted = [...logos.slice(half), ...logos.slice(0, half)];
 
   return (
-    <section data-section="clients" className={`bg-primary flex flex-col gap-10 ${SPACING[spacing]}`}>
+    <section id={id} data-section={id} className={`scroll-mt-18 bg-primary flex flex-col gap-10 ${SPACING[spacing]}`}>
       <div className="text-secondary mx-auto flex w-full max-w-[1700px] flex-col items-center gap-2.5 px-5 text-center lg:px-15">
         <Eyebrow>Confían en nosotros</Eyebrow>
         <SectionTitle align="center" lead="Marcas que ya exponen con" rotating="Octa" />
