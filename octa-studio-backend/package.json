@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon --exec tsx src/index.ts",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js"
   },
@@ -48,7 +48,7 @@
     "@types/sanitize-html": "^2.16.1",
     "cross-env": "^10.1.0",
     "nodemon": "^3.1.14",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
