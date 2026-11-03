@@ -1,4 +1,5 @@
-import { FaListUl } from 'react-icons/fa6';
+import { HiListBullet } from 'react-icons/hi2';
+
 import type { TTocItem } from '@/utils/blogToc';
 
 /** Indice del articulo: enlaces a los h2/h3 del contenido. */
@@ -8,7 +9,7 @@ export const PostToc = ({ items }: { items: TTocItem[] }) => {
   return (
     <nav aria-labelledby="post-toc-title" className="border-fourth/30 mb-10 flex flex-col gap-5 rounded-xl border p-5 lg:p-10">
       <p id="post-toc-title" className="text-secondary flex items-center gap-2.5 text-xs font-semibold uppercase lg:text-sm">
-        <FaListUl aria-hidden="true" className="size-4 lg:size-4.5" />
+        <HiListBullet aria-hidden="true" className="size-4 lg:size-4.5" />
         En esta entrada
       </p>
 

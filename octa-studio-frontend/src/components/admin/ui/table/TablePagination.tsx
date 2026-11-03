@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
 import type { TAdminListParams } from '@/types/common.types';
 import { toQueryString } from '@/utils/admin/queryString';
@@ -14,9 +14,9 @@ type TTablePaginationProps = {
 const BTN =
     'inline-flex h-8.5 min-w-8.5 items-center justify-center gap-1.5 rounded-xl border hover:shadow-lg px-2.5 text-xs lg:text-sm font-semibold transition-all duration-150 select-none';
 
-const IDLE = `${BTN} text-fourth-admin bg-primary-admin border-fourth-admin/30 hover:border-secondary-admin hover:bg-thrird-admin/50 hover:text-secondary-admin`;
+const IDLE = `${BTN} text-fourth-admin bg-primary-admin border-fourth-admin/30 hover:border-secondary-admin hover:bg-third-admin/50 hover:text-secondary-admin`;
 
-const DISABLED = `${BTN} cursor-not-allowed hover:shadow-none border-fourth-admin/30 bg-thrird-admin/50 text-fourth-admin/30`;
+const DISABLED = `${BTN} cursor-not-allowed hover:shadow-none border-fourth-admin/30 bg-third-admin/50 text-fourth-admin/30`;
 
 /** Paginas a mostrar: la primera, la ultima y dos vecinas de la actual, con "…" en los saltos. */
 const pageWindow = (page: number, totalPages: number) => {
@@ -46,12 +46,12 @@ export const TablePagination = ({ pagination, basePath, params }: TTablePaginati
                 <nav aria-label="Paginación" className="flex flex-wrap items-center justify-center gap-1.5">
                     {hasPrevPage ? (
                         <Link href={href(page - 1)} className={`${IDLE} px-2.5`}>
-                            <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
                             <span className="hidden sm:inline">Anterior</span>
                         </Link>
                     ) : (
                         <span aria-disabled="true" className={`${DISABLED} px-2.5`}>
-                            <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
                             <span className="hidden sm:inline">Anterior</span>
                         </span>
                     )}
@@ -81,12 +81,12 @@ export const TablePagination = ({ pagination, basePath, params }: TTablePaginati
                     {hasNextPage ? (
                         <Link href={href(page + 1)} className={`${IDLE} px-2.5`}>
                             <span className="hidden sm:inline">Siguiente</span>
-                            <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
                         </Link>
                     ) : (
                         <span aria-disabled="true" className={`${DISABLED} px-2.5`}>
                             <span className="hidden sm:inline">Siguiente</span>
-                            <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
                         </span>
                     )}
                 </nav>

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FaRegCalendar } from 'react-icons/fa6';
+import { HiOutlineCalendar } from 'react-icons/hi2';
 import { BulkCheckbox } from './BulkSelection';
 
 /** Lista de tarjetas que reemplaza a la tabla por debajo de 768px. */
@@ -51,7 +51,7 @@ export const TableCard = ({ id, title, media, meta = [], extra, date, actions, s
                 <span className="inline-flex items-center gap-1.5 text-xs lg:text-sm text-fourth-admin/75">
                     {date && (
                         <>
-                            <FaRegCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiOutlineCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
                             {date}
                         </>
                     )}

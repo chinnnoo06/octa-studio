@@ -1,9 +1,13 @@
 'use client';
 
+import { HiChevronLeft, HiChevronRight, HiStar } from 'react-icons/hi2';
+import { FaQuoteLeft } from 'react-icons/fa6';
+
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
-import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar } from 'react-icons/fa6';
+
+
 import type { TTestimonial } from '@/schemas/testimonial/testimonial.schemas';
 
 const ARROW =
@@ -84,7 +88,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestimoni
 
                 <div className="flex items-center gap-1.5" aria-label={`${t.rating} de 5`}>
                   {Array.from({ length: t.rating }, (_, s) => (
-                    <FaStar key={s} aria-hidden="true" className="text-primary size-4 lg:size-4.5" />
+                    <HiStar key={s} aria-hidden="true" className="text-primary size-4 lg:size-4.5" />
                   ))}
                 </div>
 
@@ -99,7 +103,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestimoni
 
       <div className="flex items-center gap-5">
         <button type="button" onClick={prev} aria-label="Testimonio anterior" className={ARROW}>
-          <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+          <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
         </button>
 
         <ul className="flex items-center gap-2.5">
@@ -119,7 +123,7 @@ export const TestimonialCarousel = ({ testimonials }: { testimonials: TTestimoni
         </ul>
 
         <button type="button" onClick={next} aria-label="Testimonio siguiente" className={ARROW}>
-          <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+          <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
         </button>
       </div>
     </div>

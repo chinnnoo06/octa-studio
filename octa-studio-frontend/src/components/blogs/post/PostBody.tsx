@@ -1,4 +1,5 @@
-import { FaRegCalendar, FaRegClock, FaTag } from 'react-icons/fa6';
+import { HiOutlineCalendar, HiOutlineClock, HiTag } from 'react-icons/hi2';
+
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
 import { BlogContent } from './BlogContent';
 import { PostToc } from './PostToc';
@@ -26,7 +27,7 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
           <ul className="flex flex-col gap-5">
             <li className="flex items-center gap-5">
               <span className={TILE}>
-                <FaRegCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiOutlineCalendar aria-hidden="true" className="size-4 lg:size-4.5" />
               </span>
               <div className="flex flex-col gap-0.5">
                 <span className={LABEL}>Publicado</span>
@@ -36,7 +37,7 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
 
             <li className="flex items-center gap-5">
               <span className={TILE}>
-                <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiOutlineClock aria-hidden="true" className="size-4 lg:size-4.5" />
               </span>
               <div className="flex flex-col gap-0.5">
                 <span className={LABEL}>Lectura</span>
@@ -46,7 +47,7 @@ export const PostBody = ({ blog }: { blog: TBlog }) => {
 
             <li className="flex items-center gap-5">
               <span className={TILE}>
-                <FaTag aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiTag aria-hidden="true" className="size-4 lg:size-4.5" />
               </span>
               <div className="flex flex-col gap-0.5">
                 <span className={LABEL}>Categoría</span>

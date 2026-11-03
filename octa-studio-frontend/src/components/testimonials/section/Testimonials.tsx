@@ -11,7 +11,7 @@ export const Testimonials = ({ id, testimonials }: { id: string; testimonials: T
   if (testimonials.length === 0) return null;
 
   return (
-    <section id={id} data-section={id} className="scroll-mt-18 bg-thrird">
+    <section id={id} data-section={id} className="scroll-mt-18 bg-third">
       <Reveal
         variants={fadeBlur}
         className="bg-fourth relative flex min-h-[60svh] items-center justify-center overflow-hidden py-15 lg:py-20 "

@@ -1,4 +1,4 @@
-import { FaCircleInfo } from 'react-icons/fa6';
+import { HiInformationCircle } from 'react-icons/hi2';
 
 type TInfoTipProps = {
     text: string;
@@ -13,7 +13,7 @@ type TInfoTipProps = {
 export const InfoTip = ({ text, light = false }: TInfoTipProps) => {
     return (
         <>
-            <FaCircleInfo
+            <HiInformationCircle
                 aria-hidden="true"
                 className={`ml-1.5 inline-block size-4 lg:size-4.5 cursor-help align-[-1px] ${light ? 'text-primary-admin/75' : 'text-fourth-admin/30'}`}
             />

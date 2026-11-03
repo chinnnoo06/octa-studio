@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FiChevronRight } from 'react-icons/fi';
+import { HiChevronRight } from 'react-icons/hi2';
 import type { TBreadcrumbItem } from '@/types/common.types';
 
 export const Breadcrumb = ({ items }: { items: TBreadcrumbItem[] }) => {
@@ -22,7 +22,7 @@ export const Breadcrumb = ({ items }: { items: TBreadcrumbItem[] }) => {
                   <Link href={step.path} className="hover:text-secondary transition-colors duration-300">
                     {step.name}
                   </Link>
-                  <FiChevronRight aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
+                  <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                 </>
               )}
             </li>

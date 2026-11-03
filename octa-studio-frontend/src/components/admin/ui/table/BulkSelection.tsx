@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import { FaCheck, FaMinus } from 'react-icons/fa6';
+import { HiCheck, HiMinus } from 'react-icons/hi2';
+import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
 
 type TBulkSelection = {
     ids: string[];
@@ -64,7 +64,7 @@ const Checkbox = ({ checked, indeterminate = false, onChange, label, rowMarker =
         />
         {(checked || indeterminate) && (
             <span aria-hidden="true" className="text-primary-admin pointer-events-none absolute inset-0 flex items-center justify-center">
-                {indeterminate && !checked ? <FaMinus className="size-2.5" /> : <FaCheck className="size-2.5" />}
+                {indeterminate && !checked ? <HiMinus className="size-2.5" /> : <HiCheck className="size-2.5" />}
             </span>
         )}
     </span>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa6';
+import { HiChevronDown, HiChevronUp } from 'react-icons/hi2';
 import type { TAdminListParams } from '@/types/common.types';
 import { toQueryString } from '@/utils/admin/queryString';
 import { BulkSelectAll } from './BulkSelection';
@@ -25,7 +25,7 @@ const ALIGN = { center: 'text-center', right: 'text-right pr-5' } as const;
 
 export const TableHead = ({ columns, alignLast = true, selectable = false, sorting }: TTableHeadProps) => {
     return (
-        <thead className="border-b border-fourth-admin/30 bg-thrird-admin/50">
+        <thead className="border-b border-fourth-admin/30 bg-third-admin/50">
             <tr>
                 {selectable && (
                     <th scope="col" className="w-10 pr-0 pl-5 text-center">
@@ -62,8 +62,8 @@ export const TableHead = ({ columns, alignLast = true, selectable = false, sorti
                             <Link href={href} scroll={false} className="group hover:text-fourth-admin inline-flex items-center gap-1.5 transition-colors duration-150">
                                 {label}
                                 <span aria-hidden="true" className={`inline-flex flex-col leading-none transition-opacity duration-150 group-hover:opacity-100 ${active ? 'opacity-100' : 'opacity-60'}`}>
-                                    <FaCaretUp className={`-mb-0.75 size-2.5 ${active && order === 'asc' ? 'text-secondary-admin' : 'text-fourth-admin/30 group-hover:text-fourth-admin'}`} />
-                                    <FaCaretDown className={`size-2.5 ${active && order !== 'asc' ? 'text-secondary-admin' : 'text-fourth-admin/30 group-hover:text-fourth-admin'}`} />
+                                    <HiChevronUp className={`-mb-0.75 size-2.5 ${active && order === 'asc' ? 'text-secondary-admin' : 'text-fourth-admin/30 group-hover:text-fourth-admin'}`} />
+                                    <HiChevronDown className={`size-2.5 ${active && order !== 'asc' ? 'text-secondary-admin' : 'text-fourth-admin/30 group-hover:text-fourth-admin'}`} />
                                 </span>
                             </Link>
                         </th>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FaCirclePlay } from 'react-icons/fa6';
+import { HiPlayCircle } from 'react-icons/hi2';
 import { MediaPreviewModal } from './MediaPreviewModal';
 
 type TVideosCellProps = { videos: string[]; name: string; baseUrl: string };
@@ -22,7 +22,7 @@ export const VideosCell = ({ videos, name, baseUrl }: TVideosCellProps) => {
                 aria-label={`Ver los videos de ${name}`}
                 className="bg-secondary-admin/8 text-secondary-admin hover:bg-secondary-admin/15 inline-flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1.5 text-xs lg:text-sm font-semibold whitespace-nowrap transition-colors duration-150"
             >
-                <FaCirclePlay aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiPlayCircle aria-hidden="true" className="size-4 lg:size-4.5" />
                 {videos.length} {videos.length === 1 ? 'video' : 'videos'}
             </button>
 

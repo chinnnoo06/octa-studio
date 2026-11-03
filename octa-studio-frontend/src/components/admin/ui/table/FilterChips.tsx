@@ -1,6 +1,6 @@
 'use client';
 
-import { FaXmark } from 'react-icons/fa6';
+import { HiXMark } from 'react-icons/hi2';
 import type { TAdminListParams, TFilterField } from '@/types/common.types';
 
 type TFilterChipsProps = {
@@ -50,7 +50,7 @@ export const FilterChips = ({ fields, params, onRemove }: TFilterChipsProps) => 
                 >
                     {chip.label}
                     <span className="bg-secondary-admin/20 group-hover:bg-secondary-admin group-hover:text-primary-admin inline-flex size-4.5 items-center justify-center rounded-full">
-                        <FaXmark aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiXMark aria-hidden="true" className="size-4 lg:size-4.5" />
                     </span>
                 </button>
             ))}

@@ -1,4 +1,4 @@
-import { FaEye, FaNewspaper } from 'react-icons/fa6';
+import { HiEye, HiNewspaper } from 'react-icons/hi2';
 import { EditButton } from '@/components/admin/ui/buttons/EditButton';
 import { Table } from '@/components/admin/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/admin/ui/table/TableHead';
@@ -51,9 +51,9 @@ const Actions = ({ blog }: { blog: TBlogSummary }) => (
 export const BlogsTable = ({ blogs, basePath, params, filtered }: TBlogsTableProps) => {
     if (blogs.length === 0) {
         return filtered ? (
-            <TableEmpty title="Sin resultados" icon={FaNewspaper}>Ningún blog coincide con la búsqueda o los filtros.</TableEmpty>
+            <TableEmpty title="Sin resultados" icon={HiNewspaper}>Ningún blog coincide con la búsqueda o los filtros.</TableEmpty>
         ) : (
-            <TableEmpty title="No hay blogs" icon={FaNewspaper}>Aún no hay entradas de blog. ¡Crea la primera!</TableEmpty>
+            <TableEmpty title="No hay blogs" icon={HiNewspaper}>Aún no hay entradas de blog. ¡Crea la primera!</TableEmpty>
         );
     }
 
@@ -81,7 +81,7 @@ export const BlogsTable = ({ blogs, basePath, params, filtered }: TBlogsTablePro
 
                             <TableCell className="whitespace-nowrap">
                                 <span className="inline-flex items-center gap-1.5">
-                                    <FaEye aria-hidden="true" className="size-4 lg:size-4.5 text-fourth-admin/75" />
+                                    <HiEye aria-hidden="true" className="size-4 lg:size-4.5 text-fourth-admin/75" />
                                     {blog.views.toLocaleString('es-MX')}
                                 </span>
                             </TableCell>

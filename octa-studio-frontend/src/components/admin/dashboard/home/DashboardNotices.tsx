@@ -1,4 +1,4 @@
-import { FaCircleInfo } from 'react-icons/fa6';
+import { HiInformationCircle } from 'react-icons/hi2';
 import type { TDashboard } from '@/schemas/analytics/analytics.schemas';
 
 const SOURCE_NAMES = { ga: 'Google Analytics', searchConsole: 'Search Console', posthog: 'PostHog' } as const;
@@ -23,7 +23,7 @@ export const DashboardNotices = ({ dashboard }: { dashboard: TDashboard | null }
 
             {off.length > 0 && (
                 <div className={NOTE}>
-                    <FaCircleInfo aria-hidden="true" className="text-secondary-admin mt-0.5 size-4 lg:size-4.5 shrink-0" />
+                    <HiInformationCircle aria-hidden="true" className="text-secondary-admin mt-0.5 size-4 lg:size-4.5 shrink-0" />
                     <span>
                         Pendiente de conectar: <strong className="text-fourth-admin font-semibold">{off.join(', ')}</strong>. Sus gráficas
                         aparecerán vacías hasta que se configuren las credenciales en el backend.
@@ -33,7 +33,7 @@ export const DashboardNotices = ({ dashboard }: { dashboard: TDashboard | null }
 
             {dashboard.period === 'hoy' && (
                 <div className={NOTE}>
-                    <FaCircleInfo aria-hidden="true" className="text-secondary-admin mt-0.5 size-4 lg:size-4.5 shrink-0" />
+                    <HiInformationCircle aria-hidden="true" className="text-secondary-admin mt-0.5 size-4 lg:size-4.5 shrink-0" />
                     <span>
                         Google Analytics procesa los datos de hoy con varias horas de retraso (Search Console, con 2-3 días);
                         sus gráficas pueden verse vacías durante el día. Las <strong className="text-fourth-admin font-semibold">conversiones</strong> y

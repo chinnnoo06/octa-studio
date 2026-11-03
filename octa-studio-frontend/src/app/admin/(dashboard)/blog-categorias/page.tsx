@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import { FaPlus } from 'react-icons/fa6';
+import { Metadata } from 'next';
+import { HiPlus } from 'react-icons/hi2';
 
 import { AdminHeading } from '@/components/admin/layout/AdminHeading';
 import { PanelButton } from '@/components/admin/ui/buttons/PanelButton';
@@ -18,7 +18,7 @@ export default async function AdminBlogCategoriasPage() {
       {/* Sin buscador: son pocas y se listan en su orden. */}
       <div className="mb-5 flex md:justify-end">
         <PanelButton href="/admin/blog-categorias/crear">
-          <FaPlus aria-hidden="true" className="size-4 lg:size-4.5" />
+          <HiPlus aria-hidden="true" className="size-4 lg:size-4.5" />
           Nueva categoría
         </PanelButton>
       </div>

@@ -73,7 +73,7 @@ sesión ya se verificó. La excepción es el route handler público de
 `app/api/admin`, que sí comprueba la cookie porque es una URL abierta.
 
 **Colores y fuentes solo del `@theme`.** `primary` blanco, `secondary` azul,
-`thrird` gris claro, `fourth` negro; con opacidades (`text-fourth/75`,
+`third` gris claro, `fourth` negro; con opacidades (`text-fourth/75`,
 `bg-secondary/15`). Recetas: sección `py-15 lg:py-20`, contenedor
 `max-w-[1700px] px-5 lg:px-15`, título `Eyebrow` + `SectionTitle`, lectura
 `text-base lg:text-lg`, tarjeta blanca con borde `border-fourth/30`, tarjeta

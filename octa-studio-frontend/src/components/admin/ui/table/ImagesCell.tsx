@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { FaImage } from 'react-icons/fa6';
+import { HiPhoto } from 'react-icons/hi2';
 import { MediaPreviewModal } from './MediaPreviewModal';
 
 type TImagesCellProps = { images: string[]; name: string; baseUrl: string };
@@ -14,8 +14,8 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
 
     if (images.length === 0) {
         return (
-            <span className={`${THUMB} mx-auto flex items-center justify-center bg-thrird-admin/50 text-fourth-admin/30`} title="Sin imágenes">
-                <FaImage aria-hidden="true" className="size-4 lg:size-4.5" />
+            <span className={`${THUMB} mx-auto flex items-center justify-center bg-third-admin/50 text-fourth-admin/30`} title="Sin imágenes">
+                <HiPhoto aria-hidden="true" className="size-4 lg:size-4.5" />
             </span>
         );
     }
@@ -34,12 +34,12 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
                 {/* Capas traseras: sugieren que hay mas fotos detras de la portada. */}
                 {extra > 0 && (
                     <>
-                        <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 -translate-y-1.5 rounded-xl border border-fourth-admin/30 bg-thrird-admin" />
-                        <span aria-hidden="true" className="absolute inset-0 translate-x-0.75 -translate-y-0.75 rounded-xl border border-fourth-admin/30 bg-thrird-admin/50" />
+                        <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 -translate-y-1.5 rounded-xl border border-fourth-admin/30 bg-third-admin" />
+                        <span aria-hidden="true" className="absolute inset-0 translate-x-0.75 -translate-y-0.75 rounded-xl border border-fourth-admin/30 bg-third-admin/50" />
                     </>
                 )}
 
-                <span className={`${THUMB} bg-thrird-admin transition-shadow duration-150 group-hover:shadow-[0_4px_12px_color-mix(in_srgb,var(--color-secondary-admin)_25%,transparent)]`}>
+                <span className={`${THUMB} bg-third-admin transition-shadow duration-150 group-hover:shadow-[0_4px_12px_color-mix(in_srgb,var(--color-secondary-admin)_25%,transparent)]`}>
                     <Image
                         src={`${baseUrl}/${images[0]}`}
                         alt={`Portada de ${name}`}

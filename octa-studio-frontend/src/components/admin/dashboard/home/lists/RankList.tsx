@@ -43,7 +43,7 @@ export const RankList = ({ items, emptyMessage }: TRankListProps) => {
                             <span title={item.label} className={text}>{item.label}</span>
                         )}
 
-                        <div className="h-2 overflow-hidden rounded-xl bg-thrird-admin">
+                        <div className="h-2 overflow-hidden rounded-xl bg-third-admin">
                             <div
                                 className="bg-secondary-admin h-full rounded-xl transition-[width] duration-500"
                                 style={{ width: `${((item.value / max) * 100).toFixed(1)}%` }}

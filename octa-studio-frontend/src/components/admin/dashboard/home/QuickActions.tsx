@@ -1,4 +1,4 @@
-import { FaCirclePlus } from 'react-icons/fa6';
+import { HiPlusCircle } from 'react-icons/hi2';
 import { PanelButton } from '@/components/admin/ui/buttons/PanelButton';
 import { formatNumber } from '@/utils/admin/formatMetrics';
 import { DashCard } from './DashCard';
@@ -15,7 +15,7 @@ export const QuickActions = ({ projectsTotal }: { projectsTotal: number | null }
             <div className="flex flex-wrap items-center gap-5">
                 {ACTIONS.map((action) => (
                     <PanelButton key={action.href} href={action.href}>
-                        <FaCirclePlus aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiPlusCircle aria-hidden="true" className="size-4 lg:size-4.5" />
                         {action.label}
                     </PanelButton>
                 ))}

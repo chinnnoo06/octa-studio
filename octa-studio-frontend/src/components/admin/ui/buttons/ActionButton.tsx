@@ -2,7 +2,7 @@ import { TActionButtonProps } from './types';
 
 const VARIANT = {
   solid: 'border-secondary-admin bg-secondary-admin text-primary-admin hover:-translate-y-px hover:bg-secondary-admin/90 px-5 py-2.5 text-sm lg:text-base',
-  outline: 'border-fourth-admin/30 bg-primary-admin text-fourth-admin hover:border-fourth-admin/75 hover:bg-thrird-admin/50 px-5 py-2.5 text-xs lg:text-sm',
+  outline: 'border-fourth-admin/30 bg-primary-admin text-fourth-admin hover:border-fourth-admin/75 hover:bg-third-admin/50 px-5 py-2.5 text-xs lg:text-sm',
 } as const;
 
 export const ActionButton = ({

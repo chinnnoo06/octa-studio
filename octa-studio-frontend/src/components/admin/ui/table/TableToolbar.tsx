@@ -1,8 +1,8 @@
 'use client';
 
+import { HiAdjustmentsHorizontal, HiMagnifyingGlass, HiPlus, HiXMark } from 'react-icons/hi2';
 import { useEffect, useRef, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaMagnifyingGlass, FaPlus, FaSliders, FaXmark } from 'react-icons/fa6';
 import type { TAdminListParams, TFilterField } from '@/types/common.types';
 import { activeFilterKeys } from '@/utils/admin/tableFilters';
 import { toQueryString } from '@/utils/admin/queryString';
@@ -58,7 +58,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
         <>
             <div className="mb-5 flex flex-col gap-2.5 md:flex-row md:flex-wrap md:items-center">
                 <div className="bg-primary-admin focus-within:border-secondary-admin relative flex w-full items-center rounded-xl border border-fourth-admin/30 transition-all duration-200 focus-within:shadow-lg md:min-w-60 md:flex-1">
-                    <FaMagnifyingGlass aria-hidden="true" className="ml-2.5 size-4 lg:size-4.5 shrink-0 text-fourth-admin/75" />
+                    <HiMagnifyingGlass aria-hidden="true" className="ml-2.5 size-4 lg:size-4.5 shrink-0 text-fourth-admin/75" />
 
                     <input
                         type="text"
@@ -77,7 +77,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
                             aria-label="Limpiar búsqueda"
                             className="hover:text-fourth-admin flex cursor-pointer items-center px-2.5 py-1.5 text-fourth-admin/75"
                         >
-                            <FaXmark aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiXMark aria-hidden="true" className="size-4 lg:size-4.5" />
                         </button>
                     )}
                 </div>
@@ -92,7 +92,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
                         : 'bg-primary-admin text-fourth-admin hover:border-secondary-admin hover:text-secondary-admin border-fourth-admin/30'
                         }`}
                 >
-                    <FaSliders aria-hidden="true" className={`size-4 lg:size-4.5 ${activeCount > 0 ? '' : 'group-hover:text-secondary-admin text-fourth-admin/75'}`} />
+                    <HiAdjustmentsHorizontal aria-hidden="true" className={`size-4 lg:size-4.5 ${activeCount > 0 ? '' : 'group-hover:text-secondary-admin text-fourth-admin/75'}`} />
                     Filtros
                     {activeCount > 0 && (
                         <span className="bg-secondary-admin text-primary-admin ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[11px] font-semibold">
@@ -102,7 +102,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
                 </button>
 
                 <PanelButton href={addHref} className="md:ml-auto">
-                    <FaPlus aria-hidden="true" className="size-4 lg:size-4.5" />
+                    <HiPlus aria-hidden="true" className="size-4 lg:size-4.5" />
                     {addLabel}
                 </PanelButton>
             </div>

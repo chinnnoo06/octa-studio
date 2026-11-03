@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import type { TPagination } from '@/schemas/common/common.response.schemas';
 
 type TPaginationProps = {
@@ -28,12 +28,12 @@ export const Pagination = ({ pagination, basePath, anchor }: TPaginationProps) =
             <div className="flex items-center gap-2.5">
                 {hasPrevPage ? (
                     <Link href={href(page - 1)} className={`${CONTROL} text-secondary hover:bg-secondary/15`}>
-                        <FiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
                         Anterior
                     </Link>
                 ) : (
                     <span aria-disabled="true" className={`${CONTROL} text-fourth/30`}>
-                        <FiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
                         Anterior
                     </span>
                 )}
@@ -41,12 +41,12 @@ export const Pagination = ({ pagination, basePath, anchor }: TPaginationProps) =
                 {hasNextPage ? (
                     <Link href={href(page + 1)} className={`${CONTROL} text-secondary hover:bg-secondary/15`}>
                         Siguiente
-                        <FiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
                     </Link>
                 ) : (
                     <span aria-disabled="true" className={`${CONTROL} text-fourth/30`}>
                         Siguiente
-                        <FiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+                        <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
                     </span>
                 )}
             </div>

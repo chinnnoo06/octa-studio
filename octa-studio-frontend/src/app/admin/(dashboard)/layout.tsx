@@ -22,7 +22,7 @@ export default async function DashboardLayout({ children }: Readonly<{ children:
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar />
 
-        <main className="bg-thrird-admin relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-5 pt-5 pb-10 md:px-10 md:pt-10">
+        <main className="bg-third-admin relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-5 pt-5 pb-10 md:px-10 md:pt-10">
           {children}
         </main>
       </div>

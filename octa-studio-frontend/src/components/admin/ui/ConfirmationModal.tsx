@@ -65,7 +65,7 @@ export const ConfirmationModal = ({
             type="button"
             onClick={onClose}
             disabled={loading}
-            className={`${BUTTON} text-fourth-admin bg-thrird-admin hover:bg-fourth-admin/10`}
+            className={`${BUTTON} text-fourth-admin bg-third-admin hover:bg-fourth-admin/10`}
           >
             Cancelar
           </button>

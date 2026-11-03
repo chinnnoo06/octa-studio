@@ -35,7 +35,7 @@ export const DashCard = ({ title, tip, source, link, full = false, children }: T
                 {source && <span className={`${BADGE} ${SOURCE[source].className}`}>{SOURCE[source].label}</span>}
 
                 {link && (
-                    <Link href={link.href} className={`${BADGE} text-fourth-admin bg-thrird-admin hover:bg-fourth-admin/10`}>
+                    <Link href={link.href} className={`${BADGE} text-fourth-admin bg-third-admin hover:bg-fourth-admin/10`}>
                         {link.label}
                     </Link>
                 )}

@@ -1,4 +1,4 @@
-import { FaComments, FaStar } from 'react-icons/fa6';
+import { HiChatBubbleLeftRight, HiStar } from 'react-icons/hi2';
 import { EditButton } from '@/components/admin/ui/buttons/EditButton';
 import { Table } from '@/components/admin/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/admin/ui/table/TableHead';
@@ -36,7 +36,7 @@ type TTestimonialsTableProps = {
 const Rating = ({ rating }: { rating: number }) => (
     <span className="inline-flex items-center gap-0.5" aria-label={`${rating} de 5`}>
         {Array.from({ length: 5 }, (_, i) => (
-            <FaStar key={i} aria-hidden="true" className={`size-4 lg:size-4.5 ${i < rating ? 'text-[#e8a200]' : 'text-fourth-admin/30'}`} />
+            <HiStar key={i} aria-hidden="true" className={`size-4 lg:size-4.5 ${i < rating ? 'text-[#e8a200]' : 'text-fourth-admin/30'}`} />
         ))}
     </span>
 );
@@ -51,9 +51,9 @@ const Actions = ({ testimonial }: { testimonial: TTestimonial }) => (
 export const TestimonialsTable = ({ testimonials, basePath, params, filtered }: TTestimonialsTableProps) => {
     if (testimonials.length === 0) {
         return filtered ? (
-            <TableEmpty title="Sin resultados" icon={FaComments}>Ningún testimonio coincide con la búsqueda o los filtros.</TableEmpty>
+            <TableEmpty title="Sin resultados" icon={HiChatBubbleLeftRight}>Ningún testimonio coincide con la búsqueda o los filtros.</TableEmpty>
         ) : (
-            <TableEmpty title="No hay testimonios" icon={FaComments}>Aún no hay testimonios. ¡Agrega el primero!</TableEmpty>
+            <TableEmpty title="No hay testimonios" icon={HiChatBubbleLeftRight}>Aún no hay testimonios. ¡Agrega el primero!</TableEmpty>
         );
     }
 

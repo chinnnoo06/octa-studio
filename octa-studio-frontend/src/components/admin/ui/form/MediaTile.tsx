@@ -1,5 +1,5 @@
+import { HiPlus, HiXMark } from 'react-icons/hi2';
 import { ReactNode } from 'react';
-import { FaPlus, FaXmark } from 'react-icons/fa6';
 
 /** Rejilla de cuadros de imagen/video: 2, 3, 4 y 5 columnas segun el ancho. */
 type TMediaTileProps = {
@@ -23,7 +23,7 @@ export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, r
 
   const box = `group/tile relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border-2 transition-[border-color,background-color] duration-200 ${filled
     ? 'bg-primary-admin border-solid border-fourth-admin/30'
-    : 'border-dashed border-fourth-admin/30 bg-thrird-admin/50'
+    : 'border-dashed border-fourth-admin/30 bg-third-admin/50'
     } ${disabled ? 'cursor-not-allowed opacity-50' : htmlFor ? 'hover:border-secondary-admin cursor-pointer' : ''} ${!filled && !disabled ? 'hover:bg-secondary-admin/6' : ''}`;
 
   const content = (
@@ -32,7 +32,7 @@ export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, r
         children
       ) : (
         <span className="pointer-events-none flex flex-col items-center gap-1.5 text-fourth-admin/75 transition-all duration-200 select-none group-hover/tile:scale-110 group-hover/tile:text-secondary-admin">
-          <FaPlus aria-hidden="true" className="size-6" />
+          <HiPlus aria-hidden="true" className="size-6" />
           <span className="text-[10.5px] font-semibold tracking-[0.3px] uppercase">Añadir</span>
         </span>
       )}
@@ -66,7 +66,7 @@ export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, r
           aria-label={removeLabel}
           className="bg-primary-admin text-fourth-admin absolute top-1.25 right-1.25 z-3 inline-flex size-6 -translate-y-0.5 cursor-pointer items-center justify-center rounded-full border border-fourth-admin/30 opacity-0 shadow-[0_2px_6px_color-mix(in_srgb,var(--color-fourth-admin)_12%,transparent)] transition-all duration-150 group-hover/media:translate-y-0 group-hover/media:opacity-100 hover:border-red-700 hover:bg-red-700 hover:text-primary-admin focus-visible:translate-y-0 focus-visible:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
         >
-          <FaXmark aria-hidden="true" className="size-4 lg:size-4.5" />
+          <HiXMark aria-hidden="true" className="size-4 lg:size-4.5" />
         </button>
       )}
     </div>

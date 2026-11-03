@@ -1,7 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiChevronDown } from 'react-icons/fi';
+import { HiChevronDown } from 'react-icons/hi2';
+
+
 import { accordionPanel } from '@/utils/motion/accordion';
 import type { TFaq } from '@/types/content.types';
 
@@ -31,7 +33,7 @@ export const FaqItem = ({ item, isOpen, onToggle, id }: TFaqItemProps) => {
             isOpen ? 'bg-secondary/15 rotate-180' : ''
           }`}
         >
-          <FiChevronDown className="size-4 lg:size-4.5" />
+          <HiChevronDown className="size-4 lg:size-4.5" />
         </span>
       </button>
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaPenToSquare } from 'react-icons/fa6';
+import { HiPencilSquare } from 'react-icons/hi2';
 import { ICON_BUTTON } from './iconButton';
 import { TEditButtonProps } from './types';
 
@@ -11,7 +11,7 @@ export const EditButton = ({ href, label, className }: TEditButtonProps) => {
       title={label}
       className={`${ICON_BUTTON.base} ${ICON_BUTTON.edit} ${className ?? ''}`}
     >
-      <FaPenToSquare aria-hidden="true" className={ICON_BUTTON.icon} />
+      <HiPencilSquare aria-hidden="true" className={ICON_BUTTON.icon} />
     </Link>
   );
 };

@@ -108,7 +108,7 @@ Pide usuario y contraseña — están en el chat del equipo, no en el repo.
 ### Los colores y fuentes viven en `globals.css`
 
 Están en el bloque `@theme`: `primary` (blanco), `secondary` (azul de marca),
-`thrird` (gris claro), `fourth` (negro) y las dos fuentes. No inventes colores
+`third` (gris claro), `fourth` (negro) y las dos fuentes. No inventes colores
 en las secciones; usa esos con sus opacidades (`text-fourth/75`,
 `bg-secondary/15`).
 

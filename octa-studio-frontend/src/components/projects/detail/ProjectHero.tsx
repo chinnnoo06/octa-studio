@@ -1,4 +1,4 @@
-import { FaBuilding, FaImages, FaTag } from 'react-icons/fa6';
+import { HiBuildingOffice2, HiRectangleStack, HiTag } from 'react-icons/hi2';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { RevealOnLoad } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';
@@ -16,9 +16,9 @@ export const ProjectHero = ({ project }: { project: TProject }) => {
   ].filter(Boolean).join(' · ');
 
   const facts = [
-    { icon: FaBuilding, label: 'Cliente', value: project.name },
-    { icon: FaTag, label: 'Sector', value: project.sector },
-    { icon: FaImages, label: 'Galería', value: gallery },
+    { icon: HiBuildingOffice2, label: 'Cliente', value: project.name },
+    { icon: HiTag, label: 'Sector', value: project.sector },
+    { icon: HiRectangleStack, label: 'Galería', value: gallery },
   ];
 
   return (

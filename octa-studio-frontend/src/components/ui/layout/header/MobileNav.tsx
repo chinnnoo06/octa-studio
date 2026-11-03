@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { HiOutlineArrowLongRight } from "react-icons/hi2";
+import { HiOutlineArrowLongRight } from 'react-icons/hi2';
+
 import { NAV_LINKS } from "@/utils/data/navigation";
 import { isActiveHref } from "@/utils/activeHref";
 import { usePathname } from "next/navigation";

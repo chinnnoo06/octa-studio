@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 const TONE = {
     success: 'bg-[rgba(46,125,49,0.12)] text-[#1b5e20]',
     warning: 'bg-[rgba(251,192,45,0.18)] text-[#856404]',
-    neutral: 'bg-thrird-admin text-fourth-admin/75',
+    neutral: 'bg-third-admin text-fourth-admin/75',
 } as const;
 
 type TStatusBadgeProps = {

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegClock } from 'react-icons/fa6';
+import { HiOutlineClock } from 'react-icons/hi2';
+
 import type { TBlogSummary } from '@/schemas/blog/blog.schemas';
 import { formatDate } from '@/utils/formatDate';
 
@@ -31,7 +32,7 @@ export const BlogCard = ({ blog }: { blog: TBlogSummary }) => {
           {formatDate(blog.createdAt)}
           <span aria-hidden="true" className="bg-fourth/30 size-1 rounded-full" />
           <span className="flex items-center gap-1.5">
-            <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
+            <HiOutlineClock aria-hidden="true" className="size-4 lg:size-4.5" />
             {blog.readingTime} min
           </span>
         </p>

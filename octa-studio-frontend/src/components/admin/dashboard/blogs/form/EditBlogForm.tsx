@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Control, FieldErrors, useForm, UseFormRegister, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FaFloppyDisk } from 'react-icons/fa6';
+import { HiArrowDownTray } from 'react-icons/hi2';
 import { toast } from "react-toastify";
 
 import { UpdateBlogFormSchema, TUpdateBlogForm } from '@/schemas/blog/blog.form.schemas';
@@ -76,7 +76,7 @@ export const EditBlogForm = ({ blog, categories }: { blog: TBlog; categories: TB
             </FormSection>
 
             <ActionButton loading={updateBlog.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiArrowDownTray aria-hidden="true" className="size-4 lg:size-4.5" />
                 {updateBlog.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>

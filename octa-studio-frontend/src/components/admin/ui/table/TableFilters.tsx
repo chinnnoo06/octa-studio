@@ -74,7 +74,7 @@ export const TableFilters = ({ id, open, fields, params, onApply }: TTableFilter
                     <button
                         type="button"
                         onClick={onClear}
-                        className="hover:text-fourth-admin cursor-pointer rounded-xl px-5 py-2.5 text-xs lg:text-sm font-semibold text-fourth-admin/75 transition-all duration-200 hover:bg-thrird-admin"
+                        className="hover:text-fourth-admin cursor-pointer rounded-xl px-5 py-2.5 text-xs lg:text-sm font-semibold text-fourth-admin/75 transition-all duration-200 hover:bg-third-admin"
                     >
                         Limpiar
                     </button>

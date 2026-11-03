@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegClock } from 'react-icons/fa6';
+import { HiOutlineClock } from 'react-icons/hi2';
+
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { Reveal, RevealOnLoad } from '@/components/ui/Reveal';
@@ -37,7 +38,7 @@ export const PostHero = ({ blog }: { blog: TBlog }) => {
             {formatDate(blog.createdAt)}
             <span aria-hidden="true" className="bg-fourth/30 size-1 rounded-full" />
             <span className="flex items-center gap-1.5">
-              <FaRegClock aria-hidden="true" className="size-4 lg:size-4.5" />
+              <HiOutlineClock aria-hidden="true" className="size-4 lg:size-4.5" />
               {blog.readingTime} min de lectura
             </span>
           </p>

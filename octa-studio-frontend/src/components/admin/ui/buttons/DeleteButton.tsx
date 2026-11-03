@@ -1,4 +1,4 @@
-import { FaTrashCan } from 'react-icons/fa6';
+import { HiTrash } from 'react-icons/hi2';
 import { ICON_BUTTON } from './iconButton';
 import { TDeleteButtonProps } from './types';
 
@@ -12,7 +12,7 @@ export const DeleteButton = ({ onClick, label, disabled = false, className }: TD
       title={label}
       className={`${ICON_BUTTON.base} ${ICON_BUTTON.delete} ${className ?? ''}`}
     >
-      <FaTrashCan aria-hidden="true" className={ICON_BUTTON.icon} />
+      <HiTrash aria-hidden="true" className={ICON_BUTTON.icon} />
     </button>
   );
 };

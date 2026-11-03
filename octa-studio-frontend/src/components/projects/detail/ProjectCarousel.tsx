@@ -1,9 +1,9 @@
 'use client';
 
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { Reveal } from '@/components/ui/Reveal';
 import { fadeUpScale } from '@/utils/motion/reveal';
 import type { TProject } from '@/schemas/project/project.schemas';
@@ -119,7 +119,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
         {many && (
           <div className="flex items-center gap-5">
             <button type="button" onClick={prev} aria-label="Anterior" className={ARROW}>
-              <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+              <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
             </button>
 
             <ul className="flex items-center gap-2.5">
@@ -139,7 +139,7 @@ export const ProjectCarousel = ({ project }: { project: TProject }) => {
             </ul>
 
             <button type="button" onClick={next} aria-label="Siguiente" className={ARROW}>
-              <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+              <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
             </button>
           </div>
         )}

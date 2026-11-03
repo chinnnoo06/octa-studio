@@ -12,7 +12,7 @@ type TImageCellProps = {
 const THUMB = 'relative block h-13.5 w-18 shrink-0 overflow-hidden rounded-xl border border-fourth-admin/30';
 
 export const ImageCell = ({ image, name, baseUrl, fit = 'cover' }: TImageCellProps) => (
-    <span className={`${THUMB} mx-auto ${fit === 'contain' ? 'bg-primary-admin p-1.5' : 'bg-thrird-admin'}`}>
+    <span className={`${THUMB} mx-auto ${fit === 'contain' ? 'bg-primary-admin p-1.5' : 'bg-third-admin'}`}>
         <Image
             src={`${baseUrl}/${image}`}
             alt={`Imagen de ${name}`}

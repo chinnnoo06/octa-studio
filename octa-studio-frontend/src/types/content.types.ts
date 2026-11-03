@@ -1,6 +1,8 @@
 import type { StaticImageData } from 'next/image';
 import type { IconType } from 'react-icons';
 
+
+
 export type TNavLink = { label: string; href: string };
 
 /** Que lados de una banda llevan padding. Se decide en la pagina: contra una

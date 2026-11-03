@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Control, FieldErrors, useForm, UseFormRegister, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FaFloppyDisk } from 'react-icons/fa6';
+import { HiArrowDownTray } from 'react-icons/hi2';
 import { toast } from "react-toastify";
 
 import { CreateBlogFormSchema, TCreateBlogForm } from '@/schemas/blog/blog.form.schemas';
@@ -71,7 +71,7 @@ export const CreateBlogForm = ({ categories }: { categories: TBlogCategory[] }) 
             </FormSection>
 
             <ActionButton loading={createBlog.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiArrowDownTray aria-hidden="true" className="size-4 lg:size-4.5" />
                 {createBlog.loading ? 'Guardando...' : 'Crear blog'}
             </ActionButton>
         </form>

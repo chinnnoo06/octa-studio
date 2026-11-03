@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FaFloppyDisk } from 'react-icons/fa6';
+import { HiArrowDownTray } from 'react-icons/hi2';
 import { toast } from "react-toastify";
 
 import { UpdateProjectFormSchema, TUpdateProjectForm } from '@/schemas/project/project.form.schemas';
@@ -136,7 +136,7 @@ export const EditProjectForm = ({ project }: { project: TProject }) => {
             </FormSection>
 
             <ActionButton loading={updateProject.loading} className="w-full">
-                <FaFloppyDisk aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiArrowDownTray aria-hidden="true" className="size-4 lg:size-4.5" />
                 {updateProject.loading ? 'Guardando...' : 'Guardar cambios'}
             </ActionButton>
         </form>

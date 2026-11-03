@@ -1,10 +1,5 @@
 import Image from 'next/image';
-import {
-  HiOutlineBuildingStorefront,
-  HiOutlineSpeakerWave,
-  HiOutlineTruck,
-  HiOutlineUserGroup,
-} from 'react-icons/hi2';
+import { HiOutlineBuildingStorefront, HiOutlineSpeakerWave, HiOutlineTruck, HiOutlineUserGroup } from 'react-icons/hi2';
 import type { IconType } from 'react-icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { LinkButton } from '@/components/ui/buttons/LinkButton';

@@ -1,8 +1,9 @@
 "use client"
 
+import { HiArrowLeftOnRectangle, HiEye, HiEyeSlash } from 'react-icons/hi2';
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FaEye, FaEyeSlash, FaRightToBracket } from 'react-icons/fa6';
+
 
 import { LoginFormSchema, TLoginForm } from '@/schemas/auth/login.form.schemas';
 import { toast } from "react-toastify";
@@ -72,8 +73,8 @@ export const LoginForm = () => {
                         className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-secondary-admin/75 hover:text-secondary-admin"
                     >
                         {showPassword
-                            ? <FaEyeSlash className="size-4 lg:size-4.5" aria-hidden="true" />
-                            : <FaEye className="size-4 lg:size-4.5" aria-hidden="true" />
+                            ? <HiEyeSlash className="size-4 lg:size-4.5" aria-hidden="true" />
+                            : <HiEye className="size-4 lg:size-4.5" aria-hidden="true" />
                         }
                     </button>
                 </div>
@@ -84,7 +85,7 @@ export const LoginForm = () => {
 
 
             <ActionButton loading={loading}>
-                <FaRightToBracket aria-hidden="true" className="size-4 lg:size-4.5" />
+                <HiArrowLeftOnRectangle aria-hidden="true" className="size-4 lg:size-4.5" />
                 {loading ? 'Entrando...' : 'Entrar'}
             </ActionButton>
         </form>

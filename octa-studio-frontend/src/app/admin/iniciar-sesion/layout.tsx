@@ -11,7 +11,7 @@ export default function LoginLayout({ children }: Readonly<{ children: React.Rea
     <>
       <SimpleHeader />
 
-      <main className="bg-thrird-admin text-fourth-admin min-h-dvh pt-18">
+      <main className="bg-third-admin text-fourth-admin min-h-dvh pt-18">
         <div className="px-5 pt-5 pb-10 md:px-10 md:pt-10">{children}</div>
       </main>
     </>

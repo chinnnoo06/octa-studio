@@ -1,4 +1,4 @@
-import { FaHammer } from 'react-icons/fa6';
+import { HiWrenchScrewdriver } from 'react-icons/hi2';
 import { EditButton } from '@/components/admin/ui/buttons/EditButton';
 import { Table } from '@/components/admin/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/admin/ui/table/TableHead';
@@ -47,9 +47,9 @@ const Actions = ({ project }: { project: TProject }) => (
 export const ProjectsTable = ({ projects, basePath, params, filtered }: TProjectsTableProps) => {
     if (projects.length === 0) {
         return filtered ? (
-            <TableEmpty title="Sin resultados" icon={FaHammer}>Ningún proyecto coincide con la búsqueda o los filtros.</TableEmpty>
+            <TableEmpty title="Sin resultados" icon={HiWrenchScrewdriver}>Ningún proyecto coincide con la búsqueda o los filtros.</TableEmpty>
         ) : (
-            <TableEmpty title="No hay proyectos" icon={FaHammer}>Aún no hay proyectos. ¡Crea el primero!</TableEmpty>
+            <TableEmpty title="No hay proyectos" icon={HiWrenchScrewdriver}>Aún no hay proyectos. ¡Crea el primero!</TableEmpty>
         );
     }
 

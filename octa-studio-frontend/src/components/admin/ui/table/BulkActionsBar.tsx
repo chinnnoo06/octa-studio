@@ -1,7 +1,7 @@
 'use client';
 
+import { HiCheckCircle, HiTrash, HiXMark } from 'react-icons/hi2';
 import { useState } from 'react';
-import { FaCircleCheck, FaTrashCan, FaXmark } from 'react-icons/fa6';
 import { ConfirmationModal } from '@/components/admin/ui/ConfirmationModal';
 import { useBulkSelection } from './BulkSelection';
 
@@ -34,7 +34,7 @@ export const BulkActionsBar = ({ onDelete, loading }: TBulkActionsBarProps) => {
                 className={`bg-fourth-admin text-primary-admin fixed inset-x-0 bottom-0 z-95 flex flex-col items-stretch gap-2.5 px-2.5 pt-2.5 pb-[calc(10px+env(safe-area-inset-bottom,0px))] shadow-[0_-6px_24px_color-mix(in_srgb,var(--color-fourth-admin)_18%,transparent)] transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] md:inset-x-auto md:bottom-5 md:left-1/2 md:w-auto md:max-w-[calc(100vw-2rem)] md:-translate-x-1/2 md:flex-row md:items-center md:rounded-xl md:py-2.5 md:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-fourth-admin)_28%,transparent)] ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-[120%] opacity-0'}`}
             >
                 <span className="flex shrink-0 items-center justify-center gap-1.5 text-xs lg:text-sm font-semibold md:justify-start">
-                    <FaCircleCheck aria-hidden="true" className="text-primary-admin/75 size-4 lg:size-4.5" />
+                    <HiCheckCircle aria-hidden="true" className="text-primary-admin/75 size-4 lg:size-4.5" />
                     <span className="bg-secondary-admin min-w-6 rounded-full px-1.5 py-0.5 text-center text-xs lg:text-sm">{selected.length}</span>
                     <span>seleccionado(s)</span>
                 </span>
@@ -43,12 +43,12 @@ export const BulkActionsBar = ({ onDelete, loading }: TBulkActionsBarProps) => {
 
                 <div className="grid grid-cols-2 gap-1.5 md:flex md:items-center md:gap-2.5">
                     <button type="button" onClick={clear} className={`${BTN} text-primary-admin/75 bg-primary-admin/6 hover:bg-primary-admin/14 hover:text-primary-admin`}>
-                        <FaXmark aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
+                        <HiXMark aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                         Cancelar
                     </button>
 
                     <button type="button" onClick={() => setConfirming(true)} className={`${BTN} text-primary-admin bg-red-700 hover:bg-red-800`}>
-                        <FaTrashCan aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
+                        <HiTrash aria-hidden="true" className="size-4 lg:size-4.5 shrink-0" />
                         Eliminar seleccionados
                     </button>
                 </div>

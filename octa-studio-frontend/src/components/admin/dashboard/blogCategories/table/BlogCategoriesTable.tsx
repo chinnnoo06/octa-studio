@@ -1,4 +1,4 @@
-import { FaTags } from 'react-icons/fa6';
+import { HiTag } from 'react-icons/hi2';
 import { EditButton } from '@/components/admin/ui/buttons/EditButton';
 import { Table } from '@/components/admin/ui/table/Table';
 import { TableHead, type TTableColumn } from '@/components/admin/ui/table/TableHead';
@@ -14,7 +14,7 @@ import { BulkDeleteBlogCategories } from './BulkDeleteBlogCategories';
 const COLUMNS: TTableColumn[] = ['Nombre', 'Slug', 'Entradas', 'Acciones'];
 
 const Slug = ({ slug }: { slug: string }) => (
-    <code className="text-fourth-admin rounded-sm bg-thrird-admin px-1.5 py-0.5 text-xs lg:text-sm">{slug}</code>
+    <code className="text-fourth-admin rounded-sm bg-third-admin px-1.5 py-0.5 text-xs lg:text-sm">{slug}</code>
 );
 
 const Actions = ({ category }: { category: TBlogCategory }) => (
@@ -26,7 +26,7 @@ const Actions = ({ category }: { category: TBlogCategory }) => (
 
 export const BlogCategoriesTable = ({ categories }: { categories: TBlogCategory[] }) => {
     if (categories.length === 0) {
-        return <TableEmpty title="No hay categorías" icon={FaTags}>Aún no hay categorías de blog. ¡Crea la primera!</TableEmpty>;
+        return <TableEmpty title="No hay categorías" icon={HiTag}>Aún no hay categorías de blog. ¡Crea la primera!</TableEmpty>;
     }
 
     return (

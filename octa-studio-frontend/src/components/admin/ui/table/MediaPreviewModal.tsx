@@ -1,8 +1,8 @@
 'use client';
 
+import { HiChevronLeft, HiChevronRight, HiXMark } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6';
 import { useLockBodyScroll } from '@/hooks/ui/useLockBodyScroll';
 
 export type TMediaItem = { type: 'image' | 'video'; src: string };
@@ -59,7 +59,7 @@ export const MediaPreviewModal = ({ open, onClose, items, title }: TMediaPreview
                     <div className="flex shrink-0 items-center gap-2.5">
                         {many && <span className="text-primary-admin/75 text-xs lg:text-sm">{index + 1} / {items.length}</span>}
                         <button type="button" onClick={onClose} aria-label="Cerrar" className="bg-primary-admin/15 hover:bg-primary-admin/25 inline-flex size-9 cursor-pointer items-center justify-center rounded-full transition-colors duration-150">
-                            <FaXmark aria-hidden="true" className="size-4 lg:size-4.5" />
+                            <HiXMark aria-hidden="true" className="size-4 lg:size-4.5" />
                         </button>
                     </div>
                 </div>
@@ -75,10 +75,10 @@ export const MediaPreviewModal = ({ open, onClose, items, title }: TMediaPreview
                     {many && (
                         <>
                             <button type="button" onClick={prev} aria-label="Anterior" className={`${NAV} left-3`}>
-                                <FaChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
+                                <HiChevronLeft aria-hidden="true" className="size-4 lg:size-4.5" />
                             </button>
                             <button type="button" onClick={next} aria-label="Siguiente" className={`${NAV} right-3`}>
-                                <FaChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
+                                <HiChevronRight aria-hidden="true" className="size-4 lg:size-4.5" />
                             </button>
                         </>
                     )}

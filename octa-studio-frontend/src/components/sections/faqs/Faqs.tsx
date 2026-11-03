@@ -17,7 +17,7 @@ export const Faqs = ({ id }: { id: string }) => {
     setOpenItems((prev) => (prev.includes(i) ? prev.filter((n) => n !== i) : [...prev, i]));
 
   return (
-    <section id={id} data-section={id} className="scroll-mt-18 bg-thrird py-15 lg:py-20">
+    <section id={id} data-section={id} className="scroll-mt-18 bg-third py-15 lg:py-20">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-10 px-5 lg:px-15 lg:flex-row lg:items-start ">
 
         <div className="flex flex-col gap-10 lg:sticky lg:top-25 lg:w-2/5 lg:shrink-0">

@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { HiInbox } from 'react-icons/hi2';
 import type { IconType } from 'react-icons';
-import { FaInbox } from 'react-icons/fa6';
+import { ReactNode } from 'react';
 
 type TTableEmptyProps = {
     title: string;
@@ -8,7 +8,7 @@ type TTableEmptyProps = {
     icon?: IconType;
 };
 
-export const TableEmpty = ({ title, children, icon: Icon = FaInbox }: TTableEmptyProps) => {
+export const TableEmpty = ({ title, children, icon: Icon = HiInbox }: TTableEmptyProps) => {
     return (
         <div className="px-5 py-10 text-center md:bg-primary-admin md:rounded-xl md:py-15 md:border md:border-fourth-admin/30 md:shadow-lg">
             <Icon aria-hidden="true" className="mx-auto mb-5 size-10 text-fourth-admin/30" />

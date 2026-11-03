@@ -1,5 +1,8 @@
-import { FaPhone, FaWhatsapp, FaEnvelope } from 'react-icons/fa6';
+import { HiEnvelope, HiPhone } from 'react-icons/hi2';
+import { FaWhatsapp } from 'react-icons/fa6';
 import type { IconType } from 'react-icons';
+
+
 import { CONTACT } from '@/utils/data/contact';
 
 type TContactRowProps = {
@@ -31,7 +34,7 @@ export const FooterContact = () => {
 
       <ul className="flex max-w-full flex-col items-center gap-2.5">
         <ContactRow
-          icon={FaPhone}
+          icon={HiPhone}
           label="Teléfono"
           value={CONTACT.phone.display}
           href={CONTACT.phone.href}
@@ -45,7 +48,7 @@ export const FooterContact = () => {
         {CONTACT.emails.map((m) => (
           <ContactRow
             key={m.address}
-            icon={FaEnvelope}
+            icon={HiEnvelope}
             label={m.label}
             value={m.address}
             href={m.href}

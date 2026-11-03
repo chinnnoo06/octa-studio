@@ -20,7 +20,7 @@ type TPeriodSelectorProps = {
 /** Pastillas de periodo: rejilla de 4 en movil, fila en escritorio. */
 export const PeriodSelector = ({ active, onSelect }: TPeriodSelectorProps) => {
     return (
-        <div role="group" aria-label="Periodo" className="grid grid-cols-4 gap-1.5 rounded-xl bg-thrird-admin p-1.5 md:flex md:flex-nowrap">
+        <div role="group" aria-label="Periodo" className="grid grid-cols-4 gap-1.5 rounded-xl bg-third-admin p-1.5 md:flex md:flex-nowrap">
             {PERIODS.map(({ value, label }) => {
                 const isActive = value === active;
 

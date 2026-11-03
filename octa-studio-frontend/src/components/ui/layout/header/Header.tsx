@@ -11,6 +11,7 @@ import { isActiveHref } from '@/utils/activeHref';
 import { CONTACT } from '@/utils/data/contact';
 import { HiOutlinePhone } from 'react-icons/hi2';
 
+
 export const Header = () => {
   const { menuVisible, hamburgerRef, actions } = useHeader()
   const pathname = usePathname();
