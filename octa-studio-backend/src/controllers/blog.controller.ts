@@ -91,10 +91,10 @@ export class BlogController {
 
     static getBlogs = async (req: Request<{}, {}, {}, TGetBlogsQuery>, res: Response, next: NextFunction) => {
         const page = Number(req.query.page ?? 1)
-        const category = req.query.category
+        const categoryId = req.BlogCategory?._id.toString()
 
         try {
-            const { blogs, pagination } = await BlogService.getBlogs(page, category)
+            const { blogs, pagination } = await BlogService.getBlogs(page, categoryId)
 
             return res.status(200).json({
                 status: "success",

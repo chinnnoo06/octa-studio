@@ -23,6 +23,26 @@ export const validateBlogCategoryInput = async (req: Request, res: Response, nex
     next()
 }
 
+export const validateBlogCategorySlugQuery = async (req: Request, res: Response, next: NextFunction) => {
+    const slug = req.query.category as string | undefined
+
+    if (!slug) return next()
+
+    try {
+        const BlogCategory = await blogCategoryRepository.findBySlug(slug)
+
+        if (!BlogCategory) {
+            throw new HttpError(404, "Blog category not found")
+        }
+
+        req.BlogCategory = BlogCategory
+
+        next()
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const validateBlogCategoryExists = async (req: Request<TMongoIdParams>, res: Response, next: NextFunction) => {
     try {
         const BlogCategory = await blogCategoryRepository.findById(req.params.id)

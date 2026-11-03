@@ -1,11 +1,15 @@
-import { BlogsResponseSchema, BlogStatsResponseSchema, RelatedBlogsResponseSchema } from "@/schemas/blog/blog.response.schemas";
+import { BlogsResponseSchema, BlogStatsResponseSchema, RelatedBlogsResponseSchema, TBlogsResponse } from "@/schemas/blog/blog.response.schemas";
 import { TAdminListParams } from "@/types/common.types";
 import { toQueryString } from "@/utils/admin/queryString";
 import { BlogSchema } from "@/schemas/blog/blog.schemas";
 import { originHeader } from "../api.headers";
 import { getToken } from "../auth/auth.token";
 
-export const getBlogsService = async (page: number = 1, category?: string) => {
+type TBlogsList = Pick<TBlogsResponse, "blogs" | "pagination">;
+
+export function getBlogsService(page?: number): Promise<TBlogsList>;
+export function getBlogsService(page: number, category: string): Promise<TBlogsList | null>;
+export async function getBlogsService(page: number = 1, category?: string): Promise<TBlogsList | null> {
   const params = new URLSearchParams({ page: String(page) });
   if (category) params.set("category", category);
 
@@ -18,6 +22,11 @@ export const getBlogsService = async (page: number = 1, category?: string) => {
     },
     next: { revalidate: 3600, tags: ["blogs"] },
   });
+
+  // Categoria inexistente (404) o slug mal formado (400): la page de categoria redirige a /blogs.
+  if (req.status === 404 || req.status === 400) {
+    return null;
+  }
 
   if (!req.ok) {
     throw new Error("Request Failed");
@@ -34,7 +43,7 @@ export const getBlogsService = async (page: number = 1, category?: string) => {
     blogs: result.data.blogs,
     pagination: result.data.pagination,
   };
-};
+}
 
 export const getBlogByIdService = async (id: string) => {
   const token = await getToken();

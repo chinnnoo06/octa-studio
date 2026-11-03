@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
 import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
@@ -14,15 +14,15 @@ type TBlogCategoryPageProps = {
   searchParams: Promise<{ page?: string }>;
 };
 
-const findCategory = async (slug: string) => {
-  const categories = await getBlogCategoriesService();
-  return { categories, category: categories.find((c) => c.slug === slug) };
-};
-
 /** El SEO de la categoria; si se dejo vacio, su nombre y su descripcion. */
 export async function generateMetadata({ params, searchParams }: TBlogCategoryPageProps): Promise<Metadata> {
-  const [{ slug }, { page }] = await Promise.all([params, searchParams]);
-  const { category } = await findCategory(slug);
+  const [{ slug }, { page }, categories] = await Promise.all([
+    params,
+    searchParams,
+    getBlogCategoriesService(),
+  ]);
+
+  const category = categories.find((c) => c.slug === slug);
 
   if (!category) return { title: 'Categoría no encontrada' };
 
@@ -43,16 +43,22 @@ export async function generateMetadata({ params, searchParams }: TBlogCategoryPa
 }
 
 export default async function BlogCategoryPage({ params, searchParams }: TBlogCategoryPageProps) {
-  const [{ slug }, { page }] = await Promise.all([params, searchParams]);
-
-  const { categories, category } = await findCategory(slug);
-
-  if (!category) notFound();
+  const [{ slug }, { page }, categories] = await Promise.all([
+    params,
+    searchParams,
+    getBlogCategoriesService(),
+  ]);
 
   const requested = Number(page);
   const current = Number.isInteger(requested) && requested > 0 ? requested : 1;
 
-  const { blogs, pagination } = await getBlogsService(current, category.slug);
+  const data = await getBlogsService(current, slug);
+
+  if (data === null) redirect('/blogs');
+
+  const category = categories.find((c) => c.slug === slug)!;
+
+  const { blogs, pagination } = data;
 
   if (pagination.totalPages > 0 && current > pagination.totalPages) {
     redirect(`${blogCategoryPath(category.slug)}#blogs-entradas`);

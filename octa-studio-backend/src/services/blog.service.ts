@@ -73,18 +73,11 @@ const resolveCategory = async (id?: string) => {
 
 export const BlogService = {
 
-    /** Listado publico; `categorySlug` viene de la pagina `/blogs/categoria/:slug`. */
-    async getBlogs(page: number, categorySlug?: string) {
-        const category = categorySlug ? await blogCategoryRepository.findBySlug(categorySlug) : null
-
-        // Una categoria que no existe devuelve una pagina vacia, no todo el blog.
-        if (categorySlug && !category) {
-            return { blogs: [], pagination: toPagination({ page, limit: BLOGS_PER_PAGE, totalDocs: 0, totalPages: 0, hasNextPage: false, hasPrevPage: false }) }
-        }
-
+    /** Listado publico; el id de categoria lo resuelve el middleware desde el slug. */
+    async getBlogs(page: number, categoryId?: string) {
         const filter = {
             ...PUBLIC_BLOG_FILTER,
-            ...(category ? { category: category._id } : {})
+            ...(categoryId ? { category: categoryId } : {})
         }
 
         const result = await blogRepository.findPaginated(page, BLOGS_PER_PAGE, filter)
