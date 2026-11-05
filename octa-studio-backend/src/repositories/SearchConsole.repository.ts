@@ -8,17 +8,13 @@ const TOP_QUERIES = 8;
 
 type TSearchRow = { keys?: string[], clicks?: number, impressions?: number };
 
-export const searchConsoleRepository = {
+export class SearchConsoleRepository {
 
-    isConfigured() {
+    static isConfigured() {
         return Boolean(GSC_SITE_URL && getGoogleClient());
-    },
+    }
 
-    /**
-     * Busquedas de Google que mas clics trajeron en el periodo. Search Console
-     * publica los datos con 2-3 dias de retraso: "Hoy" casi siempre sale vacio.
-     */
-    async getData(cfg: TPeriodConfig): Promise<TSearchConsoleData> {
+    static async getData(cfg: TPeriodConfig): Promise<TSearchConsoleData> {
         if (!this.isConfigured()) return { status: "off", topQueries: [] };
 
         try {
@@ -44,4 +40,4 @@ export const searchConsoleRepository = {
             return { status: "error", topQueries: [] };
         }
     }
-};
+}

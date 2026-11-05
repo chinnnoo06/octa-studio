@@ -1,25 +1,8 @@
 import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { BlogStatus, TBlog, TBlogSEO, TBlogVirtuals } from "../types/blog/blog.types";
+import { BlogStatus, TBlog, TBlogVirtuals } from "../types/blog/blog.types";
 import { readingTimeOf } from "../utils/blogContent";
-
-const BlogSEOSchema = new Schema<TBlogSEO>(
-    {
-        metaTitle: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 60
-        },
-        metaDescription: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 160
-        }
-    },
-    { _id: false }
-)
+import { SeoSchema } from "./Seo";
 
 const BlogSchema = new Schema<TBlog, PaginateModel<TBlog>, {}, {}, TBlogVirtuals>(
     {
@@ -79,7 +62,7 @@ const BlogSchema = new Schema<TBlog, PaginateModel<TBlog>, {}, {}, TBlogVirtuals
         },
 
         seo: {
-            type: BlogSEOSchema,
+            type: SeoSchema,
             required: true
         }
     },

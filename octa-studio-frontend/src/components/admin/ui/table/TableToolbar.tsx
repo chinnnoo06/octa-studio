@@ -21,11 +21,6 @@ type TTableToolbarProps = {
 
 const SEARCH_DELAY = 400;
 
-/**
- * Barra superior de cada listado: buscador con espera, boton de filtros con
- * contador y el boton "Nuevo". Debajo, el panel de filtros y los chips activos.
- * Todo vive en la URL, asi el listado se puede recargar o compartir tal cual.
- */
 export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, addHref, addLabel }: TTableToolbarProps) => {
     const router = useRouter();
     const [, startTransition] = useTransition();

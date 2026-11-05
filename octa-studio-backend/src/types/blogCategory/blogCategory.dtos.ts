@@ -1,9 +1,7 @@
-import { TBlogCategorySEO } from "./blogCategory.types";
+import { TSeo } from "../common/common.types";
 
 export type TBlogCategoryDto = {
     name: string,
-    /** Vacio: se genera a partir del nombre. */
-    slug?: string,
-    description?: string,
-    seo?: Partial<TBlogCategorySEO>
+    description: string,
+    seo?: Partial<TSeo>
 }

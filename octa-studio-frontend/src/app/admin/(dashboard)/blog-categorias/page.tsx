@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { HiPlus } from 'react-icons/hi2';
 
-import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { AdminHeading } from '@/components/admin/ui/layout/AdminHeading';
 import { PanelButton } from '@/components/admin/ui/buttons/PanelButton';
 import { BlogCategoriesTable } from '@/components/admin/dashboard/blogCategories/table/BlogCategoriesTable';
 import { getAdminBlogCategoriesService } from '@/services/server/blogCategory.service';

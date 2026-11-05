@@ -4,7 +4,7 @@ import { EditTestimonialForm } from '@/components/admin/dashboard/testimonials/f
 import { getTestimonialService } from '@/services/server/testimonial.service';
 import { BackButton } from '@/components/admin/ui/buttons/BackButton';
 import { FormSubmitButton } from '@/components/admin/ui/buttons/FormSubmitButton';
-import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { AdminHeading } from '@/components/admin/ui/layout/AdminHeading';
 
 export const metadata: Metadata = { title: 'Editar Testimonio' };
 

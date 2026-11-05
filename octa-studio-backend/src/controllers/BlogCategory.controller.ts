@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { TBulkDeleteDto, TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithBlogCategory } from "../types/express/blogCategory";
 import { TBlogCategoryDto } from "../types/blogCategory/blogCategory.dtos";
-import { BlogCategoryService } from "../services/blogCategory.service";
+import { BlogCategoryService } from "../services/BlogCategory.service";
 
 export class BlogCategoryController {
 

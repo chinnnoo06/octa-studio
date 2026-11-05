@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config/env";
-import { authRepository } from "../repositories/auth.repository";
+import { AuthRepository } from "../repositories/Auth.repository";
 import { HttpError } from "../utils/error";
 import { TTokenPayload, TUserPayload } from "../types/user/user.types";
 
@@ -34,7 +34,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const decode = jwt.verify(token, SECRET_KEY) as TTokenPayload;
 
-        const user = await authRepository.findById(decode.id);
+        const user = await AuthRepository.findById(decode.id);
 
         if (!user) {
             throw new HttpError(401, "Invalid token");

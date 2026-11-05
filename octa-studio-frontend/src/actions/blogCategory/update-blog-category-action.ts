@@ -23,7 +23,7 @@ export const updateBlogCategory = async (id: string, data: TBlogCategoryForm): P
     const url = `${process.env.API_URL}/blog-categories/${id}`
 
     const req = await fetch(url, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,

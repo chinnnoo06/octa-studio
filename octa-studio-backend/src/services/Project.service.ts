@@ -1,14 +1,13 @@
-import fs from "fs";
 import path from "path";
 
-import { projectRepository } from "../repositories/project.repository";
+import { ProjectRepository } from "../repositories/Project.repository";
 import { TMulterFiles } from "../types/multer/multer.types";
-import { TGetAdminProjectsQuery, TProjectDto } from "../types/project/project.dtos";
+import { TCreateProjectDto, TGetAdminProjectsQuery, TUpdateProjectDto } from "../types/project/project.dtos";
 import { TProjectDocument } from "../types/project/project.types";
-import { deleteAllUploadedFiles } from "../utils/deleteFiles";
+import { deleteAllUploadedFiles, deleteFilesByName } from "../utils/deleteFiles";
 import { HttpError } from "../utils/error";
 import { buildSlug } from "../utils/slug";
-import { buildSort, dateRangeFilter, searchFilter, toPagination } from "../utils/listQuery";
+import { toPagination } from "../utils/listQuery";
 import { buildSeo } from "../utils/seo";
 import { UPLOADS_PATH } from "../config/env";
 
@@ -20,50 +19,32 @@ const PROJECTS_PER_PAGE = 6;
 /** El panel muestra mas filas por pagina que la web. */
 const ADMIN_PROJECTS_PER_PAGE = 10;
 
-const ADMIN_SORTABLE = ["name", "sector", "createdAt"];
-
 /** Tope de fotos y de videos por proyecto, el mismo del formulario. */
 const MAX_MEDIA = 5;
 
-const deleteFilesFromDisk = (dir: string, names: string[]) => {
-    names.forEach(name => {
-        const filePath = path.join(dir, name)
+export class ProjectService {
 
-        try {
-            fs.unlinkSync(filePath)
-            console.log(`File deleted: ${name}`);
-        } catch (err) {
-            console.error(`Error deleting ${name}`)
-        }
-    })
-}
-
-const deleteImagesFromDisk = (images: string[]) => deleteFilesFromDisk(imagesDir, images)
-const deleteVideosFromDisk = (videos: string[]) => deleteFilesFromDisk(videosDir, videos)
-
-export const ProjectService = {
-
-    async createProject(data: TProjectDto, files?: TMulterFiles) {
+    static async createProject(data: TCreateProjectDto, files: TMulterFiles) {
         try {
             const slug = buildSlug(data.name)
 
-            const slugTaken = await projectRepository.findBySlug(slug)
+            const slugTaken = await ProjectRepository.findBySlug(slug)
 
             if (slugTaken) {
                 throw new HttpError(409, "A project with that name already exists");
             }
 
             // converToWebP already renamed each file, so `filename` is the name stored on disk
-            const images = files?.projectImages?.map(file => file.filename) ?? []
+            const images = files.projectImages?.map(file => file.filename) ?? []
 
             if (images.length === 0) {
                 throw new HttpError(400, "At least one image is required for the project");
             }
 
             // Los videos son opcionales: sin campo, lista vacia.
-            const videos = files?.projectVideos?.map(file => file.filename) ?? []
+            const videos = files.projectVideos?.map(file => file.filename) ?? []
 
-            await projectRepository.createProject({
+            await ProjectRepository.createProject({
                 name: data.name,
                 description: data.description,
                 sector: data.sector,
@@ -77,19 +58,14 @@ export const ProjectService = {
             deleteAllUploadedFiles(files);
             throw error
         }
-    },
+    }
 
-    /**
-     * Edicion completa: datos, SEO y medios. `keepImages`/`keepVideos` son los
-     * archivos actuales que se conservan (en ese orden); los nuevos se agregan
-     * detras. Lo que deja de estar se borra del disco despues de guardar.
-     */
-    async updateProject(project: TProjectDocument, data: TProjectDto, files?: TMulterFiles) {
+    static async updateProject(project: TProjectDocument, data: TUpdateProjectDto, files?: TMulterFiles) {
         try {
             const slug = buildSlug(data.name)
 
             if (slug !== project.slug) {
-                const slugTaken = await projectRepository.findBySlug(slug)
+                const slugTaken = await ProjectRepository.findBySlug(slug)
 
                 if (slugTaken) {
                     throw new HttpError(409, "A project with that name already exists");
@@ -124,74 +100,61 @@ export const ProjectService = {
 
             await project.save()
 
-            deleteImagesFromDisk(removedImages)
-            deleteVideosFromDisk(removedVideos)
+            deleteFilesByName(imagesDir, removedImages)
+            deleteFilesByName(videosDir, removedVideos)
         } catch (error) {
             deleteAllUploadedFiles(files);
             throw error
         }
-    },
+    }
 
-    async deleteProject(project: TProjectDocument) {
+    static async deleteProject(project: TProjectDocument) {
         await project.deleteOne()
 
-        deleteImagesFromDisk(project.images)
-        deleteVideosFromDisk(project.videos)
-    },
+        deleteFilesByName(imagesDir, project.images)
+        deleteFilesByName(videosDir, project.videos)
+    }
 
-    async getProjects(page: number) {
-        const result = await projectRepository.findPaginated(page, PROJECTS_PER_PAGE)
+    static async getProjects(page: number) {
+        const result = await ProjectRepository.findPaginated(page, PROJECTS_PER_PAGE)
 
         return {
             projects: result.docs,
             pagination: toPagination(result)
         }
-    },
+    }
 
-    async getAdminProjects({ page, search, sector, from, to, sort, order }: TGetAdminProjectsQuery) {
-        const filter = {
-            ...searchFilter(search, ["name", "description", "sector"]),
-            ...(sector ? { sector } : {}),
-            ...dateRangeFilter(from, to)
-        }
-
+    static async getAdminProjects(query: TGetAdminProjectsQuery) {
         const [result, sectors] = await Promise.all([
-            projectRepository.findPaginated(
-                Number(page ?? 1),
-                ADMIN_PROJECTS_PER_PAGE,
-                filter,
-                buildSort(sort, order, ADMIN_SORTABLE)
-            ),
-            projectRepository.findSectors()
+            ProjectRepository.findAdminPaginated(query, ADMIN_PROJECTS_PER_PAGE),
+            ProjectRepository.findSectors()
         ])
 
         return {
             projects: result.docs,
             pagination: toPagination(result),
-            // Opciones del filtro "Sector": los que existen, no una lista fija.
             sectors
         }
-    },
+    }
 
-    /** Borrado masivo del panel: cada proyecto se lleva sus fotos y videos. */
-    async deleteProjects(ids: string[]) {
-        const projects = await projectRepository.findByIds(ids)
+    static async deleteProjects(ids: string[]) {
+        const projects = await ProjectRepository.findByIds(ids)
 
         if (projects.length === 0) {
             throw new HttpError(404, "No projects found to delete");
         }
 
-        await projectRepository.deleteByIds(projects.map(project => String(project._id)))
+        await ProjectRepository.deleteByIds(projects.map(project => String(project._id)))
 
         projects.forEach(project => {
-            deleteImagesFromDisk(project.images)
-            deleteVideosFromDisk(project.videos)
+            deleteFilesByName(imagesDir, project.images)
+            deleteFilesByName(videosDir, project.videos)
         })
 
         return projects.length
-    },
+    }
 
-    async getTotalCount() {
-        return await projectRepository.getTotalCount()
+    static async getTotalCount() {
+        return await ProjectRepository.getTotalCount()
     }
 }

@@ -1,23 +1,6 @@
 import { model, Schema } from "mongoose";
-import { TBlogCategory, TBlogCategorySEO } from "../types/blogCategory/blogCategory.types";
-
-const BlogCategorySEOSchema = new Schema<TBlogCategorySEO>(
-    {
-        metaTitle: {
-            type: String,
-            trim: true,
-            maxlength: 60,
-            default: ""
-        },
-        metaDescription: {
-            type: String,
-            trim: true,
-            maxlength: 160,
-            default: ""
-        }
-    },
-    { _id: false }
-)
+import { TBlogCategory } from "../types/blogCategory/blogCategory.types";
+import { SeoSchema } from "./Seo";
 
 const BlogCategorySchema = new Schema<TBlogCategory>(
     {
@@ -38,14 +21,14 @@ const BlogCategorySchema = new Schema<TBlogCategory>(
 
         description: {
             type: String,
+            required: true,
             trim: true,
-            maxlength: 300,
-            default: ""
+            maxlength: 300
         },
 
         seo: {
-            type: BlogCategorySEOSchema,
-            default: () => ({})
+            type: SeoSchema,
+            required: true
         },
 
         position: {

@@ -5,7 +5,7 @@ import { handleInputErrors, validateAdminListQuery, validateBulkDelete, validate
 import { converToWebP } from "../middlewares/convertToWebp";
 import { testimonialsUploads } from "../middlewares/uploads";
 import { validateTestimonialExists, validateTestimonialInput } from "../middlewares/testimonial";
-import { TestimonialController } from "../controllers/testimonial.controller";
+import { TestimonialController } from "../controllers/Testimonial.controller";
 
 const router: Router = Router();
 
@@ -42,7 +42,7 @@ router.post("/",
 )
 
 // Edicion completa en una sola peticion: datos y, opcional, el logo de la empresa.
-router.put("/:id",
+router.patch("/:id",
     auth,
     testimonialsUploads.fields([
         { name: "testimonialImage", maxCount: 1 }

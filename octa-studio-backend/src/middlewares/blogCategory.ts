@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { TBlogCategoryDocument } from "../types/blogCategory/blogCategory.types";
 import { TMongoIdParams } from "../types/common/common.dtos";
 import { HttpError } from "../utils/error";
-import { blogCategoryRepository } from "../repositories/blogCategory.repository";
+import { BlogCategoryRepository } from "../repositories/BlogCategory.repository";
 
 declare global {
     namespace Express {
@@ -15,8 +15,7 @@ declare global {
 
 export const validateBlogCategoryInput = async (req: Request, res: Response, next: NextFunction) => {
     await body("name").trim().notEmpty().withMessage("Name is required").isLength({ max: 150 }).withMessage("Name must be 150 characters or less").run(req)
-    await body("slug").optional({ values: "falsy" }).trim().matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).withMessage("The slug can only contain lowercase letters, numbers and hyphens").run(req)
-    await body("description").optional({ values: "falsy" }).isString().isLength({ max: 300 }).withMessage("Description must be 300 characters or less").run(req)
+    await body("description").notEmpty().withMessage("Description is required").isLength({ max: 300 }).withMessage("Description must be 300 characters or less").run(req)
     await body("seo.metaTitle").optional({ values: "falsy" }).isString().isLength({ max: 60 }).withMessage("Meta title must be 60 characters or less").run(req)
     await body("seo.metaDescription").optional({ values: "falsy" }).isString().isLength({ max: 160 }).withMessage("Meta description must be 160 characters or less").run(req)
 
@@ -29,7 +28,7 @@ export const validateBlogCategorySlugQuery = async (req: Request, res: Response,
     if (!slug) return next()
 
     try {
-        const BlogCategory = await blogCategoryRepository.findBySlug(slug)
+        const BlogCategory = await BlogCategoryRepository.findBySlug(slug)
 
         if (!BlogCategory) {
             throw new HttpError(404, "Blog category not found")
@@ -45,7 +44,7 @@ export const validateBlogCategorySlugQuery = async (req: Request, res: Response,
 
 export const validateBlogCategoryExists = async (req: Request<TMongoIdParams>, res: Response, next: NextFunction) => {
     try {
-        const BlogCategory = await blogCategoryRepository.findById(req.params.id)
+        const BlogCategory = await BlogCategoryRepository.findById(req.params.id)
 
         if (!BlogCategory) {
             throw new HttpError(404, "Blog category not found")

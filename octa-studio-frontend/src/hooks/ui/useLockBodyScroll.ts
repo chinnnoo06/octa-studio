@@ -1,16 +1,20 @@
-"use client";
-
 import { useEffect } from "react";
 
-export const useLockBodyScroll = (locked: boolean) => {
+let lockCount = 0;
+
+export const useLockBodyScroll = (locked: boolean = true) => {
   useEffect(() => {
     if (!locked) return;
 
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockCount++;
+    const html = document.documentElement;
+    html.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = previous;
+      lockCount = Math.max(0, lockCount - 1);
+      if (lockCount === 0) {
+        html.style.overflow = "";
+      }
     };
   }, [locked]);
 };

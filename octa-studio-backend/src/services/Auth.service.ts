@@ -1,29 +1,29 @@
 import bcrypt from "bcrypt";
 import { HttpError } from "../utils/error";
-import { authRepository } from "../repositories/auth.repository";
+import { AuthRepository } from "../repositories/Auth.repository";
 import { TLoginDto, TRegisterDto } from "../types/auth/auth.dtos";
 import { TSession } from "../types/auth/auth.types";
 import { generateJWT } from "../utils/jwt";
 
-export const authService = {
+export class AuthService {
 
-    async register(data: TRegisterDto) {
-        const userExist = await authRepository.findByUserName(data.username)
+    static async register(data: TRegisterDto) {
+        const userExist = await AuthRepository.findByUserName(data.username)
 
         if (userExist) throw new HttpError(409, "This user is already registered");
 
         const pwd = await bcrypt.hash(data.password, 10);
 
-        const user = await authRepository.register({
+        const user = await AuthRepository.register({
             ...data,
             password: pwd
         })
 
         return user
-    },
+    }
 
-    async login(data: TLoginDto): Promise<TSession> {
-        const userExists = await authRepository.findByUserName(data.username)
+    static async login(data: TLoginDto): Promise<TSession> {
+        const userExists = await AuthRepository.findByUserName(data.username)
 
         if (!userExists) throw new HttpError(409, "Invalid credentials");
 

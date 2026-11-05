@@ -1,5 +1,5 @@
 import { LoginForm } from '@/components/admin/auth/LoginForm';
-import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { AdminHeading } from '@/components/admin/ui/layout/AdminHeading';
 
 export default function LoginPage() {
     return (

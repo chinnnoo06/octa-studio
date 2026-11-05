@@ -19,7 +19,7 @@ export const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <aside className="bg-secondary-admin border-primary-admin/30 border-t hidden w-[135px] shrink-0 overflow-y-auto lg:block">
+        <aside className="bg-secondary-admin border-primary-admin/30 border-t hidden w-50 shrink-0 overflow-y-auto lg:block">
             <nav aria-label="Panel de administración" className="flex flex-col gap-2.5 p-2.5">
                 {ADMIN_LINKS.map(({ href, label, icon: Icon }) => {
                     const active = isActiveAdminHref(pathname, href);

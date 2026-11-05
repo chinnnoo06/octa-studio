@@ -14,7 +14,6 @@ const dim = (row: TGARow, i = 0) => row.dimensionValues?.[i]?.value ?? "";
 const metric = (row: TGARow, i = 0) => Number(row.metricValues?.[i]?.value ?? 0);
 const rowsOf = (report?: TGAReport) => report?.rows ?? [];
 
-/** Filtro de GA4: la dimension empieza por `value`. */
 const beginsWith = (fieldName: string, value: string) => ({
     filter: { fieldName, stringFilter: { matchType: "BEGINS_WITH", value } }
 });
@@ -36,10 +35,6 @@ const emptyGA = (status: TGAData["status"], buckets: TBuckets): TGAData => {
         blog: { views: zeros, top: [], sources: empty }
     };
 };
-
-// ---------------------------------------------------------------------------
-//  Parsers (uno por reporte, igual que en el dashboard de DILAE)
-// ---------------------------------------------------------------------------
 
 const parseTotals = (report?: TGAReport): TGAData["kpis"] => {
     const [row] = rowsOf(report);
@@ -83,7 +78,6 @@ const parseLabelValue = (report?: TGAReport, upperFirst = false): TLabelValue =>
 const parsePages = (report?: TGAReport) =>
     rowsOf(report).map(row => ({ url: dim(row), views: metric(row) }));
 
-/** Agrupa las rutas del sitio en las secciones de Octa. */
 const sectionOf = (path: string) => {
     const clean = path.split("?")[0];
 
@@ -174,10 +168,6 @@ const parseBlogTop = (report?: TGAReport) =>
         return { title: title || path, path, views: metric(row) };
     });
 
-// ---------------------------------------------------------------------------
-//  Peticiones
-// ---------------------------------------------------------------------------
-
 const batchRunReports = async (requests: object[]) => {
     const client = getGoogleClient()!;
 
@@ -191,18 +181,17 @@ const batchRunReports = async (requests: object[]) => {
     return res.data.reports ?? [];
 };
 
-export const googleAnalyticsRepository = {
+export class GoogleAnalyticsRepository {
 
-    isConfigured() {
+    static isConfigured() {
         return Boolean(GA_PROPERTY_ID && getGoogleClient());
-    },
+    }
 
-    async getData(cfg: TPeriodConfig, buckets: TBuckets): Promise<TGAData> {
+    static async getData(cfg: TPeriodConfig, buckets: TBuckets): Promise<TGAData> {
         if (!this.isConfigured()) return emptyGA("off", buckets);
 
         const dateRanges = [{ startDate: cfg.start, endDate: cfg.end }];
 
-        // GA4 acepta hasta 5 reportes por lote: tres lotes, en paralelo.
         const batch1 = [
             {
                 dateRanges,
@@ -259,7 +248,6 @@ export const googleAnalyticsRepository = {
             }
         ];
 
-        // Blog: /blogs (listado y categorias) y /blogs/<slug> (articulos).
         const batch3 = [
             {
                 dateRanges,
@@ -313,10 +301,9 @@ export const googleAnalyticsRepository = {
             console.error("Google Analytics API error:", error instanceof Error ? error.message : error);
             return emptyGA("error", buckets);
         }
-    },
+    }
 
-    /** Usuarios activos en los ultimos 30 minutos; `null` si GA no esta disponible. */
-    async getRealtimeUsers(): Promise<number | null> {
+    static async getRealtimeUsers(): Promise<number | null> {
         if (!this.isConfigured()) return null;
 
         try {
@@ -335,4 +322,4 @@ export const googleAnalyticsRepository = {
             return null;
         }
     }
-};
+}

@@ -1,9 +1,5 @@
 import { HydratedDocument } from "mongoose";
-
-export type TProjectSEO = {
-    metaTitle: string,
-    metaDescription: string
-}
+import { TSeo } from "../common/common.types";
 
 export type TProject = {
     slug: string,
@@ -12,8 +8,7 @@ export type TProject = {
     sector: string,
     images: string[],
     videos: string[],
-    seo: TProjectSEO
+    seo: TSeo
 };
-
 
 export type TProjectDocument = HydratedDocument<TProject>

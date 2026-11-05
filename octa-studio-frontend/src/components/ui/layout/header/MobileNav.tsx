@@ -6,6 +6,8 @@ import { HiOutlineArrowLongRight } from 'react-icons/hi2';
 import { NAV_LINKS } from "@/utils/data/navigation";
 import { isActiveHref } from "@/utils/activeHref";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useLockBodyScroll } from "@/hooks/ui/useLockBodyScroll";
 
 type TMobileNavProps = {
     menuVisible: boolean
@@ -14,6 +16,19 @@ type TMobileNavProps = {
 
 export const MobileNav = ({ menuVisible, toggleMenu }: TMobileNavProps) => {
     const pathname = usePathname();
+
+    useEffect(() => {
+        if (!menuVisible) return
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") toggleMenu()
+        }
+
+        window.addEventListener("keydown", onKeyDown)
+        return () => window.removeEventListener("keydown", onKeyDown)
+    }, [menuVisible, toggleMenu])
+
+    useLockBodyScroll(menuVisible)
 
     return (
         <div

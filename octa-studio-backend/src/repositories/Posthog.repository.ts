@@ -8,11 +8,6 @@ const CHANNELS: TConversionChannel[] = ["whatsapp", "phone", "email"];
 
 const FUNNEL_STEPS = ["Visitaron el sitio", "Vieron proyectos o servicios", "Contactaron"];
 
-/**
- * Conversiones medidas con el autocapture de PostHog: clic en un enlace de
- * WhatsApp, `tel:` o `mailto:` (el sitio no tiene formulario de contacto).
- * `elements_chain` guarda el href del enlace pulsado.
- */
 const CONDITIONS: Record<TConversionChannel, string> = {
     whatsapp: "(properties.$event_type = 'click' AND (elements_chain LIKE '%wa.me%' OR elements_chain LIKE '%whatsapp.com%'))",
     phone: "(properties.$event_type = 'click' AND elements_chain LIKE '%tel:%')",
@@ -27,7 +22,6 @@ const countColumns = CHANNELS
 
 type TRows = unknown[][];
 
-/** Lanza todas las consultas HogQL en paralelo. `null` = fallo la peticion (distinto de [] = sin datos). */
 const runQueries = async <K extends string>(queries: Record<K, string>) => {
     const url = `${POSTHOG_API_HOST}/api/projects/${POSTHOG_PROJECT_ID}/query/`;
 
@@ -74,17 +68,15 @@ const emptyPostHog = (status: TPostHogData["status"], buckets: TBuckets): TPostH
     };
 };
 
-export const posthogRepository = {
+export class PosthogRepository {
 
-    isConfigured() {
+    static isConfigured() {
         return Boolean(POSTHOG_PERSONAL_API_KEY && POSTHOG_PROJECT_ID);
-    },
+    }
 
-    async getData(cfg: TPeriodConfig, buckets: TBuckets): Promise<TPostHogData> {
+    static async getData(cfg: TPeriodConfig, buckets: TBuckets): Promise<TPostHogData> {
         if (!this.isConfigured()) return emptyPostHog("off", buckets);
 
-        // HogQL no acepta zona horaria como 2o argumento de las funciones de
-        // fecha: primero se convierte el timestamp con toTimeZone().
         const tz = ANALYTICS_TIMEZONE;
         const local = `toTimeZone(timestamp, '${tz}')`;
         const from = `toDateTime('${cfg.start} 00:00:00', '${tz}')`;
@@ -125,7 +117,6 @@ export const posthogRepository = {
                 WHERE ${range}`
         });
 
-        // `counts` es un agregado sin GROUP BY: si la peticion salio bien siempre trae una fila.
         if (!results.counts?.length) return emptyPostHog("error", buckets);
 
         const [countsRow] = results.counts;
@@ -157,4 +148,4 @@ export const posthogRepository = {
             funnel: FUNNEL_STEPS.map((step, i) => ({ step, count: Number(funnelRow[i] ?? 0) }))
         };
     }
-};
+}

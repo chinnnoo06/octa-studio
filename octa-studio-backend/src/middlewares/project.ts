@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { TProjectDocument } from "../types/project/project.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
-import { projectRepository } from "../repositories/project.repository";
+import { ProjectRepository } from "../repositories/Project.repository";
 
 declare global {
     namespace Express {
@@ -33,7 +33,7 @@ export const validateProjectExistsBySlug = async (req: Request<TSlugParams>, res
     const { slug } = req.params
 
     try {
-        const Project = await projectRepository.findBySlug(slug.trim().toLowerCase())
+        const Project = await ProjectRepository.findBySlug(slug.trim().toLowerCase())
 
         if (!Project) {
             throw new HttpError(404, "Project not found")
@@ -51,7 +51,7 @@ export const validateProjectExists = async (req: Request<TMongoIdParams>, res: R
     const { id } = req.params
 
     try {
-        const Project = await projectRepository.findById(id)
+        const Project = await ProjectRepository.findById(id)
 
         if (!Project) {
             throw new HttpError(404, "Project not found")

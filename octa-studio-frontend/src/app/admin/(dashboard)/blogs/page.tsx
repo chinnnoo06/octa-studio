@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { AdminHeading } from '@/components/admin/ui/layout/AdminHeading';
 import { TableToolbar } from '@/components/admin/ui/table/TableToolbar';
 import { TablePagination } from '@/components/admin/ui/table/TablePagination';
 import { BlogsTable } from '@/components/admin/dashboard/blogs/table/BlogsTable';

@@ -7,7 +7,7 @@ import { blogContentUploads, blogsUploads } from "../middlewares/uploads";
 import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat } from "../middlewares/reqValidation";
 import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
 import { validateBlogCategorySlugQuery } from "../middlewares/blogCategory";
-import { BlogController } from "../controllers/blog.controller";
+import { BlogController } from "../controllers/Blog.controller";
 
 const router: Router = Router();
 
@@ -19,7 +19,6 @@ router.get("/",
     BlogController.getBlogs
 )
 
-// Listado del panel: incluye borradores y acepta buscador, filtros y orden.
 router.get("/admin",
     auth,
     validateAdminListQuery,
@@ -41,7 +40,6 @@ router.post("/bulk-delete",
     BlogController.deleteBlogs
 )
 
-// Publica: la llama la ficha del articulo una vez por sesion de navegador.
 router.post("/:slug/views",
     param('slug').notEmpty().withMessage('Slug is required'),
     handleInputErrors,
@@ -71,7 +69,6 @@ router.post("/content-images",
     BlogController.uploadContentImage
 )
 
-// Edicion completa en una sola peticion: datos, SEO y, opcional, la imagen destacada.
 router.patch("/:id",
     auth,
     blogsUploads.fields([

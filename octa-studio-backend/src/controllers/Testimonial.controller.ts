@@ -3,7 +3,7 @@ import { TMulterFiles } from "../types/multer/multer.types";
 import { TBulkDeleteDto, TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithTestimonial } from "../types/express/testimonial";
 import { TGetAdminTestimonialsQuery, TTestimonialDto } from "../types/testimonial/testimonial.dtos";
-import { TestimonialService } from "../services/testimonial.service";
+import { TestimonialService } from "../services/Testimonial.service";
 
 export class TestimonialController {
 
@@ -86,7 +86,7 @@ export class TestimonialController {
 
     static updateTestimonial = async (req: TRequestWithTestimonial<TMongoIdParams, {}, TTestimonialDto>, res: Response, next: NextFunction) => {
         const data = req.body
-        const files = req.files as TMulterFiles
+        const files = req.files as TMulterFiles | undefined
 
         try {
             await TestimonialService.updateTestimonial(req.Testimonial, data, files)

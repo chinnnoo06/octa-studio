@@ -12,15 +12,14 @@ import { IS_DEV, UPLOADS_PATH } from './config/env'
 
 import { errorHandler } from './middlewares/error'
 
-import authRouter from './routes/auth.routes'
-import projectRouter from './routes/project.routes'
-import blogRouter from './routes/blog.routes'
-import testimonialRouter from './routes/testimonial.routes'
-import analyticsRouter from './routes/analytics.routes'
-import blogCategoryRouter from './routes/blogCategory.routes'
+import authRouter from './routes/Auth.routes'
+import projectRouter from './routes/Project.routes'
+import blogRouter from './routes/Blog.routes'
+import testimonialRouter from './routes/Testimonial.routes'
+import analyticsRouter from './routes/Analytics.routes'
+import blogCategoryRouter from './routes/BlogCategory.routes'
 
 import { scheduleOrphanContentImagesCleanup } from './jobs/cleanOrphanContentImages.job'
-import { runBlogCategoriesMigration } from './jobs/migrateBlogCategories.job'
 
 connection();
 
@@ -53,7 +52,6 @@ server.use("/api/blog-categories", blogCategoryRouter);
 
 server.use(errorHandler);
 
-runBlogCategoriesMigration();
 scheduleOrphanContentImagesCleanup();
 
 export default server

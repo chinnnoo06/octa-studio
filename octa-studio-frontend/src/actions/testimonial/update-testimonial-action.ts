@@ -34,7 +34,7 @@ export const updateTestimonial = async (id: string, data: TUpdateTestimonialForm
     if (parsed.data.image) formData.append("testimonialImage", parsed.data.image)
 
     const req = await fetch(url, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             "Authorization": `Bearer ${token}`,
             ...originHeader()

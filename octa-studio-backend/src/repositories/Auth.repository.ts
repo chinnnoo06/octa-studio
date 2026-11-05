@@ -1,17 +1,17 @@
 import { User } from "../models/User";
 import { TRegisterDto } from "../types/auth/auth.dtos";
 
-export const authRepository = {
+export class AuthRepository {
 
-    async register(data: TRegisterDto) {
+    static async register(data: TRegisterDto) {
         return User.create(data)
-    },
+    }
 
-    async findById(id: string) {
+    static async findById(id: string) {
         return User.findById(id);
-    },
+    }
 
-    async findByUserName(username: string) {
+    static async findByUserName(username: string) {
         return User.findOne({ username })
     }
 }

@@ -15,9 +15,9 @@ import { BlogCategoryFields } from "./BlogCategoryFields";
 export const CreateBlogCategoryForm = () => {
     const router = useRouter();
 
-    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<TBlogCategoryForm>({
+    const { register, control, handleSubmit, formState: { errors } } = useForm<TBlogCategoryForm>({
         resolver: zodResolver(BlogCategoryFormSchema),
-        defaultValues: { name: "", slug: "", description: "", seo: { metaTitle: "", metaDescription: "" } },
+        defaultValues: { name: "", description: "", seo: { metaTitle: "", metaDescription: "" } },
     });
 
     const { createBlogCategory } = useBlogCategory();
@@ -34,7 +34,7 @@ export const CreateBlogCategoryForm = () => {
 
     return (
         <form id="admin-form" className="mx-auto flex w-full max-w-240 flex-col gap-5" onSubmit={handleSubmit(onSubmit)} noValidate>
-            <BlogCategoryFields register={register} control={control} setValue={setValue} errors={errors} />
+            <BlogCategoryFields register={register} control={control} errors={errors} />
 
             <ActionButton loading={createBlogCategory.loading} className="w-full">
                 <HiArrowDownTray aria-hidden="true" className="size-4 lg:size-4.5" />

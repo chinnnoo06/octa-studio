@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { TGetDashboardQuery } from "../types/analytics/analytics.dtos";
-import { AnalyticsService } from "../services/analytics.service";
+import { AnalyticsService } from "../services/Analytics.service";
 
 export class AnalyticsController {
 

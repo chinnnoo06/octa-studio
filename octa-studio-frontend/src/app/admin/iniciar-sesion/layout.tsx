@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { SimpleHeader } from '@/components/admin/layout/SimpleHeader';
+import { SimpleHeader } from '@/components/admin/ui/layout/SimpleHeader';
 
 export const metadata: Metadata = {
   title: { absolute: 'Iniciar sesión | Panel · Octa Building Studio' },

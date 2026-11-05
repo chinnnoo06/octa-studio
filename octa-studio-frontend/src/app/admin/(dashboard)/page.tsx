@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { AdminHeading } from '@/components/admin/layout/AdminHeading';
+import { AdminHeading } from '@/components/admin/ui/layout/AdminHeading';
 import { DashboardShell } from '@/components/admin/dashboard/home/DashboardShell';
 import { DashboardNotices } from '@/components/admin/dashboard/home/DashboardNotices';
 import { DashboardError } from '@/components/admin/dashboard/home/DashboardError';

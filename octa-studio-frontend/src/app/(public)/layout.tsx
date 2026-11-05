@@ -9,7 +9,6 @@ export default function PublicLayout({
 }: Readonly<{ children: React.ReactNode }>) {
     return (
         <>
-            {/* Solo el sitio publico se mide: el panel no carga ninguna analitica. */}
             <GoogleAnalytics />
             <PostHogAnalytics />
             <Header />

@@ -1,6 +1,6 @@
-import { googleAnalyticsRepository } from "../repositories/googleAnalytics.repository";
-import { searchConsoleRepository } from "../repositories/searchConsole.repository";
-import { posthogRepository } from "../repositories/posthog.repository";
+import { GoogleAnalyticsRepository } from "../repositories/GoogleAnalytics.repository";
+import { SearchConsoleRepository } from "../repositories/SearchConsole.repository";
+import { PosthogRepository } from "../repositories/Posthog.repository";
 import { buildBuckets, normalizePeriod, periodConfig } from "../utils/periods";
 import { TPeriod } from "../types/analytics/analytics.types";
 
@@ -17,14 +17,14 @@ const buildDashboard = async (period: TPeriod) => {
     const buckets = buildBuckets(cfg.start, cfg.end, cfg.gran);
 
     const [firstGa, gsc, ph] = await Promise.all([
-        googleAnalyticsRepository.getData(cfg, buckets),
-        searchConsoleRepository.getData(cfg),
-        posthogRepository.getData(cfg, buckets)
+        GoogleAnalyticsRepository.getData(cfg, buckets),
+        SearchConsoleRepository.getData(cfg),
+        PosthogRepository.getData(cfg, buckets)
     ]);
 
     // Un reintento ante fallo transitorio de GA (cuota o red).
     const ga = firstGa.status === "error"
-        ? await new Promise(resolve => setTimeout(resolve, 500)).then(() => googleAnalyticsRepository.getData(cfg, buckets))
+        ? await new Promise(resolve => setTimeout(resolve, 500)).then(() => GoogleAnalyticsRepository.getData(cfg, buckets))
         : firstGa;
 
     const sessions = ga.kpis.sessions;
@@ -69,9 +69,9 @@ const buildDashboard = async (period: TPeriod) => {
     };
 };
 
-export const AnalyticsService = {
+export class AnalyticsService {
 
-    async getDashboard(rawPeriod?: string) {
+    static async getDashboard(rawPeriod?: string) {
         const period = normalizePeriod(rawPeriod);
         const ttl = period === "hoy" ? TTL_TODAY : TTL_DEFAULT;
 
@@ -86,9 +86,9 @@ export const AnalyticsService = {
         if (!data.partial) cache.set(period, { data, at: Date.now() });
 
         return data;
-    },
-
-    async getRealtimeUsers() {
-        return googleAnalyticsRepository.getRealtimeUsers();
     }
-};
+
+    static async getRealtimeUsers() {
+        return GoogleAnalyticsRepository.getRealtimeUsers();
+    }
+}

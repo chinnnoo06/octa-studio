@@ -3,16 +3,14 @@ import { param } from "express-validator";
 import { auth } from "../middlewares/auth";
 import { handleInputErrors, validateBulkDelete } from "../middlewares/reqValidation";
 import { validateBlogCategoryExists, validateBlogCategoryInput } from "../middlewares/blogCategory";
-import { BlogCategoryController } from "../controllers/blogCategory.controller";
+import { BlogCategoryController } from "../controllers/BlogCategory.controller";
 
 const router: Router = Router();
 
-// Publica: el filtro de categorias del blog.
 router.get("/",
     BlogCategoryController.getCategories
 )
 
-// Panel: con el numero de entradas de cada categoria.
 router.get("/admin",
     auth,
     BlogCategoryController.getAdminCategories
@@ -32,7 +30,7 @@ router.post("/",
     BlogCategoryController.createCategory
 )
 
-router.put("/:id",
+router.patch("/:id",
     auth,
     param('id').isMongoId().withMessage('Invalide Id'),
     validateBlogCategoryInput,

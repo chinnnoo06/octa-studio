@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { BlogStatus, TBlogDocument } from "../types/blog/blog.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
-import { blogRepository } from "../repositories/blog.repository";
+import { BlogRepository } from "../repositories/Blog.repository";
 import { contentToText, extractContentImages, sanitizeBlogContent } from "../utils/blogContent";
 
 declare global {
@@ -46,7 +46,7 @@ export const validateBlogExistsBySlug = async (req: Request<TSlugParams>, res: R
 
     try {
         // Ruta publica: un borrador responde igual que un slug inexistente.
-        const Blog = await blogRepository.findPublishedBySlug(slug.trim().toLowerCase())
+        const Blog = await BlogRepository.findPublishedBySlug(slug.trim().toLowerCase())
 
         if (!Blog) {
             throw new HttpError(404, "Blog not found")
@@ -64,7 +64,7 @@ export const validateBlogExists = async (req: Request<TMongoIdParams>, res: Resp
     const { id } = req.params
 
     try {
-        const Blog = await blogRepository.findById(id)
+        const Blog = await BlogRepository.findById(id)
 
         if (!Blog) {
             throw new HttpError(404, "Blog not found")

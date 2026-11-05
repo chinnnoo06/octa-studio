@@ -1,24 +1,7 @@
 import { model, PaginateModel, Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { TProject, TProjectSEO } from "../types/project/project.types";
-
-const ProjectSEOSchema = new Schema<TProjectSEO>(
-    {
-        metaTitle: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 60
-        },
-        metaDescription: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 160
-        }
-    },
-    { _id: false }
-)
+import { TProject } from "../types/project/project.types";
+import { SeoSchema } from "./Seo";
 
 const ProjectSchema = new Schema<TProject>({
     slug: {
@@ -59,7 +42,7 @@ const ProjectSchema = new Schema<TProject>({
         }
     },
     seo: {
-        type: ProjectSEOSchema,
+        type: SeoSchema,
         required: true
     },
 }, {

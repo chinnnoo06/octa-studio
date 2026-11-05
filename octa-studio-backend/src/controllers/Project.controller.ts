@@ -2,14 +2,14 @@ import type { NextFunction, Request, Response } from "express";
 import { TMulterFiles } from "../types/multer/multer.types";
 import { TBulkDeleteDto, TMongoIdParams } from "../types/common/common.dtos";
 import { TRequestWithProject } from "../types/express/project";
-import { TGetAdminProjectsQuery, TGetProjectsQuery, TProjectDto } from "../types/project/project.dtos";
-import { ProjectService } from "../services/project.service";
+import { TCreateProjectDto, TGetAdminProjectsQuery, TGetProjectsQuery, TUpdateProjectDto } from "../types/project/project.dtos";
+import { ProjectService } from "../services/Project.service";
 
 
 
 export class ProjectController {
 
-    static createProject = async (req: Request<{}, {}, TProjectDto>, res: Response, next: NextFunction) => {
+    static createProject = async (req: Request<{}, {}, TCreateProjectDto>, res: Response, next: NextFunction) => {
         const data = req.body;
         const files = req.files as TMulterFiles;
 
@@ -27,9 +27,9 @@ export class ProjectController {
         }
     }
 
-     static updateProject = async (req: TRequestWithProject<TMongoIdParams, {}, TProjectDto>, res: Response, next: NextFunction) => {
+     static updateProject = async (req: TRequestWithProject<TMongoIdParams, {}, TUpdateProjectDto>, res: Response, next: NextFunction) => {
         const data = req.body
-        const files = req.files as TMulterFiles
+        const files = req.files as TMulterFiles | undefined
 
         try {
             await ProjectService.updateProject(req.Project, data, files)

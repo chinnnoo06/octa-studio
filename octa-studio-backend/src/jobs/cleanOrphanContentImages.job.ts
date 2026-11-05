@@ -3,7 +3,7 @@ import path from "path";
 import mongoose from "mongoose";
 
 import { UPLOADS_PATH } from "../config/env";
-import { blogRepository } from "../repositories/blog.repository";
+import { BlogRepository } from "../repositories/Blog.repository";
 import { extractContentImages } from "../utils/blogContent";
 
 const contentImagesDir = path.resolve(UPLOADS_PATH, "blogs", "content");
@@ -15,7 +15,7 @@ const MIN_AGE = 24 * 60 * 60 * 1000;
 export const cleanOrphanContentImages = async () => {
     if (!fs.existsSync(contentImagesDir)) return;
 
-    const blogs = await blogRepository.findAllContent();
+    const blogs = await BlogRepository.findAllContent();
 
     const referenced = new Set(blogs.flatMap(blog => extractContentImages(blog.content)));
 

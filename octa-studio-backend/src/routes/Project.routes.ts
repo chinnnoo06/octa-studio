@@ -4,7 +4,7 @@ import { converToWebP } from "../middlewares/convertToWebp";
 import { projectMediaUploads } from "../middlewares/uploads";
 import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat, validateVideosFormat } from "../middlewares/reqValidation";
 import { validateProjectExists, validateProjectExistsBySlug, validateProjectInput } from "../middlewares/project";
-import { ProjectController } from "../controllers/project.controller";
+import { ProjectController } from "../controllers/Project.controller";
 import { param, query } from "express-validator";
 
 const router: Router = Router();
@@ -15,7 +15,6 @@ router.get("/",
     ProjectController.getProjects
 )
 
-// Listado del panel: buscador, filtro por sector y fechas, y orden por columna.
 router.get("/admin",
     auth,
     validateAdminListQuery,

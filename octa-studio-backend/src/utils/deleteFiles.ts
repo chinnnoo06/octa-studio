@@ -1,6 +1,18 @@
 import fs from "fs";
+import path from "path";
 import { TMulterFiles } from "../types/multer/multer.types";
 
+/** Borra archivos ya persistidos (por nombre, en el directorio de la entidad). */
+export const deleteFilesByName = (dir: string, names: string[]) => {
+    names.forEach(name => {
+        try {
+            fs.unlinkSync(path.join(dir, name))
+            console.log(`Deleted: ${name}`);
+        } catch (err) {
+            console.error(`Error deleting ${name}`)
+        }
+    })
+}
 
 export const deleteSingleUploadedFile = (file: Express.Multer.File) => {
   if (!file) return;

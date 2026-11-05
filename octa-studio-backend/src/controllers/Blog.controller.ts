@@ -3,7 +3,7 @@ import { TMulterFiles } from "../types/multer/multer.types";
 import { TBulkDeleteDto, TMongoIdParams, TSlugParams } from "../types/common/common.dtos";
 import { TRequestWithBlog } from "../types/express/blog";
 import { TBlogDto, TGetAdminBlogsQuery, TGetBlogsQuery } from "../types/blog/blog.dtos";
-import { BlogService } from "../services/blog.service";
+import { BlogService } from "../services/Blog.service";
 
 export class BlogController {
 
@@ -27,7 +27,7 @@ export class BlogController {
 
     static updateBlog = async (req: TRequestWithBlog<TMongoIdParams, {}, TBlogDto>, res: Response, next: NextFunction) => {
         const data = req.body
-        const files = req.files as TMulterFiles
+        const files = req.files as TMulterFiles | undefined
 
         try {
             await BlogService.updateBlog(req.Blog, data, files)
@@ -76,11 +76,14 @@ export class BlogController {
         }
     }
 
+    /** Publica y admin: el middleware (por slug o por id) ya verifico que existe. */
     static getBlog = async (req: TRequestWithBlog, res: Response, next: NextFunction) => {
         try {
+            const blog = await BlogService.getBlog(req.Blog._id.toString())
+
             return res.status(200).json({
                 status: "success",
-                blog: req.Blog
+                blog
             });
 
         } catch (error) {

@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { TTestimonialDocument } from "../types/testimonial/testimonial.types";
 import { HttpError } from "../utils/error";
 import { TMongoIdParams } from "../types/common/common.dtos";
-import { testimonialRepository } from "../repositories/testimonial.repository";
+import { TestimonialRepository } from "../repositories/Testimonial.repository";
 
 declare global {
     namespace Express {
@@ -25,7 +25,7 @@ export const validateTestimonialExists = async (req: Request<TMongoIdParams>, re
     const { id } = req.params
 
     try {
-        const Testimonial = await testimonialRepository.findById(id)
+        const Testimonial = await TestimonialRepository.findById(id)
 
         if (!Testimonial) {
             throw new HttpError(404, "Testimonial not found")

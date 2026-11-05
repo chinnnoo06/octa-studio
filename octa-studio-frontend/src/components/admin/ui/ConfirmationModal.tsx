@@ -17,15 +17,7 @@ export type TConfirmationModalProps = {
 const BUTTON =
   "cursor-pointer rounded-xl hover:shadow-lg px-5 py-2.5 text-xs lg:text-sm font-semibold transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none";
 
-export const ConfirmationModal = ({
-  isOpen,
-  onClose,
-  onConfirm,
-  title,
-  context,
-  loading = false,
-  confirmLabel = "Eliminar",
-}: TConfirmationModalProps) => {
+export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, context, loading = false, confirmLabel = "Eliminar" }: TConfirmationModalProps) => {
   useLockBodyScroll(isOpen);
 
   useEffect(() => {
@@ -51,7 +43,7 @@ export const ConfirmationModal = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
-        className="bg-primary-admin w-full max-w-[460px] rounded-xl p-5 shadow-[0_24px_64px_color-mix(in_srgb,var(--color-fourth-admin)_25%,transparent)]"
+        className="bg-primary-admin w-full max-w-xl rounded-xl p-5 shadow-[0_24px_64px_color-mix(in_srgb,var(--color-fourth-admin)_25%,transparent)]"
         onClick={(event) => event.stopPropagation()}
       >
         <h3 id="confirmation-modal-title" className="text-fourth-admin mb-2.5 text-lg lg:text-xl font-semibold">

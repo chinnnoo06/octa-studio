@@ -6,6 +6,8 @@ import { ADMIN_LINKS } from '@/utils/data/admin';
 import { isActiveAdminHref } from '@/utils/activeHref';
 import { LogoutButton } from '@/components/admin/auth/LogoutButton';
 import { SIDEBAR_ITEM, SIDEBAR_TEXT } from './Sidebar';
+import { useEffect } from 'react';
+import { useLockBodyScroll } from '@/hooks/ui/useLockBodyScroll';
 
 type TAdminMobileNavProps = {
     menuVisible: boolean;
@@ -15,13 +17,26 @@ type TAdminMobileNavProps = {
 const ICON = 'size-4 lg:size-4.5';
 
 export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps) => {
-    const pathname = usePathname();
+    const pathname = usePathname()
+
+    useEffect(() => {
+        if (!menuVisible) return
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") toggleMenu()
+        }
+
+        window.addEventListener("keydown", onKeyDown)
+        return () => window.removeEventListener("keydown", onKeyDown)
+    }, [menuVisible, toggleMenu])
+
+    useLockBodyScroll(menuVisible)
 
     return (
         <div
             inert={!menuVisible}
             aria-hidden={!menuVisible}
-            className={`fixed inset-0 z-110 lg:hidden ${menuVisible ? '' : 'pointer-events-none'}`}
+            className={`lg:hidden fixed inset-x-0 top-18 bottom-0 z-95 ${menuVisible ? "" : "pointer-events-none"}`}
         >
             <button
                 type="button"
@@ -31,9 +46,8 @@ export const AdminMobileNav = ({ menuVisible, toggleMenu }: TAdminMobileNavProps
                 className={`absolute inset-0 bg-fourth-admin/50 transition-opacity duration-300 ${menuVisible ? 'opacity-100' : 'opacity-0'}`}
             />
 
-            {/* Mismo cajon de la sidebar, mas ancho, entrando desde la izquierda. */}
             <aside
-                className={`bg-secondary-admin absolute inset-y-0 left-0 w-[250px] overflow-y-auto transition-transform duration-300 ease-in-out ${menuVisible ? 'translate-x-0' : '-translate-x-full'}`}
+                className={`bg-secondary-admin absolute inset-y-0 left-0 w-[80%] max-w-xs overflow-y-auto transition-transform duration-300 ease-in-out ${menuVisible ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <nav aria-label="Panel de administración" className="flex h-full flex-col justify-between gap-2.5 px-2.5 py-10">
                     {ADMIN_LINKS.map(({ href, label, icon: Icon }) => {

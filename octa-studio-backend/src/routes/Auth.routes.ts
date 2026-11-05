@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { AuthController } from "../controllers/auth.controller";
+import { AuthController } from "../controllers/Auth.controller";
 import { auth } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/reqValidation";
 

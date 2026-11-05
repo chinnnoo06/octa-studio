@@ -2,7 +2,7 @@ import { Router } from "express";
 import { query } from "express-validator";
 import { auth } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/reqValidation";
-import { AnalyticsController } from "../controllers/analytics.controller";
+import { AnalyticsController } from "../controllers/Analytics.controller";
 import { PERIODS } from "../utils/periods";
 
 const router: Router = Router();

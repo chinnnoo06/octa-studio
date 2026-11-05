@@ -1,13 +1,15 @@
 import { TAdminListQuery } from "../common/common.dtos";
-import { TProjectSEO } from "./project.types";
+import { TSeo } from "../common/common.types";
 
-export type TProjectDto = {
+export type TCreateProjectDto = {
     name: string,
     description: string,
     sector: string,
-    /** Vacio o a medias: el servicio completa con el nombre y la descripcion. */
-    seo?: Partial<TProjectSEO>,
-    /** Edicion: archivos actuales que se conservan, en orden. */
+    seo?: Partial<TSeo>
+}
+
+/** Edicion: archivos actuales que se conservan, en orden; si se omite, se conservan todos. */
+export type TUpdateProjectDto = TCreateProjectDto & {
     keepImages?: string[],
     keepVideos?: string[]
 }
