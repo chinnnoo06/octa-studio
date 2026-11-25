@@ -79,7 +79,7 @@ export const ProjectsTable = ({ projects, basePath, params, filtered }: TProject
                                 <VideosCell videos={project.videos} name={project.name} baseUrl={VIDEO_URL} />
                             </TableCell>
 
-                            <TableCell className="whitespace-nowrap">{project.createdAt ? formatShortDate(project.createdAt) : '—'}</TableCell>
+                            <TableCell className="whitespace-nowrap">{formatShortDate(project.createdAt)}</TableCell>
 
                             <TableCell variant="actions">
                                 <div className="inline-flex items-center justify-end gap-1.5">
@@ -101,7 +101,7 @@ export const ProjectsTable = ({ projects, basePath, params, filtered }: TProject
                         media={<ImagesCell images={project.images} name={project.name} baseUrl={IMAGE_URL} />}
                         meta={[{ label: 'Sector', value: project.sector }]}
                         extra={<VideosCell videos={project.videos} name={project.name} baseUrl={VIDEO_URL} />}
-                        date={project.createdAt ? formatShortDate(project.createdAt) : undefined}
+                        date={formatShortDate(project.createdAt)}
                         actions={<Actions project={project} />}
                     />
                 ))}

@@ -18,7 +18,7 @@ export const SimpleHeader = ({ showMenu = false }: { showMenu?: boolean;}) => {
 
                     <div className="flex items-center justify-start shrink-0">
                         <Link href="/" className="flex items-center gap-2.5" aria-label="Ir al inicio">
-                            <div className="w-18 xl:w-23 shrink-0">
+                            <div className="w-18 xl:w-23 shrink-0 transition-transform duration-300 hover:scale-[1.03]">
                                 <Logo />
                             </div>
 

@@ -22,7 +22,7 @@ export const validateBlogCategoryInput = async (req: Request, res: Response, nex
     next()
 }
 
-export const validateBlogCategorySlugQuery = async (req: Request, res: Response, next: NextFunction) => {
+export const validateBlogCategorySlugQueryExist = async (req: Request, res: Response, next: NextFunction) => {
     const slug = req.query.category as string | undefined
 
     if (!slug) return next()

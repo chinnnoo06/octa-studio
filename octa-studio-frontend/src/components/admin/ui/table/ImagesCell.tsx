@@ -49,7 +49,7 @@ export const ImagesCell = ({ images, name, baseUrl }: TImagesCellProps) => {
                     />
 
                     {extra > 0 && (
-                        <span className="text-primary-admin absolute right-1 bottom-1 rounded-full bg-fourth-admin/70 px-1.5 py-0.5 text-[10.5px] leading-tight font-semibold">
+                        <span className="text-primary-admin absolute right-1 bottom-1 rounded-full bg-fourth-admin/75 px-1.5 py-0.5 text-[10.5px] lg:text-[11.5px] leading-tight font-semibold">
                             +{extra}
                         </span>
                     )}

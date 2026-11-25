@@ -9,7 +9,7 @@ const SOURCE = {
     ph: { label: 'PostHog', className: 'bg-secondary-admin/12 text-secondary-admin' },
 } as const;
 
-const BADGE = 'shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-semibold whitespace-nowrap';
+const BADGE = 'shrink-0 rounded-full px-2.5 py-0.5 text-[10px] lg:text-[11px] font-semibold whitespace-nowrap';
 
 type TDashCardProps = {
     title: string;

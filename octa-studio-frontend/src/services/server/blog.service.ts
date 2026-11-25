@@ -23,8 +23,7 @@ export async function getBlogsService(page: number = 1, category?: string): Prom
     next: { revalidate: 3600, tags: ["blogs"] },
   });
 
-  // Categoria inexistente (404) o slug mal formado (400): la page de categoria redirige a /blogs.
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404) {
     return null;
   }
 
@@ -59,8 +58,7 @@ export const getBlogByIdService = async (id: string) => {
     cache: "no-store",
   });
 
-  // Id inexistente (404) o mal formado (400): la pagina responde 404.
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404) {
     return null;
   }
 
@@ -90,8 +88,7 @@ export const getBlogBySlugService = async (slug: string) => {
     next: { revalidate: 3600, tags: ["blogs"] },
   });
 
-  // Slug inexistente (404) o rechazado por el backend (400): la pagina responde 404.
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404) {
     return null;
   }
 

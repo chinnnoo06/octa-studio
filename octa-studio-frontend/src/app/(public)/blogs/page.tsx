@@ -1,6 +1,7 @@
 import { permanentRedirect, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { Hero } from '@/components/blogs/Hero';
 import { Posts } from '@/components/blogs/Posts';
 import { getBlogsService } from '@/services/server/blog.service';
@@ -44,6 +45,7 @@ export default async function BlogsPage({ searchParams }: TBlogsPageProps) {
 
   return (
     <>
+      <BreadcrumbStructuredData items={[{ name: 'Blog', path: '/blogs' }]} />
       <Hero />
       <Posts blogs={blogs} pagination={pagination} categories={categories} />
     </>

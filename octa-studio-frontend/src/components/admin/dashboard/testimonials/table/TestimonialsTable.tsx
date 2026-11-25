@@ -79,7 +79,7 @@ export const TestimonialsTable = ({ testimonials, basePath, params, filtered }: 
 
                             <TableCell><Rating rating={t.rating} /></TableCell>
 
-                            <TableCell className="whitespace-nowrap">{t.createdAt ? formatShortDate(t.createdAt) : '—'}</TableCell>
+                            <TableCell className="whitespace-nowrap">{formatShortDate(t.createdAt)}</TableCell>
 
                             <TableCell variant="actions">
                                 <div className="inline-flex items-center justify-end gap-1.5">
@@ -105,7 +105,7 @@ export const TestimonialsTable = ({ testimonials, basePath, params, filtered }: 
                                 <p className="line-clamp-2">{t.quote}</p>
                             </div>
                         }
-                        date={t.createdAt ? formatShortDate(t.createdAt) : undefined}
+                        date={formatShortDate(t.createdAt)}
                         actions={<Actions testimonial={t} />}
                     />
                 ))}

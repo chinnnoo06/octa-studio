@@ -78,9 +78,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },
-  async redirects() {
-    return [{ source: '/terminos', destination: '/privacidad', permanent: true }];
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],

@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ImageFileSchema, SEOFormSchema, VideoFileSchema } from "@/schemas/common/common.form.schemas"
+import { ImageFileSchema, SeoFormSchema, VideoFileSchema } from "@/schemas/common/common.form.schemas"
 
 const MAX_MEDIA = 5
 
@@ -7,7 +7,7 @@ export const CreateProjectFormSchema = z.object({
     name: z.string().trim().min(1, { message: "Campo obligatorio" }),
     description: z.string().trim().min(1, { message: "Campo obligatorio" }),
     sector: z.string().trim().min(1, { message: "Campo obligatorio" }),
-    seo: SEOFormSchema,
+    seo: SeoFormSchema,
     images: z
         .array(ImageFileSchema)
         .min(1, { message: "Sube al menos una imagen" })
@@ -15,11 +15,6 @@ export const CreateProjectFormSchema = z.object({
     videos: z.array(VideoFileSchema).max(MAX_MEDIA, { message: "Maximo 5 videos" }),
 })
 
-/**
- * Edicion con medios: `keepImages`/`keepVideos` son los archivos actuales que
- * se conservan; `images`/`videos`, los nuevos. Entre ambos: 1 a 5 fotos y
- * hasta 5 videos.
- */
 export const UpdateProjectFormSchema = CreateProjectFormSchema.extend({
     keepImages: z.array(z.string()),
     keepVideos: z.array(z.string()),

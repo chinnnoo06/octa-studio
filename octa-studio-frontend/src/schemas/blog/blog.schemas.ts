@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SEOSchema } from "../common/common.schemas";
+import { SeoSchema } from "../common/common.schemas";
 import { BlogStatusSchema } from "@/schemas/enums.schemas";
 import { BlogCategoryRefSchema } from "@/schemas/blogCategory/blogCategory.schemas";
 
@@ -14,9 +14,9 @@ export const BlogSchema = z.object({
   readingTime: z.number().default(1),
   image: z.string(),
   content: z.string(),
-  seo: SEOSchema,
+  seo: SeoSchema,
   createdAt: z.string(),
-  updatedAt: z.string().optional(),
+  updatedAt: z.string(),
 });
 
 export type TBlog = z.infer<typeof BlogSchema>;

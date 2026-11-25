@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SEOSchema = z.object({
+export const SeoSchema = z.object({
   metaTitle: z.string(),
   metaDescription: z.string(),
 });

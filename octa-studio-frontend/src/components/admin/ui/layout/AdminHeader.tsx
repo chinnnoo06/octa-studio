@@ -16,7 +16,7 @@ export const AdminHeader = () => {
             <header className="bg-secondary-admin shrink-0 px-5">
                 <div className="flex h-18 items-center justify-between">
                     <Link href={ADMIN_HOME} className="flex items-center gap-2.5" aria-label="Ir al inicio del panel">
-                        <div className="w-18 xl:w-23 shrink-0">
+                        <div className="w-18 xl:w-23 shrink-0 transition-transform duration-300 hover:scale-[1.03]">
                             <Logo />
                         </div>
 

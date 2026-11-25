@@ -64,8 +64,7 @@ export const getBlogCategoryByIdService = async (id: string): Promise<TBlogCateg
     cache: "no-store",
   });
 
-  // Id inexistente (404) o mal formado (400): la pagina responde 404.
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404 ) {
     return null;
   }
 

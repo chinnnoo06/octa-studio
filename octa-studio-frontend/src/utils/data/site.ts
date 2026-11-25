@@ -11,7 +11,7 @@ export const SITE = {
   ogImage: '/og-image.jpg',
   ogImageWidth: 1200,
   ogImageHeight: 630,
-  ogImageAlt: 'Octa Building Studio – Diseño, fabricación y montaje de stands para expos y eventos',
+  ogImageAlt: 'Octa Building Studio - Diseño, fabricación y montaje de stands para expos y eventos',
   logo: '/icon.png',
   themeColor: '#18608C',
 } as const;

@@ -20,7 +20,7 @@ export const BackButtonLeft = ({ label = 'Volver', className }: TBackButtonProps
         <HiArrowUpLeft className="size-4 lg:size-4.5 stroke-1" />
       </span>
 
-      <span className="border-secondary-admin bg-secondary-admin text-primary-admin group-hover:text-secondary-admin group-hover:bg-primary-admin inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-sm lg:text-base font-medium transition-colors duration-300">
+      <span className="border-secondary-admin bg-secondary-admin text-primary-admin group-hover:text-secondary-admin group-hover:bg-primary-admin inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-xs lg:text-sm font-medium transition-colors duration-300">
         {label}
       </span>
     </button>

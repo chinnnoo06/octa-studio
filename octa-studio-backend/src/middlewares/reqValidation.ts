@@ -41,15 +41,12 @@ export const validateBulkDelete = async (req: Request, res: Response, next: Next
     next()
 }
 
-/** Tope por imagen, el mismo que valida el formulario. */
-const IMAGE_MAX_SIZE = 10 * 1024 * 1024;
+const IMAGE_MAX_SIZE = 25 * 1024 * 1024;
 
-/** Al crear la imagen es obligatoria; al editar es opcional (`validateOptionalImagesFormat`). */
 const checkImagesFormat = (required: boolean) => (req: Request, res: Response, next: NextFunction) => {
     const files = req.files as TMulterFiles | undefined;
 
-    // Every image field is checked, whatever its name (projectImages, blogImage, ...);
-    // the video field has its own validator.
+   
     const { projectVideos, ...imageFields } = files ?? {};
 
     const imagesFiles: Express.Multer.File[] = Object.values(imageFields)

@@ -26,6 +26,9 @@ body {
 
   --font-gentleman: var(--font-gentleman-local), ui-serif, Georgia, cursive;
 
+  /* Panel: Inter fija aqui (no via --font-sans), para que un cambio de tipografia en lo publico no mueva el panel. */
+  --font-admin: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+
   --ease-brand: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 

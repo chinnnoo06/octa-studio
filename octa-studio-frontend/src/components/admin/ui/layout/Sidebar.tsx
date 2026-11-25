@@ -13,7 +13,7 @@ export const SIDEBAR_ITEM =
 export const SIDEBAR_ICON = 'size-4 lg:size-4.5';
 
 export const SIDEBAR_TEXT =
-    'mt-1.5 flex min-h-[2.4em] w-full items-center justify-center text-center text-[10px] font-semibold uppercase leading-[1.2] wrap-break-word';
+    'mt-1.5 flex min-h-[2.4em] w-full items-center justify-center text-center text-[10px] lg:text-[11px] font-semibold uppercase leading-[1.2] wrap-break-word';
 
 export const Sidebar = () => {
     const pathname = usePathname();

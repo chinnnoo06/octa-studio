@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { LegalPage } from '@/components/legal/LegalPage';
 import { LegalBlock } from '@/components/legal/LegalBlock';
 import { CONTACT } from '@/utils/data/contact';
@@ -23,9 +24,11 @@ export const metadata: Metadata = {
 
 const [proyectos, direccion] = CONTACT.emails;
 
-export default function PrivacidadPage() {
+export default function PrivacyPage() {
   return (
-    <LegalPage id="privacidad-contenido" lead="Privacidad y" rotating="aviso legal" updated="16 de septiembre de 2026">
+    <>
+      <BreadcrumbStructuredData items={[{ name: 'Privacidad y aviso legal', path: '/privacidad' }]} />
+      <LegalPage id="privacidad-contenido" data-section="privacidad-contenido" lead="Privacidad y" rotating="aviso legal" updated="16 de septiembre de 2026">
       <p className="text-fourth/75 text-base lg:text-lg">
         Este sitio no tiene formularios ni recoge datos por su cuenta. Los únicos datos personales
         que llegan a Octa Building Studio son los que tú decides compartir cuando nos escribes por
@@ -131,5 +134,6 @@ export default function PrivacidadPage() {
         </p>
       </LegalBlock>
     </LegalPage>
+    </>
   );
 }

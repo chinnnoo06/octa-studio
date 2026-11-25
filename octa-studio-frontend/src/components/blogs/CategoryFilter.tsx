@@ -2,7 +2,6 @@ import Link from 'next/link';
 import type { TBlogCategory } from '@/schemas/blogCategory/blogCategory.schemas';
 import { blogCategoryPath } from '@/utils/blogBreadcrumb';
 
-/** La pildora de ServiceCard: la activa va en solido, el resto con borde. */
 const PILL =
   'flex h-10 shrink-0 items-center justify-center rounded-full border px-5 text-sm lg:text-base font-medium whitespace-nowrap transition-colors duration-300 lg:h-12';
 

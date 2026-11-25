@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SEOSchema } from "../common/common.schemas";
+import { SeoSchema } from "../common/common.schemas";
 
 export const ProjectSchema = z.object({
   _id: z.string(),
@@ -9,9 +9,9 @@ export const ProjectSchema = z.object({
   slug: z.string(),
   images: z.array(z.string()),
   videos: z.array(z.string()).default([]),
-  seo: SEOSchema,
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
+  seo: SeoSchema,
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export type TProject = z.infer<typeof ProjectSchema>;

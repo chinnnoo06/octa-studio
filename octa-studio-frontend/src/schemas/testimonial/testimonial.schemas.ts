@@ -7,7 +7,7 @@ export const TestimonialSchema = z.object({
   name: z.string(),
   rating: z.number().min(0).max(5),
   image: z.string(),
-  createdAt: z.string().optional(),
+  createdAt: z.string(),
 });
 
 export type TTestimonial = z.infer<typeof TestimonialSchema>;

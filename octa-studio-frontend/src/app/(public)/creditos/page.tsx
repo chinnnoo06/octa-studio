@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SHARED_OPEN_GRAPH, SHARED_TWITTER } from '@/utils/data/site';
+import { BreadcrumbStructuredData } from '@/components/seo/BreadcrumbStructuredData';
 import { LegalPage } from '@/components/legal/LegalPage';
 import { LegalBlock } from '@/components/legal/LegalBlock';
 import { DEVELOPER, IMAGE_CREDITS, MAGNIFIC_ATTRIBUTION } from '@/utils/data/credits';
@@ -23,9 +24,11 @@ export const metadata: Metadata = {
 
 const LINK = 'text-secondary underline underline-offset-4 transition-colors duration-300 hover:text-secondary/75';
 
-export default function CreditosPage() {
+export default function CreditsPage() {
   return (
-    <LegalPage id="creditos-contenido" lead="Licencia y" rotating="créditos" updated="16 de septiembre de 2026">
+    <>
+      <BreadcrumbStructuredData items={[{ name: 'Licencia y Creditos', path: '/creditos' }]} />
+      <LegalPage id="creditos-contenido" data-section="privacidad-contenido"  lead="Licencia y" rotating="créditos" updated="16 de septiembre de 2026">
       <p className="text-fourth/75 text-base lg:text-lg">
         Las fotografías de stands y montajes que aparecen en este sitio son de proyectos reales
         de Octa Building Studio. Los fondos de apoyo se generaron con Magnific y se acreditan
@@ -68,5 +71,6 @@ export default function CreditosPage() {
         </p>
       </LegalBlock>
     </LegalPage>
+    </>
   );
 }

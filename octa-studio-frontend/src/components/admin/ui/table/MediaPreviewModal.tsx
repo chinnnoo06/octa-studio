@@ -45,7 +45,7 @@ export const MediaPreviewModal = ({ open, onClose, items, title }: TMediaPreview
     const current = items[Math.min(index, items.length - 1)];
 
     return createPortal(
-        <div className="fixed inset-0 z-120 flex items-center justify-center bg-fourth-admin/80 p-5 backdrop-blur-[2px]" onClick={onClose}>
+        <div className="fixed inset-0 z-120 flex items-center justify-center bg-fourth-admin/55 p-5 backdrop-blur-[2px]" onClick={onClose}>
             <div
                 role="dialog"
                 aria-modal="true"

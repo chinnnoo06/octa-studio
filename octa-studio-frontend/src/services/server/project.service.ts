@@ -48,7 +48,7 @@ export const getProjectByIdService = async (id: string) => {
     cache: "no-store",
   });
 
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404) {
     return null;
   }
 
@@ -78,7 +78,7 @@ export const getProjectBySlugService = async (slug: string) => {
     next: { revalidate: 3600, tags: ["projects"] },
   });
 
-  if (req.status === 404 || req.status === 400) {
+  if (req.status === 404) {
     return null;
   }
 

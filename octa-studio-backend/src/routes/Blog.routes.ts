@@ -6,7 +6,7 @@ import { converToWebP, convertContentImageToWebP } from "../middlewares/convertT
 import { blogContentUploads, blogsUploads } from "../middlewares/uploads";
 import { handleInputErrors, parseJsonFields, validateAdminListQuery, validateBulkDelete, validateImagesFormat, validateOptionalImagesFormat } from "../middlewares/reqValidation";
 import { validateBlogExists, validateBlogExistsBySlug, validateBlogInput } from "../middlewares/blog";
-import { validateBlogCategorySlugQuery } from "../middlewares/blogCategory";
+import { validateBlogCategorySlugQueryExist } from "../middlewares/blogCategory";
 import { BlogController } from "../controllers/Blog.controller";
 
 const router: Router = Router();
@@ -15,7 +15,7 @@ router.get("/",
     query('page').optional().isInt({ min: 1 }).withMessage('Page must be an integer greater than 0'),
     query('category').optional().trim().matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).withMessage('Invalid category slug'),
     handleInputErrors,
-    validateBlogCategorySlugQuery,
+    validateBlogCategorySlugQueryExist,
     BlogController.getBlogs
 )
 

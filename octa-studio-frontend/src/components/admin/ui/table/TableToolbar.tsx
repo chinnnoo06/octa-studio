@@ -51,7 +51,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
 
     return (
         <>
-            <div className="mb-5 flex flex-col gap-2.5 md:flex-row md:flex-wrap md:items-center">
+            <div className="mb-5 flex flex-col gap-2.5 md:flex-row md:flex-wrap">
                 <div className="bg-primary-admin focus-within:border-secondary-admin relative flex w-full items-center rounded-xl border border-fourth-admin/30 transition-all duration-200 focus-within:shadow-lg md:min-w-60 md:flex-1">
                     <HiMagnifyingGlass aria-hidden="true" className="ml-2.5 size-4 lg:size-4.5 shrink-0 text-fourth-admin/75" />
 
@@ -90,7 +90,7 @@ export const TableToolbar = ({ basePath, params, searchPlaceholder, filters, add
                     <HiAdjustmentsHorizontal aria-hidden="true" className={`size-4 lg:size-4.5 ${activeCount > 0 ? '' : 'group-hover:text-secondary-admin text-fourth-admin/75'}`} />
                     Filtros
                     {activeCount > 0 && (
-                        <span className="bg-secondary-admin text-primary-admin ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[11px] font-semibold">
+                        <span className="bg-secondary-admin text-primary-admin ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[11px] lg:text-[12px] font-semibold">
                             {activeCount}
                         </span>
                     )}

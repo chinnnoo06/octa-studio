@@ -33,12 +33,12 @@ export const MediaTile = ({ children, htmlFor, hoverText, principal, onRemove, r
       ) : (
         <span className="pointer-events-none flex flex-col items-center gap-1.5 text-fourth-admin/75 transition-all duration-200 select-none group-hover/tile:scale-110 group-hover/tile:text-secondary-admin">
           <HiPlus aria-hidden="true" className="size-6" />
-          <span className="text-[10.5px] font-semibold tracking-[0.3px] uppercase">Añadir</span>
+          <span className="text-[10.5px] lg:text-[11.5px] font-semibold tracking-[0.3px] uppercase">Añadir</span>
         </span>
       )}
 
       {principal && filled && (
-        <span className="bg-secondary-admin text-primary-admin pointer-events-none absolute top-1.25 left-1.25 z-2 rounded-xl px-1.5 py-0.5 text-[10px] leading-[1.2] font-semibold tracking-[0.3px] uppercase shadow-[0_1px_3px_color-mix(in_srgb,var(--color-fourth-admin)_12%,transparent)]">
+        <span className="bg-secondary-admin text-primary-admin pointer-events-none absolute top-1.25 left-1.25 z-2 rounded-xl px-1.5 py-0.5 text-[10px] lg:text-[11px] leading-[1.2] font-semibold tracking-[0.3px] uppercase shadow-[0_1px_3px_color-mix(in_srgb,var(--color-fourth-admin)_12%,transparent)]">
           Principal
         </span>
       )}

@@ -12,16 +12,16 @@ export default async function DashboardLayout({ children }: Readonly<{ children:
   await verifySession();
 
   return (
-    <div>
+    <>
       <AdminHeader />
 
       <div className="flex min-h-0 flex-1 h-dvh overflow-hidden">
         <Sidebar />
 
-        <main className="bg-third-admin relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-5 pt-5 pb-10 lg:px-10 lg:pt-10">
+        <main className="bg-third-admin text-fourth-admin relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-5 pt-5 pb-10 lg:px-10 lg:pt-10">
           {children}
         </main>
       </div>
-    </div>
+    </>
   );
 }

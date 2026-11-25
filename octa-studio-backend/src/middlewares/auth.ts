@@ -13,37 +13,40 @@ declare global {
     }
 }
 
-export const auth = async (req: Request, res: Response, next: NextFunction) => {
-    let token: string | null = null;
-
-    if (req.cookies?.token) {
-        token = req.cookies.token;
-    }
-
-    if (!token && req.headers.authorization) {
-        const bearer = req.headers.authorization;
-        if (bearer.startsWith("Bearer ")) {
-            token = bearer.split(" ")[1];
-        }
-    }
-
-    if (!token) {
-        return next(new HttpError(403, "No token provided"));
-    }
-
+export const auth = () => async (req: Request, res: Response, next: NextFunction) => {
     try {
+        let token: string | null = null;
+
+        if (req.cookies?.token) {
+            token = req.cookies.token;
+        }
+
+        if (!token && req.headers.authorization) {
+            const bearer = req.headers.authorization;
+            if (bearer.startsWith("Bearer ")) {
+                token = bearer.split(" ")[1];
+            }
+        }
+
+        if (!token) {
+            throw new HttpError(401, "No hay token");
+        }
+
         const decode = jwt.verify(token, SECRET_KEY) as TTokenPayload;
 
         const user = await AuthRepository.findById(decode.id);
 
         if (!user) {
-            throw new HttpError(401, "Invalid token");
+            throw new HttpError(401, "Token inválido");
         }
 
         req.user = { id: user._id };
 
         next();
     } catch (error) {
-        next(error instanceof HttpError ? error : new HttpError(401, "Invalid token"));
+        if (error instanceof jwt.JsonWebTokenError) {
+            return next(new HttpError(401, "Token inválido"));
+        }
+        next(error);
     }
 };

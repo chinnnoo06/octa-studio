@@ -76,7 +76,6 @@ export class BlogController {
         }
     }
 
-    /** Publica y admin: el middleware (por slug o por id) ya verifico que existe. */
     static getBlog = async (req: TRequestWithBlog, res: Response, next: NextFunction) => {
         try {
             const blog = await BlogService.getBlog(req.Blog._id.toString())
